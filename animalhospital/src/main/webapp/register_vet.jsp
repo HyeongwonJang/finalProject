@@ -31,7 +31,7 @@
     </div>
     <div class="x_panel">
       <div class="x_title">
-        <h2>수의사 회원가입</h2>
+        <h2>수의사 회원가입 - git Test</h2>
         <ul class="nav navbar-right panel_toolbox">
           <li></li>
         </ul>
