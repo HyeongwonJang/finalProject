@@ -4,26 +4,17 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <!-- MyBatis  DataSource에 대한 설정 및  SQL 정의 xml 에 대한 매핑-->
-<configuration>	
-	<!-- 사용할 클래스에 대한 별칭을 명시한다.  -->
-	<typeAliases>
-		<!-- <typeAlias type="org.animalhospital.doctor.model.bean.HospitalVO" alias="hvo"/>
-		<typeAlias type="org.kosta.springmvc17.model.BoardVO" alias="bvo"/>
-		<typeAlias type="org.kosta.springmvc17.model.MemberVO" alias="mvo"/>		 -->
-	</typeAliases>	
+<configuration>   
+   <!-- 사용할 클래스에 대한 별칭을 명시한다.  -->
+   <typeAliases>
+      <typeAlias type="org.animalhospital.petowner.model.VO.MemberPetOwnerVO" alias="mpovo"/>
+      <typeAlias type="org.animalhospital.petowner.model.VO.PetOwnerVO" alias="povo"/>
+      <typeAlias type="org.animalhospital.petowner.model.VO.PetVO" alias="pvo"/>            
+   </typeAliases>   
     <!-- sql mapping config xml 을 연결 -->
-	<mappers>
-	<!-- 	<mapper resource="mybatis/config/hospital.xml"/>		    -->
-		<!-- <mapper resource="mybatis/config/board.xml"/> -->
-	</mappers>
+   <mappers>
+      <!-- <mapper resource="mybatis/config/hospital.xml"/>          -->
+      <mapper resource="mybatis/config/petOwner.xml"/>       
+   </mappers>
+   
 </configuration>
-
-
-
-
-
-
-
-
-
-

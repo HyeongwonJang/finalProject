@@ -11,8 +11,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		<id column="Pet_Owner_address" property="petOwnerAddress"/>
  		<collection property="petVO" ofType="pvo">
  			<id column="Pet_name" property="petName"/>
+ 			<id column="Pet_birthday" property="petBirthday"/>
+ 			<id column="Pet_gender" property="petGender"/>
+ 			<id column="Pet_note" property="petNote"/>
+ 			<id column="Animal_kind_name" property="animalKindName"/>
  		</collection>
  	</resultMap>
+ 	<select id="loginPetOwner" resultType="mpovo" resultMap="mpovoRM">
+ 		select mpo.Pet_Owner_id, po.Pet_Owner_name, mpo.Pet_Owner_tel, mpo.Pet_Owner_address, p.Pet_name, p.Pet_birthday, p.Pet_gender, p.Pet_note, p.Animal_kind_name
+		from Member_Pet_Owner mpo , Pet_Owner po, Pet p
+		where mpo.Pet_Owner_id = #{petOwnerId} and mpo.Pet_Owner_password =#{petOwnerPassword} 
+				 and mpo.Pet_Owner_tel = p.Pet_Owner_tel and po.Pet_Owner_tel = p.Pet_Owner_tel
+ 	</select>
  	<select id="findMemberPetOwnerByTel" parameterType="povo" resultType="mpovo" resultMap="mpovoRM">
  		select po.Pet_Owner_tel, po.Pet_Owner_name, mpo.Pet_Owner_id, mpo.Pet_Owner_address
 		from Pet_Owner po, Member_Pet_Owner mpo
@@ -32,28 +42,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values(#{petOwnerVO.petOwnerTel}, #{petOwnerId}, #{petOwnerPassword}, #{petOwnerAddress})
  	</insert>
  	
- 	
  	<insert id="registerPet" parameterType="pvo">
-		insert into Pet(Pet_name, Pet_Owner_tel, Pet_birthday, Pet_gender, Pet_note, Animal_kind_name)
-		values
-		<foreach collection="petVO" item="item" separator=",">
-			(#{item.petName},'01012341234',#{item.birthday},#{item.gender},#{item.note},#{item.animalKindName}) 	
- 		</foreach>
- 	</insert>
- 	
- 	<insert id="registerPet3" parameterType="java.util.Map">
-		insert into Pet(Pet_name, Pet_Owner_tel, Pet_birthday, Pet_gender, Pet_note, Animal_kind_name)
-		values
-		<foreach collection="list" item="item" separator=" , ">
-			(#{item.petName}, '01012341234', #{item.birthday}, #{item.gender}, #{item.note}, #{item.animalKindName}) 	
- 		</foreach>
- 	</insert>
- 	
- 	
- 	
- 	<insert id="registerPet2" parameterType="pvo">
 		insert into Pet(Pet_name, Pet_Owner_tel, Pet_birthday, Pet_gender, Pet_note, Animal_kind_name)
 		values(#{petName}, '01012341234', #{birthday}, #{gender}, #{note}, #{animalKindName}) 	
  	</insert>
+ 	
+ 	<update id="updatePetOwner" parameterType="mpovo">
+ 		update Member_Pet_Owner
+		set Pet_Owner_address = #{petOwnerAddress}
+		where Pet_Owner_id = #{petOwnerId}  
+ 	</update>
+ 	
+ 	<update id ="deletePetOwner" parameterType="mpovo">
+ 		update Member_Pet_Owner
+		set Pet_Owner_id=null, Pet_Owner_password='null', Pet_Owner_address='null'
+		where Pet_Owner_id = #{petOwnerId}
+ 	</update>
+ 	
  	
  </mapper>

@@ -2,22 +2,22 @@ package org.animalhospital.petowner.model.VO;
 
 public class PetVO {
 	private String petName;
-	private String birthday;
-	private String gender;
-	private String note;
+	private String petBirthday;
+	private String petGender;
+	private String petNote;
 	private String animalKindName;
 	
 	public PetVO() {
 		super();
 	}
 
-	public PetVO(String petName, String birthday, String gender, String note,
-			String animalKindName) {
+	public PetVO(String petName, String petBirthday, String petGender,
+			String petNote, String animalKindName) {
 		super();
 		this.petName = petName;
-		this.birthday = birthday;
-		this.gender = gender;
-		this.note = note;
+		this.petBirthday = petBirthday;
+		this.petGender = petGender;
+		this.petNote = petNote;
 		this.animalKindName = animalKindName;
 	}
 
@@ -29,28 +29,28 @@ public class PetVO {
 		this.petName = petName;
 	}
 
-	public String getBirthday() {
-		return birthday;
+	public String getPetBirthday() {
+		return petBirthday;
 	}
 
-	public void setBirthday(String birthday) {
-		this.birthday = birthday;
+	public void setPetBirthday(String petBirthday) {
+		this.petBirthday = petBirthday;
 	}
 
-	public String getGender() {
-		return gender;
+	public String getPetGender() {
+		return petGender;
 	}
 
-	public void setGender(String gender) {
-		this.gender = gender;
+	public void setPetGender(String petGender) {
+		this.petGender = petGender;
 	}
 
-	public String getNote() {
-		return note;
+	public String getPetNote() {
+		return petNote;
 	}
 
-	public void setNote(String note) {
-		this.note = note;
+	public void setPetNote(String petNote) {
+		this.petNote = petNote;
 	}
 
 	public String getAnimalKindName() {
@@ -63,10 +63,12 @@ public class PetVO {
 
 	@Override
 	public String toString() {
-		return "PetVO [petName=" + petName + ", birthday=" + birthday
-				+ ", gender=" + gender + ", note=" + note + ", animalKindName="
-				+ animalKindName + "]";
+		return "PetVO [petName=" + petName + ", petBirthday=" + petBirthday
+				+ ", petGender=" + petGender + ", petNote=" + petNote
+				+ ", animalKindName=" + animalKindName + "]";
 	}
+
+	
 	
 	
 	
