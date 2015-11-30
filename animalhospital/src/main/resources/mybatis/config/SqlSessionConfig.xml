@@ -9,12 +9,17 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
    <typeAliases>
       <typeAlias type="org.animalhospital.petowner.model.VO.MemberPetOwnerVO" alias="mpovo"/>
       <typeAlias type="org.animalhospital.petowner.model.VO.PetOwnerVO" alias="povo"/>
-      <typeAlias type="org.animalhospital.petowner.model.VO.PetVO" alias="pvo"/>            
+      <typeAlias type="org.animalhospital.petowner.model.VO.PetVO" alias="pvo"/>    
+      <typeAlias type="org.animalhospital.vet.model.VO.HospitalVO" alias="hvo"/>
+      <typeAlias type="org.animalhospital.vet.model.VO.VetVO" alias="vvo"/>
+      <typeAlias type="org.animalhospital.vet.model.VO.VetLicenseVO" alias="lvo"/>
+      
    </typeAliases>   
     <!-- sql mapping config xml 을 연결 -->
    <mappers>
       <!-- <mapper resource="mybatis/config/hospital.xml"/>          -->
       <mapper resource="mybatis/config/petOwner.xml"/>       
+      <mapper resource="mybatis/config/vet.xml"/>
    </mappers>
    
 </configuration>

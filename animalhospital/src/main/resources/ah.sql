@@ -14,21 +14,33 @@ values('개');
 select * from Animal_kind;
 
 -- 반려 동물 주인
-drop table Pet_Owner;
+drop table Pet_Owner cascade constraint;
 create table Pet_Owner(
-	Pet_Owner_tel varchar2(50) primary key,
+	Pet_Owner_tel varchar2(50),
 	Pet_Owner_name varchar2(50) not null
 );
+insert into Pet_Owner(Pet_Owner_tel, Pet_Owner_name)
+values('01011112222','장형원');
+update Pet_Owner set Pet_Owner_tel='01011113333';
+ALTER TABLE Pet_Owner
+ADD CONSTRAINT pk_Pet_Owner_tel  PRIMARY KEY (Pet_Owner_tel);
 
+SELECT * FROM USER_CONSTRAINTS;
 -- 회원 가입한 반려 동물 주인
 drop table Member_Pet_Owner;
 create table Member_Pet_Owner(
-	Pet_Owner_tel varchar2(50) primary key,
+	Pet_Owner_tel varchar2(50),
 	Pet_Owner_id varchar2(50) unique,
 	Pet_Owner_password varchar2(50) not null,
 	Pet_Owner_address varchar2(50) not null,
 	constraint fk_Member_Pet_Owner_tel foreign key(Pet_Owner_tel) references Pet_Owner
 );
+ALTER TABLE Member_Pet_Owner
+ADD CONSTRAINT pk_member_Pet_Owner_tel  PRIMARY KEY (Pet_Owner_tel);
+
+alter table Member_Pet_Owner
+add constraint fk_Member_Pet_Owner_tel 
+foreign key(Pet_Owner_tel) references Pet_Owner(Pet_Owner_tel);
 
 -- 반려 동물
 drop table pet cascade constraint;
@@ -87,6 +99,8 @@ select * from Member_Pet_Owner;
 select * from Pet;
 
 ---- 전화번호 수정시 불가능?
+alter table Pet_Owner modify constraints sys_c004347 disable novalidate;
+commit;
 update Pet_Owner set Pet_Owner_tel='01011113333';
 
 
@@ -169,10 +183,10 @@ create table Vet(
 	constraint fk_Hospital_id foreign key(Hospital_id) references Hospital
 )
 drop table Vet;
-insert into Vet values('ImChangJung', '1234','111-1111',2 ,'4');
-insert into Vet values('ParBG', '1234', '111-1111', 6, '2');
-insert into Vet values('YUNA',  '1234', '111-1111',4,'2');
-insert into Vet values('DoctorSong', '1234','111-1111',1, '5');
+insert into Vet values('ImChangJung', '1234','1111111',2 ,'4');
+insert into Vet values('ParBG', '1234', '1111111', 6, '2');
+insert into Vet values('YUNA',  '1234', '1111111',4,'2');
+insert into Vet values('DoctorSong', '1234','1111111',1, '5');
 
 
 select * from Vet;

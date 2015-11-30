@@ -13,6 +13,9 @@ public class PetOwnerDAOImpl implements PetOwnerDAO {
 	@Resource
 	private SqlSessionTemplate sqlSessionTemplate;
 	
+	/* (non-Javadoc)
+	 * @see org.animalhospital.petowner.model.MemberPetOwnerDAO#findMemberPetOwnerByTel(org.animalhospital.petowner.model.PetOwnerVO)
+	 */
 	@Override
 	public MemberPetOwnerVO findMemberPetOwnerByTel(PetOwnerVO povo) {
 		System.out.println("hello");
@@ -49,6 +52,9 @@ public class PetOwnerDAOImpl implements PetOwnerDAO {
 		sqlSessionTemplate.update("petOwner.deletePetOwner",mpovo);
 	}
 
-	
+	@Override
+	public void deletePet(MemberPetOwnerVO mpovo) {
+		sqlSessionTemplate.delete("petOwner.deletePet",mpovo);
+	}
 	
 }
