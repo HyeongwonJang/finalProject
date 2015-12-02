@@ -53,4 +53,21 @@ public class ViewController {
 		return "/account/register_petowner";
 	}
 	
+	/**
+	 * 진료기록등록페이지
+	 * @return
+	 */
+	@RequestMapping("treatment_record_register.do")
+	public String treatmentRecordRegisterView(){
+		return "treatment_record_register";
+	}
+	
+	/**
+	 * 진료조회페이지
+	 * @return
+	 */
+	@RequestMapping("treatment_record_find.do")
+	public String treatmentRecordFind(){
+		return "treatment_record_find";
+	}
 }

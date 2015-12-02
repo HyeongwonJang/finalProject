@@ -20,9 +20,7 @@
     
    <!-- Bootstrap core js -->
     <script src="${initparam.root}resources/js/bootstrap.min.js"></script>
-   <!-- form validation -->
-   <script src="${initparam.root}resources/js/custom.js"></script>
-   <script type="text/javascript" src="${initparam.root}resources/js/parsley/parsley.min.js"></script>
+   
     </head>
     <body style="background: #F7F7F7;">
     <div class="">
@@ -148,6 +146,17 @@
       </div>
     </div>
 	<!-- 스크립트 구문 -->
+	<!-- form validation -->
+	<!-- icheck -->
+	<script
+		src="${initparam.root}resources/js/progressbar/bootstrap-progressbar.min.js"></script>
+	<script
+		src="${initparam.root}resources/js/nicescroll/jquery.nicescroll.min.js"></script>
+	<script src="${initparam.root}resources/js/icheck/icheck.min.js"></script>
+	<script src="${initparam.root}resources/js/custom.js"></script>
+	<script type="text/javascript"
+		src="${initparam.root}resources/js/parsley/parsley.min.js"></script>
+	<script src="${initparam.root}resources/js/custom.js"></script>
 	<script
 		src="${initparam.root}resources/js/input_mask/jquery.inputmask.js"></script>
 	<!-- input_mask -->

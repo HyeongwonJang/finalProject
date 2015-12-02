@@ -17,7 +17,7 @@
     <link href="${initparam.root}resources/css/custom.css" rel="stylesheet">
     <link href="${initparam.root}resources/css/icheck/flat/green.css" rel="stylesheet">
     <!-- jQuery 플러그인 -->
-    <script src="${initparam.root}resources/js/jquery.js"></script>
+    <script src="${initparam.root}resources/js/jquery.min.js"></script>
     <!-- select2 -->
     <script src="${initparam.root}resources/js/select/select2.full.js"></script>
     <!-- select2 -->
@@ -43,9 +43,9 @@
     <div class="container body">
       <div class="main_container">
         <div class="col-md-3 left_col">
-          <div class="left_col scroll-view">
+          <div class="left_col">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Ah! 동물!</span></a>
+              <a href="home.do" class="site_title"><i class="fa fa-paw"></i> <span>Ah! 동물!</span></a>
             </div>
             <div class="clearfix"></div>
             <!-- menu prile quick info -->
@@ -57,7 +57,7 @@
               <div class="menu_section">
                 <ul class="nav side-menu">
                   <li>
-                    <a href="index.html">
+                    <a href="treatment_record_find.do">
                       <i class="fa fa-search"></i> 병원검색
                     </a>
                   </li>
@@ -65,10 +65,10 @@
                     <a><i class="fa fa-clipboard"></i> 진료관리 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu" style="display: none">
                       <li>
-                        <a href="index.html">진료등록</a>
+                        <a href="treatment_record_register.do">진료등록</a>
                       </li>
                       <li>
-                        <a href="treatment_record_view.html">진료조회</a>
+                        <a href="treatment_record_find.do">진료조회</a>
                       </li>
                     </ul>
                   </li>
@@ -137,58 +137,15 @@
     </div>
     <!-- 부트스트랩 자바스크립트 -->
     <script src="${initparam.root}resources/js/bootstrap.min.js"></script>
+    <!-- chart js -->
+    <script src="${initparam.root}resources/js/chartjs/chart.min.js"></script>
     <!-- icheck -->
+    <script src="${initparam.root}resources/js/progressbar/bootstrap-progressbar.min.js"></script>
+    <script src="${initparam.root}resources/js/nicescroll/jquery.nicescroll.min.js"></script>
     <script src="${initparam.root}resources/js/icheck/icheck.min.js"></script>
-    <%-- <script src="${initparam.root}resources/js/custom.js"></script> --%>
-    <!-- moris js -->
-    <script src="${initparam.root}resources/js/moris/raphael-min.js"></script>
-    <script src="${initparam.root}resources/js/moris/morris.js"></script>
-    <script src="${initparam.root}resources/js/moris/example.js"></script>
+    <script src="${initparam.root}resources/js/custom.js"></script>
+    
   	
 </body>
-<!-- form validation -->
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $.listen('parsley:field:validate', function () {
-                    validateFront();
-                });
-                $('#demo-form .btn').on('click', function () {
-                    $('#demo-form').parsley().validate();
-                    validateFront();
-                });
-                var validateFront = function () {
-                    if (true === $('#demo-form').parsley().isValid()) {
-                        $('.bs-callout-info').removeClass('hidden');
-                        $('.bs-callout-warning').addClass('hidden');
-                    } else {
-                        $('.bs-callout-info').addClass('hidden');
-                        $('.bs-callout-warning').removeClass('hidden');
-                    }
-                };
-            });
-
-            $(document).ready(function () {
-                $.listen('parsley:field:validate', function () {
-                    validateFront();
-                });
-                $('#demo-form2 .btn').on('click', function () {
-                    $('#demo-form2').parsley().validate();
-                    validateFront();
-                });
-                var validateFront = function () {
-                    if (true === $('#demo-form2').parsley().isValid()) {
-                        $('.bs-callout-info').removeClass('hidden');
-                        $('.bs-callout-warning').addClass('hidden');
-                    } else {
-                        $('.bs-callout-info').addClass('hidden');
-                        $('.bs-callout-warning').removeClass('hidden');
-                    }
-                };
-            });
-            try {
-                hljs.initHighlightingOnLoad();
-            } catch (err) {}
-        </script>
-        <!-- /form validation -->
 		
 </html>
