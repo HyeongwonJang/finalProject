@@ -5,6 +5,8 @@ import javax.annotation.Resource;
 import org.animalhospital.petowner.model.DAO.PetOwnerDAO;
 import org.animalhospital.petowner.model.VO.PetOwnerVO;
 import org.animalhospital.vet.model.DAO.VetDAO;
+import org.animalhospital.vet.model.VO.VetLicenseVO;
+import org.animalhospital.vet.service.VetService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -20,8 +22,13 @@ public class TestJUnit {
 	private PetOwnerDAO PetOwnerDAO;
 	@Resource
 	private VetDAO vetDAO;
+	@Resource
+	private VetService vetService;
 	@Test
 	public void TestDao2(){
-		System.out.println(vetDAO.findAllHospital());
+		VetLicenseVO lvo = new VetLicenseVO();
+		lvo.setVetLicenseNo(21);
+		lvo.setVetName("송인국");
+		System.out.println("체크결과:" + vetService.licenseCheck(lvo));
 	}
 }

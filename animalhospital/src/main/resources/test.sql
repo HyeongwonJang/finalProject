@@ -1,3 +1,9 @@
+-- 이미 사용하고 있는 면허증 번호
+select count(*)
+from Vet v, Vet_License l
+where v.Vet_License_no = l.Vet_License_no
+and l.Vet_License_no = 22;
+
 -- 로그인 테스트
 select Pet_Owner_no, Pet_Owner_id, Pet_Owner_name, Pet_Owner_tel, Pet_Owner_address
 		from  Pet_Owner

@@ -5,7 +5,6 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.animalhospital.vet.model.VO.HospitalVO;
 import org.animalhospital.vet.model.VO.VetLicenseVO;
@@ -14,19 +13,12 @@ import org.animalhospital.vet.service.VetService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class VetController {
 	@Resource
 	private VetService vetService;
 
-	@RequestMapping("findAllHospitalAjax.do")
-	@ResponseBody
-	public List<HospitalVO> findAllHospitalAjax(){
-		return vetService.findAllHospital();
-	}
-	
 	@RequestMapping("test.do")
 	public String test(HospitalVO vo, VetVO vvo){
 		vo.addListObject(vvo);
@@ -36,35 +28,51 @@ public class VetController {
 	/**
 	 * 수의사 등록
 	 */
-	@RequestMapping("registerVet.do")
+	@RequestMapping("register_vet.do")
 	public String registerVet(HospitalVO hvo){
-		System.out.println(hvo);
-		//vetService.registerVet(hvo);
+		vetService.registerVet(hvo);
 		return "home.do";
 	}
 	/**
 	 * 라이센스 체크
-	 *//*
+	 */
 	@RequestMapping("licenseCheck.do")
-	public ModelAndView licenseCheck(VetLicenseVO lvo){
-		return new ModelAndView("license_check_result_view.do","licenseCheck", vetService.licenseCheck(lvo));
+	@ResponseBody
+	public int licenseCheck(VetLicenseVO lvo){
+		System.out.println(lvo);
+		return vetService.licenseCheck(lvo);
 	}
-	*//**
+	/**
 	 * 병원 검색
-	 *//*
+	 */
 	@RequestMapping("findHospital.do")
-	public ModelAndView findHospital(String hospitalName){
-		List<HospitalVO> hospitalList=vetService.findHospital(hospitalName);
-		return new ModelAndView("find_hospital_result_view.do", "hospitalList", hospitalList);
+	@ResponseBody
+	public List<HospitalVO> findHospital(HttpServletRequest request, String hospitalName){
+		 List<HospitalVO> hospitalList=vetService.findHospital(hospitalName);
+		 request.setAttribute("hospitalList", hospitalList);
+		return /*new ModelAndView("find_hospital_result_view.do", "hospitalList", hospitalList)*/hospitalList;
 	}
-	*//**
+	/**
 	 * 수의사 아이디 중복 체크
-	 *//*
+	 */
 	@RequestMapping("findVetById.do")
-	public ModelAndView findVetById(String vetId){
-		return new ModelAndView("vet_id_check_result_view.do","vetIdCheck",vetService.findVetById(vetId));
+	@ResponseBody
+	public int findVetById(HttpServletResponse response, String vetId){
+		return vetService.findVetById(vetId);
 	}
-	*//**
+	
+	@RequestMapping("testAjax.do")
+	@ResponseBody
+	public String testAjax(){
+		return "테스트 성공";
+	}
+	@RequestMapping("findAllHospitalAjax.do")
+	@ResponseBody
+	public List<HospitalVO> findAllHospitalAjax(){
+		return vetService.findAllHospital();
+	}
+	
+	/**
 	 * 수의사 로그인
 	 *//*
 	@RequestMapping("vetLogin.do")

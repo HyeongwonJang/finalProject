@@ -170,6 +170,8 @@ insert into Vet_License values(Vet_License_no_seq.nextval, '이윤아', 880625, 
 insert into Vet_License values(Vet_License_no_seq.nextval, '칼퇴하조', 890905, to_date('1999/12/20'));
 insert into Vet_License values(Vet_License_no_seq.nextval, '박보검',930616, to_date('2011/12/20'));
 
+commit
+
 select * from Vet_License;
 delete Vet_License where Vet_License_no=2;
 
@@ -193,12 +195,13 @@ create table Vet(
 drop table Vet;
 insert into Vet values('ImChangJung', '1234','1111111',2 ,'4');
 insert into Vet values('ParBG', '1234', '1111111', 6, '2');
-insert into Vet values('YUNA',  '1234', '1111111',4,'2');
-insert into Vet values('DoctorSong', '1234','1111111',1, '5');
+insert into Vet values('YUNA',  '1234', '1111111',22,'2');
+insert into Vet values('java2', '1234','1111111',21, '5');
 
+commit
 
 select * from Vet;
-
+select count(*) 
 ---------------------------------------- 진료기록 ----------------------------------------
 
 ------- 질병 ---------

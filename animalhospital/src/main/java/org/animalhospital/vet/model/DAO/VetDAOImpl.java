@@ -6,33 +6,47 @@ import javax.annotation.Resource;
 
 import org.animalhospital.vet.model.VO.HospitalVO;
 import org.animalhospital.vet.model.VO.VetLicenseVO;
+import org.animalhospital.vet.model.VO.VetVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class VetDAOImpl implements VetDAO {
 	@Resource
-	private SqlSessionTemplate sqlSessionTemplate;
+	private SqlSessionTemplate sqlSessionTemlate;
 	
-	/**
-	 * 병원 정보를 모두 가져오는 메서드
-	 * 용도: 회원가입 시 병원 리스트를 가져오는데 사용한다.
-	 */
+	@Override
+	public List<HospitalVO> findHospital(String hospitalName){
+		return  sqlSessionTemlate.selectList("vet.findHospital",hospitalName);
+	}
+	@Override
+	public void registerVet(HospitalVO hvo) {
+		sqlSessionTemlate.insert("vet.registerVet",hvo);
+	}
+	@Override
+	public int licenseCheck(VetLicenseVO lvo) {
+		return sqlSessionTemlate.selectOne("vet.licenseCheck",lvo);
+	}
+	
+	public int useVetLicenseCheck(VetLicenseVO lvo){
+		return sqlSessionTemlate.selectOne("vet.useVetLicenseCheck", lvo);
+	}
+	
 	public List<HospitalVO> findAllHospital(){
-		return sqlSessionTemplate.selectList("vet.findAllHospital");
+		return sqlSessionTemlate.selectList("vet.findAllHospital");
 	}
 	
 	@Override
-	public int registerVet(HospitalVO vo){
-		return sqlSessionTemplate.insert("vet.registerVet", vo);
+	public int findVetById(String vetId) {
+		return sqlSessionTemlate.selectOne("vet.findVetById",vetId);
 	}
-	
-	public HospitalVO findHospitalById(int hospitalId){
-		return sqlSessionTemplate.selectOne("vet.findHospitalById",hospitalId);
+	@Override
+	public VetVO vetLogin(VetVO vvo) {
+		return sqlSessionTemlate.selectOne("vet.vetLogin", vvo);
 	}
-	
-	public VetLicenseVO findVetLicenseByNoAndName(VetLicenseVO vo){
-		return sqlSessionTemplate.selectOne("vet.findVetLicenseByNoAndName", vo);
+	@Override
+	public List<VetVO> findVetByHospitalId(int hospitalId) {
+		return sqlSessionTemlate.selectList("vet.findVetByHospitalId", hospitalId);
 	}
 	
 }

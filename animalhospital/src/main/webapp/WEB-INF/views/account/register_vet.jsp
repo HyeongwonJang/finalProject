@@ -23,9 +23,25 @@
 <script src="${initparam.root}resources/js/jquery.min.js"></script>
 <!-- Bootstrap Core JavaScript -->
 <script src="${initparam.root}resources/js/bootstrap.min.js"></script>
+
+<script type='text/javascript'>
+// 모달창 검색어 검색 필터
+	function filter(){
+		if($('#txtFilter').val()=="")
+			$("#modalTableInfo tr").css('display','');			
+		else{
+			$("#modalTableInfo tr").css('display','none');
+			$("#modalTableInfo tr[name*='"+$('#txtFilter').val().toLowerCase()+"']").css('display','');
+		}
+		return false;
+	}
+</script>
+
 <script type="text/javascript">
 	$(document).ready(function() {
+		// 모달창 띄우는 함수
 		$("#popbutton").click(function() {
+			// 모달창이 뜨기 전에 ajax로 병원 정보를 가져온다
 			$.ajax({
 			    type: "post", // get 또는 post로 설정
 			    url: "findAllHospitalAjax.do", // 이동할 url 설정
@@ -43,14 +59,12 @@
 			    		tableInfo += "</tr>";
 					});
 			    	$("#modalTableInfo").html(tableInfo)
-			    	
 			    }
 			});
+			// 모달창을 띄운다
 			$('div.modal').modal({
 			});
 		});
-		
-		
 		
 		$("#testBtn").click(function() {
 			alert("테스트");
@@ -58,31 +72,56 @@
 			$('div.modal').modal('hide');
 			})
 		
+		// ajax를 이용하여 id의 중복체크를 한다.
+		$("#vetId").keyup(function() {
+			$.ajax({
+			    type: "post", // get 또는 post로 설정
+			    url: "findVetById.do", // 이동할 url 설정
+			    data: "vetId=" + $(this).val(),
+			    success: function(searchResult){
+			   		if(searchResult == 0){
+			   			$("#idSearchMessage").text("사용하지 않은 아이디입니다!");
+			   			$("#idSearchMessage").attr('class', 'text-primary');
+			   		} else {
+			   			$("#idSearchMessage").text("이미 사용하고 있는 아이디입니다!");
+			   			$("#idSearchMessage").attr('class', 'text-danger');
+			   		}
+			    }
+			});
+		});
+		
+		// ajax를 이용하여 면허증과 이름을 체크한다.
+		$("#vetLicenseNo, #vetName").keyup(function() {
+			$.ajax({
+			    type: "post", 
+			    url: "licenseCheck.do", 
+			    data: "vetLicenseNo=" + $("#vetLicenseNo").val() + "&vetName=" + $("#vetName").val(),
+			    success: function(searchResult){
+			   		if(searchResult == 0){
+			   			$("#licenseSearchMessage").text("면허번호와 이름이 일치하지 않거나 이미 사용하고 있는 면허번호입니다!");
+			   			$("#licenseSearchMessage").attr('class', 'text-danger');
+			   		} else {
+			   			$("#licenseSearchMessage").text("면허증 번호와 이름이 일치합니다!");
+			   			$("#licenseSearchMessage").attr('class', 'text-primary');
+			   		}
+			    }
+			});
+		});
+		
+		
+		//숫자만 입력할 수 있도록 정의
+		$("#vetTel").keyup(function(){
+			$(this).val( $(this).val().replace(/[^0-9]/g,""));
+			if($(this).val().length > 11){
+				$(this).val($(this).val().replace($(this).val(),$(this).val().substring(0,11)));
+				alert("전화번호 양식에 맞게 작성해주세요!");
+			}
+		});
 		
 	});
 </script>
 
-<script type='text/javascript'>
-	function filter(){
-		if($('#txtFilter').val()=="")
-			$("#modalTableInfo tr").css('display','');			
-		else{
-			$("#modalTableInfo tr").css('display','none');
-			$("#modalTableInfo tr[name*='"+$('#txtFilter').val().toLowerCase()+"']").css('display','');
-		}
-		return false;
-	}
-</script>
 
-
-<script type="text/javascript">
-	$(document).ready(function() {
-		$("#testBtn").click(function() {
-			alert("만세");
-			$("#vetId").val("형원이형 약 빠는 중");
-		});
-	});
-</script>
 
 </head>
   
@@ -118,7 +157,7 @@
             </div>
             <div>
             	<!-- 텍스트 색깔은 text-primary text-danger 이거 사용-->
-              <h3></h3><span class="text-danger" style="font-weight: bold">중복체크 ajax</span>
+              <h3></h3><span class="text-danger" id="idSearchMessage" style="font-weight: bold"></span>
           	</div>
           </div>
           <div class="form-group">
@@ -140,19 +179,28 @@
               	<input type="text" id="vetTel" required="required" class="form-control col-md-7 col-xs-12"
               	name="vetList[0].vetTel">
             </div>
+            <div>
+            	<!-- 텍스트 색깔은 text-primary -->
+              <span class="text-primary" style="font-weight: bold">
+              	전화번호는 특수기호를 빼고 넣어주세요<br>
+              	ex) 01020433456
+              </span>
+          	</div>
           </div>
           <div class="form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">면허증번호
               <span class="required">*</span>
             </label>
-            <div class="col-md-2 col-sm-6 col-xs-12">
+            <div class="col-md-4 col-sm-6 col-xs-12">
             	<!-- 수의사 면허증 번호에 대한 input -->
               	<input type="text" id="vetLicenseNo" required="required" 
-              	class="form-control col-md-7 col-xs-10" placeholder="면허증번호를 입력해주세요" 
+              	class="form-control col-md-7 col-xs-10" placeholder="면허증 번호와 이름을 입력해주세요" 
               	name="vetList[0].vetLicenseVO.vetLicenseNo">
             </div>
             <div>
-              <h3></h3>면허증 번호가 조회되면 ajax로 연동</div>
+              <h3></h3>
+              <span class="text-danger" id="licenseSearchMessage" style="font-weight: bold"></span>
+              </div>
           	</div>
           <div class="form-group">
             <label for="last-name" class="control-label col-md-3 col-sm-3 col-xs-12">이름
