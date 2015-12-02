@@ -160,7 +160,7 @@
             </label>
             <div class="col-md-2 col-sm-6 col-xs-12">
             	<!-- 수의사 이름에 대한 input -->
-              	<input id="vetName" class="form-control col-md-7 col-xs-10" type="text" name="vetList[0].vetLicenseVO.vetLicenseName" 
+              	<input id="vetName" class="form-control col-md-7 col-xs-10 test" type="text" name="vetList[0].vetLicenseVO.vetLicenseName" 
               	required="required">
             </div>
           </div>
@@ -170,7 +170,7 @@
             </label>
             <div class="col-md-2 col-sm-6 col-xs-12">
             	<!-- 병원 이름에 대한 input -->
-              	<input id="hospitalName" class="form-control col-md-7 col-xs-10" type="text" name="hospitalName"
+              	<input id="hospitalName" class="form-control col-md-7 col-xs-10 test" type="text" name="hospitalName"
               	required="required" readonly>
             </div>
             <div>
