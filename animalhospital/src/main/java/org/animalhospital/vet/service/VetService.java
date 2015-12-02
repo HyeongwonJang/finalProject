@@ -8,8 +8,8 @@ import org.animalhospital.vet.model.VO.VetVO;
 
 public interface VetService {
 
-	void registerVet(HospitalVO hvo);
-
+	public void registerVet(HospitalVO hvo);
+	public List<HospitalVO>findAllHospital();
 	/*List<HospitalVO> findHospital(String hospitalName);
 
 	int licenseCheck(VetLicenseVO lvo);

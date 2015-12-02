@@ -24,20 +24,21 @@ public class PetOwnerController {
 	
 	@RequestMapping(value = "petOwnerLogin.do", method = RequestMethod.POST)
 	public String loginPetOwner(HttpServletRequest request, PetOwnerVO povo){
-		String path ="account/login_ok";
-		List<PetOwnerVO> list = petOwnerService.loginPetOwner(povo);
-		if (list == null) {
-			path = "account/login";
+		PetOwnerVO resultVO = petOwnerService.loginPetOwner(povo);
+		if (resultVO == null) {
+			return "account/login_fail";
+		} else {
+			request.getSession().setAttribute("povo", resultVO);
+			return "redirect:home.do";
 		}
-		request.getSession().setAttribute("povo", list);
-		return path;
 	}
+	
 	@RequestMapping("logout.do")
 	public String logout(HttpServletRequest request){
 		HttpSession session = request.getSession(false);
 		if (session != null)
 			session.invalidate();
-		return "index";
+		return "redirect:home.do";
 	}
 	
 }

@@ -37,8 +37,8 @@ public class PetOwnerDAOImpl implements PetOwnerDAO {
 	}
 
 	@Override
-	public List<PetOwnerVO> loginPetOwner(PetOwnerVO povo) {
-		return sqlSessionTemplate.selectList("petOwner.loginPetOwner",povo);
+	public PetOwnerVO loginPetOwner(PetOwnerVO povo) {
+		return sqlSessionTemplate.selectOne("petOwner.loginPetOwner",povo);
 	}
 
 	@Override

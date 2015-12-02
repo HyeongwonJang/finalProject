@@ -1,3 +1,14 @@
+-- 로그인 테스트
+select Pet_Owner_no, Pet_Owner_id, Pet_Owner_name, Pet_Owner_tel, Pet_Owner_address
+		from  Pet_Owner
+		where Pet_Owner_id = 'java' and Pet_Owner_password = '1234' 
+		
+select po.Pet_Owner_no, po.Pet_Owner_id, po.Pet_Owner_name, po.Pet_Owner_tel, po.Pet_Owner_address
+		from  Pet_Owner po, Pet p
+		where po.Pet_Owner_id = 'java' and po.Pet_Owner_password = '1234'  
+			and po.Pet_Owner_no = p.Pet_Owner_no;
+
+
 select * from Pet_Owner;
 select * from Member_Pet_Owner;
 select * from Pet;

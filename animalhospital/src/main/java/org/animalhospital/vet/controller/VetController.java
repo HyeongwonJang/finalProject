@@ -13,6 +13,7 @@ import org.animalhospital.vet.model.VO.VetVO;
 import org.animalhospital.vet.service.VetService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -20,6 +21,12 @@ public class VetController {
 	@Resource
 	private VetService vetService;
 
+	@RequestMapping("findAllHospitalAjax.do")
+	@ResponseBody
+	public List<HospitalVO> findAllHospitalAjax(){
+		return vetService.findAllHospital();
+	}
+	
 	@RequestMapping("test.do")
 	public String test(HospitalVO vo, VetVO vvo){
 		vo.addListObject(vvo);
@@ -29,9 +36,10 @@ public class VetController {
 	/**
 	 * 수의사 등록
 	 */
-	@RequestMapping("register_vet.do")
+	@RequestMapping("registerVet.do")
 	public String registerVet(HospitalVO hvo){
-		vetService.registerVet(hvo);
+		System.out.println(hvo);
+		//vetService.registerVet(hvo);
 		return "home.do";
 	}
 	/**

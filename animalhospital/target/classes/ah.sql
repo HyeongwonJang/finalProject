@@ -1,8 +1,11 @@
 ---------------------------------------- 회원 ----------------------------------------
 
 
+
+
 -- 동물 종륲
-drop table Animal_Kind;
+drop table Animal_Kind constraint cascade;
+
 create table Animal_kind(
 	Animal_kind_name varchar2(50) primary key
 );
@@ -27,7 +30,7 @@ ADD CONSTRAINT pk_Pet_Owner_tel  PRIMARY KEY (Pet_Owner_tel);
 
 SELECT * FROM USER_CONSTRAINTS;
 -- 회원 가입한 반려 동물 주인
-drop table Member_Pet_Owner;
+drop table Member_Pet_Owner CONSTRAINT cascade;
 create table Member_Pet_Owner(
 	Pet_Owner_tel varchar2(50),
 	Pet_Owner_id varchar2(50) unique,
@@ -143,6 +146,11 @@ insert into Hospital values(Hospital_id_seq.nextval, 'EXCEPTION 동물병원', '
 insert into Hospital values(Hospital_id_seq.nextval, '임박사동물병원', '성남시 분당구 운중동', '031-123-4567');
 insert into Hospital values(Hospital_id_seq.nextval, '송일국 동물병원', '인천시 연수구 송도동', '032-123-4567');
 insert into Hospital values(Hospital_id_seq.nextval, 'Kal-Toi Anial Hospital', '서울시 서초구', '032-123-4567');
+
+commit
+
+select hospital_id, hospital_name, hospital_address, hospital_tel
+		from hospital
 
 select * from Hospital;
 delete Hospital where Hospital_id=4;

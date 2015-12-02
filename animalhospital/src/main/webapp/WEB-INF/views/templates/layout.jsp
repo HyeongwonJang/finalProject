@@ -65,10 +65,10 @@
                     <a><i class="fa fa-clipboard"></i> 진료관리 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu" style="display: none">
                       <li>
-                        <a href="treatment_record_register.do">진료등록</a>
+                        <a href="${initparam.root}treatment_record_register.do">진료등록</a>
                       </li>
                       <li>
-                        <a href="treatment_record_find.do">진료조회</a>
+                        <a href="${initparam.root}treatment_record_find.do">진료조회</a>
                       </li>
                     </ul>
                   </li>
@@ -102,7 +102,7 @@
                       <a href="javascript:;">  My page</a>
                     </li>
                     <li>
-                      <a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+                      <a href="${initparam.root}logout.do"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
                     </li>
                   </ul>
                 </li>

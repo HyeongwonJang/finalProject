@@ -72,7 +72,7 @@
 				<div class="modal-body">
 					<p align="center" class="text-success">
 					<!-- 버튼 링크 -->
-						<a class="btn btn-primary" href="${initparam.root}registerVetView.do">
+						<a class="btn btn-primary" href="registerVetView.do">
 						수의사</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<a class="btn btn-success" href="${initparam.root}registerPetownerView.do">보호자</a>
 					</p>

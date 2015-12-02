@@ -1,5 +1,5 @@
 package org.animalhospital.treatment.model.VO;
-import org.animalhospital.petowner.model.VO.MemberPetOwnerVO;
+import org.animalhospital.petowner.model.VO.PetOwnerVO;
 import org.animalhospital.vet.model.VO.HospitalVO;
 
 public class TreatmentRecordVO {
@@ -7,25 +7,22 @@ public class TreatmentRecordVO {
 	private String treatmentHours;
 	private String treatmentContent;
 	private double petWeight;
-	private MemberPetOwnerVO memberPetOwnerVO;
+	private PetOwnerVO petOwnerVO;
 	private HospitalVO hospitalVO;
 	private DiseaseVO diseaseVO;
-	
 	public TreatmentRecordVO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
 	public TreatmentRecordVO(String treatmentRecordNo, String treatmentHours,
-			String treatmentContent, double petWeight,
-			MemberPetOwnerVO memberPetOwnerVO, HospitalVO hospitalVO,
-			DiseaseVO diseaseVO) {
+			String treatmentContent, double petWeight, PetOwnerVO petOwnerVO,
+			HospitalVO hospitalVO, DiseaseVO diseaseVO) {
 		super();
 		this.treatmentRecordNo = treatmentRecordNo;
 		this.treatmentHours = treatmentHours;
 		this.treatmentContent = treatmentContent;
 		this.petWeight = petWeight;
-		this.memberPetOwnerVO = memberPetOwnerVO;
+		this.petOwnerVO = petOwnerVO;
 		this.hospitalVO = hospitalVO;
 		this.diseaseVO = diseaseVO;
 	}
@@ -53,11 +50,11 @@ public class TreatmentRecordVO {
 	public void setPetWeight(double petWeight) {
 		this.petWeight = petWeight;
 	}
-	public MemberPetOwnerVO getMemberPetOwnerVO() {
-		return memberPetOwnerVO;
+	public PetOwnerVO getPetOwnerVO() {
+		return petOwnerVO;
 	}
-	public void setMemberPetOwnerVO(MemberPetOwnerVO memberPetOwnerVO) {
-		this.memberPetOwnerVO = memberPetOwnerVO;
+	public void setPetOwnerVO(PetOwnerVO petOwnerVO) {
+		this.petOwnerVO = petOwnerVO;
 	}
 	public HospitalVO getHospitalVO() {
 		return hospitalVO;
@@ -76,9 +73,10 @@ public class TreatmentRecordVO {
 		return "TreatmentRecordVO [treatmentRecordNo=" + treatmentRecordNo
 				+ ", treatmentHours=" + treatmentHours + ", treatmentContent="
 				+ treatmentContent + ", petWeight=" + petWeight
-				+ ", memberPetOwnerVO=" + memberPetOwnerVO + ", hospitalVO="
-				+ hospitalVO + ", diseaseVO=" + diseaseVO + "]";
+				+ ", petOwnerVO=" + petOwnerVO + ", hospitalVO=" + hospitalVO
+				+ ", diseaseVO=" + diseaseVO + "]";
 	}
+	
 	
 	
 		

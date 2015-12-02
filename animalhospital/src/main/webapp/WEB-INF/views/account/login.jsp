@@ -29,7 +29,7 @@
 				if(command == "vet"){
 					$("input[name=userId]").attr('name', 'vetId');
 					$("input[name=userPass]").attr('name', 'vetPassword');
-				} else if(command == "petowner"){
+				} else if(command == "petOwner"){
 					$("input[name=userId]").attr('name', 'petOwnerId');
 					$("input[name=userPass]").attr('name', 'petOwnerPassword');
 				}
@@ -37,7 +37,7 @@
 				// vetLogin.do 와 petownerLogin.do로 넘어가게 된다
 				$("#loginForm").attr('action', command + "Login.do");
 				
-			});
+			});	
 		});
     </script>
     </head>
@@ -49,7 +49,7 @@
       <div id="wrapper">
         <div id="login" class="animate form">
           <section class="login_content">
-            <form id="loginForm" >
+            <form id="loginForm" method="post">
               <h1>로그인</h1>
               
               <div>
@@ -64,11 +64,11 @@
 						<div class="commandRadio">
 							<label>
 								<input type="radio" name="loginCommand"
-									value="vet" > 수의사
+									value="vet" checked> 수의사
 							</label> &nbsp;&nbsp;
 							<label>
 								<input type="radio" name="loginCommand"
-									value="petowner" > 보호자
+									value="petOwner" > 보호자
 							</label>
 						</div>
 				<button type="submit" class="btn btn-default btn-sm">Log in</button>

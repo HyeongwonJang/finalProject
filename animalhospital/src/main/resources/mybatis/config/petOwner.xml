@@ -6,24 +6,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  <mapper namespace="petOwner">
  	<resultMap type="povo" id="povoRM">
  		<id column="Pet_Owner_no" property="petOwnerNo"/>
- 		<id column="Pet_Owner_tel" property="petOwnerTel"/>
- 		<id column="Pet_Owner_name" property="petOwnerName"/>
- 		<id column="Pet_Owner_id" property="petOwnerId"/>
- 		<id column="Pet_Owner_password" property="petOwnerPassword"/>
- 		<id column="Pet_Owner_address" property="petOwnerAddress"/>
+ 		<result column="Pet_Owner_tel" property="petOwnerTel"/>
+ 		<result column="Pet_Owner_name" property="petOwnerName"/>
+ 		<result column="Pet_Owner_id" property="petOwnerId"/>
+ 		<result column="Pet_Owner_password" property="petOwnerPassword"/>
+ 		<result column="Pet_Owner_address" property="petOwnerAddress"/>
  		<collection property="petVO" ofType="pvo">
  			<id column="Pet_name" property="petName"/>
- 			<id column="Pet_birthday" property="petBirthday"/>
- 			<id column="Pet_gender" property="petGender"/>
- 			<id column="Pet_note" property="petNote"/>
- 			<id column="Animal_kind_name" property="animalKindName"/>
+ 			<result column="Pet_birthday" property="petBirthday"/>
+ 			<result column="Pet_gender" property="petGender"/>
+ 			<result column="Pet_note" property="petNote"/>
+ 			<result column="Animal_kind_name" property="animalKindName"/>
  		</collection>
  	</resultMap>
- 	<select id="loginPetOwner" resultType="povo" resultMap="povoRM">
- 		select po.Pet_Owner_no, po.Pet_Owner_id, po.Pet_Owner_name, po.Pet_Owner_tel, po.Pet_Owner_address
-		from  Pet_Owner po, Pet p
-		where po.Pet_Owner_id = #{petOwnerId} and po.Pet_Owner_password =#{petOwnerPassword} 
-			and po.Pet_Owner_no = p.Pet_Owner_no			
+ 	<select id="loginPetOwner" resultMap="povoRM" parameterType="povo">
+ 		select Pet_Owner_no, Pet_Owner_id, Pet_Owner_name, Pet_Owner_tel, Pet_Owner_address
+		from  Pet_Owner
+		where Pet_Owner_id = #{petOwnerId} and Pet_Owner_password =#{petOwnerPassword} 
  	</select>
  	<select id="findMemberPetOwnerByTel" parameterType="povo" resultType="povo" resultMap="povoRM">
  		select po.Pet_Owner_tel, po.Pet_Owner_name, mpo.Pet_Owner_id, mpo.Pet_Owner_address

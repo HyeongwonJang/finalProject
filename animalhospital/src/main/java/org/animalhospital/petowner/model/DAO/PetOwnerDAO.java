@@ -11,7 +11,7 @@ public interface PetOwnerDAO {
 	public void registerPetOwner(PetOwnerVO povo);
 	public void registerMemberPetOwner(PetOwnerVO povo);
 	public void registerPet(PetOwnerVO povo);
-	public List<PetOwnerVO> loginPetOwner(PetOwnerVO povo);
+	public PetOwnerVO loginPetOwner(PetOwnerVO povo);
 	public void updatePetOwner(PetOwnerVO povo);
 	public void deletePetOwner(PetOwnerVO povo);
 }
