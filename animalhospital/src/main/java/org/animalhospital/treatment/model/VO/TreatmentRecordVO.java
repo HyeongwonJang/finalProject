@@ -3,7 +3,7 @@ import org.animalhospital.petowner.model.VO.PetOwnerVO;
 import org.animalhospital.vet.model.VO.HospitalVO;
 
 public class TreatmentRecordVO {
-	private String treatmentRecordNo;
+	private int treatmentRecordNo;
 	private String treatmentHours;
 	private String treatmentContent;
 	private double petWeight;
@@ -12,9 +12,8 @@ public class TreatmentRecordVO {
 	private DiseaseVO diseaseVO;
 	public TreatmentRecordVO() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
-	public TreatmentRecordVO(String treatmentRecordNo, String treatmentHours,
+	public TreatmentRecordVO(int treatmentRecordNo, String treatmentHours,
 			String treatmentContent, double petWeight, PetOwnerVO petOwnerVO,
 			HospitalVO hospitalVO, DiseaseVO diseaseVO) {
 		super();
@@ -26,10 +25,10 @@ public class TreatmentRecordVO {
 		this.hospitalVO = hospitalVO;
 		this.diseaseVO = diseaseVO;
 	}
-	public String getTreatmentRecordNo() {
+	public int getTreatmentRecordNo() {
 		return treatmentRecordNo;
 	}
-	public void setTreatmentRecordNo(String treatmentRecordNo) {
+	public void setTreatmentRecordNo(int treatmentRecordNo) {
 		this.treatmentRecordNo = treatmentRecordNo;
 	}
 	public String getTreatmentHours() {
@@ -77,7 +76,4 @@ public class TreatmentRecordVO {
 				+ ", diseaseVO=" + diseaseVO + "]";
 	}
 	
-	
-	
-		
-}
+}	
