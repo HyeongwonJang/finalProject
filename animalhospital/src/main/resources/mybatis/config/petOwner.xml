@@ -4,10 +4,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- MyBatis에서 namespace는 필수적으로 명시해야 함 -->
  <mapper namespace="petOwner">
- 	<resultMap type="mpovo" id="mpovoRM">
- 		<id column="Pet_Owner_name" property="petOwnerVO.petOwnerName"/>
- 		<id column="Pet_Owner_tel" property="petOwnerVO.petOwnerTel"/>
+ 	<resultMap type="povo" id="povoRM">
+ 		<id column="Pet_Owner_no" property="petOwnerNo"/>
+ 		<id column="Pet_Owner_tel" property="petOwnerTel"/>
+ 		<id column="Pet_Owner_name" property="petOwnerName"/>
  		<id column="Pet_Owner_id" property="petOwnerId"/>
+ 		<id column="Pet_Owner_password" property="petOwnerPassword"/>
  		<id column="Pet_Owner_address" property="petOwnerAddress"/>
  		<collection property="petVO" ofType="pvo">
  			<id column="Pet_name" property="petName"/>
@@ -17,27 +19,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<id column="Animal_kind_name" property="animalKindName"/>
  		</collection>
  	</resultMap>
- 	<select id="loginPetOwner" resultType="mpovo" resultMap="mpovoRM">
- 		select mpo.Pet_Owner_id, po.Pet_Owner_name, mpo.Pet_Owner_tel, mpo.Pet_Owner_address, p.Pet_name, p.Pet_birthday, p.Pet_gender, p.Pet_note, p.Animal_kind_name
-		from Member_Pet_Owner mpo , Pet_Owner po, Pet p
-		where mpo.Pet_Owner_id = #{petOwnerId} and mpo.Pet_Owner_password =#{petOwnerPassword} 
-				 and mpo.Pet_Owner_tel = p.Pet_Owner_tel and po.Pet_Owner_tel = p.Pet_Owner_tel
+ 	<select id="loginPetOwner" resultType="povo" resultMap="povoRM">
+ 		select po.Pet_Owner_no, po.Pet_Owner_id, po.Pet_Owner_name, po.Pet_Owner_tel, po.Pet_Owner_address
+		from  Pet_Owner po, Pet p
+		where po.Pet_Owner_id = #{petOwnerId} and po.Pet_Owner_password =#{petOwnerPassword} 
+			and po.Pet_Owner_no = p.Pet_Owner_no			
  	</select>
- 	<select id="findMemberPetOwnerByTel" parameterType="povo" resultType="mpovo" resultMap="mpovoRM">
+ 	<select id="findMemberPetOwnerByTel" parameterType="povo" resultType="povo" resultMap="povoRM">
  		select po.Pet_Owner_tel, po.Pet_Owner_name, mpo.Pet_Owner_id, mpo.Pet_Owner_address
 		from Pet_Owner po, Member_Pet_Owner mpo
 		where po.Pet_Owner_tel = mpo.Pet_Owner_tel and po.Pet_Owner_tel = #{petOwnerTel} 	
  	</select>
- 	<select id="findPetByTel" parameterType="povo" resultType="mpovo" resultMap="mpovoRM">
+ 	<select id="findPetByTel" parameterType="povo" resultType="povo" resultMap="povoRM">
  		select po.Pet_Owner_tel, po.Pet_Owner_name, mpo.Pet_Owner_id, mpo.Pet_Owner_address, p.Pet_name
 		from Pet_Owner po, Member_Pet_Owner mpo, Pet p
 		where po.Pet_Owner_tel = mpo.Pet_Owner_tel and po.Pet_Owner_tel = p.Pet_Owner_tel and po.Pet_Owner_tel = #{petOwnerTel} 	
  	</select>
- 	<insert id="registerPetOwner" parameterType="mpovo">
+ 	<insert id="registerPetOwner" parameterType="povo">
  		insert into Pet_Owner(Pet_Owner_tel, Pet_Owner_name)
 		values(#{petOwnerVO.petOwnerTel}, #{petOwnerVO.petOwnerName})
  	</insert>
- 	<insert id="registerMemberPetOwner" parameterType="mpovo">
+ 	<insert id="registerMemberPetOwner" parameterType="povo">
 		insert into Member_Pet_Owner(Pet_Owner_tel, Pet_Owner_id, Pet_Owner_password, Pet_Owner_address)
 		values(#{petOwnerVO.petOwnerTel}, #{petOwnerId}, #{petOwnerPassword}, #{petOwnerAddress})
  	</insert>
@@ -47,15 +49,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values(#{petName}, '01012341234', #{birthday}, #{gender}, #{note}, #{animalKindName}) 	
  	</insert>
  	
- 	<update id="updatePetOwner" parameterType="mpovo">
- 		update Member_Pet_Owner
-		set Pet_Owner_address = #{petOwnerAddress}
+ 	<update id="updatePetOwner" parameterType="povo">
+ 		update Pet_Owner
+		set Pet_Owner_tel=#{petOwnerTel}, Pet_Owner_name=#{petOwnerName},
+			 Pet_Owner_password=#{petOwnerPassword}, Pet_Owner_address = #{petOwnerAddress}
 		where Pet_Owner_id = #{petOwnerId}  
  	</update>
  	
- 	<update id ="deletePetOwner" parameterType="mpovo">
- 		update Member_Pet_Owner
-		set Pet_Owner_id=null, Pet_Owner_password='null', Pet_Owner_address='null'
+ 	<update id ="deletePetOwner" parameterType="povo">
+ 		update Pet_Owner
+		set Pet_Owner_id=null, Pet_Owner_password=null, Pet_Owner_address=null
 		where Pet_Owner_id = #{petOwnerId}
  	</update>
  	

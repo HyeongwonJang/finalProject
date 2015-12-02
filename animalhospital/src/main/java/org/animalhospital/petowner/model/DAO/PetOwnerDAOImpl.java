@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.animalhospital.petowner.model.VO.MemberPetOwnerVO;
 import org.animalhospital.petowner.model.VO.PetOwnerVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
@@ -17,44 +16,41 @@ public class PetOwnerDAOImpl implements PetOwnerDAO {
 	 * @see org.animalhospital.petowner.model.MemberPetOwnerDAO#findMemberPetOwnerByTel(org.animalhospital.petowner.model.PetOwnerVO)
 	 */
 	@Override
-	public MemberPetOwnerVO findMemberPetOwnerByTel(PetOwnerVO povo) {
+	public PetOwnerVO findMemberPetOwnerByTel(PetOwnerVO povo) {
 		System.out.println("hello");
 		return sqlSessionTemplate.selectOne("petOwner.findMemberPetOwnerByTel", povo);
 	}
 	
-	public MemberPetOwnerVO findPetByTel(PetOwnerVO povo) {
+	public PetOwnerVO findPetByTel(PetOwnerVO povo) {
 		return sqlSessionTemplate.selectOne("petOwner.findPetByTel", povo);
 	}
 	
-	public void registerPetOwner(MemberPetOwnerVO mpovo) {
-		sqlSessionTemplate.insert("petOwner.registerPetOwner", mpovo);
+	public void registerPetOwner(PetOwnerVO povo) {
+		sqlSessionTemplate.insert("petOwner.registerPetOwner", povo);
 	}
-	public void registerMemberPetOwner(MemberPetOwnerVO mpovo) {
-		sqlSessionTemplate.insert("petOwner.registerMemberPetOwner", mpovo);
+	public void registerMemberPetOwner(PetOwnerVO povo) {
+		sqlSessionTemplate.insert("petOwner.registerMemberPetOwner", povo);
 	}
-	public void registerPet(MemberPetOwnerVO mpovo) {
-		for(int i=0; i<mpovo.getPetVO().size(); i++)
-			sqlSessionTemplate.insert("petOwner.registerPet", mpovo.getPetVO().get(i));
-	}
-
-	@Override
-	public List<MemberPetOwnerVO> loginPetOwner(MemberPetOwnerVO mpovo) {
-		return sqlSessionTemplate.selectList("petOwner.loginPetOwner",mpovo);
+	public void registerPet(PetOwnerVO povo) {
+		for(int i=0; i<povo.getPetVO().size(); i++)
+			sqlSessionTemplate.insert("petOwner.registerPet", povo.getPetVO().get(i));
 	}
 
 	@Override
-	public void updatePetOwner(MemberPetOwnerVO mpovo) {
-		 sqlSessionTemplate.update("petOwner.updatePetOwner",mpovo);
+	public List<PetOwnerVO> loginPetOwner(PetOwnerVO povo) {
+		return sqlSessionTemplate.selectList("petOwner.loginPetOwner",povo);
 	}
 
 	@Override
-	public void deletePetOwner(MemberPetOwnerVO mpovo) {
-		sqlSessionTemplate.update("petOwner.deletePetOwner",mpovo);
+	public void updatePetOwner(PetOwnerVO povo) {
+		 sqlSessionTemplate.update("petOwner.updatePetOwner",povo);
 	}
 
 	@Override
-	public void deletePet(MemberPetOwnerVO mpovo) {
-		sqlSessionTemplate.delete("petOwner.deletePet",mpovo);
+	public void deletePetOwner(PetOwnerVO povo) {
+		sqlSessionTemplate.update("petOwner.deletePetOwner",povo);
 	}
+
+	
 	
 }

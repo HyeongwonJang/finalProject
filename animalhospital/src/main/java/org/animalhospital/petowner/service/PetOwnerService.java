@@ -1,9 +1,13 @@
 package org.animalhospital.petowner.service;
 
-import org.animalhospital.petowner.model.VO.MemberPetOwnerVO;
+import java.util.List;
+
+import org.animalhospital.petowner.model.VO.PetOwnerVO;
 
 public interface PetOwnerService {
 
-	void registerMemberPetOwnerAndPet(MemberPetOwnerVO mpovo);
+	public PetOwnerVO findMemberPetOwnerByTel(PetOwnerVO povo);
+	public void registerMemberPetOwnerAndPet(PetOwnerVO povo);
+	public List<PetOwnerVO> loginPetOwner(PetOwnerVO povo);
 
 }

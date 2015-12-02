@@ -1,9 +1,11 @@
 package org.animalhospital.petowner.service;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.animalhospital.petowner.model.DAO.PetOwnerDAO;
-import org.animalhospital.petowner.model.VO.MemberPetOwnerVO;
+import org.animalhospital.petowner.model.VO.PetOwnerVO;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,12 +17,22 @@ public class PetOwnerServiceImpl implements PetOwnerService {
 	 * @see org.animalhospital.petowner.model.PetOwnerService#registerMemberPetOwnerAndPet(org.animalhospital.petowner.model.MemberPetOwnerVO)
 	 */
 	@Override
-	public void registerMemberPetOwnerAndPet(MemberPetOwnerVO mpovo) {
+	public void registerMemberPetOwnerAndPet(PetOwnerVO povo) {
 //		petOwnerDAO.registerPetOwner(mpovo);
 //		System.out.println("비회원 등록 성공");
 //		petOwnerDAO.registerMemberPetOwner(mpovo);
 //		System.out.println("회원 등록 성공");
-		petOwnerDAO.registerPet(mpovo);
+		petOwnerDAO.registerPet(povo);
 		System.out.println("동물 리스트 등록 성공");
+	}
+
+	@Override
+	public PetOwnerVO findMemberPetOwnerByTel(PetOwnerVO povo) {
+		return petOwnerDAO.findMemberPetOwnerByTel(povo);
+	}
+
+	@Override
+	public List<PetOwnerVO> loginPetOwner(PetOwnerVO povo) {
+		return petOwnerDAO.loginPetOwner(povo);
 	}
 }
