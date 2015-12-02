@@ -27,7 +27,7 @@ public class PetOwnerController {
 		String path ="account/login_ok";
 		List<PetOwnerVO> list = petOwnerService.loginPetOwner(povo);
 		if (list == null) {
-			path = "account/login_fail";
+			path = "account/login";
 		}
 		request.getSession().setAttribute("povo", list);
 		return path;
