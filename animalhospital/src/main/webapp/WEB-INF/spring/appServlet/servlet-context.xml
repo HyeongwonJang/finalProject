@@ -27,15 +27,18 @@
 			value="org.springframework.web.servlet.view.tiles2.TilesView" />
 		<property name="order" value="0" />
 	</bean>
+	<!-- Ajax 적용 Resolver -->
+	<bean id="beanNameViewResolver"
+		class="org.springframework.web.servlet.view.BeanNameViewResolver">
+		<property name="order" value="1"></property>
+	</bean>
 	<!-- 일반 jsp ViewResolver 설정: order를 1로 설정, ajax 적용하면 2로 적용 -->
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="order" value="1"></property>
+		<property name="order" value="2"></property>
 		<property name="prefix" value="/WEB-INF/views/"></property>
 		<property name="suffix" value=".jsp"></property>
 	</bean>
-	
-
 </beans>
 
 

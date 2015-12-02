@@ -23,12 +23,11 @@
 <link href="${initparam.root}resources/css/icheck/flat/green.css" rel="stylesheet">
 <script src="${initparam.root}resources/js/jquery.min.js"></script>
 <!-- 스크립트 구간 -->
-	<!-- jQuery -->
-	<script src="${initparam.root}resources/js/jquery.js"></script>
-	<!-- Bootstrap Core JavaScript -->
-	<script src="${initparam.root}resources/js/bootstrap.min.js"></script>
-	<!-- Custom Theme JavaScript -->
-	<!-- 모달을 띄우기 위한 스크립트 -->
+<!-- jQuery -->
+<script src="${initparam.root}resources/js/jquery.js"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="${initparam.root}resources/js/bootstrap.min.js"></script>
+<!-- 모달을 띄우기 위한 스크립트 -->
 <script type="text/javascript">
 		$(document).ready(function() {
 			$("#popbutton").click(function() {

@@ -15,13 +15,14 @@
     <!-- Custom styling plus plugins -->
     <link href="${initparam.root}resources/css/custom.css" rel="stylesheet">
     <link href="${initparam.root}resources/css/icheck/flat/green.css" rel="stylesheet">
-   
-   <!-- Bootstrap core js -->
-    <script src="${initparam.root}resources/js/bootstrap.min.js"></script>
     <!-- Jquery core js -->
     <script src="${initparam.root}resources/js/jquery.min.js"></script>
-    <!-- form validation -->
-    <script type="text/javascript" src="${initparam.root}resources/js/parsley/parsley.min.js"></script>
+    
+   <!-- Bootstrap core js -->
+    <script src="${initparam.root}resources/js/bootstrap.min.js"></script>
+   <!-- form validation -->
+   <script src="${initparam.root}resources/js/custom.js"></script>
+   <script type="text/javascript" src="${initparam.root}resources/js/parsley/parsley.min.js"></script>
     </head>
     <body style="background: #F7F7F7;">
     <div class="">
@@ -106,6 +107,7 @@
               <input id="birthday" class="date-picker form-control col-md-7 col-xs-12" type="text">
             </div>
           </div>
+          
           <div class="form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12">성별</label>
             <div class="col-md-6 col-sm-6 col-xs-12">
@@ -113,7 +115,7 @@
                 <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
                   <input type="radio" name="gender" value="male">&nbsp; Male &nbsp;</label>
                 <label class="btn btn-primary active" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                  <input type="radio" name="gender" value="female" checked="" >Female</label>
+                  <input type="radio" name="gender" value="female" >Female</label>
               </div>
             </div>
           </div>
@@ -157,7 +159,7 @@
 	<!-- /input mask -->
 
 	<!-- form validation -->
-	<script src="${initparam.root}resources/js/custom.js"></script>
+	
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$.listen('parsley:field:validate', function() {

@@ -2,6 +2,21 @@ select * from Pet_Owner;
 select * from Member_Pet_Owner;
 select * from Pet;
 
+create table test_null(
+	test_no number primary key,
+	id varchar2(50) unique
+);
+
+select * from test_null;
+insert into test_null(test_no, id) values(1, null);
+insert into test_null(test_no, id) values(2, null);
+
+insert into test_null(test_no, id) values(3, 'a');
+insert into test_null(test_no, id) values(4, 'a');
+
+drop table test_null
+
+
 -- 일반 수정, 무결성 제약조건
 update Pet_Owner set Pet_Owner_tel='01011113333';
 

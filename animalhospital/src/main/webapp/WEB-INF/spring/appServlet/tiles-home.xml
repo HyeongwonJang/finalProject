@@ -11,7 +11,7 @@
  -->       
 <tiles-definitions>
 	<definition name="home" template="/WEB-INF/views/templates/layout.jsp">
-		<put-attribute name="main"  value="/WEB-INF/views/templates/treatment_record_view.jsp"  />
+		<put-attribute name="main"  value="/WEB-INF/views/templates/register_treatment_record.jsp"  />
 	</definition>	
 </tiles-definitions>
 

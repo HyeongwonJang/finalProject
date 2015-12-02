@@ -16,8 +16,20 @@
     <!-- Custom styling plus plugins -->
     <link href="${initparam.root}resources/css/custom.css" rel="stylesheet">
     <link href="${initparam.root}resources/css/icheck/flat/green.css" rel="stylesheet">
-    <script src="${initparam.root}resources/js/jquery.min.js"></script>
-    <!--[if lt IE 9]>
+    <!-- jQuery 플러그인 -->
+    <script src="${initparam.root}resources/js/jquery.js"></script>
+    <!-- select2 -->
+    <script src="${initparam.root}resources/js/select/select2.full.js"></script>
+    <!-- select2 -->
+    <link href="${initparam.root}resources/css/select/select2.min.css" rel="stylesheet">
+    <!-- jquery 달력 css -->
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.7.2/themes/smoothness/jquery-ui.css">
+	<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+     <!-- form validation 플러그인-->
+    <script type="text/javascript" src="${initparam.root}resources/js/parsley/parsley.min.js"></script>
+	<!-- textarea resize -->
+	<script src="${initparam.root}resources/js/textarea/autosize.min.js"></script>
+	<!--[if lt IE 9]>
       <script src="../assets/js/ie8-responsive-file-warning.js"></script>
     <![endif]-->
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media
@@ -26,7 +38,8 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-  </head><body class="nav-md">
+  </head>
+  <body class="nav-md">
     <div class="container body">
       <div class="main_container">
         <div class="col-md-3 left_col">
@@ -126,11 +139,56 @@
     <script src="${initparam.root}resources/js/bootstrap.min.js"></script>
     <!-- icheck -->
     <script src="${initparam.root}resources/js/icheck/icheck.min.js"></script>
-    <script src="${initparam.root}resources/js/custom.js"></script>
+    <%-- <script src="${initparam.root}resources/js/custom.js"></script> --%>
     <!-- moris js -->
     <script src="${initparam.root}resources/js/moris/raphael-min.js"></script>
     <script src="${initparam.root}resources/js/moris/morris.js"></script>
     <script src="${initparam.root}resources/js/moris/example.js"></script>
-  
+  	
+</body>
+<!-- form validation -->
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $.listen('parsley:field:validate', function () {
+                    validateFront();
+                });
+                $('#demo-form .btn').on('click', function () {
+                    $('#demo-form').parsley().validate();
+                    validateFront();
+                });
+                var validateFront = function () {
+                    if (true === $('#demo-form').parsley().isValid()) {
+                        $('.bs-callout-info').removeClass('hidden');
+                        $('.bs-callout-warning').addClass('hidden');
+                    } else {
+                        $('.bs-callout-info').addClass('hidden');
+                        $('.bs-callout-warning').removeClass('hidden');
+                    }
+                };
+            });
 
-</body></html>
+            $(document).ready(function () {
+                $.listen('parsley:field:validate', function () {
+                    validateFront();
+                });
+                $('#demo-form2 .btn').on('click', function () {
+                    $('#demo-form2').parsley().validate();
+                    validateFront();
+                });
+                var validateFront = function () {
+                    if (true === $('#demo-form2').parsley().isValid()) {
+                        $('.bs-callout-info').removeClass('hidden');
+                        $('.bs-callout-warning').addClass('hidden');
+                    } else {
+                        $('.bs-callout-info').addClass('hidden');
+                        $('.bs-callout-warning').removeClass('hidden');
+                    }
+                };
+            });
+            try {
+                hljs.initHighlightingOnLoad();
+            } catch (err) {}
+        </script>
+        <!-- /form validation -->
+		
+</html>

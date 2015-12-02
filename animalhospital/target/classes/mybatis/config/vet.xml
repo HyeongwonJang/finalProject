@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- MyBatis에서 namespace는 필수적으로 명시해야 함 -->
+<mapper namespace="vet">
+	<resultMap type="hvo" id="hvoRM">
+		<id column="hospital_id" property="hospitalId" />
+		<result column="hospital_name" property="hospitalName" />
+		<result column="hospital_address" property="hospitalAddress" />
+		<result column="hospital_tel" property="hospitalTel" />
+		<collection property="vetList"  ofType="vvo">
+ 			<id column="vet_id" property="vetId"/>
+ 			<result column="vet_name" property="vetLicenseVO.vetName"/>
+ 		</collection>
+	</resultMap>
+	
+
+	<resultMap type="vvo" id="vvoRM">
+		<id column="vet_id" property="vetId" />
+		<result column="vet_tel" property="vetTel" />
+		<result column="vet_name" property="vetLicenseVO.vetName"/>
+		<result column="vet_license_no" property="vetLicenseVO.vetLicenseNo"/>
+	</resultMap>
+	
+	<!-- 의사 가입 -->
+	<insert id="registerVet" parameterType="hvo">
+		insert into Vet(Vet_id, Vet_password, Vet_tel, Vet_License_no, Hospital_id)
+		values(#{vetList[0].vetId}, #{vetList[0].vetPassword}, 
+		#{vetList[0].vetTel}, #{vetList[0].vetLicenseVO.vetLicenseNo}, #{hospitalId})
+	</insert>
+	
+	<!-- 가입시 병원 확인을 위한 병원 조회 -->
+	<select id="findHospitalById" parameterType="int" resultMap="hvoRM"> 
+		select Hospital_id, Hospital_name
+		from Hospital
+		where Hospital_id = #{value}
+	</select>
+	
+	<!-- 가입시 수의사 면허증을 위한 조회 -->
+	<select id="findVetLicenseByNoAndName" parameterType="lvo" resultMap="hvoRM"> 
+		select Hospital_id, Hospital_name
+		from Hospital
+		where Hospital_id = #{value}
+	</select>
+	
+	
+	<!-- 병원명으로 검색하여 해당병원의 이사정보 까지 출력하기 -->
+	<select id="findHospital" resultMap="hvoRM" >
+		select
+		a.hospital_id,a.hospital_name,a.hospital_address,a.hospital_tel,b.vet_id,c.vet_name
+		from HOSPITAL a, vet b,vet_license c
+		where a.hospital_name like '%${value}%'
+		and
+		a.hospital_id=b.hospital_id
+		and b.vet_license_no=c.vet_license_no
+	</select>
+
+
+
+	<select id="findVetById" resultMap="vvoRM" parameterType="string">
+		select a.vet_id,a.vet_tel,b.vet_name,b.vet_license_no
+		from vet a,vet_license b
+		where a.vet_id=#{value}
+		and a.vet_license_no= b.vet_license_no
+	</select>
+
+
+
+
+
+
+	<select id="licenseCheck" parameterType="lvo" resultType="lvo">
+		select
+		count(*) from VET_LICENSE where vet_license_no=#{vetLicenseNo} and
+		vet_name=#{vetName}
+	</select>
+	
+	
+	<insert id="regsterVet" parameterType="vvo">
+		insert into vet
+		(vet_id,vet_password,vet_tel,vet_license_no,hospital_id)
+		values(#{vetId}, #{vetPassword}, #{vetTel},
+		#{vetLicenseNo},#{hospitalId});
+	</insert>
+
+</mapper>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
