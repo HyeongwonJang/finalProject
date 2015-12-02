@@ -54,23 +54,27 @@
 			    		tableInfo += "<td>" + hospitalList[index].hospitalAddress +"</td>";
 			    		tableInfo += "<td>" + hospitalList[index].hospitalTel +"</td>";
 			    		tableInfo += "<td> " + 
-			    					" <button type='button' class='btn btn-info' id='testBtn'>선택</button>" +
+			    					" <button type='button' class='btn btn-info' " +
+			    					"name='selectHospitalBtn'>선택</button>" +
 			    					"</td>";
 			    		tableInfo += "</tr>";
 					});
-			    	$("#modalTableInfo").html(tableInfo)
+			    	$("#modalTableInfo").html(tableInfo);
+			    	$("[name='selectHospitalBtn']").click(function() {
+						$("#hospitalName").val($(this).parent().siblings().eq(1).text());
+						$("#hospitalId").attr('value', $(this).parent().siblings().eq(0).text()); 
+						$('div.modal').modal('hide');
+						})
+			    	
 			    }
 			});
 			// 모달창을 띄운다
 			$('div.modal').modal({
+				
 			});
 		});
 		
-		$("#testBtn").click(function() {
-			alert("테스트");
-			
-			$('div.modal').modal('hide');
-			})
+		
 		
 		// ajax를 이용하여 id의 중복체크를 한다.
 		$("#vetId").keyup(function() {
@@ -221,6 +225,7 @@
               	<input id="hospitalName" class="form-control col-md-7 col-xs-10 test" type="text" name="hospitalName"
               	required="required" readonly>
             </div>
+            <input type="hidden" name="hospitalId" id="hospitalId" value="">
             <div>
               <button type="button" class="btn btn-info" id="popbutton">조회</button>
             </div>
@@ -236,19 +241,18 @@
    		</form>
       </div>
     </div>
-  	<!-- Modal Page data-dismiss="modal"-->
+  	<!-- Modal Page -->
 	<div class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" id="testBtn"
-						aria-hidden="true">×</button>
-					검색: <input type='text' id='txtFilter' class="form-control"
+					<button type="button" class="close" id="dismiss" name="selectHospitalBtn"
+						aria-hidden="true" data-dismiss="modal">×</button>
+					검색: <input type='text' id='txtFilter' class="form-control" 
 					  		onkeyup='{filter();return false}' 
 					  		onkeypress='javascript:if(event.keyCode==13){ filter(); return false;}'>
 				</div>
 				<div class="modal-body">
-					
 					<table 	class="table table-striped responsive-utilities jambo_table bulk_action" id=modalTable>
 				<thead>
 				<tr class="headings">
