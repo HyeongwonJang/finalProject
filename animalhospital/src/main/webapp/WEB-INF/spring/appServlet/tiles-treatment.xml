@@ -10,8 +10,8 @@
 	  조합결과 화면이 반환된다. 
  -->       
 <tiles-definitions>
-	<definition name="home" template="/WEB-INF/views/templates/layout.jsp">
-		<put-attribute name="main"  value="/WEB-INF/views/templates/blank.jsp"  />
+	<definition name="treatment_record_*" extends="home">
+		<put-attribute name="main"  value="/WEB-INF/views/treatment/treatment_record_{1}.jsp"  />
 	</definition>	
 </tiles-definitions>
 

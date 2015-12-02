@@ -80,7 +80,7 @@
 			</div>
 		</div>
 	</div>
-	<aside class="callout"></aside>
+	
 	
 	
 	
