@@ -35,25 +35,29 @@ public class VetController {
 	}
 	/**
 	 * 라이센스 체크
+	 * 라이센스의 이름과 번호가 존재하는지 확인하여 count(*) return
+	 * 존재하면 1 존재하지 않으면 0
 	 */
 	@RequestMapping("licenseCheck.do")
 	@ResponseBody
 	public int licenseCheck(VetLicenseVO lvo){
-		System.out.println(lvo);
 		return vetService.licenseCheck(lvo);
 	}
 	/**
 	 * 병원 검색
+	 * 병원이름으로 병원을 검색, 입력한 hospitalName을 포함하고 있다면 HospitalVO리스트로 return
 	 */
 	@RequestMapping("findHospital.do")
 	@ResponseBody
 	public List<HospitalVO> findHospital(HttpServletRequest request, String hospitalName){
 		 List<HospitalVO> hospitalList=vetService.findHospital(hospitalName);
 		 request.setAttribute("hospitalList", hospitalList);
-		return /*new ModelAndView("find_hospital_result_view.do", "hospitalList", hospitalList)*/hospitalList;
+		return hospitalList;
 	}
 	/**
 	 * 수의사 아이디 중복 체크
+	 * 수의사의 아이디가 존재하는지 존재하지 않는지 count(*) return
+	 * 입력한 아이디가 이미 존재하면 1 존재하지 않으면 0
 	 */
 	@RequestMapping("findVetById.do")
 	@ResponseBody
@@ -66,16 +70,11 @@ public class VetController {
 	public String testAjax(){
 		return "테스트 성공";
 	}
-	@RequestMapping("findAllHospitalAjax.do")
-	@ResponseBody
-	public List<HospitalVO> findAllHospitalAjax(){
-		return vetService.findAllHospital();
-	}
 	
 	/**
 	 * 수의사 로그인
-	 *//*
-	@RequestMapping("vetLogin.do")
+	 */
+	/*@RequestMapping("vetLogin.do")
 	public String vetLogin(HttpServletRequest request, VetVO vvo){
 		VetVO loginResult=vetService.vetLogin(vvo);
 		if(vvo!=null){
