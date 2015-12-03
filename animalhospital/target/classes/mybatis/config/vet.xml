@@ -26,6 +26,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	
 
+
 	<!-- 가입시 병원 확인을 위한 병원 조회 -->
 	<select id="findHospitalById" parameterType="int" resultMap="hvoRM"> 
 		select Hospital_id, Hospital_name
@@ -113,6 +114,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			where v.hospital_id=#{value} and v.vet_license_no=l.vet_license_no
 		)
 	</select>
+	
+	<!-- 의사 정보 수정 -->
+	<update id="updateVet" >
+		update vet 
+		set 
+		<foreach collection="vetList" item="vetvo"></foreach>
+		vet_password=#{vetvo.vetPassword}, vet_tel=#{vetvo.vetTel},
+		 hospital_id=#{hospitalId} where vet_id=#{vetvo.vetId}
+	</update>
+	
+	
+	
 </mapper>
  
  

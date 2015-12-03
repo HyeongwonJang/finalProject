@@ -13,40 +13,40 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class VetDAOImpl implements VetDAO {
 	@Resource
-	private SqlSessionTemplate sqlSessionTemlate;
+	private SqlSessionTemplate sqlSessionTemplate;
 	
 	@Override
 	public List<HospitalVO> findHospital(String hospitalName){
-		return  sqlSessionTemlate.selectList("vet.findHospital",hospitalName);
+		return  sqlSessionTemplate.selectList("vet.findHospital",hospitalName);
 	}
 	@Override
 	public void registerVet(HospitalVO hvo) {
-		sqlSessionTemlate.insert("vet.registerVet",hvo);
+		sqlSessionTemplate.insert("vet.registerVet",hvo);
 	}
 	@Override
 	public int licenseCheck(VetLicenseVO lvo) {
-		return sqlSessionTemlate.selectOne("vet.licenseCheck",lvo);
+		return sqlSessionTemplate.selectOne("vet.licenseCheck",lvo);
 	}
 	
 	public int useVetLicenseCheck(VetLicenseVO lvo){
-		return sqlSessionTemlate.selectOne("vet.useVetLicenseCheck", lvo);
+		return sqlSessionTemplate.selectOne("vet.useVetLicenseCheck", lvo);
 	}
 	
 	public List<HospitalVO> findAllHospital(){
-		return sqlSessionTemlate.selectList("vet.findAllHospital");
+		return sqlSessionTemplate.selectList("vet.findAllHospital");
 	}
 	
 	@Override
 	public int findVetById(String vetId) {
-		return sqlSessionTemlate.selectOne("vet.findVetById",vetId);
+		return sqlSessionTemplate.selectOne("vet.findVetById",vetId);
 	}
 	@Override
 	public VetVO vetLogin(VetVO vvo) {
-		return sqlSessionTemlate.selectOne("vet.vetLogin", vvo);
+		return sqlSessionTemplate.selectOne("vet.vetLogin", vvo);
 	}
 	@Override
 	public List<VetVO> findVetByHospitalId(int hospitalId) {
-		return sqlSessionTemlate.selectList("vet.findVetByHospitalId", hospitalId);
+		return sqlSessionTemplate.selectList("vet.findVetByHospitalId", hospitalId);
 	}
 	
 }

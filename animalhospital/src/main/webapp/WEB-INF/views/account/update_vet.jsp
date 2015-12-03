@@ -111,7 +111,7 @@
       </div>
       <div class="x_content">
         <br>
-        <form id="vetForm" class="form-horizontal form-label-left" action="registerVet.do" method="get">
+        <form id="vetForm" class="form-horizontal form-label-left" action="updateVet.do" method="get">
           <div class="form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="occupation">아이디
               <span class="required">*</span>
@@ -119,7 +119,7 @@
             <div class="col-md-4 col-sm-6 col-xs-12">
             	<!-- 수의사 id에 대한 input -->
             	<input type="text" id="vetId" class="form-control col-md-7 col-xs-12"
-              	name="vetList[0].vetId" required readonly/>
+              	name="vetList[0].vetId" value="${sessionScope.vetLogin.vetList[0].vetId }"required readonly/>
               	<p class="help-block"></p>
             </div>
             <div>

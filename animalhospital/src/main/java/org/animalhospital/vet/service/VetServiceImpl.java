@@ -56,6 +56,9 @@ public class VetServiceImpl implements VetService{
 	public List<HospitalVO> findAllHospital() {
 		return vetDAO.findAllHospital();
 	}
+	public int updateVet(HospitalVO hospitalVO){
+		return vetDAO.updateVet(hospitalVO);
+	}
 	
 	
 }
