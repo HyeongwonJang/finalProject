@@ -119,7 +119,7 @@
             <div class="col-md-4 col-sm-6 col-xs-12">
             	<!-- 수의사 id에 대한 input -->
             	<input type="text" id="vetId" class="form-control col-md-7 col-xs-12"
-              	name="vetList[0].vetId" value="${sessionScope.vetLogin.vetList[0].vetId }"required readonly/>
+              	name="vetList[0].vetId" value="${sessionScope.loginVO.vetList[0].vetId }"required readonly/>
               	<p class="help-block"></p>
             </div>
             <div>

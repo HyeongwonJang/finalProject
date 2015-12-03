@@ -18,7 +18,7 @@ public class ViewController {
 	@RequestMapping("home.do")
 	public String homeView(HttpServletRequest request){
 		HttpSession session = request.getSession(false);
-		if (session.getAttribute("loginVO")==null) {
+		if (session ==null||session.getAttribute("loginVO")==null) {
 			return "index";
 		} else {
 			System.out.println("타일즈 정상수행");
