@@ -104,7 +104,7 @@
                                 </a>
                   <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
                     <li>
-                      <a href="javascript:;">  My page</a>
+                      	<a href="vet_update.do"><i class="fa fa-user"></i> 회원정보수정</a>
                     </li>
                     <li>
                       <a href="${initparam.root}logout.do"><i class="fa fa-sign-out pull-right"></i> Log Out</a>

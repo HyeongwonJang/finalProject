@@ -76,4 +76,9 @@ public class ViewController {
 		return "treatment_record_test";
 	}
 	
+	@RequestMapping("vet_update.do")
+	public String vetUpdate(){
+		return "vet_update";
+	}
+	
 }
