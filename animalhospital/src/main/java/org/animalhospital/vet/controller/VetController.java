@@ -93,7 +93,8 @@ public class VetController {
 			return "home";
 		} else {
 			return "account/login_fail";
-		}	
+		}
+		
 	}
 	@RequestMapping("updateVet.do")
 	public String updateVet(HttpServletRequest request,HospitalVO hospitalVO){
@@ -102,5 +103,4 @@ public class VetController {
 		request.getSession().setAttribute("loginVO", hospitalVO);
 		return "home";
 	}
-		
 }
