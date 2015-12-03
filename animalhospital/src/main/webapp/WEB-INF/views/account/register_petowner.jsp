@@ -17,11 +17,10 @@
     <link href="${initparam.root}resources/css/icheck/flat/green.css" rel="stylesheet">
     <!-- Jquery core js -->
     <script src="${initparam.root}resources/js/jquery.min.js"></script>
-    
    <!-- Bootstrap core js -->
     <script src="${initparam.root}resources/js/bootstrap.min.js"></script>
-   
     </head>
+    
     <body style="background: #F7F7F7;">
     <div class="">
       <a class="hiddenanchor" id="toregister"></a>
@@ -47,6 +46,8 @@
               <span class="required">*</span>
             </label>
             <div class="col-md-4 col-sm-6 col-xs-12">
+            	
+            	<!-- 아이디 input 입력란 -->
               <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12">
             </div>
           </div>
@@ -55,6 +56,8 @@
               <span class="required">*</span>
             </label>
             <div class="col-md-4 col-sm-6 col-xs-12">
+            	
+            	<!-- 비밀번호 input 입력란 -->
               <input type="password" id="first-name" required="required" class="form-control col-md-7 col-xs-12">
             </div>
           </div>
@@ -63,24 +66,33 @@
               <span class="required">*</span>
             </label>
             <div class="col-md-4 col-sm-6 col-xs-12">
+            
+            	<!-- 이름 input 입력란 -->
               <input type="text" id="last-name" name="last-name" required="required" class="form-control col-md-7 col-xs-12">
             </div>
+            
           </div>
           <div class="form-group">
             <label for="last-name" class="control-label col-md-3 col-sm-3 col-xs-12">휴대폰 번호
               <span class="required">*</span>
             </label>
             <div class="col-md-4 col-sm-6 col-xs-12">
+            
+				<!-- 휴대폰 번호 input 입력란 -->	            
               <input id="last-name" class="form-control col-md-7 col-xs-12" type="text" name="last-name" required="required">
             </div>
           </div>
           <div class="form-group">
             <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">주소</label>
             <div class="col-md-4 col-sm-6 col-xs-12">
+            	
+            	<!-- 주소 input 입력란 -->
               <input id="temp_address" class="form-control col-md-7 col-xs-12" type="text" name="middle-name">
             </div>
           </div>
           <div class="form-group">
+          		
+          		<!-- "+" 버튼 -> 버튼을 누를시 폼이 동적으로 생성 -->
             <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">펫
               <i class="fa fa-plus-circle"></i>
             </label>&lt;-이 버튼을 누를 시 아래의 폼이 뜨도록 구성할 예정</div>
@@ -90,22 +102,28 @@
               <span class="required">*</span>
             </label>
             <div class="col-md-2 col-sm-6 col-xs-12">
+            	<!-- 펫 이름 input 입력란 -->
               <input type="text" class="form-control col-md-7 col-xs-12" id="first-name" required="required">
             </div>
           </div>
           <div class="form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-3">생일</label>
             <div class="col-md-2 col-sm-9 col-xs-9">
+            
+            	<!-- 펫 생일 input 입력란 inputMask 걸려있음-->	
               <input class="form-control" type="text" data-inputmask="'mask': '9999/99'">
             </div>
           </div>
           <div class="form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12">몸무게</label>
             <div class="col-md-2 col-sm-6 col-xs-12">
+            	
+            	<!-- 펫 몸무게 input 입력란 -->
               <input id="birthday" class="date-picker form-control col-md-7 col-xs-12" type="text">
             </div>
           </div>
           
+          	<!-- 펫 성별 input 입력란, 버튼처럼 보이지만 라디오 타입 -->
           <div class="form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12">성별</label>
             <div class="col-md-6 col-sm-6 col-xs-12">
@@ -120,12 +138,14 @@
           <div class="form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="middle-name">비고</label>
             <div class="col-md-6 col-sm-6 col-xs-12">
+            	<!-- 펫 비고 입력란 -->
               <input id="birthday" class="date-picker form-control col-md-7 col-xs-12" type="text" required="required">
             </div>
           </div>
           <div class="form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12">동물 종류</label>
             <div class="col-md-4 col-sm-9 col-xs-12">
+            	<!-- 동물종류를 선택하는 입력란 -->
               <select class="form-control">
                 <option>개</option>
                 <option>고양이</option>

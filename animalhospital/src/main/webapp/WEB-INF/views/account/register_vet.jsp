@@ -273,18 +273,4 @@
 	</div>
 	
 </body>
-<!-- 특수문자 포함되면 지우는 스크립트 추가 -->
-<script type="text/javascript">
-	$(document).ready(function() {
-		$("#vetTel").keyup(function() {
-			$("#vetTel").bind("keyup", function() {
-				var re = /[~!@\#$%^&*\()\-=+./,;_']/gi;
-				var temp = $("#vetTel").val();
-				if (re.test(temp)) { //특수문자가 포함되면 삭제하여 값으로 다시셋팅
-					$("#vetTel").val(temp.replace(re, ""));
-				}
-			});	
-		});
-	});
-</script>
 </html>
