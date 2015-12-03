@@ -6,6 +6,7 @@ import org.animalhospital.petowner.model.DAO.PetOwnerDAO;
 import org.animalhospital.petowner.model.VO.PetOwnerVO;
 import org.animalhospital.vet.model.DAO.VetDAO;
 import org.animalhospital.vet.model.VO.VetLicenseVO;
+import org.animalhospital.vet.model.VO.VetVO;
 import org.animalhospital.vet.service.VetService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,9 +27,7 @@ public class TestJUnit {
 	private VetService vetService;
 	@Test
 	public void TestDao2(){
-		VetLicenseVO lvo = new VetLicenseVO();
-		lvo.setVetLicenseNo(21);
-		lvo.setVetName("송인국");
-		System.out.println("체크결과:" + vetService.licenseCheck(lvo));
+		
+		System.out.println(vetDAO.vetLogin(new VetVO("YUNA", "1234", null, null)));
 	}
 }

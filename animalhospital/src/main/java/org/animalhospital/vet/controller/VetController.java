@@ -5,7 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import javax.servlet.http.HttpSession;
 import org.animalhospital.vet.model.VO.HospitalVO;
 import org.animalhospital.vet.model.VO.VetLicenseVO;
 import org.animalhospital.vet.model.VO.VetVO;
@@ -28,10 +28,10 @@ public class VetController {
 	/**
 	 * 수의사 등록
 	 */
-	@RequestMapping("register_vet.do")
+	@RequestMapping("registerVet.do")
 	public String registerVet(HospitalVO hvo){
 		vetService.registerVet(hvo);
-		return "home.do";
+		return "redirect:home.do";
 	}
 	/**
 	 * 라이센스 체크
@@ -51,7 +51,6 @@ public class VetController {
 	@ResponseBody
 	public List<HospitalVO> findHospital(HttpServletRequest request, String hospitalName){
 		 List<HospitalVO> hospitalList=vetService.findHospital(hospitalName);
-		 request.setAttribute("hospitalList", hospitalList);
 		return hospitalList;
 	}
 	/**
@@ -65,6 +64,14 @@ public class VetController {
 		return vetService.findVetById(vetId);
 	}
 	
+	@RequestMapping("findAllHospitalAjax.do")
+	@ResponseBody
+	public List<HospitalVO> findAllHospitalAjax(){
+		List<HospitalVO> hospitalList=vetService.findAllHospital();
+		return hospitalList;
+	}
+	
+	
 	@RequestMapping("testAjax.do")
 	@ResponseBody
 	public String testAjax(){
@@ -73,13 +80,28 @@ public class VetController {
 	
 	/**
 	 * 수의사 로그인
+	 * userLevel로 수의사와 보호자를 구분한다
+	 * 수의사 userLevel = "vet"
 	 */
-	/*@RequestMapping("vetLogin.do")
+	@RequestMapping("vetLogin.do")
 	public String vetLogin(HttpServletRequest request, VetVO vvo){
-		VetVO loginResult=vetService.vetLogin(vvo);
-		if(vvo!=null){
-			request.getSession().setAttribute("vetLogin", loginResult);
-		}
-		return "home.do";
-	}*/
+		HospitalVO loginResult=vetService.vetLogin(vvo);
+		if(loginResult != null){
+			HttpSession session = request.getSession();
+			session.setAttribute("loginVO", loginResult);
+			session.setAttribute("userLevel", "vet");
+			return "home";
+		} else {
+			return "account/login_fail";
+		}	
+	
+
+		<!-- 의사 정보 수정 -->
+		<update id="updateVet" >
+			update vet 
+			set 
+			<foreach collection="vetList" item="vetvo"></foreach>
+			vet_password=#{vetvo.vetPassword}, vet_tel=#{vetvo.vetTel},
+			 hospital_id=#{hospitalId} where vet_id=#{vetvo.vetId}
+		</update>
 }
