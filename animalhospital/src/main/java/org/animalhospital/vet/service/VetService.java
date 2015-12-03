@@ -16,9 +16,11 @@ public interface VetService {
 
 	public int findVetById(String vetId);
 
-	public VetVO vetLogin(VetVO vvo);
+	public HospitalVO vetLogin(VetVO vvo);
 
 	public List<VetVO> findVetByHospitalId(int hospitalId);
 	
 	public List<HospitalVO> findAllHospital();
+	
+	public int updateVet(HospitalVO hospitalVO);
 }

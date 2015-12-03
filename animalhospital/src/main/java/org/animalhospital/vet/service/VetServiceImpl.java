@@ -45,7 +45,7 @@ public class VetServiceImpl implements VetService{
 		return vetDAO.findVetById(vetId);
 	}
 	@Override
-	public VetVO vetLogin(VetVO vvo) {
+	public HospitalVO vetLogin(VetVO vvo) {
 		return vetDAO.vetLogin(vvo);
 	}
 	@Override
@@ -55,6 +55,9 @@ public class VetServiceImpl implements VetService{
 	@Override
 	public List<HospitalVO> findAllHospital() {
 		return vetDAO.findAllHospital();
+	}
+	public int updateVet(HospitalVO hospitalVO){
+		return vetDAO.updateVet(hospitalVO);
 	}
 	
 	
