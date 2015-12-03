@@ -36,18 +36,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		and v.vet_password = #{vetPassword}
 	</select>
 
-	<!-- 로그인을 위한 sql문 -->
-	<select id="vetLogin" parameterType="vvo" resultMap="hvoRM">
-		select v.vet_id, v.vet_tel, vl.vet_name, vl.vet_license_no, h.Hospital_id, h.Hospital_name
-		from vet v, Vet_License vl, HOSPITAL h
-		where v.Vet_License_no = vl.Vet_License_no
-		and v.Hospital_id = h.Hospital_id
-		and v.vet_id = #{vetId}
-		and v.vet_password = #{vetPassword}
-	</select>
-	
->>>>>>> branch 'master' of https://github.com/prototype01/finalProject.git
-	
 	<!-- 가입시 병원 확인을 위한 병원 조회 -->
 	<select id="findHospitalById" parameterType="int" resultMap="hvoRM"> 
 		select Hospital_id, Hospital_name
@@ -144,12 +132,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		vet_password=#{vetvo.vetPassword}, vet_tel=#{vetvo.vetTel},
 		 hospital_id=#{hospitalId} where vet_id=#{vetvo.vetId}
 	</update>
-<<<<<<< HEAD
-=======
-	
-	
-	
->>>>>>> branch 'master' of https://github.com/prototype01/finalProject.git
+
 </mapper>
  
  
