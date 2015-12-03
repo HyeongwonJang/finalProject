@@ -3,7 +3,9 @@ drop sequence Treatment_Record_no;
 drop table Treatment_Record;
 drop table Disease;
 
-commit
+drop sequence Vaccination_Record_no;
+drop table Vaccination_Record;
+drop table Vaccination;
 
 drop table Vet;
 drop sequence Vet_License_no_seq;

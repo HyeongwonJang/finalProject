@@ -18,7 +18,7 @@ create table Treatment_Record(
 	Pet_weight float(10) not null,
 	Pet_Owner_no number(15) not null,
 	Pet_name varchar2(50) not null,
-	Vet_License_no number(10) not null,
+	Vet_License_no number(10),
 	Disease_name varchar2(50) not null,
 	constraint fk_tr_Pet_id foreign key(pet_Owner_no, pet_name) references Pet,
 	constraint fk_tr_Vet_License_no foreign key(Vet_License_no) references Vet_License,
