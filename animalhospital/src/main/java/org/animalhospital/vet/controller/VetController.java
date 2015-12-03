@@ -29,10 +29,10 @@ public class VetController {
 	/**
 	 * 수의사 등록
 	 */
-	@RequestMapping("register_vet.do")
+	@RequestMapping("registerVet.do")
 	public String registerVet(HospitalVO hvo){
 		vetService.registerVet(hvo);
-		return "home.do";
+		return "redirect:home.do";
 	}
 	/**
 	 * 라이센스 체크
@@ -45,6 +45,16 @@ public class VetController {
 		return vetService.licenseCheck(lvo);
 	}
 	/**
+	 * 모든 Hospital 정보 출력
+	 * @return
+	 */
+	  @RequestMapping("findAllHospitalAjax.do")
+	   @ResponseBody
+	   public List<HospitalVO> findAllHospitalAjax(){
+	      List<HospitalVO> hospitalList=vetService.findAllHospital();
+	      return hospitalList;
+	   }
+	/**
 	 * 병원 검색
 	 * 병원이름으로 병원을 검색, 입력한 hospitalName을 포함하고 있다면 HospitalVO리스트로 return
 	 */
@@ -52,7 +62,6 @@ public class VetController {
 	@ResponseBody
 	public List<HospitalVO> findHospital(HttpServletRequest request, String hospitalName){
 		 List<HospitalVO> hospitalList=vetService.findHospital(hospitalName);
-		 request.setAttribute("hospitalList", hospitalList);
 		return hospitalList;
 	}
 	/**
