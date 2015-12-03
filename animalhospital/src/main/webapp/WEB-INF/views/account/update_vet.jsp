@@ -144,7 +144,7 @@
             <div class="col-md-4 col-sm-6 col-xs-12">
             	<!-- 수의사 tel에 대한 input -->
               	<input type="text" id="vetTel" required="required" class="form-control col-md-7 col-xs-12"
-              	name="vetList[0].vetTel">
+              	name="vetList[0].vetTel"  value="${sessionScope.loginVO.vetList[0].vetTel}">
             </div>
             <div>
             	<!-- 텍스트 색깔은 text-primary -->
@@ -186,7 +186,7 @@
             <div class="col-md-2 col-sm-6 col-xs-12">
             	<!-- 병원 이름에 대한 input -->
               	<input id="hospitalName" class="form-control col-md-7 col-xs-10 test" type="text" name="hospitalName"
-              	required="required" readonly>
+              	required="required" value="${sessionScope.loginVO.hospitalId}"readonly>
             </div>
             <input type="hidden" name="hospitalId" id="hospitalId" value="">
             <div>
