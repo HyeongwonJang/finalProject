@@ -94,14 +94,13 @@ public class VetController {
 		} else {
 			return "account/login_fail";
 		}	
-	
-
-		<!-- 의사 정보 수정 -->
-		<update id="updateVet" >
-			update vet 
-			set 
-			<foreach collection="vetList" item="vetvo"></foreach>
-			vet_password=#{vetvo.vetPassword}, vet_tel=#{vetvo.vetTel},
-			 hospital_id=#{hospitalId} where vet_id=#{vetvo.vetId}
-		</update>
+	}
+	@RequestMapping("updateVet.do")
+	public String updateVet(HttpServletRequest request,HospitalVO hospitalVO){
+		//System.out.println(hospitalVO);
+		vetService.updateVet(hospitalVO);
+		request.getSession().setAttribute("loginVO", hospitalVO);
+		return "home";
+	}
+		
 }
