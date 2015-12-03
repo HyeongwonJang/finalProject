@@ -6,48 +6,49 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  <mapper namespace="petOwner">
  	<resultMap type="povo" id="povoRM">
  		<id column="Pet_Owner_no" property="petOwnerNo"/>
- 		<result column="Pet_Owner_tel" property="petOwnerTel"/>
- 		<result column="Pet_Owner_name" property="petOwnerName"/>
- 		<result column="Pet_Owner_id" property="petOwnerId"/>
- 		<result column="Pet_Owner_password" property="petOwnerPassword"/>
- 		<result column="Pet_Owner_address" property="petOwnerAddress"/>
+ 		<id column="Pet_Owner_tel" property="petOwnerTel"/>
+ 		<id column="Pet_Owner_name" property="petOwnerName"/>
+ 		<id column="Pet_Owner_id" property="petOwnerId"/>
+ 		<id column="Pet_Owner_password" property="petOwnerPassword"/>
+ 		<id column="Pet_Owner_address" property="petOwnerAddress"/>
  		<collection property="petVO" ofType="pvo">
  			<id column="Pet_name" property="petName"/>
- 			<result column="Pet_birthday" property="petBirthday"/>
- 			<result column="Pet_gender" property="petGender"/>
- 			<result column="Pet_note" property="petNote"/>
- 			<result column="Animal_kind_name" property="animalKindName"/>
+ 			<id column="Pet_birthday" property="petBirthday"/>
+ 			<id column="Pet_gender" property="petGender"/>
+ 			<id column="Pet_note" property="petNote"/>
+ 			<id column="Animal_kind_name" property="animalKindName"/>
  		</collection>
  	</resultMap>
- 	<select id="loginPetOwner" resultMap="povoRM" parameterType="povo">
- 		select Pet_Owner_no, Pet_Owner_id, Pet_Owner_name, Pet_Owner_tel, Pet_Owner_address
-		from  Pet_Owner
-		where Pet_Owner_id = #{petOwnerId} and Pet_Owner_password =#{petOwnerPassword} 
- 	</select>
- 	<select id="findMemberPetOwnerByTel" parameterType="povo" resultType="povo" resultMap="povoRM">
- 		select po.Pet_Owner_tel, po.Pet_Owner_name, mpo.Pet_Owner_id, mpo.Pet_Owner_address
-		from Pet_Owner po, Member_Pet_Owner mpo
-		where po.Pet_Owner_tel = mpo.Pet_Owner_tel and po.Pet_Owner_tel = #{petOwnerTel} 	
- 	</select>
- 	<select id="findPetByTel" parameterType="povo" resultType="povo" resultMap="povoRM">
- 		select po.Pet_Owner_tel, po.Pet_Owner_name, mpo.Pet_Owner_id, mpo.Pet_Owner_address, p.Pet_name
-		from Pet_Owner po, Member_Pet_Owner mpo, Pet p
-		where po.Pet_Owner_tel = mpo.Pet_Owner_tel and po.Pet_Owner_tel = p.Pet_Owner_tel and po.Pet_Owner_tel = #{petOwnerTel} 	
- 	</select>
+ 	
+ 	<!-- 회원가입 -->
  	<insert id="registerPetOwner" parameterType="povo">
- 		insert into Pet_Owner(Pet_Owner_tel, Pet_Owner_name)
-		values(#{petOwnerVO.petOwnerTel}, #{petOwnerVO.petOwnerName})
- 	</insert>
- 	<insert id="registerMemberPetOwner" parameterType="povo">
-		insert into Member_Pet_Owner(Pet_Owner_tel, Pet_Owner_id, Pet_Owner_password, Pet_Owner_address)
-		values(#{petOwnerVO.petOwnerTel}, #{petOwnerId}, #{petOwnerPassword}, #{petOwnerAddress})
+		insert into Pet_Owner(Pet_Owner_no,Pet_Owner_tel, Pet_Owner_name, Pet_Owner_id, Pet_Owner_password, Pet_Owner_address)
+		values(Pet_Owner_no_seq.nextval, #{petOwnerTel}, #{petOwnerName}, #{petOwnerId}, #{petOwnerPassword}, #{petOwnerAddress})
  	</insert>
  	
+ 	<!-- 반려동물 등록 -->
  	<insert id="registerPet" parameterType="pvo">
 		insert into Pet(Pet_name, Pet_Owner_tel, Pet_birthday, Pet_gender, Pet_note, Animal_kind_name)
-		values(#{petName}, '01012341234', #{birthday}, #{gender}, #{note}, #{animalKindName}) 	
+		values(#{petName}, '01012341234', #{petBirthday}, #{petGender}, #{petNote}, #{animalKindName}) 	
  	</insert>
  	
+ 	<!-- 반려동물 보호자 로그인 -->
+ 	<select id="loginPetOwner" resultType="povo" resultMap="povoRM">
+ 		select po.Pet_Owner_no, po.Pet_Owner_id, po.Pet_Owner_name, po.Pet_Owner_tel, po.Pet_Owner_address
+		from  Pet_Owner po, Pet p
+		where po.Pet_Owner_id = #{petOwnerId} and po.Pet_Owner_password =#{petOwnerPassword} 
+			and po.Pet_Owner_no = p.Pet_Owner_no			
+ 	</select>
+ 
+ 	<!-- 아이디로 반려동물 조회 -->
+ 	<select id="findPetById" parameterType="povo" resultType="povo" resultMap="povoRM">
+ 		select p.Pet_name, p.Pet_birthday, p.Pet_gender, p.Pet_note, p.Pet_Animal_kind_name
+		from Pet_Owner po, Pet p
+		where po.Pet_Owner_no_seq = p.Pet_Owner_no_seq 
+				and po.Pet_Owner_id = #{petOwnerId} 	
+ 	</select>
+
+ 	<!-- 회원 정보 수정 -->
  	<update id="updatePetOwner" parameterType="povo">
  		update Pet_Owner
 		set Pet_Owner_tel=#{petOwnerTel}, Pet_Owner_name=#{petOwnerName},
@@ -55,12 +56,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where Pet_Owner_id = #{petOwnerId}  
  	</update>
  	
+ 	<!-- 회원 탈퇴 -->
  	<update id ="deletePetOwner" parameterType="povo">
  		update Pet_Owner
 		set Pet_Owner_id=null, Pet_Owner_password=null, Pet_Owner_address=null
 		where Pet_Owner_id = #{petOwnerId}
  	</update>
  	
- 	
+ 	<!-- 아이디로 진료기록 조회 -->
+ 	<select id = "findTreatmentRecordById" resultType="povo" parameterType="povo">
+ 		select tr.Treatment_Record_no, tr.Treatment_hours, tr.Treatment_content, p.Pet_name, tr.Pet_weight, p.Pet_gender, tr.Disease_name
+		from Treatment_Record tr , Pet p , Pet_Owner po
+		where po.Pet_Owner_id=#{petOwnerId} and p.Pet_name = #{petName} and p.Pet_Owner_no = tr.Pet_Owner_no and p.Pet_name = tr.Pet_name
+ 	</select>
  	
  </mapper>

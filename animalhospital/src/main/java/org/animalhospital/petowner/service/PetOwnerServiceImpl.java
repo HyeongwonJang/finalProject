@@ -6,7 +6,6 @@ import javax.annotation.Resource;
 
 import org.animalhospital.petowner.model.DAO.PetOwnerDAO;
 import org.animalhospital.petowner.model.VO.PetOwnerVO;
-import org.animalhospital.vet.model.VO.HospitalVO;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -37,5 +36,13 @@ public class PetOwnerServiceImpl implements PetOwnerService {
 		return petOwnerDAO.loginPetOwner(povo);
 	}
 
-	
+	@Override
+	public void updatePetOwner(PetOwnerVO povo) {
+		petOwnerDAO.updatePetOwner(povo);
+	}
+
+	@Override
+	public void registerPetOwner(PetOwnerVO povo) {
+		petOwnerDAO.updatePetOwner(povo);
+	}
 }
