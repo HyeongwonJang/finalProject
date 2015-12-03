@@ -17,12 +17,13 @@ public class PetOwnerController {
 	
 	@RequestMapping(value = "petOwnerLogin.do", method = RequestMethod.POST)
 	public String loginPetOwner(HttpServletRequest request, PetOwnerVO povo){
-		String path ="account/login_fail";
 		PetOwnerVO petOwnerVO = petOwnerService.loginPetOwner(povo);
 		if (petOwnerVO != null) {
 			request.getSession().setAttribute("povo", petOwnerVO);
+			return "home.do";
+		} else {
+			return "account/login_fail";
 		}
-		return "home";
 	}
 	@RequestMapping("logout.do")
 	public String logout(HttpServletRequest request){
