@@ -20,7 +20,7 @@ public class PetOwnerController {
 		PetOwnerVO petOwnerVO = petOwnerService.loginPetOwner(povo);
 		if (petOwnerVO != null) {
 			request.getSession().setAttribute("povo", petOwnerVO);
-			return "home.do";
+			return "home";
 		} else {
 			return "account/login_fail";
 		}
