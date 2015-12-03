@@ -62,6 +62,11 @@
                     </a>
                   </li>
                   <li>
+                    <a href="treatment_record_test.do">
+                      <i class="fa fa-search"></i> 테스트 페이지
+                    </a>
+                  </li>
+                  <li>
                     <a><i class="fa fa-clipboard"></i> 진료관리 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu" style="display: none">
                       <li>

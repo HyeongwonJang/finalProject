@@ -3,6 +3,8 @@ drop sequence Treatment_Record_no;
 drop table Treatment_Record;
 drop table Disease;
 
+commit
+
 drop table Vet;
 drop sequence Vet_License_no_seq;
 drop table Vet_License;

@@ -16,7 +16,7 @@ var validator = (function($){
 	*/
 	message = {
 		invalid			: 'invalid input',
-		empty			: 'please put something here',
+		empty			: '이 항목에 내용을 입력해주세요!',
 		min				: 'input is too short',
 		max				: 'input is too long',
 		number_min		: 'too low',

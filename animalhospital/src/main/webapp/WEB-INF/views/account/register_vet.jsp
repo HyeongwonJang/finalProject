@@ -23,6 +23,12 @@
 <script src="${initparam.root}resources/js/jquery.min.js"></script>
 <!-- Bootstrap Core JavaScript -->
 <script src="${initparam.root}resources/js/bootstrap.min.js"></script>
+<!-- 유효성 검증 플러그인 -->
+<script src="${initparam.root}resources//js/jqBootstrapValidation.js"></script>
+<!-- 유효성 검증 플러그인 적용 -->
+<script>
+  $(function () { $("input,select,textarea").not("[type=submit]").jqBootstrapValidation(); } );
+</script>
 
 <script type='text/javascript'>
 // 모달창 검색어 검색 필터
@@ -151,13 +157,14 @@
         <br>
         <form id="vetForm" class="form-horizontal form-label-left" action="registerVet.do" method="get">
           <div class="form-group">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12">아이디
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="occupation">아이디
               <span class="required">*</span>
             </label>
             <div class="col-md-4 col-sm-6 col-xs-12">
             	<!-- 수의사 id에 대한 input -->
-            	<input type="text" id="vetId" required="required" class="form-control col-md-7 col-xs-12"
-              	name="vetList[0].vetId">
+            	<input type="text" id="vetId" class="form-control col-md-7 col-xs-12"
+              	name="vetList[0].vetId" required />
+              	<p class="help-block"></p>
             </div>
             <div>
             	<!-- 텍스트 색깔은 text-primary text-danger 이거 사용-->
@@ -271,6 +278,6 @@
 			</div>
 		</div>
 	</div>
-	
 </body>
+
 </html>

@@ -70,4 +70,10 @@ public class ViewController {
 	public String treatmentRecordFind(){
 		return "treatment_record_find";
 	}
+	
+	@RequestMapping("treatment_record_test.do")
+	public String treatmentRecordTest(){
+		return "treatment_record_test";
+	}
+	
 }
