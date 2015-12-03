@@ -21,4 +21,6 @@ public interface VetService {
 	public List<VetVO> findVetByHospitalId(int hospitalId);
 	
 	public List<HospitalVO> findAllHospital();
+	
+	public int updateVet(HospitalVO hospitalVO);
 }

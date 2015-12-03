@@ -48,5 +48,9 @@ public class VetDAOImpl implements VetDAO {
 	public List<VetVO> findVetByHospitalId(int hospitalId) {
 		return sqlSessionTemplate.selectList("vet.findVetByHospitalId", hospitalId);
 	}
+	@Override
+	public int updateVet(HospitalVO hospitalVO) {
+		return sqlSessionTemplate.update("vet.updateVet", hospitalVO);
+	}
 	
 }
