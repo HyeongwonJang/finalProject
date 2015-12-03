@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.animalhospital.vet.model.VO.HospitalVO;
 import org.animalhospital.vet.model.VO.VetLicenseVO;
@@ -73,13 +74,20 @@ public class VetController {
 	
 	/**
 	 * 수의사 로그인
+	 * userLevel로 수의사와 보호자를 구분한다
+	 * 수의사 userLevel = "vet"
 	 */
-	/*@RequestMapping("vetLogin.do")
+	@RequestMapping("vetLogin.do")
 	public String vetLogin(HttpServletRequest request, VetVO vvo){
 		VetVO loginResult=vetService.vetLogin(vvo);
-		if(vvo!=null){
-			request.getSession().setAttribute("vetLogin", loginResult);
+		if(loginResult !=null){
+			HttpSession session = request.getSession();
+			session.setAttribute("loginVO", loginResult);
+			session.setAttribute("userLevel", "vet");
+			return "home";
+		} else {
+			return "account/login_fail";
 		}
-		return "home.do";
-	}*/
+		
+	}
 }

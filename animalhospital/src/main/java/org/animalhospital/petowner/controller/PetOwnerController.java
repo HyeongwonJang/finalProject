@@ -15,11 +15,21 @@ public class PetOwnerController {
 	@Resource
 	private PetOwnerService petOwnerService;
 	
+	/**
+	 * 보호자 로그인
+	 * userLevel로 수의사와 보호자를 구분한다
+	 * 수의사 userLevel = "vet"
+	 * @param request
+	 * @param povo
+	 * @return
+	 */
 	@RequestMapping(value = "petOwnerLogin.do", method = RequestMethod.POST)
 	public String loginPetOwner(HttpServletRequest request, PetOwnerVO povo){
 		PetOwnerVO petOwnerVO = petOwnerService.loginPetOwner(povo);
 		if (petOwnerVO != null) {
-			request.getSession().setAttribute("povo", petOwnerVO);
+			HttpSession session = request.getSession();
+			session.setAttribute("loginVO", petOwnerVO);
+			session.setAttribute("userLevel", "petOwner");
 			return "home";
 		} else {
 			return "account/login_fail";

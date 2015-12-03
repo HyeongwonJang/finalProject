@@ -25,7 +25,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="get_license_date" property="vetLicenseVO.getLicenseDate"/>
 	</resultMap>
 	
-
+	<!-- 로그인을 위한 sql문 -->
+	<select id="vetLogin" parameterType="vvo" resultMap="vvoRM">
+		select v.vet_id, v.vet_tel, vl.vet_name, vl.vet_license_no
+		from vet v, Vet_License vl
+		where v.Vet_License_no = vl.Vet_License_no
+		and v.vet_id = #{vetId}
+		and v.vet_password = #{vetPassword}
+	</select>
+	
+	
 	<!-- 가입시 병원 확인을 위한 병원 조회 -->
 	<select id="findHospitalById" parameterType="int" resultMap="hvoRM"> 
 		select Hospital_id, Hospital_name
