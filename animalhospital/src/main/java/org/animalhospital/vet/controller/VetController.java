@@ -79,8 +79,8 @@ public class VetController {
 	 */
 	@RequestMapping("vetLogin.do")
 	public String vetLogin(HttpServletRequest request, VetVO vvo){
-		VetVO loginResult=vetService.vetLogin(vvo);
-		if(loginResult !=null){
+		HospitalVO loginResult=vetService.vetLogin(vvo);
+		if(loginResult != null){
 			HttpSession session = request.getSession();
 			session.setAttribute("loginVO", loginResult);
 			session.setAttribute("userLevel", "vet");

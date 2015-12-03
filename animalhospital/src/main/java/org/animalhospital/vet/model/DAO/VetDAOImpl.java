@@ -41,7 +41,7 @@ public class VetDAOImpl implements VetDAO {
 		return sqlSessionTemplate.selectOne("vet.findVetById",vetId);
 	}
 	@Override
-	public VetVO vetLogin(VetVO vvo) {
+	public HospitalVO vetLogin(VetVO vvo) {
 		return sqlSessionTemplate.selectOne("vet.vetLogin", vvo);
 	}
 	@Override

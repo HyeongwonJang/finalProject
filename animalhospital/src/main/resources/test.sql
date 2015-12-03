@@ -1,6 +1,7 @@
-select v.vet_id, v.vet_tel, vl.vet_name, vl.vet_license_no
-		from vet v, Vet_License vl
+select v.vet_id, v.vet_tel, vl.vet_name, vl.vet_license_no, h.Hospital_id, h.Hospital_name
+		from vet v, Vet_License vl, HOSPITAL h
 		where v.Vet_License_no = vl.Vet_License_no
+		and v.Hospital_id = h.Hospital_id
 		and v.vet_id = 'YUNA'
 		and v.vet_password = '1234'
 

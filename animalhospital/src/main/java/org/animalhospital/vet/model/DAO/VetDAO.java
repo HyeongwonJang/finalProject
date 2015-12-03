@@ -38,7 +38,7 @@ public interface VetDAO {
 	 * @param vvo
 	 * @return
 	 */
-	public VetVO vetLogin(VetVO vvo);
+	public HospitalVO vetLogin(VetVO vvo);
 	/**
 	 * 병원을 아이디로 찾는 메서드
 	 * @param hospitalId
