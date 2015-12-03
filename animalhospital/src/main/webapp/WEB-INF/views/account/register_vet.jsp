@@ -70,7 +70,7 @@
 						$("#hospitalName").val($(this).parent().siblings().eq(1).text());
 						$("#hospitalId").attr('value', $(this).parent().siblings().eq(0).text()); 
 						$('div.modal').modal('hide');
-						})
+					});
 			    	
 			    }
 			});
@@ -78,6 +78,7 @@
 			$('div.modal').modal({
 				
 			});
+
 		});
 		
 		

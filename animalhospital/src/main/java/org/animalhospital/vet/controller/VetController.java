@@ -45,16 +45,6 @@ public class VetController {
 		return vetService.licenseCheck(lvo);
 	}
 	/**
-	 * 모든 Hospital 정보 출력
-	 * @return
-	 */
-	  @RequestMapping("findAllHospitalAjax.do")
-	   @ResponseBody
-	   public List<HospitalVO> findAllHospitalAjax(){
-	      List<HospitalVO> hospitalList=vetService.findAllHospital();
-	      return hospitalList;
-	   }
-	/**
 	 * 병원 검색
 	 * 병원이름으로 병원을 검색, 입력한 hospitalName을 포함하고 있다면 HospitalVO리스트로 return
 	 */
@@ -74,6 +64,14 @@ public class VetController {
 	public int findVetById(HttpServletResponse response, String vetId){
 		return vetService.findVetById(vetId);
 	}
+	
+	@RequestMapping("findAllHospitalAjax.do")
+	@ResponseBody
+	public List<HospitalVO> findAllHospitalAjax(){
+		List<HospitalVO> hospitalList=vetService.findAllHospital();
+		return hospitalList;
+	}
+	
 	
 	@RequestMapping("testAjax.do")
 	@ResponseBody
