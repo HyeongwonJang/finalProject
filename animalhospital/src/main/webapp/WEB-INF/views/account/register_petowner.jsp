@@ -161,7 +161,7 @@
 				<div class="form-group">
 					<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
 						<button type="submit" class="btn btn-success">등록</button>
-						<button type="submit" class="btn btn-primary">취소</button>
+						<button type="button" class="btn btn-primary" id="cancel" >취소</button>
 					</div>
 				</div> 
 			</form>
@@ -194,6 +194,11 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			var petCount = 0;
+			$("#cancel").click(function(){
+				if(confirm("작성을 취소하고 로그인 페이지로 이동하시겠습니까?")){
+					location.href="home.do";
+				}
+			});
 			$("#pet-form").submit(function() {
 				if(confirm("전송 하시겠습니까?")) {
 					
