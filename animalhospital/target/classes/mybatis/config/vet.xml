@@ -9,11 +9,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="hospital_name" property="hospitalName" />
 		<result column="hospital_address" property="hospitalAddress" />
 		<result column="hospital_tel" property="hospitalTel" />
-		<collection property="vetList"  ofType="vvo">
- 			<id column="vet_id" property="vetId"/>
- 			<result column="vet_tel" property="vetLicenseVO.vetTel"/>
- 			<result column="vet_name" property="vetLicenseVO.vetName"/>
- 		</collection>
+		<collection property="vetList" ofType="vvo">
+			<id column="vet_id" property="vetId" />
+			<result column="vet_password" property="vetPassword" />
+			<result column="vet_tel" property="vetTel" />
+			<result column="vet_name" property="vetLicenseVO.vetName" />
+			<result column="vet_license_no" property="vetLicenseVO.vetLicenseNo" />
+			<result column="resident_no" property="vetLicenseVO.residentNo" />
+			<result column="get_license_date" property="vetLicenseVO.getLicenseDate" />
+		</collection>
 	</resultMap>
 	
 	<resultMap type="vvo" id="vvoRM">

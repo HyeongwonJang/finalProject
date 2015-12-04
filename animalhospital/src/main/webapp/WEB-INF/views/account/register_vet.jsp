@@ -44,9 +44,12 @@
 </script>
 
 <script type="text/javascript">
+	var submitFlag = false;
+
 	$(document).ready(function() {
 		// 모달창 띄우는 함수
 		$("#popbutton").click(function() {
+			submitFlag = false;
 			// 모달창이 뜨기 전에 ajax로 병원 정보를 가져온다
 			$.ajax({
 			    type: "post", // get 또는 post로 설정
@@ -64,6 +67,7 @@
 			    					"name='selectHospitalBtn'>선택</button>" +
 			    					"</td>";
 			    		tableInfo += "</tr>";
+			    		submitFlag = true;
 					});
 			    	$("#modalTableInfo").html(tableInfo);
 			    	$("[name='selectHospitalBtn']").click(function() {
@@ -93,9 +97,11 @@
 			   		if(searchResult == 0){
 			   			$("#idSearchMessage").text("사용하지 않은 아이디입니다!");
 			   			$("#idSearchMessage").attr('class', 'text-primary');
+			   			submitFlag = true;
 			   		} else {
 			   			$("#idSearchMessage").text("이미 사용하고 있는 아이디입니다!");
 			   			$("#idSearchMessage").attr('class', 'text-danger');
+			   			submitFlag = false;
 			   		}
 			    }
 			});
@@ -111,9 +117,11 @@
 			   		if(searchResult == 0){
 			   			$("#licenseSearchMessage").text("면허번호와 이름이 일치하지 않거나 이미 사용하고 있는 면허번호입니다!");
 			   			$("#licenseSearchMessage").attr('class', 'text-danger');
+			   			submitFlag = false;
 			   		} else {
 			   			$("#licenseSearchMessage").text("면허증 번호와 이름이 일치합니다!");
 			   			$("#licenseSearchMessage").attr('class', 'text-primary');
+			   			submitFlag = true;
 			   		}
 			    }
 			});
@@ -127,6 +135,17 @@
 				$(this).val($(this).val().replace($(this).val(),$(this).val().substring(0,11)));
 				alert("전화번호 양식에 맞게 작성해주세요!");
 			}
+		});
+		
+		// 면허증번호 숫자만 입력하기
+		$("#vetLicenseNo").keyup(function(){
+			$(this).val( $(this).val().replace(/[^0-9]/g,""));
+			
+		});
+		
+		// submit 제어
+		$("#vetForm").submit(function() {
+			return 	submitFlag;
 		});
 		
 	});

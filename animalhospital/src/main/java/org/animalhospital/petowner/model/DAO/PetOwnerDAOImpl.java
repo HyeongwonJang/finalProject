@@ -1,8 +1,11 @@
 package org.animalhospital.petowner.model.DAO;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.animalhospital.petowner.model.VO.PetOwnerVO;
+import org.animalhospital.petowner.model.VO.PetVO;
 import org.animalhospital.treatment.model.VO.TreatmentRecordVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
@@ -14,6 +17,7 @@ public class PetOwnerDAOImpl implements PetOwnerDAO {
 	/* (non-Javadoc)
 	 * @see org.animalhospital.petowner.model.MemberPetOwnerDAO#findMemberPetOwnerByTel(org.animalhospital.petowner.model.PetOwnerVO)
 	 */
+	
 	@Override
 	public PetOwnerVO findMemberPetOwnerByTel(PetOwnerVO povo) {
 		System.out.println("hello");

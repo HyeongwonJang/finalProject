@@ -53,23 +53,23 @@ $(function(){
 				</select> 
 			<label for="inputInfo">몸무게:</label> 
 			<input type="text" id="petWeight" class="form-control" name="" />
-			<label>질병종류</label>
+			<label>진료종류</label>
 				<select class="select2_single form-control" tabindex="-1">
-					<option>나태</option>
-					<option>폭식</option>
-					<option>나태</option>
-					<option>집에 가고 싶다</option>
-					<option>집에 가도 할 게 없다</option>
+					<option>내과</option>
+					<option>외과</option>
+					<option>치과</option>
+					<option>신경외과</option>
+					<option>예방접종</option>
 				</select>
 			<label>진료내용</label>
-			<textarea class="form-control" rows="8">진료내용을 입력해주세요</textarea>
+			<textarea class="form-control" rows="8" placeholder="진료내용을 입력해주세요"></textarea>
 			
 			<div class="ln_solid"></div>
 			<div class="form-group">
 				<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
 					<p align="center">
-						<button type="submit" class="btn btn-primary">Submit</button>
-						<button type="submit" class="btn btn-success">Cancel</button>
+						<button type="submit" class="btn btn-primary">제출</button>
+						<button type="button" class="btn btn-success">취소</button>
 					</p>
 				</div>
 			</div>

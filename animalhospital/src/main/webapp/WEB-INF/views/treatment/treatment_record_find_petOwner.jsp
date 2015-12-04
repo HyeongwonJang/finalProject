@@ -1,5 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<!-- select2 -->
+<script>
+	$(document).ready(function() {
+		$(".select2_single").select2({
+			placeholder : "해당 항목을 선택해주세요",
+			allowClear : true
+		});
+		$(".select2_group").select2({});
+		$(".select2_multiple").select2({
+			maximumSelectionLength : 4,
+			placeholder : "With Max Selection limit 4",
+			allowClear : true
+		});
+	});
+</script>
+<!-- /select2 -->    
 <div class="x_panel" style="height: 600px;">
 	<!-- 타이틀 -->
 	<div class="x_title">
@@ -9,6 +25,14 @@
 	</div>
 	<!-- 데이터 입력부분 -->
 	<div class="x_content">
+		<label>반려동물명</label>
+			<select class="select2_single form-control" tabindex="-1">
+				<option>ajax로 가져오면 되겠지</option>
+				<option>귀찮음</option>
+				<option>졸림</option>
+				<option>배고픔</option>
+			</select> 	
+		<hr>
 		<table
 			class="table table-striped responsive-utilities jambo_table bulk_action">
 			<thead>

@@ -27,7 +27,11 @@ public class TestJUnit {
 	private VetService vetService;
 	@Test
 	public void TestDao2(){
+		PetOwnerVO paramVO = new PetOwnerVO();
+		paramVO.setPetOwnerId("jsp");
+		paramVO.setPetOwnerTel("01011112222");
+		System.out.println(PetOwnerDAO.findPetByTel(paramVO));
+		//System.out.println(vetDAO.findHospital("동물"));
 		
-		System.out.println(vetDAO.vetLogin(new VetVO("YUNA", "1234", null, null)));
 	}
 }

@@ -40,12 +40,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			and po.Pet_Owner_no = p.Pet_Owner_no			
  	</select>
  
- 	<!-- 아이디로 반려동물 조회 -->
- 	<select id="findPetById" parameterType="povo" resultType="povo" resultMap="povoRM">
- 		select p.Pet_name, p.Pet_birthday, p.Pet_gender, p.Pet_note, p.Pet_Animal_kind_name
+ 	<!-- 전화번호로 반려동물 조회 -->
+ 	<select id="findPetByTel" parameterType="povo" resultMap="povoRM">
+ 		select p.Pet_name, p.Pet_birthday, p.Pet_gender, p.Pet_note, p.Animal_kind_name, po.Pet_Owner_no
 		from Pet_Owner po, Pet p
-		where po.Pet_Owner_no_seq = p.Pet_Owner_no_seq 
-				and po.Pet_Owner_id = #{petOwnerId} 	
+		where po.Pet_Owner_no = p.Pet_Owner_no
+		and po.Pet_Owner_tel = #{petOwnerTel} 	
  	</select>
 
  	<!-- 회원 정보 수정 -->

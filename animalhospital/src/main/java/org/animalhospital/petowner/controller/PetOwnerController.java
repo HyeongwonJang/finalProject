@@ -16,6 +16,23 @@ public class PetOwnerController {
 	private PetOwnerService petOwnerService;
 	
 	/**
+	 * 보호자 진료조회 페이지
+	 * @return
+	 */
+	@RequestMapping("findTreatmentRecordByPetOwner.do")
+	public String findTreatmentRecordByPetOwner(HttpServletRequest request){
+		HttpSession session = 	request.getSession(false);
+		if(session != null){
+			PetOwnerVO vo = (PetOwnerVO) session.getAttribute("loginVO");
+			
+			
+		}
+		
+		return "treatment_record_find_petOwner";
+	}
+	
+	
+	/**
 	 * 보호자 로그인
 	 * userLevel로 수의사와 보호자를 구분한다
 	 * 수의사 userLevel = "vet"

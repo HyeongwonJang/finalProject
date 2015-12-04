@@ -19,6 +19,7 @@ public class VetDAOImpl implements VetDAO {
 	public List<HospitalVO> findHospital(String hospitalName){
 		return  sqlSessionTemplate.selectList("vet.findHospital",hospitalName);
 	}
+	
 	@Override
 	public void registerVet(HospitalVO hvo) {
 		sqlSessionTemplate.insert("vet.registerVet",hvo);

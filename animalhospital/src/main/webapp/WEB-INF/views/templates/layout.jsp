@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-  <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>   
+<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>  
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -55,6 +56,8 @@
             <!-- sidebar menu -->
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
+              
+              <!-- 왼쪽 메뉴 -->
                 <ul class="nav side-menu">
                   <li>
                     <a href="treatment_record_find.do">
@@ -69,12 +72,22 @@
                   <li>
                     <a><i class="fa fa-clipboard"></i> 진료관리 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu" style="display: none">
-                      <li>
-                        <a href="${initparam.root}treatment_record_register.do">진료등록</a>
-                      </li>
-                      <li>
-                        <a href="${initparam.root}treatment_record_find.do">진료조회</a>
-                      </li>
+                    	<c:choose>
+                    		<c:when test="${sessionScope.userLevel == 'vet' }">
+                    			<li>
+                        		<a href="${initparam.root}registerTreatmentRecord.do">진료등록</a>
+                      			</li>
+                    		</c:when>
+	                    	<c:when test="${sessionScope.userLevel == 'petOwner' }">
+	                    		<li>
+                        		<a href="${initparam.root}registerVaccinationRecord.do">예방접종등록</a>
+                      			</li>	
+                      			<li>
+                        		<a href="${initparam.root}findTreatmentRecordByPetOwner.do">진료기록조회</a>
+                      			</li>
+	                    	</c:when>
+                    	</c:choose>
+                      
                     </ul>
                   </li>
                 </ul>
@@ -99,13 +112,30 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                    칼퇴하조님 환영합니다
-                                    <span class=" fa fa-angle-down"></span>
-                                </a>
+                  	<c:choose>
+                    	<c:when test="${sessionScope.userLevel == 'vet' }">
+                    		${sessionScope.loginVO.vetList[0].vetLicenseVO.vetName}님 환영합니다
+                    	</c:when>
+                    	<c:when test="${sessionScope.userLevel == 'petOwner' }">
+                    		${sessionScope.loginVO.petOwnerName}님 환영합니다	
+                    	</c:when>
+                    </c:choose>
+					<span class=" fa fa-angle-down"></span>
+                  </a>
                   <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
-                    <li>
-                      	<a href="vet_update.do"><i class="fa fa-user"></i> 회원정보수정</a>
-                    </li>
+                    
+                    <c:choose>
+                    	<c:when test="${sessionScope.userLevel == 'vet' }">
+                    		<li>
+                      			<a href="vet_update.do"><i class="fa fa-user"></i> 회원정보수정</a>
+                    		</li>
+                    	</c:when>
+                    	<c:when test="${sessionScope.userLevel == 'petOwner' }">
+                    		<li>
+                      			<a href="petOwner_update.do"><i class="fa fa-user"></i> 회원정보수정</a>
+                    		</li>	
+                    	</c:when>
+                    </c:choose>
                     <li>
                       <a href="${initparam.root}logout.do"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
                     </li>

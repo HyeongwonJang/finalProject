@@ -1,3 +1,8 @@
+select p.Pet_name, p.Pet_birthday, p.Pet_gender, p.Pet_note, p.Animal_kind_name, po.Pet_Owner_no
+		from Pet_Owner po, Pet p
+		where po.Pet_Owner_no = p.Pet_Owner_no
+		and po.Pet_Owner_tel = 01011112222	
+
 select v.vet_id, v.vet_tel, vl.vet_name, vl.vet_license_no, h.Hospital_id, h.Hospital_name
 		from vet v, Vet_License vl, HOSPITAL h
 		where v.Vet_License_no = vl.Vet_License_no
