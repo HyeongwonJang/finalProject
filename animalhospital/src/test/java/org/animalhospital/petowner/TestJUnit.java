@@ -30,7 +30,7 @@ public class TestJUnit {
 		PetOwnerVO paramVO = new PetOwnerVO();
 		paramVO.setPetOwnerId("jsp");
 		paramVO.setPetOwnerTel("01011112222");
-		System.out.println(PetOwnerDAO.findPetByTel(paramVO));
+		//System.out.println(PetOwnerDAO.findPetByTel(paramVO));
 		//System.out.println(vetDAO.findHospital("동물"));
 		
 	}
