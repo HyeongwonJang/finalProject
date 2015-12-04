@@ -1,5 +1,6 @@
 package org.animalhospital.petowner.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -12,24 +13,6 @@ import org.springframework.stereotype.Service;
 public class PetOwnerServiceImpl implements PetOwnerService {
 	@Resource
 	private PetOwnerDAO petOwnerDAO;
-	
-	/* (non-Javadoc)
-	 * @see org.animalhospital.petowner.model.PetOwnerService#registerMemberPetOwnerAndPet(org.animalhospital.petowner.model.MemberPetOwnerVO)
-	 */
-	@Override
-	public void registerMemberPetOwnerAndPet(PetOwnerVO povo) {
-//		petOwnerDAO.registerPetOwner(mpovo);
-//		System.out.println("비회원 등록 성공");
-//		petOwnerDAO.registerMemberPetOwner(mpovo);
-//		System.out.println("회원 등록 성공");
-		petOwnerDAO.registerPet(povo);
-		System.out.println("동물 리스트 등록 성공");
-	}
-
-	@Override
-	public PetOwnerVO findMemberPetOwnerByTel(PetOwnerVO povo) {
-		return petOwnerDAO.findMemberPetOwnerByTel(povo);
-	}
 
 	@Override
 	public PetOwnerVO loginPetOwner(PetOwnerVO povo) {
@@ -43,6 +26,15 @@ public class PetOwnerServiceImpl implements PetOwnerService {
 
 	@Override
 	public void registerPetOwner(PetOwnerVO povo) {
-		petOwnerDAO.updatePetOwner(povo);
+		petOwnerDAO.registerPetOwner(povo);
+		HashMap<String, Object> pom = new HashMap<String, Object>();
+		System.out.println(povo);
+		pom.put("petOwnerNo", povo.getPetOwnerNo());
+		if(povo.getPetVO()!=null) {
+			for(int i=0; i<povo.getPetVO().size(); i++) {
+				pom.put("petVO", povo.getPetVO().get(i));
+				petOwnerDAO.registerPet(pom);
+			}
+		}
 	}
 }

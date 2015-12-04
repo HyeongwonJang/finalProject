@@ -45,6 +45,15 @@ public class ViewController {
 	}
 	
 	/**
+	 * 보호자 회원가입 완료 페이지
+	 * @return
+	 */
+	@RequestMapping("registerPetOwnerResult.do")
+	public String registerPetOwnerResult(){
+		return "/account/register_petowner_result";
+	}
+	
+	/**
 	 * 보호자 등록페이지가 나오게 하는 컨트롤러
 	 * @return
 	 */

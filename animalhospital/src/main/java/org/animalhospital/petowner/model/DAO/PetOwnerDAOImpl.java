@@ -1,6 +1,10 @@
 package org.animalhospital.petowner.model.DAO;
 
+<<<<<<< HEAD
 import java.util.List;
+=======
+import java.util.HashMap;
+>>>>>>> branch 'master' of https://github.com/prototype01/finalProject.git
 
 import javax.annotation.Resource;
 
@@ -14,6 +18,7 @@ public class PetOwnerDAOImpl implements PetOwnerDAO {
 	@Resource
 	private SqlSessionTemplate sqlSessionTemplate;
 	
+<<<<<<< HEAD
 	/* (non-Javadoc)
 	 * @see org.animalhospital.petowner.model.MemberPetOwnerDAO#findMemberPetOwnerByTel(org.animalhospital.petowner.model.PetOwnerVO)
 	 */
@@ -28,15 +33,13 @@ public class PetOwnerDAOImpl implements PetOwnerDAO {
 		return sqlSessionTemplate.selectOne("petOwner.findPetByTel", povo);
 	}
 	
+=======
+>>>>>>> branch 'master' of https://github.com/prototype01/finalProject.git
 	public void registerPetOwner(PetOwnerVO povo) {
 		sqlSessionTemplate.insert("petOwner.registerPetOwner", povo);
 	}
-	public void registerMemberPetOwner(PetOwnerVO povo) {
-		sqlSessionTemplate.insert("petOwner.registerMemberPetOwner", povo);
-	}
-	public void registerPet(PetOwnerVO povo) {
-		for(int i=0; i<povo.getPetVO().size(); i++)
-			sqlSessionTemplate.insert("petOwner.registerPet", povo.getPetVO().get(i));
+	public void registerPet(HashMap<String, Object> pom) {
+		sqlSessionTemplate.insert("petOwner.registerPet", pom);
 	}
 
 	@Override
