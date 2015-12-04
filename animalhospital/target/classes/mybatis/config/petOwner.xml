@@ -21,15 +21,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	</resultMap>
  	
  	<!-- 회원가입 -->
- 	<insert id="registerPetOwner" parameterType="povo">
-		insert into Pet_Owner(Pet_Owner_no,Pet_Owner_tel, Pet_Owner_name, Pet_Owner_id, Pet_Owner_password, Pet_Owner_address)
-		values(Pet_Owner_no_seq.nextval, #{petOwnerTel}, #{petOwnerName}, #{petOwnerId}, #{petOwnerPassword}, #{petOwnerAddress})
- 	</insert>
+    <insert id="registerPetOwner" parameterType="povo">
+       <selectKey keyProperty="petOwnerNo" resultType="int" order="BEFORE">
+         select Pet_Owner_no_seq.nextval from dual
+      </selectKey>
+      insert into Pet_Owner(Pet_Owner_no, Pet_Owner_tel, Pet_Owner_name, Pet_Owner_id, Pet_Owner_password, Pet_Owner_address)
+      values(#{petOwnerNo}, #{petOwnerTel}, #{petOwnerName}, #{petOwnerId}, #{petOwnerPassword}, #{petOwnerAddress})   
+    </insert>
  	
  	<!-- 반려동물 등록 -->
- 	<insert id="registerPet" parameterType="pvo">
-		insert into Pet(Pet_name, Pet_Owner_tel, Pet_birthday, Pet_gender, Pet_note, Animal_kind_name)
-		values(#{petName}, '01012341234', #{petBirthday}, #{petGender}, #{petNote}, #{animalKindName}) 	
+ 	 <insert id="registerPet" parameterType="map">
+		insert into Pet(Pet_Owner_no, Pet_name, Pet_birthday, Pet_gender, Pet_note, Animal_kind_name)
+		values(#{petOwnerNo}, #{petVO.petName}, #{petVO.petBirthday}, #{petVO.petGender}, #{petVO.petNote}, #{petVO.animalKindName}) 	
  	</insert>
  	
  	<!-- 반려동물 보호자 로그인 -->
