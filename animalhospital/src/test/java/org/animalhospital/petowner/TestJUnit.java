@@ -4,6 +4,7 @@ import javax.annotation.Resource;
 
 import org.animalhospital.petowner.model.DAO.PetOwnerDAO;
 import org.animalhospital.petowner.model.VO.PetOwnerVO;
+import org.animalhospital.petowner.service.PetOwnerService;
 import org.animalhospital.vet.model.DAO.VetDAO;
 import org.animalhospital.vet.model.VO.VetLicenseVO;
 import org.animalhospital.vet.model.VO.VetVO;
@@ -25,13 +26,15 @@ public class TestJUnit {
 	private VetDAO vetDAO;
 	@Resource
 	private VetService vetService;
+	@Resource
+	private PetOwnerService petOwnerService;
 	@Test
 	public void TestDao2(){
 		PetOwnerVO paramVO = new PetOwnerVO();
 		paramVO.setPetOwnerId("jsp");
 		paramVO.setPetOwnerTel("01011112222");
 		//System.out.println(PetOwnerDAO.findPetByTel(paramVO));
-		//System.out.println(vetDAO.findHospital("동물"));
+		System.out.println(petOwnerService.findMemberPetOwnerByTel(paramVO));
 		
 	}
 }

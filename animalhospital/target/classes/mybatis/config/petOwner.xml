@@ -44,8 +44,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	</select>
  
  	<!-- 전화번호로 반려동물 조회 -->
- 	<select id="findPetByTel" parameterType="povo" resultMap="povoRM">
- 		select p.Pet_name, p.Pet_birthday, p.Pet_gender, p.Pet_note, p.Animal_kind_name, po.Pet_Owner_no
+ 	<select id="findMemberPetOwnerByTel" parameterType="povo" resultMap="povoRM">
+ 		select p.Pet_name, p.Pet_birthday, p.Pet_gender, p.Pet_note, p.Animal_kind_name, p.Pet_Owner_no
 		from Pet_Owner po, Pet p
 		where po.Pet_Owner_no = p.Pet_Owner_no
 		and po.Pet_Owner_tel = #{petOwnerTel} 	

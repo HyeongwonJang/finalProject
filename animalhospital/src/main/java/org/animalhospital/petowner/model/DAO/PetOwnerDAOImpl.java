@@ -18,7 +18,6 @@ public class PetOwnerDAOImpl implements PetOwnerDAO {
 	
 	@Override
 	public PetOwnerVO findMemberPetOwnerByTel(PetOwnerVO povo) {
-		System.out.println("hello");
 		return sqlSessionTemplate.selectOne("petOwner.findMemberPetOwnerByTel", povo);
 	}
 	

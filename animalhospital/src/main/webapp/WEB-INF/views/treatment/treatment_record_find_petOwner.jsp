@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!-- select2 -->
 <script>
 	$(document).ready(function() {
@@ -15,7 +16,9 @@
 		});
 	});
 </script>
-<!-- /select2 -->    
+<!-- /select2 -->
+
+    
 <div class="x_panel" style="height: 600px;">
 	<!-- 타이틀 -->
 	<div class="x_title">
@@ -27,10 +30,9 @@
 	<div class="x_content">
 		<label>반려동물명</label>
 			<select class="select2_single form-control" tabindex="-1">
-				<option>ajax로 가져오면 되겠지</option>
-				<option>귀찮음</option>
-				<option>졸림</option>
-				<option>배고픔</option>
+				<c:forEach items="${findPetResult.petVO }" var="pet">
+					<option value="${pet.petName }">${pet.petName }</option>
+				</c:forEach>
 			</select> 	
 		<hr>
 		<table

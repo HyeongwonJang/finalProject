@@ -37,4 +37,9 @@ public class PetOwnerServiceImpl implements PetOwnerService {
 			}
 		}
 	}
+
+	@Override
+	public PetOwnerVO findMemberPetOwnerByTel(PetOwnerVO povo) {
+		return petOwnerDAO.findMemberPetOwnerByTel(povo);
+	}
 }

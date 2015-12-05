@@ -9,6 +9,7 @@ import org.animalhospital.petowner.service.PetOwnerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class PetOwnerController {
@@ -20,15 +21,19 @@ public class PetOwnerController {
 	 * @return
 	 */
 	@RequestMapping("findTreatmentRecordByPetOwner.do")
-	public String findTreatmentRecordByPetOwner(HttpServletRequest request){
+	public ModelAndView findTreatmentRecordByPetOwner(HttpServletRequest request){
 		HttpSession session = 	request.getSession(false);
+		PetOwnerVO vo = null;
 		if(session != null){
-			PetOwnerVO vo = (PetOwnerVO) session.getAttribute("loginVO");
-			
-			
+			vo = (PetOwnerVO) session.getAttribute("loginVO");
+		} else {
+			// 세션이 끊어졌을 시에는 처리할 조건을 걸어줘야 함
+			// exception: SessionNotFoundException
+			// 예외처리를 AOP로 처리함, 단계에 대한 고민이 필요함, info 단계로 예상, 민호
 		}
 		
-		return "treatment_record_find_petOwner";
+		return new ModelAndView("treatment_record_find_petOwner", "findPetResult",
+				petOwnerService.findMemberPetOwnerByTel(vo));
 	}
 	
 	

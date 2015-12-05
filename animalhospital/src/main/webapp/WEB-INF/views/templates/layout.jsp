@@ -133,6 +133,7 @@
                     	<c:when test="${sessionScope.userLevel == 'petOwner' }">
                     		<li>
                       			<a href="petOwner_update.do"><i class="fa fa-user"></i> 회원정보수정</a>
+                      			<a href="petOwner_update.do"><i class="fa fa-user"></i> 반려동물정보수정</a>
                     		</li>	
                     	</c:when>
                     </c:choose>
