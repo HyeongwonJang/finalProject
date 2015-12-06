@@ -20,7 +20,7 @@ public class PetOwnerController {
 	 * 보호자 진료조회 페이지
 	 * @return
 	 */
-	@RequestMapping("findTreatmentRecordByPetOwner.do")
+	@RequestMapping("viewFindTreatmentRecordPage.do")
 	public ModelAndView findTreatmentRecordByPetOwner(HttpServletRequest request){
 		HttpSession session = 	request.getSession(false);
 		PetOwnerVO vo = null;
@@ -33,7 +33,7 @@ public class PetOwnerController {
 		}
 		
 		return new ModelAndView("treatment_record_find_petOwner", "findPetResult",
-				petOwnerService.findMemberPetOwnerByTel(vo));
+				petOwnerService.findPetOwnerByTel(vo));
 	}
 	
 	

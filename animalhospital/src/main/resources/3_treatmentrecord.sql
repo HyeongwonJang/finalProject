@@ -3,7 +3,8 @@
  */
 
 -- Disease
-create table Disease(
+drop table Disease
+create table Treatment(
 	Disease_name varchar2(50) primary key,
 	Disease_symptom varchar2(200) not null
 );

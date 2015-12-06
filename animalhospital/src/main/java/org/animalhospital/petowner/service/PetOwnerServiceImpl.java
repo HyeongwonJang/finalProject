@@ -39,7 +39,7 @@ public class PetOwnerServiceImpl implements PetOwnerService {
 	}
 
 	@Override
-	public PetOwnerVO findMemberPetOwnerByTel(PetOwnerVO povo) {
-		return petOwnerDAO.findMemberPetOwnerByTel(povo);
+	public PetOwnerVO findPetOwnerByTel(PetOwnerVO povo) {
+		return petOwnerDAO.findPetOwnerByTel(povo);
 	}
 }

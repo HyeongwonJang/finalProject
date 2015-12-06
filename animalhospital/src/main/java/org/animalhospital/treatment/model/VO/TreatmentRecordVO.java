@@ -1,7 +1,6 @@
 package org.animalhospital.treatment.model.VO;
 import org.animalhospital.petowner.model.VO.PetVO;
 import org.animalhospital.vet.model.VO.HospitalVO;
-import org.animalhospital.vet.model.VO.VetLicenseVO;
 
 public class TreatmentRecordVO {
 	private int treatmentRecordNo;

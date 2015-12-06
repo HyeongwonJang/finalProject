@@ -1,3 +1,12 @@
+-- 진료기록을 보호자 회원번호(시퀀스)와 반려동물 이름으로 조회
+select t.Treatment_Record_no, to_char(t.Treatment_hours, 'YYYY-MM-DD') as Treatment_hours, t.Treatment_content, t.Pet_name, t.Disease_name, d.Disease_symptom
+from TREATMENT_RECORD t, DISEASE d
+where t.Disease_name = d.Disease_name
+and Pet_Owner_no = 1
+and Pet_name = '도트'
+and t.Treatment_hours 
+between to_date('2010-03-01', 'YYYY-MM-DD') and to_date('2015-12-06', 'YYYY-MM-DD');
+
 select p.Pet_name, p.Pet_birthday, p.Pet_gender, p.Pet_note, p.Animal_kind_name, po.Pet_Owner_no
 		from Pet_Owner po, Pet p
 		where po.Pet_Owner_no = p.Pet_Owner_no

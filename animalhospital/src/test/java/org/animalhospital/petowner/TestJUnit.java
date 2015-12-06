@@ -1,10 +1,18 @@
 package org.animalhospital.petowner;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import org.animalhospital.petowner.model.DAO.PetOwnerDAO;
 import org.animalhospital.petowner.model.VO.PetOwnerVO;
+import org.animalhospital.petowner.model.VO.PetVO;
 import org.animalhospital.petowner.service.PetOwnerService;
+import org.animalhospital.treatment.model.DAO.TreatmentDAO;
+import org.animalhospital.treatment.service.DAO.TreatmentService;
 import org.animalhospital.vet.model.DAO.VetDAO;
 import org.animalhospital.vet.model.VO.VetLicenseVO;
 import org.animalhospital.vet.model.VO.VetVO;
@@ -28,13 +36,28 @@ public class TestJUnit {
 	private VetService vetService;
 	@Resource
 	private PetOwnerService petOwnerService;
+	@Resource 
+	private TreatmentDAO treatmentDAO;
+	@Resource
+	private TreatmentService treatmentService;
 	@Test
 	public void TestDao2(){
 		PetOwnerVO paramVO = new PetOwnerVO();
-		paramVO.setPetOwnerId("jsp");
+		List<PetVO> petList = new ArrayList<PetVO>();
+		PetVO petVO = new PetVO();
+		petVO.setPetName("도트");
+		petList.add(petVO);
+		paramVO.setPetOwnerNo(1);
 		paramVO.setPetOwnerTel("01011112222");
+		paramVO.setPetVO(petList);
+		//System.out.println(paramVO.getPetVO().get(0));
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("povo", paramVO);
+		map.put("startDate", "2010-03-10");
+		map.put("endDate", "2015-12-06");
 		//System.out.println(PetOwnerDAO.findPetByTel(paramVO));
-		System.out.println(petOwnerService.findMemberPetOwnerByTel(paramVO));
+		//System.out.println(treatmentService.findTreatmentRecordByNoAndName(map));
+		System.out.println(petOwnerService.findPetOwnerByTel(paramVO));
 		
 	}
 }

@@ -17,7 +17,7 @@ public class PetOwnerDAOImpl implements PetOwnerDAO {
 	private SqlSessionTemplate sqlSessionTemplate;
 	
 	@Override
-	public PetOwnerVO findMemberPetOwnerByTel(PetOwnerVO povo) {
+	public PetOwnerVO findPetOwnerByTel(PetOwnerVO povo) {
 		return sqlSessionTemplate.selectOne("petOwner.findMemberPetOwnerByTel", povo);
 	}
 	
