@@ -12,11 +12,11 @@ public interface VetService {
 
 	public List<HospitalVO> findHospital(String hospitalName);
 
-	public int licenseCheck(VetLicenseVO lvo);
+	public int checkVetLicense(VetLicenseVO lvo);
 
 	public int findVetById(String vetId);
 
-	public HospitalVO vetLogin(VetVO vvo);
+	public HospitalVO loginVet(VetVO vvo);
 
 	public List<VetVO> findVetByHospitalId(int hospitalId);
 	

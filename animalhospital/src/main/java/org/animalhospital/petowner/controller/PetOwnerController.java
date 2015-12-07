@@ -19,16 +19,13 @@ public class PetOwnerController {
 	 * 보호자 진료조회 페이지
 	 * @return
 	 */
-	@RequestMapping("findTreatmentRecordByPetOwner.do")
-	public String findTreatmentRecordByPetOwner(HttpServletRequest request){
+	@RequestMapping("findPetOwnerTreatmentRecord.do")
+	public String findPetOwnerTreatmentRecord(HttpServletRequest request){
 		HttpSession session = 	request.getSession(false);
 		if(session != null){
 			PetOwnerVO vo = (PetOwnerVO) session.getAttribute("loginVO");
-			
-			
 		}
-		
-		return "treatment_record_find_petOwner";
+		return "find_petOwner_treatmentRecord";
 	}
 	
 	
@@ -40,7 +37,7 @@ public class PetOwnerController {
 	 * @param povo
 	 * @return
 	 */
-	@RequestMapping(value = "petOwnerLogin.do", method = RequestMethod.POST)
+	@RequestMapping(value = "loginPetOwner.do", method = RequestMethod.POST)
 	public String loginPetOwner(HttpServletRequest request, PetOwnerVO povo){
 		PetOwnerVO petOwnerVO = petOwnerService.loginPetOwner(povo);
 		if (petOwnerVO != null) {

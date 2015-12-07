@@ -29,13 +29,15 @@
 				if(command == "vet"){
 					$("input[name=userId]").attr('name', 'vetId');
 					$("input[name=userPass]").attr('name', 'vetPassword');
+					command = "Vet";
 				} else if(command == "petOwner"){
 					$("input[name=userId]").attr('name', 'petOwnerId');
 					$("input[name=userPass]").attr('name', 'petOwnerPassword');
+					command = "PetOwner";
 				}
 				// 다른 액션으로 변경시켜주는 코드
 				// vetLogin.do 와 petownerLogin.do로 넘어가게 된다
-				$("#loginForm").attr('action', command + "Login.do");
+				$("#loginForm").attr('action',"login" + command + ".do");
 				
 			});	
 		});

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <html>
 <head>
 <meta charset="utf-8">
@@ -9,18 +9,22 @@
 <meta name="author" content="">
 <title>인덱스 페이지</title>
 <!-- Bootstrap Core CSS -->
-<link href="${initparam.root}resources/css/bootstrap.min.css" rel="stylesheet">
+<link href="${initparam.root}resources/css/bootstrap.min.css"
+	rel="stylesheet">
 <!-- Custom CSS -->
-<link href="${initparam.root}resources/css/stylish-portfolio.css" rel="stylesheet">
+<link href="${initparam.root}resources/css/stylish-portfolio.css"
+	rel="stylesheet">
 <!-- Custom Fonts -->
-<link href="${initparam.root}resources/font-awesome/css/font-awesome.min.css" rel="stylesheet"
-	type="text/css">
+<link
+	href="${initparam.root}resources/font-awesome/css/font-awesome.min.css"
+	rel="stylesheet" type="text/css">
 <link
 	href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic"
 	rel="stylesheet" type="text/css">
 <!-- Custom styling plus plugins -->
 <link href="${initparam.root}resources/css/custom.css" rel="stylesheet">
-<link href="${initparam.root}resources/css/icheck/flat/green.css" rel="stylesheet">
+<link href="${initparam.root}resources/css/icheck/flat/green.css"
+	rel="stylesheet">
 <script src="${initparam.root}resources/js/jquery.min.js"></script>
 <!-- 스크립트 구간 -->
 <!-- jQuery -->
@@ -29,13 +33,12 @@
 <script src="${initparam.root}resources/js/bootstrap.min.js"></script>
 <!-- 모달을 띄우기 위한 스크립트 -->
 <script type="text/javascript">
-		$(document).ready(function() {
-			$("#popbutton").click(function() {
-				$('div.modal').modal({					
-				});
-			});
+	$(document).ready(function() {
+		$("#popbutton").click(function() {
+			$('div.modal').modal({});
 		});
-	</script>
+	});
+</script>
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements
     and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file://
@@ -52,8 +55,8 @@
 			<h1>Ah! 동물</h1>
 			<h3></h3>
 			<!-- 로그인 버튼 링크 -->
-			<br> <a href="${initparam.root}login_view.do" class="btn btn-dark btn-lg">Login</a>
-			<br>
+			<br> <a href="${initparam.root}loginView.do"
+				class="btn btn-dark btn-lg">Login</a> <br>
 			<!-- 회원가입 버튼 링크 -->
 			<button class="btn btn-info btn-sm" id="popbutton">회원가입</button>
 			<br>
@@ -71,21 +74,13 @@
 				</div>
 				<div class="modal-body">
 					<p align="center" class="text-success">
-					<!-- 버튼 링크 -->
-						<a class="btn btn-primary" href="registerVetView.do">
-						수의사</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<a class="btn btn-success" href="${initparam.root}registerPetownerView.do">보호자</a>
+						<!-- 버튼 링크 -->
+						<a class="btn btn-primary" href="registerVetView.do">수의사</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<a class="btn btn-success" href="registerPetOwnerView.do">보호자</a>
 					</p>
 				</div>
 			</div>
 		</div>
 	</div>
-	
-	
-	
-	
-
-
-
 </body>
 </html>

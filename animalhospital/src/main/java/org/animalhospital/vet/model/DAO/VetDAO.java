@@ -24,9 +24,9 @@ public interface VetDAO {
 	 * @param lvo
 	 * @return
 	 */
-	public int licenseCheck(VetLicenseVO lvo);
+	public int checkVetLicense(VetLicenseVO lvo);
 	
-	public int useVetLicenseCheck(VetLicenseVO lvo);
+	public int useCheckVetVicense(VetLicenseVO lvo);
 	/**
 	 * 의사를 아이디로 찾는 메서드
 	 * @param vetId
@@ -38,7 +38,7 @@ public interface VetDAO {
 	 * @param vvo
 	 * @return
 	 */
-	public HospitalVO vetLogin(VetVO vvo);
+	public HospitalVO loginVet(VetVO vvo);
 	/**
 	 * 병원을 아이디로 찾는 메서드
 	 * @param hospitalId
