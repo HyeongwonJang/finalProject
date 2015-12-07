@@ -90,6 +90,15 @@ public class ViewController {
 		return "vet_update";
 	}
 	/**
+	 * 보호자 회원정보수정 페이지
+	 * @return
+	 */
+	@RequestMapping("updatePetOwnerView.do")
+	public String updatePetOwner(){
+		return "petowner_update";
+	}
+	
+	/**
 	 * 병원 조회 페이지
 	 */
 	@RequestMapping("findHospitalView.do")

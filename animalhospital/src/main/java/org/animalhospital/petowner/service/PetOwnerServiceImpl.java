@@ -23,6 +23,13 @@ public class PetOwnerServiceImpl implements PetOwnerService {
 	public void updatePetOwner(PetOwnerVO povo) {
 		petOwnerDAO.updatePetOwner(povo);
 	}
+	@Override
+	public String telCheckPetOwner(PetOwnerVO povo) {
+		int count = petOwnerDAO.telCheckPetOwner(povo);
+		System.out.println(povo);
+		return (count==0) ? "ok":"fail";
+	}
+	
 
 	@Override
 	public void registerPetOwner(PetOwnerVO povo) {
@@ -42,4 +49,6 @@ public class PetOwnerServiceImpl implements PetOwnerService {
 	public PetOwnerVO findPetOwnerByTel(PetOwnerVO povo) {
 		return petOwnerDAO.findPetOwnerByTel(povo);
 	}
+	
+	
 }
