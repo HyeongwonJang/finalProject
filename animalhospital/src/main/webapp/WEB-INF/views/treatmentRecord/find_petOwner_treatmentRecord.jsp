@@ -75,7 +75,7 @@
 					style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
 					<i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
 					<span></span>
-					<input type="hidden" id="startDate" name="startDate">
+					<input type="hidden" id="startDate" name="startDate" value="test">
 					<input type="hidden" id="endDate" name="endDate"> 
 					<b 	class="caret"></b>
 				</div>
