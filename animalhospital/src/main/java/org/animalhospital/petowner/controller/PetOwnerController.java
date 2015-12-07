@@ -20,8 +20,8 @@ public class PetOwnerController {
 	 * 보호자 진료조회 페이지
 	 * @return
 	 */
-	@RequestMapping("viewFindTreatmentRecordPage.do")
-	public ModelAndView findTreatmentRecordByPetOwner(HttpServletRequest request){
+	@RequestMapping("viewTreatmentRecordPage.do")
+	public ModelAndView viewFindPetOwnerTreatmentRecord(HttpServletRequest request){
 		HttpSession session = 	request.getSession(false);
 		PetOwnerVO vo = null;
 		if(session != null){
@@ -31,8 +31,7 @@ public class PetOwnerController {
 			// exception: SessionNotFoundException
 			// 예외처리를 AOP로 처리함, 단계에 대한 고민이 필요함, info 단계로 예상, 민호
 		}
-		
-		return new ModelAndView("treatment_record_find_petOwner", "findPetResult",
+		return new ModelAndView("find_petOwner_treatmentRecord", "findPetResult",
 				petOwnerService.findPetOwnerByTel(vo));
 	}
 	
@@ -45,7 +44,7 @@ public class PetOwnerController {
 	 * @param povo
 	 * @return
 	 */
-	@RequestMapping(value = "petOwnerLogin.do", method = RequestMethod.POST)
+	@RequestMapping(value = "loginPetOwner.do", method = RequestMethod.POST)
 	public String loginPetOwner(HttpServletRequest request, PetOwnerVO povo){
 		PetOwnerVO petOwnerVO = petOwnerService.loginPetOwner(povo);
 		if (petOwnerVO != null) {

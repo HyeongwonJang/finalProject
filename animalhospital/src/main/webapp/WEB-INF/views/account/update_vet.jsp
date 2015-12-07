@@ -111,7 +111,7 @@
       </div>
       <div class="x_content">
         <br>
-        <form id="vetForm" class="form-horizontal form-label-left" action="updateVet.do" method="get">
+        <form id="vetForm" class="form-horizontal form-label-left" action="updateVet.do" method="post">
           <div class="form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="occupation">아이디
               <span class="required">*</span>
@@ -161,7 +161,7 @@
             <div class="col-md-4 col-sm-6 col-xs-12">
             	<!-- 수의사 면허증 번호에 대한 input -->
               	<input type="text" id="vetLicenseNo" required="required" 
-              	class="form-control col-md-7 col-xs-10" placeholder="면허증 번호와 이름을 입력해주세요" 
+              	class="form-control col-md-7 col-xs-10" value="${sessionScope.loginVO.vetList[0].vetLicenseVO.vetLicenseNo}"
               	name="vetList[0].vetLicenseVO.vetLicenseNo" readonly>
             </div>
             <div>
@@ -175,7 +175,7 @@
             </label>
             <div class="col-md-2 col-sm-6 col-xs-12">
             	<!-- 수의사 이름에 대한 input -->
-              	<input id="vetName" class="form-control col-md-7 col-xs-10 test" type="text" name="vetList[0].vetLicenseVO.vetLicenseName" 
+              	<input id="vetName" class="form-control col-md-7 col-xs-10 test" type="text" name="vetList[0].vetLicenseVO.vetName" value="${sessionScope.loginVO.vetList[0].vetLicenseVO.vetName}" 
               	required="required" readonly>
             </div>
           </div>
@@ -186,9 +186,9 @@
             <div class="col-md-2 col-sm-6 col-xs-12">
             	<!-- 병원 이름에 대한 input -->
               	<input id="hospitalName" class="form-control col-md-7 col-xs-10 test" type="text" name="hospitalName"
-              	required="required" value="${sessionScope.loginVO.hospitalId}"readonly>
+              	required="required" value="${sessionScope.loginVO.hospitalName}" readonly>
             </div>
-            <input type="hidden" name="hospitalId" id="hospitalId" value="">
+            <input type="hidden" name="hospitalId" id="hospitalId" value="${sessionScope.loginVO.hospitalId}">
             <div>
               <button type="button" class="btn btn-info" id="popbutton">조회</button>
             </div>

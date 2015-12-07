@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- MyBatis에서 namespace는 필수적으로 명시해야 함 -->
+<mapper namespace="tratmentRecord">
+	<resultMap type="tvo" id="tvoRM">
+		<id column="treatment_Record_No" property="treatmentRecordNo" />
+		<result column="treatment_Hours" property="treatmentHours" />
+		<result column="treatment_Content" property="treatmentContent" />
+		<result column="pet_Weight" property="petWeight" />
+		<result column="Pet_name" property="petVO.petName"/>
+		<result column="vet_license_no" property="hospitalVO.vetLicenseVO.vetLicenseNo" />
+		<result column="Disease_name" property="diseaseVO.diseaseName" />
+		<result column="Disease_symptom" property="diseaseVO.diseaseSymptom" />
+	</resultMap>
+	
+	<select id="findTreatmentRecordByNoAndName"  parameterType="map" resultMap="tvoRM"> 
+		select t.Treatment_Record_no, to_char(t.Treatment_hours, 'YYYY-MM-DD') as Treatment_hours
+			, t.Treatment_content, t.Pet_name, t.Disease_name, d.Disease_symptom
+		from TREATMENT_RECORD t, DISEASE d
+		where t.Disease_name = d.Disease_name
+		and t.Pet_Owner_no = #{povo.petOwnerNo}
+		and t.Pet_name = #{povo.petVO[0].petName}
+		and t.Treatment_hours 
+		between to_date(#{startDate}, 'YYYY-MM-DD') and to_date(#{endDate}, 'YYYY-MM-DD')
+	</select>
+	
+</mapper>	

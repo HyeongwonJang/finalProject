@@ -47,7 +47,7 @@
 			<form id="pet-form" class="form-horizontal form-label-left" action="registerPetOwner.do" method="post">
 				<div class="form-group">
 					<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
-						아이디 <span class="required">*</span>
+						<span class="required">* </span>아이디 
 					</label>
 					<div class="col-md-4 col-sm-6 col-xs-12">
 						<!-- 아이디 input 입력란 -->
@@ -56,7 +56,7 @@
 				</div>
 				<div class="form-group">
 					<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
-						비밀번호 <span class="required">*</span>
+						<span class="required">* </span>비밀번호
 					</label>
 					<div class="col-md-4 col-sm-6 col-xs-12">
 						<!-- 비밀번호 input 입력란 -->
@@ -65,7 +65,7 @@
 				</div>
 				<div class="form-group">
 					<label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
-						이름 <span class="required">*</span>
+						<span class="required">* </span>이름 
 					</label>
 					<div class="col-md-4 col-sm-6 col-xs-12">
 						<!-- 이름 input 입력란 -->
@@ -74,7 +74,7 @@
 				</div>
 				<div class="form-group">
 					<label for="last-name" class="control-label col-md-3 col-sm-3 col-xs-12">
-						휴대폰 번호 <span class="required">*</span>
+						<span class="required">* </span>휴대폰 번호
 					</label>
 					<div class="col-md-4 col-sm-6 col-xs-12">
 						<!-- 휴대폰 번호 input 입력란 -->
@@ -102,66 +102,10 @@
 				<div class="form-group" id="pet-input">
 					
 				</div>
-				</div>
-				<!-- <hr>
-				<div class="form-group">
-					<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
-						이름 <span class="required">*</span>
-					</label>
-					<div class="col-md-2 col-sm-6 col-xs-12">
-						펫 이름 input 입력란
-						<input type="text" class="form-control col-md-7 col-xs-12" id="first-name" required="required" name="petVO[0].petName">
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-md-3 col-sm-3 col-xs-3">생일</label>
-					<div class="col-md-2 col-sm-9 col-xs-9">
-						펫 생일 input 입력란 inputMask 걸려있음
-						<input class="form-control" type="text" data-inputmask="'mask': '9999/99/99'" name="petVO[0].petBirthday">
-					</div>
-				</div>
-				펫 성별 input 입력란, 버튼처럼 보이지만 라디오 타입
-				<div class="form-group">
-					<label class="control-label col-md-3 col-sm-3 col-xs-12">성별</label>
-					<div class="col-md-6 col-sm-6 col-xs-12">
-						<div id="gender" class="btn-group" data-toggle="buttons">
-							<label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-								<input type="radio" name="petVO[0].petGender" value="수컷">&nbsp; Male &nbsp;
-							</label>
-							<label class="btn btn-primary active" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-								<input type="radio" name="petVO[0].petGender" value="암컷">Female
-							</label>
-						</div>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-md-3 col-sm-3 col-xs-12" for="middle-name">비고</label>
-					<div class="col-md-6 col-sm-6 col-xs-12">
-						펫 비고 입력란
-						<input id="birthday" class="date-picker form-control col-md-7 col-xs-12" type="text" required="required" name="petVO[0].petNote">
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-md-3 col-sm-3 col-xs-12">동물
-						종류
-					</label>
-					<div class="col-md-4 col-sm-9 col-xs-12">
-						동물종류를 선택하는 입력란
-						<select class="form-control" name="petVO[0].animalKindName">
-							<option>개</option>
-							<option>고양이</option>
-							<option>말</option>
-							<option>소</option>
-							<option>돼지</option>
-						</select>
-					</div>
-				</div>
-				<div class="ln_solid"></div>
-				-->
 				<div class="form-group">
 					<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
 						<button type="submit" class="btn btn-success">등록</button>
-						<button type="button" class="btn btn-primary" id="cancel" >취소</button>
+						<button type="button" class="btn btn-primary" onClick="location.href='home.do'">취소</button>
 					</div>
 				</div> 
 			</form>
@@ -194,18 +138,6 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			var petCount = 0;
-			$("#cancel").click(function(){
-				if(confirm("작성을 취소하고 로그인 페이지로 이동하시겠습니까?")){
-					location.href="home.do";
-				}
-			});
-			$("#pet-form").submit(function() {
-				if(confirm("전송 하시겠습니까?")) {
-					
-				} else {
-					event.preventDefault();
-				}
-			});
 			$("#add-pet").click(function() {
 				var str = "<div id='pet-index-" + petCount + "' class='form-group'><hr>";
 				str += "<div class='form-group'><label class='control-label col-md-3 col-sm-3 col-xs-12' for='first-name'>이름 <span class='required'>*</span></label><div class='col-md-2 col-sm-6 col-xs-12'><input type='text' class='form-control col-md-7 col-xs-12' id='first-name' required='required' name='petVO[" + (petCount) + "].petName'></div></div>";
@@ -222,13 +154,6 @@
 				$("#pet-index-"+petCount).remove();
 			});
 		});
-	
-	
-	
-	
-	
-	
-	
 		$(document).ready(function() {
 			$.listen('parsley:field:validate', function() {
 				validateFront();
