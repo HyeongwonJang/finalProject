@@ -234,9 +234,6 @@
                 }
             };
 
-            $('#daterangePicker span').html(moment().subtract(29, 'days').format('YYYY-MM-DD') + ' - ' + moment().format('YYYY-MM-DD'));
-            $('#startDate').attr('value', moment().subtract(29, 'days').format('YYYY-MM-DD'));
-      		$('#endDate').attr('value', moment().format('YYYY-MM-DD'));
       		
             $('#daterangePicker').daterangepicker(optionSet1, cb);
 

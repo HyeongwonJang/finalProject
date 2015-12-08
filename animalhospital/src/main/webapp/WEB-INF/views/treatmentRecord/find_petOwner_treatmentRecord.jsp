@@ -1,62 +1,33 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-<!-- select2 -->
-<script>
-	$(document).ready(function() {
-		$(".select2_single").select2({
-			placeholder : "해당 항목을 선택해주세요",
-			allowClear : true
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
+
+<!-- 유지되는 매개변수가 있을 시 검색조건을 유지시킨다 -->
+<c:if test="${continueParam['listVO'] ne null}">
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#daterangePicker span').html("${continueParam['listVO'].startDate}" 
+					+ ' - ' + "${continueParam['listVO'].endDate}");
+	        $('#startDate').attr('value', "${continueParam['listVO'].startDate}");
+	  		$('#endDate').attr('value', "${continueParam['listVO'].endDate}");
+	  		
 		});
-		$(".select2_group").select2({});
-		$(".select2_multiple").select2({
-			maximumSelectionLength : 4,
-			placeholder : "With Max Selection limit 4",
-			allowClear : true
+	</script>
+</c:if>
+<!-- 유지되는 매개변수가 없을 시 moment.js를 이용하여 현재 시간에 맞추어서 날짜를 세팅한다 -->
+<c:if test="${continueParam['listVO'] eq null}">
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#daterangePicker span').html(moment().subtract(29, 'days').format('YYYY-MM-DD') 
+					+ ' - ' + moment().format('YYYY-MM-DD'));
+	        $('#startDate').attr('value', moment().subtract(29, 'days').format('YYYY-MM-DD'));
+	      	$('#endDate').attr('value', moment().format('YYYY-MM-DD'));
+	  		//alert($("#startDate").val())
 		});
-	});
-</script>
-<!-- /select2 -->
-<!-- <script type="text/javascript">
-	$(document).ready(function() {
-		$("#recordSearchBtn").click(function() {
-			// Ajax로 진료기록 가져오기
-			// 검색조건: 반려동물이름, 주인의 시퀀스 번호
-			$.ajax({
-			    type: "post", // get 또는 post로 설정
-			    url: "findTreatmentRecordByPetOwner.do", // 이동할 url 설정
-			    data: "petOwnerNo=" + ${sessionScope.loginVO.petOwnerNo} 
-			    		+ "&petVO[0].petName=" + $("#petList option:selected").text()
-			    		+ "&startDate=" + $('#startDate').val()
-			    		+ "&endDate=" + $('#endDate').val(),
-			    
-			    dataType:"json",
-			          
-			    success: function(treatmentRecordList){
-			   		var treatmentRecordInfo = '';
-			    	$.each(treatmentRecordList, function(ti) {
-			    		treatmentRecordInfo += '<tr class="odd pointer">';
-			    		treatmentRecordInfo += '<td>'+ treatmentRecordList[ti].treatmentRecordNo +'</td>';
-			    		treatmentRecordInfo += '<td>'+ treatmentRecordList[ti].diseaseVO.diseaseName +'</td>';
-			    		treatmentRecordInfo += '<td>'+ treatmentRecordList[ti].diseaseVO.diseaseSymptom +'</td>';
-			    		treatmentRecordInfo += '<td>'+ treatmentRecordList[ti].treatmentHours +'</td>';
-			    		treatmentRecordInfo += '<td>'+ treatmentRecordList[ti].petVO.petName +'</td>';
-			    		treatmentRecordInfo += '<td>'+ "${sessionScope.loginVO.petOwnerName}" +'</td>';
-			    		treatmentRecordInfo += '<td class=" last"><a href="#">View</a></td>';
-			    		treatmentRecordInfo += '</tr>';
-			    		
-					});
-			    	$("#treatmentRecordInfo").html(treatmentRecordInfo);
-			    	
-			    	// paging 구현
-			    	alert("게시물 개수:" + $("#treatmentRecordInfo tr").length)
-			    	
-			    }
-			});
-		
-		});
-	});
-</script> -->
+	</script>
+</c:if>
+           
 <script type="text/javascript">
 	$(document).ready(function() {
 		// 페이지 로딩 시 자동으로 ajax를 실행하여 petList를 가져온다
@@ -74,28 +45,50 @@
 			    	});
 			    	//alert("옵션 결과: " + searchPetList);
 			    	$("#petListSelect").html(searchPetList);
+			    	// 검색조건(petName)을 유지시킨다
+			    	$("#petListSelect").val("${continueParam['povo'].petVO[0].petName}").attr("selected", "selected");
+			    	
+			    	$(".select2_single").select2({
+						placeholder : "해당 항목을 선택해주세요",
+						allowClear : false
+					});
+					
 			    }	
 		});
 		
+		// submit 버튼 클릭시 실행되는 함수
+		// 페이지 값이 공백이면 1페이지부터 시작한다
 		$("#recordSearchForm").submit(function() {
-			
-			$("#petName").val($("#petList option:selected").val());
-			$("#page").val(1);
-			//alert($("#petName").val());
-			
+			if($("#page").val() == ""){
+				$("#page").val(1);	
+			}
 		});
 		
-		$("a[name=pageNo]").click(function() {
-			alert($(this).text());
+		// 페이지 번호 클릭시 이동
+		// 번호를 클릭할 시 해당 페이지로 이동한다
+		$(".pageSelector").click(function() {
+			$("#page").val($(this).text());
+			$("#recordSearchForm").submit();	
+		});
+		
+		// 다음 버튼 클릭시 이동
+		// 다음 페이지로 이동한다
+		$("#nextPage").click(function() {
+			$("#page").val("${requestScope.recordList.pagingBean.endPageOfPageGroup+1}");
+			$("#recordSearchForm").submit();	
+		});
+		
+		// 이전 버튼 클릭시 이동
+		// 이전 페이지로 이동한다
+		$("#prevPage").click(function() {
+			$("#page").val("${requestScope.recordList.pagingBean.startPageOfPageGroup-1}");
+			$("#recordSearchForm").submit();	
 		});
 	});
-	
-	
-	
 </script>
 
 
-<div class="x_panel" style="height: 600px;">
+<div class="x_panel" style="height: 800px;">
 	<!-- 타이틀 -->
 	<div class="x_title">
 		<h2>진료기록조회</h2>
@@ -106,7 +99,7 @@
 	<div class="x_content">
 		<form action="findTreatmentRecordByPetOwner.do" method="get" id="recordSearchForm">
 			<label>반려동물명:</label>
-			<select class="select2_single form-control" tabindex="-1" id="petListSelect">
+			<select class="select2_single form-control" id="petListSelect" name="petVO[0].petName">
 			</select>
 			<br>
 			
@@ -122,14 +115,17 @@
 				</div>
 			</div>
 			<input type="hidden" name="petOwnerNo" value="${sessionScope.loginVO.petOwnerNo}">
-			<input type="hidden" id ="petName" name="petVO[0].petName">
+			<!-- <input type="hidden" id ="petName" name="petVO[0].petName"> -->
 			<input type="hidden" id="page" name="page">
 			<button type="submit" class="btn btn-default" id="recordSearchBtn">검색</button>
 		</form>
 		<hr>
+		<c:if test="${fn:length(recordList.list) == 0}">
+			<p class="text-center"><h2>검색결과가 없습니다! 검색을 다시 해주세요!</h2></p>
+		</c:if>
 		
-		
-		<table
+		<c:if test="${fn:length(recordList.list) != 0}">
+			<table
 			class="table table-striped responsive-utilities jambo_table bulk_action">
 			<thead>
 				<tr class="headings">
@@ -146,38 +142,50 @@
 					</th>
 				</tr>
 			</thead>
+			<!-- 페이지 부분 -->
 			<tbody id='treatmentRecordInfo'>
-				
+				<c:forEach items="${recordList.list}" var="recordList">
+					<tr class="odd pointer">
+			    	<td>${ recordList.treatmentRecordNo }</td>
+			    	<td>${ recordList.diseaseVO.diseaseName }</td>
+			    	<td>${ recordList.diseaseVO.diseaseSymptom }</td>
+			    	<td>${ recordList.treatmentHours }</td>
+			    	<td>${ recordList.petOwnerVO.petVO[0].petName }</td>
+			    	<td>${sessionScope.loginVO.petOwnerName}</td>
+			    	<td class=" last"><a href="#">View</a></td>
+			    	</tr>
+				</c:forEach>	
 			</tbody>
 		</table>
+		<!-- 페이징 라인 -->
 		<div class="row">
   			<div class="col-md-4"></div>
-  			<div class="col-md-4">
+  			<div class="col-md-4" align="center">
   				<ul class="pagination">
-	              <li>
-	                <a id="pageNo" class="pageNo">이전</a>
-	              </li>
-	              <li>
-	                <a href="#">1</a>
-	              </li>
-	              <li>
-	                <a href="#">2</a>
-	              </li>
-	              <li>
-	                <a href="#">3</a>
-	              </li>
-	              <li>
-	                <a href="#">4</a>
-	              </li>
-	              <li>
-	                <a href="#">5</a>
-	              </li>
-	              <li>
-	                <a href="#">다음</a>
-	              </li>
+  					<c:set var="pb" value="${requestScope.recordList.pagingBean}"></c:set>
+					<c:if test="${pb.previousPageGroup}">
+						<li> <a id="prevPage">이전</a> </li>
+					</c:if>	
+					<c:forEach var="i" begin="${pb.startPageOfPageGroup}" 
+								end="${pb.endPageOfPageGroup}">
+						<c:choose>
+							<c:when test="${pb.nowPage!=i}">
+								<li> <a class="pageSelector">${i}</a> </li>
+	              			</c:when>
+							<c:otherwise>
+								<li> <a><b>${i}</b></a></li>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+					<c:if test="${pb.nextPageGroup}">
+						<li><a id="nextPage">다음</a></li>
+					</c:if>	 	  
             	</ul>
             </div>
   			<div class="col-md-4"></div>
 		</div>
-        </div>
+        </div>	
+		</c:if>
+		
+		
 	</div>

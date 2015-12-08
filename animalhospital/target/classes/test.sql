@@ -1,3 +1,35 @@
+select * from Treatment_Record
+where Pet_Owner_no=1;
+
+
+
+
+
+--
+insert into Treatment_Record(Treatment_Record_no, Treatment_hours, Treatment_content, Pet_weight, Pet_Owner_no, Pet_name, Vet_License_no, Disease_name)
+values(Treatment_Record_no.nextval, '2015-4-14', '안약 처방', 4.4, 1, '도트', 5, '결막염');
+insert into Treatment_Record(Treatment_Record_no, Treatment_hours, Treatment_content, Pet_weight, Pet_Owner_no, Pet_name, Vet_License_no, Disease_name)
+values(Treatment_Record_no.nextval, '2015-4-14', '안약 처방', 4.4, 1, '도트', 5, '결막염');
+insert into Treatment_Record(Treatment_Record_no, Treatment_hours, Treatment_content, Pet_weight, Pet_Owner_no, Pet_name, Vet_License_no, Disease_name)
+values(Treatment_Record_no.nextval, '2015-4-14', '안약 처방', 4.4, 1, '도트', 5, '결막염');
+insert into Treatment_Record(Treatment_Record_no, Treatment_hours, Treatment_content, Pet_weight, Pet_Owner_no, Pet_name, Vet_License_no, Disease_name)
+values(Treatment_Record_no.nextval, '2015-4-14', '안약 처방', 4.4, 1, '도트', 5, '결막염');
+insert into Treatment_Record(Treatment_Record_no, Treatment_hours, Treatment_content, Pet_weight, Pet_Owner_no, Pet_name, Vet_License_no, Disease_name)
+values(Treatment_Record_no.nextval, '2015-4-14', '안약 처방', 4.4, 1, '도트', 5, '결막염');
+insert into Treatment_Record(Treatment_Record_no, Treatment_hours, Treatment_content, Pet_weight, Pet_Owner_no, Pet_name, Vet_License_no, Disease_name)
+values(Treatment_Record_no.nextval, '2015-4-14', '안약 처방', 4.4, 1, '도트', 5, '결막염');
+insert into Treatment_Record(Treatment_Record_no, Treatment_hours, Treatment_content, Pet_weight, Pet_Owner_no, Pet_name, Vet_License_no, Disease_name)
+values(Treatment_Record_no.nextval, '2015-4-14', '안약 처방', 4.4, 1, '도트', 5, '결막염');
+insert into Treatment_Record(Treatment_Record_no, Treatment_hours, Treatment_content, Pet_weight, Pet_Owner_no, Pet_name, Vet_License_no, Disease_name)
+values(Treatment_Record_no.nextval, '2015-4-14', '안약 처방', 4.4, 1, '도트', 5, '결막염');
+insert into Treatment_Record(Treatment_Record_no, Treatment_hours, Treatment_content, Pet_weight, Pet_Owner_no, Pet_name, Vet_License_no, Disease_name)
+values(Treatment_Record_no.nextval, '2015-4-14', '안약 처방', 4.4, 1, '도트', 5, '결막염');
+insert into Treatment_Record(Treatment_Record_no, Treatment_hours, Treatment_content, Pet_weight, Pet_Owner_no, Pet_name, Vet_License_no, Disease_name)
+values(Treatment_Record_no.nextval, '2015-4-14', '안약 처방', 4.4, 1, '도트', 5, '결막염');
+insert into Treatment_Record(Treatment_Record_no, Treatment_hours, Treatment_content, Pet_weight, Pet_Owner_no, Pet_name, Vet_License_no, Disease_name)
+values(Treatment_Record_no.nextval, '2015-4-14', '안약 처방', 4.4, 1, '도트', 5, '결막염');
+
+
 -- 진료기록을 보호자 회원번호(시퀀스)와 반려동물 이름으로 조회, 페이징 적용
 select Treatment_Record_no, Treatment_hours, Treatment_content,
 		Pet_name, Disease_name, Disease_symptom

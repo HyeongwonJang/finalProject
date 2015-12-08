@@ -4,10 +4,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class PagingBean {
-	public PagingBean() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
 	/**
 	 * 현재 페이지
 	 */
@@ -15,7 +11,7 @@ public class PagingBean {
 	/**
 	 * 페이지 당 보여줄 게시물 수 
 	 */
-	private int contentNumberPerPage=10;
+	private int contentNumberPerPage=5;
 	/**
 	 * 페이지 그룹 당 페이지 수 
 	 */
@@ -29,6 +25,10 @@ public class PagingBean {
 	 * @param totalContents
 	 * @param nowPage
 	 */
+	public PagingBean() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	public PagingBean(int totalContents,int nowPage){
 		this.totalContents=totalContents;
 		this.nowPage=nowPage;

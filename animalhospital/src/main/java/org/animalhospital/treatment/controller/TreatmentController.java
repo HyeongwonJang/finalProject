@@ -36,16 +36,16 @@ public class TreatmentController {
 	
 		@RequestMapping("findTreatmentRecordByPetOwner.do")
 		public ModelAndView findTreatmentRecordByPetOwner(PetOwnerVO povo, 
-				String startDate, String endDate, int page, HttpServletRequest request){
+				ListVO lvo){
 			Map<String, Object> paramMap = new HashMap<String, Object>();
-			paramMap.put("startDate", startDate);
-			paramMap.put("endDate", endDate);
 			paramMap.put("povo", povo);
-			paramMap.put("page", page);
-			System.out.println("매개변수: " + paramMap); 
-			System.out.println(request.getAttribute("findPetResult"));
-			return new ModelAndView("find_petOwner_treatmentRecord", "recordList",
-					treatmentService.findTreatmentRecordByNoAndName(paramMap));
+			paramMap.put("listVO", lvo);
+			System.out.println("매개변수:" + paramMap);
+			System.out.println("결과값: " + treatmentService.findTreatmentRecordByPage(paramMap)); 
+			ModelAndView mav = new ModelAndView("find_petOwner_treatmentRecord", "recordList",
+									treatmentService.findTreatmentRecordByPage(paramMap));
+			mav.addObject("continueParam", paramMap);
+			return mav;
 			
 		}
 }

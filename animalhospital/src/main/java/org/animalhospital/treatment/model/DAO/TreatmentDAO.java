@@ -15,7 +15,9 @@ public interface TreatmentDAO {
 	 * @param paramMap
 	 * @return
 	 */
-	public List<TreatmentRecordVO> findTreatmentRecordByNoAndName(
+	public List<Object> findTreatmentRecordByPage(
 			Map<String, Object> paramMap);
 
+	public int findAllTreatmentRecord(Map<String, Object> paramMap);
+	
 }

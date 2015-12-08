@@ -1,5 +1,6 @@
 package org.animalhospital.petowner.model.VO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PetOwnerVO {
@@ -83,7 +84,6 @@ public class PetOwnerVO {
 	public void setPetVO(List<PetVO> petVO) {
 		this.petVO = petVO;
 	}
-
 	@Override
 	public String toString() {
 		return "PetOwnerVO [petOwnerNo=" + petOwnerNo + ", petOwnerTel="

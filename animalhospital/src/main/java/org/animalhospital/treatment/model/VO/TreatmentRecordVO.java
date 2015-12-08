@@ -74,14 +74,16 @@ public class TreatmentRecordVO {
 				+ ", treatmentHours=" + treatmentHours + ", treatmentContent="
 				+ treatmentContent + ", petWeight=" + petWeight
 				+ ", petOwnerVO=" + petOwnerVO + ", hospitalVO=" + hospitalVO
-				+ ", diseaseVO=" + diseaseVO + "]";
+				+ ", diseaseVO=" + diseaseVO + ", getTreatmentRecordNo()="
+				+ getTreatmentRecordNo() + ", getTreatmentHours()="
+				+ getTreatmentHours() + ", getTreatmentContent()="
+				+ getTreatmentContent() + ", getPetWeight()=" + getPetWeight()
+				+ ", getPetOwnerVO()=" + getPetOwnerVO() + ", getHospitalVO()="
+				+ getHospitalVO() + ", getDiseaseVO()=" + getDiseaseVO()
+				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
+				+ ", toString()=" + super.toString() + "]";
 	}
 	
 	
-
 	
-	
-	
-	
-		
 }

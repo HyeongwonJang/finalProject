@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.animalhospital.paging.model.VO.ListVO;
 import org.animalhospital.petowner.model.DAO.PetOwnerDAO;
 import org.animalhospital.petowner.model.VO.PetOwnerVO;
 import org.animalhospital.petowner.model.VO.PetVO;
@@ -40,6 +41,7 @@ public class TestJUnit {
 	private TreatmentDAO treatmentDAO;
 	@Resource
 	private TreatmentService treatmentService;
+	
 	@Test
 	public void TestDao2(){
 		PetOwnerVO paramVO = new PetOwnerVO();
@@ -50,14 +52,17 @@ public class TestJUnit {
 		paramVO.setPetOwnerNo(1);
 		paramVO.setPetOwnerTel("01011112222");
 		paramVO.setPetVO(petList);
-		//System.out.println(paramVO.getPetVO().get(0));
+		ListVO listVO = new ListVO(null, "2010-03-10", "2015-12-06", 1, null);
+		//System.out.println("동물:"paramVO.getPetVO().get(0));
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("povo", paramVO);
-		map.put("startDate", "2010-03-10");
-		map.put("endDate", "2015-12-06");
+		map.put("listVO", listVO);
+		System.out.println("매개변수:" + map);
 		//System.out.println(PetOwnerDAO.findPetByTel(paramVO));
 		//System.out.println(treatmentService.findTreatmentRecordByNoAndName(map));
-		System.out.println(petOwnerService.findPetListByTel(paramVO));
-		
+		//System.out.println(petOwnerService.findPetListByTel(paramVO));
+		//System.out.println(treatmentDAO.findTreatmentRecordByPage(map));
+		//System.out.println("총 게시물수:" + treatmentDAO.findAllTreatmentRecord(map));
+		System.out.println("리스트VO:" + treatmentService.findTreatmentRecordByPage(map));
 	}
 }

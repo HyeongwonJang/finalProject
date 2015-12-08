@@ -12,6 +12,7 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<!-- model 계층 빈 설정 , dbcp , MyBatis 관련 설정 , 
 	     AOP 설정 , Transaction 설정 -->		
+	<context:component-scan base-package="org.animalhospital.paging"></context:component-scan>     
 	<context:component-scan base-package="org.animalhospital.vet">
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>
@@ -21,7 +22,6 @@
 	<context:component-scan base-package="org.animalhospital.treatment">
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>
-	<context:component-scan base-package="org.animalhospital.paging" />
 	
 	<mvc:annotation-driven />
 

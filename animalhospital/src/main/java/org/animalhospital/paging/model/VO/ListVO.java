@@ -3,7 +3,6 @@ package org.animalhospital.paging.model.VO;
 import java.util.List;
 
 import javax.annotation.Resource;
-
 import org.animalhospital.paging.model.bean.PagingBean;
 import org.springframework.stereotype.Component;
 
@@ -57,7 +56,12 @@ public class ListVO {
 	}
 	public void setPagingBean(PagingBean pagingBean) {
 		this.pagingBean = pagingBean;
-		this.pagingBean.setNowPage(this.page);
+	}
+	@Override
+	public String toString() {
+		return "ListVO [list=" + list + ", startDate=" + startDate
+				+ ", endDate=" + endDate + ", page=" + page + ", pagingBean="
+				+ pagingBean + "]";
 	}
 	
 	

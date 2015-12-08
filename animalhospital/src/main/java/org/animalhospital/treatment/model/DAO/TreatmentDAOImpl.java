@@ -16,9 +16,22 @@ public class TreatmentDAOImpl implements TreatmentDAO {
 	@Resource
 	private SqlSessionTemplate sqlSessionTemplate;
 	
-	
-	public List<TreatmentRecordVO> findTreatmentRecordByNoAndName(Map<String, Object> paramMap){
-		return sqlSessionTemplate.selectList("tratmentRecord.findTreatmentRecordByNoAndName", paramMap);
+	/**
+	 * 페이지, 기간, 반려동물명, 주인의 시퀀스 값으로
+	 * 진료기록조회
+	 * 
+	 */
+	public List<Object> findTreatmentRecordByPage(Map<String, Object> paramMap){
+		return sqlSessionTemplate.selectList("treatmentRecord.findTreatmentRecordByPage", paramMap);
 	}
+	
+	
+
+	@Override
+	public int findAllTreatmentRecord(Map<String, Object> paramMap) {
+		return sqlSessionTemplate.selectOne("treatmentRecord.findAllTreatmentRecord", paramMap);
+	}
+	
+	
 		
 }
