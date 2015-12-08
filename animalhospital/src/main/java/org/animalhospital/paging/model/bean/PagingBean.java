@@ -1,4 +1,4 @@
-package org.animalhospital.treatment.model.bean;
+package org.animalhospital.paging.model.bean;
 
 import org.springframework.stereotype.Component;
 
@@ -15,7 +15,7 @@ public class PagingBean {
 	/**
 	 * 페이지 당 보여줄 게시물 수 
 	 */
-	private int contentNumberPerPage=5;
+	private int contentNumberPerPage=10;
 	/**
 	 * 페이지 그룹 당 페이지 수 
 	 */

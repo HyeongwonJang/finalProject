@@ -1,11 +1,34 @@
--- 진료기록을 보호자 회원번호(시퀀스)와 반려동물 이름으로 조회
-select t.Treatment_Record_no, to_char(t.Treatment_hours, 'YYYY-MM-DD') as Treatment_hours, t.Treatment_content, t.Pet_name, t.Disease_name, d.Disease_symptom
+-- 진료기록을 보호자 회원번호(시퀀스)와 반려동물 이름으로 조회, 페이징 적용
+select Treatment_Record_no, Treatment_hours, Treatment_content,
+		Pet_name, Disease_name, Disease_symptom
+from(
+	select Treatment_Record_no, Treatment_hours, Treatment_content,
+			Pet_name, Disease_name, Disease_symptom, ceil(rownum/5) as page from(
+			select t.Treatment_Record_no, to_char(t.Treatment_hours, 'YYYY-MM-DD') as Treatment_hours, 
+					t.Treatment_content, t.Pet_name, t.Disease_name, d.Disease_symptom
+			from TREATMENT_RECORD t, DISEASE d
+			where t.Disease_name = d.Disease_name
+			and Pet_Owner_no = 1
+			and Pet_name = '도트'
+			and t.Treatment_hours 
+			between to_date('2010-03-01', 'YYYY-MM-DD') and to_date('2015-12-06', 'YYYY-MM-DD')
+			order by t.Treatment_Record_no desc
+	)
+) where page = 1
+
+
+
+
+
+select t.Treatment_Record_no, to_char(t.Treatment_hours, 'YYYY-MM-DD') as Treatment_hours, 
+	t.Treatment_content, t.Pet_name, t.Disease_name, d.Disease_symptom
 from TREATMENT_RECORD t, DISEASE d
 where t.Disease_name = d.Disease_name
 and Pet_Owner_no = 1
 and Pet_name = '도트'
 and t.Treatment_hours 
-between to_date('2010-03-01', 'YYYY-MM-DD') and to_date('2015-12-06', 'YYYY-MM-DD');
+between to_date('2010-03-01', 'YYYY-MM-DD') and to_date('2015-12-06', 'YYYY-MM-DD')
+order by t.Treatment_Record_no desc
 
 select p.Pet_name, p.Pet_birthday, p.Pet_gender, p.Pet_note, p.Animal_kind_name, po.Pet_Owner_no
 		from Pet_Owner po, Pet p

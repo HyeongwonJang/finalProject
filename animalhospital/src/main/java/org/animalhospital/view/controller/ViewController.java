@@ -1,14 +1,33 @@
 package org.animalhospital.view.controller;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.animalhospital.petowner.model.VO.PetOwnerVO;
+import org.animalhospital.petowner.service.PetOwnerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class ViewController {
-
+	@Resource
+	private PetOwnerService petOwnerService;
+	
+	/**
+	 * 보호자 진료조회 페이지
+	 * @return
+	 */
+	@RequestMapping("viewTreatmentRecordPage.do")
+	public ModelAndView viewFindPetOwnerTreatmentRecord(HttpServletRequest request){
+		PetOwnerVO vo = (PetOwnerVO) request.getSession(false).getAttribute("loginVO");
+		
+		return new ModelAndView("find_petOwner_treatmentRecord", "findPetResult",
+				petOwnerService.findPetListByTel(vo));
+	}
+	
 	/**
 	 * 가장 첫 페이지를 출력하는 메서드 세션이 있으면 타일즈로 구성된 인덱스 페이지를 출력한다
 	 * 세션이 없으면 로그인과 회원가입만 가능한

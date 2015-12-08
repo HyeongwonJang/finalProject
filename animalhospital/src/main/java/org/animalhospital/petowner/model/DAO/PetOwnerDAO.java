@@ -14,7 +14,7 @@ public interface PetOwnerDAO {
 	public void deletePetOwner(PetOwnerVO povo);
 	public void registerPetOwner(PetOwnerVO povo);
 	public void registerPet(HashMap<String, Object> pom);
-	public PetOwnerVO findPetOwnerByTel(PetOwnerVO povo);
+	public PetOwnerVO findPetListByTel(PetOwnerVO povo);
 	public TreatmentRecordVO findTreatmentRecordById(PetOwnerVO povo);
 	
 }

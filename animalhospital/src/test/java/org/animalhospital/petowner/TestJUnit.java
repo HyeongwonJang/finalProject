@@ -12,7 +12,7 @@ import org.animalhospital.petowner.model.VO.PetOwnerVO;
 import org.animalhospital.petowner.model.VO.PetVO;
 import org.animalhospital.petowner.service.PetOwnerService;
 import org.animalhospital.treatment.model.DAO.TreatmentDAO;
-import org.animalhospital.treatment.service.DAO.TreatmentService;
+import org.animalhospital.treatment.service.TreatmentService;
 import org.animalhospital.vet.model.DAO.VetDAO;
 import org.animalhospital.vet.model.VO.VetLicenseVO;
 import org.animalhospital.vet.model.VO.VetVO;
@@ -57,7 +57,7 @@ public class TestJUnit {
 		map.put("endDate", "2015-12-06");
 		//System.out.println(PetOwnerDAO.findPetByTel(paramVO));
 		//System.out.println(treatmentService.findTreatmentRecordByNoAndName(map));
-		System.out.println(petOwnerService.findPetOwnerByTel(paramVO));
+		System.out.println(petOwnerService.findPetListByTel(paramVO));
 		
 	}
 }

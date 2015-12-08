@@ -188,10 +188,10 @@
     <!-- datepicker -->
     <script type="text/javascript">
       $(document).ready(function () {
-
             var cb = function (start, end, label) {
                 console.log(start.toISOString(), end.toISOString(), label);
                 $('#daterangePicker span').html(start.format('YYYY-MM-DD') + ' - ' + end.format('YYYY-MM-DD'));
+                
                 //alert("Callback has fired: [" + start.format('MMMM D, YYYY') + " to " + end.format('MMMM D, YYYY') + ", label = " + label + "]");
             }
 
@@ -235,7 +235,9 @@
             };
 
             $('#daterangePicker span').html(moment().subtract(29, 'days').format('YYYY-MM-DD') + ' - ' + moment().format('YYYY-MM-DD'));
-
+            $('#startDate').attr('value', moment().subtract(29, 'days').format('YYYY-MM-DD'));
+      		$('#endDate').attr('value', moment().format('YYYY-MM-DD'));
+      		
             $('#daterangePicker').daterangepicker(optionSet1, cb);
 
             $('#daterangePicker').on('show.daterangepicker', function () {

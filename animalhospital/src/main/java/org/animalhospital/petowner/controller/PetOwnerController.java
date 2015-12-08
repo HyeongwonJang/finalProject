@@ -17,6 +17,12 @@ public class PetOwnerController {
 	@Resource
 	private PetOwnerService petOwnerService;
 	
+	@RequestMapping("findPetListByTel.do")
+	@ResponseBody
+	public PetOwnerVO findPetListByTel(HttpServletRequest request){
+		PetOwnerVO vo = (PetOwnerVO) request.getSession(false).getAttribute("loginVO");
+		return petOwnerService.findPetListByTel(vo);
+	}
 	/**
 	 * 보호자 로그인
 	 * userLevel로 수의사와 보호자를 구분한다
@@ -71,24 +77,7 @@ public class PetOwnerController {
 	
 		
 		
-	/**
-	 * 보호자 진료조회 페이지
-	 * @return
-	 */
-	@RequestMapping("viewTreatmentRecordPage.do")
-	public ModelAndView viewFindPetOwnerTreatmentRecord(HttpServletRequest request){
-		HttpSession session = 	request.getSession(false);
-		PetOwnerVO vo = null;
-		if(session != null){
-			vo = (PetOwnerVO) session.getAttribute("loginVO");
-		} else {
-			// 세션이 끊어졌을 시에는 처리할 조건을 걸어줘야 함
-			// exception: SessionNotFoundException
-			// 예외처리를 AOP로 처리함, 단계에 대한 고민이 필요함, info 단계로 예상, 민호
-		}
-		return new ModelAndView("find_petOwner_treatmentRecord", "findPetResult",
-				petOwnerService.findPetOwnerByTel(vo));
-	}
+	
 	
 	
 	

@@ -17,7 +17,7 @@
 	});
 </script>
 <!-- /select2 -->
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 	$(document).ready(function() {
 		$("#recordSearchBtn").click(function() {
 			// Ajax로 진료기록 가져오기
@@ -28,7 +28,8 @@
 			    data: "petOwnerNo=" + ${sessionScope.loginVO.petOwnerNo} 
 			    		+ "&petVO[0].petName=" + $("#petList option:selected").text()
 			    		+ "&startDate=" + $('#startDate').val()
-			    		+ "&endDate=" + $('#endDate').val(), 
+			    		+ "&endDate=" + $('#endDate').val(),
+			    
 			    dataType:"json",
 			          
 			    success: function(treatmentRecordList){
@@ -43,13 +44,56 @@
 			    		treatmentRecordInfo += '<td>'+ "${sessionScope.loginVO.petOwnerName}" +'</td>';
 			    		treatmentRecordInfo += '<td class=" last"><a href="#">View</a></td>';
 			    		treatmentRecordInfo += '</tr>';
+			    		
 					});
 			    	$("#treatmentRecordInfo").html(treatmentRecordInfo);
+			    	
+			    	// paging 구현
+			    	alert("게시물 개수:" + $("#treatmentRecordInfo tr").length)
+			    	
 			    }
 			});
+		
 		});
 	});
+</script> -->
+<script type="text/javascript">
+	$(document).ready(function() {
+		// 페이지 로딩 시 자동으로 ajax를 실행하여 petList를 가져온다
+		$.ajax({
+			    type: "post", // get 또는 post로 설정
+			    url: "findPetListByTel.do", // 이동할 url 설정
+			    dataType:"json",      
+			    success: function(petList){
+			    	//alert(petList.petVO[0].petName)
+			     
+			   		var searchPetList = '';
+			    	$.each(petList.petVO, function(li) {
+			    		searchPetList += "<option value=" + petList.petVO[li].petName +">"
+			    						+ petList.petVO[li].petName +"</option>";
+			    	});
+			    	//alert("옵션 결과: " + searchPetList);
+			    	$("#petListSelect").html(searchPetList);
+			    }	
+		});
+		
+		$("#recordSearchForm").submit(function() {
+			
+			$("#petName").val($("#petList option:selected").val());
+			$("#page").val(1);
+			//alert($("#petName").val());
+			
+		});
+		
+		$("a[name=pageNo]").click(function() {
+			alert($(this).text());
+		});
+	});
+	
+	
+	
 </script>
+
 
 <div class="x_panel" style="height: 600px;">
 	<!-- 타이틀 -->
@@ -60,12 +104,9 @@
 	</div>
 	<!-- 데이터 입력부분 -->
 	<div class="x_content">
-		<!-- <form> -->
+		<form action="findTreatmentRecordByPetOwner.do" method="get" id="recordSearchForm">
 			<label>반려동물명:</label>
-			<select class="select2_single form-control" tabindex="-1" id="petList">
-				<c:forEach items="${findPetResult.petVO }" var="pet">
-					<option value="${pet.petName }">${pet.petName }</option>
-				</c:forEach>
+			<select class="select2_single form-control" tabindex="-1" id="petListSelect">
 			</select>
 			<br>
 			
@@ -75,14 +116,19 @@
 					style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
 					<i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
 					<span></span>
-					<input type="hidden" id="startDate" name="startDate" value="test">
+					<input type="hidden" id="startDate" name="startDate">
 					<input type="hidden" id="endDate" name="endDate"> 
 					<b 	class="caret"></b>
 				</div>
 			</div>
-			<button type="button" class="btn btn-default" id="recordSearchBtn">검색</button>
-		<!-- </form> -->
+			<input type="hidden" name="petOwnerNo" value="${sessionScope.loginVO.petOwnerNo}">
+			<input type="hidden" id ="petName" name="petVO[0].petName">
+			<input type="hidden" id="page" name="page">
+			<button type="submit" class="btn btn-default" id="recordSearchBtn">검색</button>
+		</form>
 		<hr>
+		
+		
 		<table
 			class="table table-striped responsive-utilities jambo_table bulk_action">
 			<thead>
@@ -100,9 +146,38 @@
 					</th>
 				</tr>
 			</thead>
-			<tbody id=treatmentRecordInfo>
+			<tbody id='treatmentRecordInfo'>
 				
 			</tbody>
 		</table>
+		<div class="row">
+  			<div class="col-md-4"></div>
+  			<div class="col-md-4">
+  				<ul class="pagination">
+	              <li>
+	                <a id="pageNo" class="pageNo">이전</a>
+	              </li>
+	              <li>
+	                <a href="#">1</a>
+	              </li>
+	              <li>
+	                <a href="#">2</a>
+	              </li>
+	              <li>
+	                <a href="#">3</a>
+	              </li>
+	              <li>
+	                <a href="#">4</a>
+	              </li>
+	              <li>
+	                <a href="#">5</a>
+	              </li>
+	              <li>
+	                <a href="#">다음</a>
+	              </li>
+            	</ul>
+            </div>
+  			<div class="col-md-4"></div>
+		</div>
+        </div>
 	</div>
-</div>

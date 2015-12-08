@@ -1,4 +1,4 @@
-package org.animalhospital.treatment.service.DAO;
+package org.animalhospital.treatment.service;
 
 import java.util.List;
 import java.util.Map;
