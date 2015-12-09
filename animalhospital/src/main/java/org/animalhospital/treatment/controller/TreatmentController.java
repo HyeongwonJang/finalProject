@@ -5,19 +5,24 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.animalhospital.paging.model.VO.ListVO;
 import org.animalhospital.petowner.model.VO.PetOwnerVO;
+import org.animalhospital.petowner.service.PetOwnerService;
 import org.animalhospital.treatment.model.VO.TreatmentRecordVO;
 import org.animalhospital.treatment.service.TreatmentService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class TreatmentController {
 	@Resource
 	private TreatmentService treatmentService;
+	@Resource
+	private PetOwnerService petOwnerService;
 	
 	/*// ajax를 이용한 진료기록 가지고 오기
 	@RequestMapping("findTreatmentRecordByPetOwner.do")
@@ -61,4 +66,20 @@ public class TreatmentController {
 			return mav;
 			
 		}
+			
+			@RequestMapping("registerTreatmentRecord.do")
+			public String registerTreatmentRecord(HttpServletRequest request,TreatmentRecordVO treatmentRecordVO){
+				 treatmentService.registerTreatmentRecord(treatmentRecordVO);
+				 return "redirect:registerTreatmentRecord_result.do";
+			} 
+			@RequestMapping("registerTreatmentRecord_result.do")
+			public String registerTreatmentRecordResult(HttpServletRequest request,TreatmentRecordVO treatmentRecordVO){
+					return "treatmentRecord/treatment_record_result";
+			}
+			@RequestMapping(value="findPetListByPetOwnerTel.do")
+			@ResponseBody
+			public PetOwnerVO findPetListByPetownerTel(String petOwnerTel){
+				return petOwnerService.findPetListByPetownerTel(petOwnerTel);
+			}
+			
 }

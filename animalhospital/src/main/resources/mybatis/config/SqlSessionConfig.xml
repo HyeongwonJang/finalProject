@@ -13,6 +13,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
       <typeAlias type="org.animalhospital.vet.model.VO.VetVO" alias="vvo"/>
       <typeAlias type="org.animalhospital.vet.model.VO.VetLicenseVO" alias="lvo"/>
       <typeAlias type="org.animalhospital.treatment.model.VO.TreatmentRecordVO" alias="tvo"/>
+       <typeAlias type="org.animalhospital.treatment.model.VO.DiseaseVO" alias="dvo"/>
       
    </typeAliases>   
     <!-- sql mapping config xml 을 연결 -->

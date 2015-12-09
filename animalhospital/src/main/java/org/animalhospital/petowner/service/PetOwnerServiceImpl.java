@@ -49,6 +49,9 @@ public class PetOwnerServiceImpl implements PetOwnerService {
 	public PetOwnerVO findPetListByTel(PetOwnerVO povo) {
 		return petOwnerDAO.findPetListByTel(povo);
 	}
+	public PetOwnerVO findPetListByPetownerTel(String petOwnerTel){
+		return petOwnerDAO.findPetListByPetownerTel(petOwnerTel);
+	}
 	
 	
 }

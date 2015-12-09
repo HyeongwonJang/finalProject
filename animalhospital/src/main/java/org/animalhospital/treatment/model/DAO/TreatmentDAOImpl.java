@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 
 import org.animalhospital.petowner.model.VO.PetOwnerVO;
 import org.animalhospital.petowner.model.VO.PetVO;
+import org.animalhospital.treatment.model.VO.DiseaseVO;
 import org.animalhospital.treatment.model.VO.TreatmentRecordVO;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -52,6 +53,13 @@ public class TreatmentDAOImpl implements TreatmentDAO {
 		return sqlSessionTemplate.selectList("treatmentRecord.findTreatmentRecordVetVerByPage", paramMap);
 	}
 	
-	
+
+	public List<DiseaseVO> allDiseaseList(){
+		return sqlSessionTemplate.selectList("treatmentRecord.allDiseaseList");
+	}
+	public int registerTreatmentRecord(TreatmentRecordVO treatmentRecordVO){
+		//System.out.println("input date : "+treatmentRecordVO);
+		return sqlSessionTemplate.insert("treatmentRecord.registerTreatmentRecord", treatmentRecordVO);
+	}
 		
 }

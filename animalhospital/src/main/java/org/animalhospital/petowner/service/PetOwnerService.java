@@ -9,4 +9,5 @@ public interface PetOwnerService {
 	public String telCheckPetOwner(PetOwnerVO povo);
 	public void registerPetOwner(PetOwnerVO povo);
 	public PetOwnerVO findPetListByTel(PetOwnerVO povo);
+	public PetOwnerVO findPetListByPetownerTel(String petOwnerTel);
 }

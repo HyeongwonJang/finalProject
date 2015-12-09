@@ -9,6 +9,7 @@ import org.animalhospital.paging.model.VO.ListVO;
 import org.animalhospital.petowner.model.VO.PetOwnerVO;
 import org.animalhospital.petowner.model.VO.PetVO;
 import org.animalhospital.treatment.model.DAO.TreatmentDAO;
+import org.animalhospital.treatment.model.VO.DiseaseVO;
 import org.animalhospital.treatment.model.VO.TreatmentRecordVO;
 import org.springframework.stereotype.Service;
 
@@ -61,6 +62,14 @@ public class TreatmentServiceImpl implements TreatmentService {
 		TreatmentRecordVO searchTreatmentVO = treatmentDAO.findDetailTreatmentRecordByTreatmentNo(treatmentNo);
 		searchTreatmentVO.getPetOwnerVO().addPetVO(detailPetVO);
 		return searchTreatmentVO;
+	}
+	
+
+	public List<DiseaseVO> allDiseaseList(){
+		return treatmentDAO.allDiseaseList();
+	}
+	public int registerTreatmentRecord(TreatmentRecordVO treatmentRecordVO){
+		return treatmentDAO.registerTreatmentRecord(treatmentRecordVO);
 	}
 	
 }
