@@ -6,7 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.animalhospital.petowner.model.VO.PetOwnerVO;
 import org.animalhospital.petowner.service.PetOwnerService;
-import org.animalhospital.vet.model.VO.HospitalVO;
+import org.animalhospital.treatment.service.TreatmentService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -15,7 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 public class ViewController {
 	@Resource
 	private PetOwnerService petOwnerService;
-	
+	@Resource
+	private TreatmentService treatmentService;
 	/**
 	 * 보호자 진료조회 페이지
 	 * @return
@@ -97,7 +98,8 @@ public class ViewController {
 	 * @return
 	 */
 	@RequestMapping("registerTreatmentRecordView.do")
-	public String treatmentRecordRegisterView() {
+	public String treatmentRecordRegisterView(HttpServletRequest request) {
+		request.setAttribute("DiseaseList",treatmentService.allDiseaseList());
 		return "register_treatmentRecord";
 	}
 

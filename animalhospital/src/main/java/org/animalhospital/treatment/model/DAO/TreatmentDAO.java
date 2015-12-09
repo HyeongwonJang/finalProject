@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.animalhospital.petowner.model.VO.PetOwnerVO;
 import org.animalhospital.petowner.model.VO.PetVO;
+import org.animalhospital.treatment.model.VO.DiseaseVO;
 import org.animalhospital.treatment.model.VO.TreatmentRecordVO;
 
 public interface TreatmentDAO {
@@ -25,4 +26,7 @@ public interface TreatmentDAO {
 	public List<Object> findTreatmentRecordVetVerByPage(
 			Map<String, Object> paramMap);
 	int findAllTreatmentRecordVetVer(Map<String, Object> paramMap);
+	
+	public List<DiseaseVO> allDiseaseList();
+	public int registerTreatmentRecord(TreatmentRecordVO treatmentRecordVO);
 }
