@@ -9,4 +9,5 @@ import org.animalhospital.treatment.model.VO.TreatmentRecordVO;
 
 public interface TreatmentService {
 	public ListVO findTreatmentRecordByPage(Map<String, Object> paramMap);
+	public TreatmentRecordVO findDetailTreatmentRecordByTreatmentNo(int treatmentNo);
 }

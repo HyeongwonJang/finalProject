@@ -57,12 +57,14 @@ public class TestJUnit {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("povo", paramVO);
 		map.put("listVO", listVO);
-		System.out.println("매개변수:" + map);
+		//System.out.println("매개변수:" + map);
 		//System.out.println(PetOwnerDAO.findPetByTel(paramVO));
 		//System.out.println(treatmentService.findTreatmentRecordByNoAndName(map));
 		//System.out.println(petOwnerService.findPetListByTel(paramVO));
 		//System.out.println(treatmentDAO.findTreatmentRecordByPage(map));
 		//System.out.println("총 게시물수:" + treatmentDAO.findAllTreatmentRecord(map));
-		System.out.println("리스트VO:" + treatmentService.findTreatmentRecordByPage(map));
+		//System.out.println("리스트VO:" + treatmentService.findTreatmentRecordByPage(map));
+		//System.out.println("검색결과: " + treatmentDAO.findDetailTreatmentRecordByTreatmentNo(42));
+		System.out.println("반려동물 검색결과: " + treatmentService.findDetailTreatmentRecordByTreatmentNo(42));
 	}
 }

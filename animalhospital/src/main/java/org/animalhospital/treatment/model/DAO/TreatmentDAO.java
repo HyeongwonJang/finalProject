@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.animalhospital.petowner.model.VO.PetOwnerVO;
+import org.animalhospital.petowner.model.VO.PetVO;
 import org.animalhospital.treatment.model.VO.TreatmentRecordVO;
 
 public interface TreatmentDAO {
@@ -19,5 +20,6 @@ public interface TreatmentDAO {
 			Map<String, Object> paramMap);
 
 	public int findAllTreatmentRecord(Map<String, Object> paramMap);
-	
+	public TreatmentRecordVO findDetailTreatmentRecordByTreatmentNo(int treatmentNo);
+	public PetVO findDetailPetRecordByTreatmentNo(int treatmentNo);
 }

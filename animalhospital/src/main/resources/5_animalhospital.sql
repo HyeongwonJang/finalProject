@@ -67,7 +67,7 @@ insert into Disease(Disease_name, Disease_symptom)
 values('결막염','눈에 염증, 눈이 붉어짐');
 -- Treatment_Record
 insert into Treatment_Record(Treatment_Record_no, Treatment_hours, Treatment_content, Pet_weight, Pet_Owner_no, Pet_name, Vet_License_no, Disease_name)
-values(Treatment_Record_no.nextval, '2015-10-15', '주사 처방', 3.4, 1, '송이', 5, '감기');
+values(Treatment_Record_no.nextval, '2015-10-15', '주사 처방', 3.4, 1, '송이', 4, '감기');
 
 
 -- Vaccination

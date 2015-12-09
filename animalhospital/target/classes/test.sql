@@ -1,33 +1,132 @@
-select * from Treatment_Record
-where Pet_Owner_no=1;
+select p.pet_name, p.pet_gender, p.Animal_kind_name
+from PET p, TREATMENT_RECORD t
+where t.pet_owner_no = p.pet_owner_no
+and t.pet_name = p.pet_name
+and Treatment_Record_no = 42
 
 
 
 
 
---
-insert into Treatment_Record(Treatment_Record_no, Treatment_hours, Treatment_content, Pet_weight, Pet_Owner_no, Pet_name, Vet_License_no, Disease_name)
-values(Treatment_Record_no.nextval, '2015-4-14', '안약 처방', 4.4, 1, '도트', 5, '결막염');
-insert into Treatment_Record(Treatment_Record_no, Treatment_hours, Treatment_content, Pet_weight, Pet_Owner_no, Pet_name, Vet_License_no, Disease_name)
-values(Treatment_Record_no.nextval, '2015-4-14', '안약 처방', 4.4, 1, '도트', 5, '결막염');
-insert into Treatment_Record(Treatment_Record_no, Treatment_hours, Treatment_content, Pet_weight, Pet_Owner_no, Pet_name, Vet_License_no, Disease_name)
-values(Treatment_Record_no.nextval, '2015-4-14', '안약 처방', 4.4, 1, '도트', 5, '결막염');
-insert into Treatment_Record(Treatment_Record_no, Treatment_hours, Treatment_content, Pet_weight, Pet_Owner_no, Pet_name, Vet_License_no, Disease_name)
-values(Treatment_Record_no.nextval, '2015-4-14', '안약 처방', 4.4, 1, '도트', 5, '결막염');
-insert into Treatment_Record(Treatment_Record_no, Treatment_hours, Treatment_content, Pet_weight, Pet_Owner_no, Pet_name, Vet_License_no, Disease_name)
-values(Treatment_Record_no.nextval, '2015-4-14', '안약 처방', 4.4, 1, '도트', 5, '결막염');
-insert into Treatment_Record(Treatment_Record_no, Treatment_hours, Treatment_content, Pet_weight, Pet_Owner_no, Pet_name, Vet_License_no, Disease_name)
-values(Treatment_Record_no.nextval, '2015-4-14', '안약 처방', 4.4, 1, '도트', 5, '결막염');
-insert into Treatment_Record(Treatment_Record_no, Treatment_hours, Treatment_content, Pet_weight, Pet_Owner_no, Pet_name, Vet_License_no, Disease_name)
-values(Treatment_Record_no.nextval, '2015-4-14', '안약 처방', 4.4, 1, '도트', 5, '결막염');
-insert into Treatment_Record(Treatment_Record_no, Treatment_hours, Treatment_content, Pet_weight, Pet_Owner_no, Pet_name, Vet_License_no, Disease_name)
-values(Treatment_Record_no.nextval, '2015-4-14', '안약 처방', 4.4, 1, '도트', 5, '결막염');
-insert into Treatment_Record(Treatment_Record_no, Treatment_hours, Treatment_content, Pet_weight, Pet_Owner_no, Pet_name, Vet_License_no, Disease_name)
-values(Treatment_Record_no.nextval, '2015-4-14', '안약 처방', 4.4, 1, '도트', 5, '결막염');
-insert into Treatment_Record(Treatment_Record_no, Treatment_hours, Treatment_content, Pet_weight, Pet_Owner_no, Pet_name, Vet_License_no, Disease_name)
-values(Treatment_Record_no.nextval, '2015-4-14', '안약 처방', 4.4, 1, '도트', 5, '결막염');
-insert into Treatment_Record(Treatment_Record_no, Treatment_hours, Treatment_content, Pet_weight, Pet_Owner_no, Pet_name, Vet_License_no, Disease_name)
-values(Treatment_Record_no.nextval, '2015-4-14', '안약 처방', 4.4, 1, '도트', 5, '결막염');
+
+select 
+		
+			t.Treatment_hours,
+			t.Treatment_content,
+			t.Disease_name,
+			d.Disease_symptom,
+			po.Pet_Owner_name,
+			po.Pet_Owner_tel,
+			t.pet_weight,
+			vl.vet_name,
+			h.hospital_name,
+			h.hospital_tel
+		from Treatment_Record t, PET_OWNER po, VET_LICENSE vl, VET v, HOSPITAL h, disease d
+		where t.pet_owner_no = po.pet_owner_no
+		and t.Disease_name = d.Disease_name
+		and t.Vet_License_no = vl.Vet_License_no
+		and vl.Vet_License_no = v.Vet_License_no
+		and v.hospital_id = h.hospital_id
+		and Treatment_Record_no = 42
+
+		
+		
+select  t.Treatment_hours,
+		t.Treatment_content,
+		t.Disease_name,
+		po.Pet_Owner_name,
+		po.Pet_Owner_tel,
+		p.pet_name,
+		p.pet_gender,
+		t.pet_weight,
+		p.Animal_kind_name,
+		vl.vet_name,
+		h.hospital_name,
+		h.hospital_tel
+from Treatment_Record t, PET_OWNER po, PET p, VET_LICENSE vl, VET v, HOSPITAL h
+where t.pet_owner_no = po.pet_owner_no
+and t.pet_owner_no = p.pet_owner_no
+and t.pet_name = p.pet_name
+and t.Vet_License_no = vl.Vet_License_no
+and vl.Vet_License_no = v.Vet_License_no
+and v.hospital_id = h.hospital_id
+and Treatment_Record_no = 42
+
+--and p.animal_kind_name = a.animal_kind_name
+
+
+select t.Vet_License_no
+from (
+	select  t.Treatment_Record_no as a,
+			t.Treatment_hours,
+			t.Treatment_content,
+			t.Disease_name,
+			po.Pet_Owner_name,
+			po.Pet_Owner_tel,
+			p.pet_name,
+			p.pet_gender,
+			t.pet_weight,
+			vl.vet_name,
+			vl.Vet_License_no as Vet_License_no,
+			p.Animal_kind_name
+	from Treatment_Record t, PET_OWNER po, PET p, VET_LICENSE vl, DISEASE d
+	where t.pet_owner_no = po.pet_owner_no
+	and t.pet_owner_no = p.pet_owner_no
+	and t.pet_name = p.pet_name
+	and t.Vet_License_no = vl.Vet_License_no
+	and t.disease_name = d.disease_name
+	and Treatment_Record_no = 5
+) t
+
+--where v.Vet_License_no = t.Vet_License_no
+
+select *
+from vet
+
+
+select vl.vet_name, 
+from Treatment_Record t, VET_LICENSE vl
+where t.Vet_License_no = vl.Vet_License_no
+and Treatment_Record_no = 5
+--and vl.Vet_License_no = v.Vet_License_no
+
+
+
+
+
+
+Treatment_Record t, PET_OWNER po, PET p, VET_LICENSE vl
+where t.pet_owner_no = po.pet_owner_no
+and t.pet_owner_no = p.pet_owner_no
+and t.pet_name = p.pet_name
+and t.Vet_License_no = vl.Vet_License_no
+and Treatment_Record_no = 5
+		
+
+
+, VET v, HOSPITAL h
+
+, VET_LICENSE vl, VET v
+, vl.vet_name
+
+select t.Treatment_Record_no, t.Treatment_hours, t.Treatment_content,
+	t.Disease_name, d.Disease_symptom, h.hospital_name, h.hospital_tel,
+	vl.vet_name, p.pet_name, p.pet_gender, t.pet_weight, 
+	po.Pet_Owner_name, po.Pet_Owner_tel
+from Treatment_Record t, PET p, PET_OWNER po, HOSPITAL h, VET v, DISEASE d, VET_LICENSE vl
+-- 보호자 join
+where t.Pet_Owner_no = po.Pet_Owner_no
+-- 반려동물 join
+and t.Pet_Owner_no = p.Pet_Owner_no
+-- 수의사 join
+and t.Vet_License_no = vl.Vet_License_no
+-- 병원 join
+and v.Hospital_id = h.Hospital_id
+-- 질병 join
+and t.Disease_name = d.Disease_name
+-- 검색조건
+and t.Treatment_Record_no = 5;
+
 
 
 -- 진료기록을 보호자 회원번호(시퀀스)와 반려동물 이름으로 조회, 페이징 적용

@@ -4,34 +4,67 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- MyBatis에서 namespace는 필수적으로 명시해야 함 -->
 <mapper namespace="treatmentRecord">
-
- 	<resultMap type="povo" id="povoRM">
- 		<id column="Pet_Owner_no" property="petOwnerNo"/>
- 		<id column="Pet_Owner_tel" property="petOwnerTel"/>
- 		<id column="Pet_Owner_name" property="petOwnerName"/>
- 		<id column="Pet_Owner_id" property="petOwnerId"/>
- 		<id column="Pet_Owner_password" property="petOwnerPassword"/>
- 		<id column="Pet_Owner_address" property="petOwnerAddress"/>
- 		<collection property="petVO" ofType="pvo">
- 			<id column="Pet_name" property="petName"/>
- 			<id column="Pet_birthday" property="petBirthday"/>
- 			<id column="Pet_gender" property="petGender"/>
- 			<id column="Pet_note" property="petNote"/>
- 			<id column="Animal_kind_name" property="animalKindName"/>
- 		</collection>
- 	</resultMap>
+	<resultMap type="pvo" id="pvoRM">
+		<id column="Pet_name" property="petName"/>
+ 		<result column="Pet_birthday" property="petBirthday"/>
+ 		<result column="Pet_gender" property="petGender"/>
+ 		<result column="Pet_note" property="petNote"/>
+ 		<result column="Animal_kind_name" property="animalKindName"/>
+	</resultMap>
 
 	<resultMap type="tvo" id="tvoRM">
 		<id column="treatment_Record_No" property="treatmentRecordNo" />
 		<result column="treatment_Hours" property="treatmentHours" />
 		<result column="treatment_Content" property="treatmentContent" />
-		<result column="pet_Weight" property="petWeight" />
-		<result column="vet_tel" property="hospitalVO.vetList[0].vetTel" />
-		<result column="vet_name" property="hospitalVO.vetList[0].vetLicenseVO.vetName"/>
-		<result column="vet_license_no" property="hospitalVO.vetList[0].vetLicenseVO.vetLicenseNo" />
+		<result column="pet_weight" property="petWeight" />
 		<result column="Disease_name" property="diseaseVO.diseaseName" />
 		<result column="Disease_symptom" property="diseaseVO.diseaseSymptom" />
+		<result column="Pet_Owner_name" property="petOwnerVO.petOwnerName"/>
+		<result column="Pet_Owner_tel" property="petOwnerVO.petOwnerTel"/>
+		<result column="hospital_name" property="hospitalVO.hospitalName"/>
+		<result column="hospital_tel" property="hospitalVO.hospitalTel"/>
+		<collection property="hospitalVO.vetList" ofType="vvo">
+			<result column="vet_tel" property="vetTel" />
+			<result column="vet_name" property="vetLicenseVO.vetName" />
+		</collection>
+			
 	</resultMap>
+	
+	<!-- 진료기록 상세페이지 조회, 펫에 대한 정보
+		  펫에 대한 정보를 resultMap으로 분류가 불가능하여
+		  select문을 두 개로 나눈다
+	 -->
+	 <select id="findDetailPetRecordByTreatmentNo" resultMap="pvoRM" parameterType="int">
+	 	select p.pet_name, p.pet_gender, p.Animal_kind_name
+		from PET p, TREATMENT_RECORD t
+		where t.pet_owner_no = p.pet_owner_no
+		and t.pet_name = p.pet_name
+		and Treatment_Record_no = #{value}
+	 </select>
+	
+	<!-- 진료기록 상세페이지 조회, 진료기록의 번호로 조회한다 -->
+	<select id="findDetailTreatmentRecordByTreatmentNo" resultMap="tvoRM" parameterType="int">
+		select 
+			t.Treatment_hours,
+			t.Treatment_content,
+			t.Disease_name,
+			d.Disease_symptom,
+			po.Pet_Owner_name,
+			po.Pet_Owner_tel,
+			t.pet_weight,
+			vl.vet_name,
+			h.hospital_name,
+			h.hospital_tel
+		from Treatment_Record t, PET_OWNER po, VET_LICENSE vl, VET v, HOSPITAL h, disease d
+		where t.pet_owner_no = po.pet_owner_no
+		and t.Disease_name = d.Disease_name
+		and t.Vet_License_no = vl.Vet_License_no
+		and vl.Vet_License_no = v.Vet_License_no
+		and v.hospital_id = h.hospital_id
+		and Treatment_Record_no = #{value}
+	</select>
+	
+	
 	
 	<select id="findAllTreatmentRecord"  parameterType="map" resultType="int"> 
 		select count(*)

@@ -120,10 +120,12 @@
 								class="user-profile dropdown-toggle" data-toggle="dropdown"
 								aria-expanded="false"> <c:choose>
 										<c:when test="${sessionScope.userLevel == 'vet' }">
-                    		${sessionScope.loginVO.vetList[0].vetLicenseVO.vetName}님 환영합니다
+                    						<i class="fa fa-user-md"></i>
+                    						${sessionScope.loginVO.vetList[0].vetLicenseVO.vetName}님 환영합니다
                     	</c:when>
 										<c:when test="${sessionScope.userLevel == 'petOwner' }">
-                    		${sessionScope.loginVO.petOwnerName}님 환영합니다	
+                    						<i class="fa -md fa-user"></i>
+                    						${sessionScope.loginVO.petOwnerName}님 환영합니다	
                     	</c:when>
 									</c:choose> <span class=" fa fa-angle-down"></span>
 							</a>

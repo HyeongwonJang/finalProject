@@ -19,9 +19,9 @@
 <c:if test="${continueParam['listVO'] eq null}">
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$('#daterangePicker span').html(moment().subtract(29, 'days').format('YYYY-MM-DD') 
+			$('#daterangePicker span').html(moment().subtract(355, 'days').format('YYYY-MM-DD') 
 					+ ' - ' + moment().format('YYYY-MM-DD'));
-	        $('#startDate').attr('value', moment().subtract(29, 'days').format('YYYY-MM-DD'));
+	        $('#startDate').attr('value', moment().subtract(355, 'days').format('YYYY-MM-DD'));
 	      	$('#endDate').attr('value', moment().format('YYYY-MM-DD'));
 	  		//alert($("#startDate").val())
 		});
@@ -121,7 +121,15 @@
 		</form>
 		<hr>
 		<c:if test="${fn:length(recordList.list) == 0}">
-			<p class="text-center"><h2>검색결과가 없습니다! 검색을 다시 해주세요!</h2></p>
+			<div class="col-md-12"></div>
+			<div class="col-md-12"></div>
+			<div class="col-md-12"></div>
+			<div class="col-md-4"></div>
+  			<div class="col-md-4" align="center">
+  				<h2>검색결과가 없습니다!<br><br>
+  					검색을 다시 해주세요!</h2>	
+  			</div>
+  			<div class="col-md-4"></div>
 		</c:if>
 		
 		<c:if test="${fn:length(recordList.list) != 0}">

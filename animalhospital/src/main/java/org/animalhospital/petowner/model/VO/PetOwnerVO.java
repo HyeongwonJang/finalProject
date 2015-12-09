@@ -84,6 +84,14 @@ public class PetOwnerVO {
 	public void setPetVO(List<PetVO> petVO) {
 		this.petVO = petVO;
 	}
+	public void addPetVO(PetVO vo){
+		if(petVO == null){
+			petVO = new ArrayList<PetVO>();
+			petVO.add(vo);
+		} else {
+			petVO.add(vo);
+		}
+	}
 	@Override
 	public String toString() {
 		return "PetOwnerVO [petOwnerNo=" + petOwnerNo + ", petOwnerTel="

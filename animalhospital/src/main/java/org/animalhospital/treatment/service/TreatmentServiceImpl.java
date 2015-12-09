@@ -20,6 +20,7 @@ public class TreatmentServiceImpl implements TreatmentService {
 	@Resource
 	private ListVO listVO;
 	
+	
 	/**
 	 * 진료기록 검색결과를 반환하는 메서드
 	 */
@@ -32,6 +33,16 @@ public class TreatmentServiceImpl implements TreatmentService {
 		listVO.getPagingBean().setNowPage(((ListVO) paramMap.get("listVO")).getPage());
 		listVO.getPagingBean().setTotalContents(treatmentDAO.findAllTreatmentRecord(paramMap));
 		return listVO;
+	}
+	
+	/**
+	 * 진료기록 상세보기를 출력하는 메서드
+	 */
+	public TreatmentRecordVO findDetailTreatmentRecordByTreatmentNo(int treatmentNo){
+		PetVO detailPetVO = treatmentDAO.findDetailPetRecordByTreatmentNo(treatmentNo);
+		TreatmentRecordVO searchTreatmentVO = treatmentDAO.findDetailTreatmentRecordByTreatmentNo(treatmentNo);
+		searchTreatmentVO.getPetOwnerVO().addPetVO(detailPetVO);
+		return searchTreatmentVO;
 	}
 	
 }

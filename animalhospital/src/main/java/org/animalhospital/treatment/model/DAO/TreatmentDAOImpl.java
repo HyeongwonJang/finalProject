@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.animalhospital.petowner.model.VO.PetOwnerVO;
+import org.animalhospital.petowner.model.VO.PetVO;
 import org.animalhospital.treatment.model.VO.TreatmentRecordVO;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -15,6 +16,13 @@ import org.springframework.stereotype.Repository;
 public class TreatmentDAOImpl implements TreatmentDAO {
 	@Resource
 	private SqlSessionTemplate sqlSessionTemplate;
+	
+	public TreatmentRecordVO findDetailTreatmentRecordByTreatmentNo(int treatmentNo){
+		return sqlSessionTemplate.selectOne("treatmentRecord.findDetailTreatmentRecordByTreatmentNo", treatmentNo);
+	}
+	public PetVO findDetailPetRecordByTreatmentNo(int treatmentNo){
+		return sqlSessionTemplate.selectOne("treatmentRecord.findDetailPetRecordByTreatmentNo", treatmentNo);
+	}
 	
 	/**
 	 * 페이지, 기간, 반려동물명, 주인의 시퀀스 값으로

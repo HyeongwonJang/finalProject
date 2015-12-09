@@ -72,9 +72,12 @@ public class PetOwnerController {
 	@RequestMapping(value = "registerPetOwner.do", method = RequestMethod.POST)
 	public String register(PetOwnerVO povo) {
 		petOwnerService.registerPetOwner(povo);		
-		return "redirect:registerPetOwnerResult.do?" + povo.getPetOwnerId();
+		return "redirect:registerPetOwnerResult.do";
 	}											
-	
+	@RequestMapping("registerPetOwnerResult.do")
+	public String registerPetOwnerResult(){
+		return "account/register_petowner_result";
+	}
 		
 		
 	
