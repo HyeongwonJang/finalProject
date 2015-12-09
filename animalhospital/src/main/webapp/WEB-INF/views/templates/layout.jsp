@@ -143,6 +143,8 @@
 										<c:when test="${sessionScope.userLevel == 'petOwner' }">
 											<li><a href="${initparam.root}updatePetOwnerView.do"><i
 													class="fa fa-user"></i> 회원정보수정</a></li>
+											<li><a href="${initparam.root}registerPetView.do"><i
+													class="fa fa-paw"></i> 동물등록</a></li>
 										</c:when>
 									</c:choose>
 									<li><a href="${initparam.root}logout.do"><i
