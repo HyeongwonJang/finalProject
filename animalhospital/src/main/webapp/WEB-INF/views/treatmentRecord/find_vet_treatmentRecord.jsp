@@ -60,6 +60,13 @@
 			$("#page").val("${requestScope.recordList.pagingBean.startPageOfPageGroup-1}");
 			$("#recordSearchForm").submit();	
 		});
+		// 모달 페이지
+		$(".detailView").click(function() {
+			
+			$('div.modal').modal({
+				
+			});
+		});
 	});
 </script>
 
@@ -111,11 +118,7 @@
 					<th class="column-title">진료시간</th>
 					<th class="column-title">반려동물명</th>
 					<th class="column-title">보호자명</th>
-					<th class="column-title no-link last"><span class="nobr">상세조회</span></th>
-					<th class="bulk-actions" colspan="7"><a class="antoo"
-						style="color: #fff; font-weight: 500;">Bulk Actions ( <span
-							class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
-					</th>
+					<th class="column-title">상세조회</th>
 				</tr>
 			</thead>
 			<!-- 페이지 부분 -->
@@ -128,7 +131,7 @@
 			    	<td>${ recordList.treatmentHours }</td>
 			    	<td>${ recordList.petOwnerVO.petVO[0].petName }</td>
 			    	<td>${recordList.petOwnerVO.petOwnerName}</td>
-			    	<td class=" last"><a href="#">View</a></td>
+			    	<td class="detailView"><a href="#" >View</a></td>
 			    	</tr>
 				</c:forEach>	
 			</tbody>
@@ -162,6 +165,6 @@
 		</div>
         </div>	
 		</c:if>
-		
+
 		
 	</div>

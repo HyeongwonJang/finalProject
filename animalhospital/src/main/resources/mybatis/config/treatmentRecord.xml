@@ -63,8 +63,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		and Treatment_Record_no = #{value}
 	</select>
 	
-	
-	
 	<select id="findAllTreatmentRecord"  parameterType="map" resultType="int"> 
 		select count(*)
 		from TREATMENT_RECORD t, DISEASE d 
@@ -84,7 +82,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		and t.Treatment_hours 
 		between to_date(#{listVO.startDate}, 'YYYY-MM-DD') and to_date(#{listVO.endDate}, 'YYYY-MM-DD')
 	</select>
-	
 	
 	<select id="findTreatmentRecordByPage"  parameterType="map" resultMap="tvoRM">
 		select Treatment_Record_no, Treatment_hours, Treatment_content,

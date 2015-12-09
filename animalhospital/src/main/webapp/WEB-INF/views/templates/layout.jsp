@@ -178,6 +178,10 @@
 		<div class="clearfix"></div>
 		<div id="notif-group" class="tabbed_notifications"></div>
 	</div>
+	<!-- 모달 페이지 푸터에서 공통적으로 사용하는 것 테스트 -->
+	<footer>
+		<tiles:insertAttribute name="footer" />
+	</footer>
 	<!-- 부트스트랩 자바스크립트 -->
 	<script src="${initparam.root}resources/js/bootstrap.min.js"></script>
 	<!-- chart js -->

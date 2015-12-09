@@ -84,6 +84,10 @@
 			$("#page").val("${requestScope.recordList.pagingBean.startPageOfPageGroup-1}");
 			$("#recordSearchForm").submit();	
 		});
+		$(".detailView").click(function() {
+			alert($(this).parent().siblings().eq(0).text());
+			$('div.modal').modal({});
+		});
 	});
 </script>
 
@@ -144,10 +148,6 @@
 					<th class="column-title">반려동물명</th>
 					<th class="column-title">보호자명</th>
 					<th class="column-title no-link last"><span class="nobr">상세조회</span></th>
-					<th class="bulk-actions" colspan="7"><a class="antoo"
-						style="color: #fff; font-weight: 500;">Bulk Actions ( <span
-							class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
-					</th>
 				</tr>
 			</thead>
 			<!-- 페이지 부분 -->
@@ -160,7 +160,7 @@
 			    	<td>${ recordList.treatmentHours }</td>
 			    	<td>${ recordList.petOwnerVO.petVO[0].petName }</td>
 			    	<td>${sessionScope.loginVO.petOwnerName}</td>
-			    	<td class=" last"><a href="#">View</a></td>
+			    	<td class=" last"><a class="detailView">View</a></td>
 			    	</tr>
 				</c:forEach>	
 			</tbody>
