@@ -6,7 +6,6 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.animalhospital.paging.model.VO.ListVO;
-import org.animalhospital.paging.model.bean.PagingBean;
 import org.animalhospital.petowner.model.VO.PetOwnerVO;
 import org.animalhospital.petowner.model.VO.PetVO;
 import org.animalhospital.treatment.model.DAO.TreatmentDAO;
@@ -31,6 +30,25 @@ public class TreatmentServiceImpl implements TreatmentService {
 		listVO.setList(list);
 		listVO.getPagingBean().setNowPage(((ListVO) paramMap.get("listVO")).getPage());
 		listVO.getPagingBean().setTotalContents(treatmentDAO.findAllTreatmentRecord(paramMap));
+		return listVO;
+	}
+
+	@Override
+	public ListVO findTreatmentRecordVetVerByPage(Map<String, Object> paramMap) {
+		List<Object> list = treatmentDAO.findTreatmentRecordVetVerByPage(paramMap);
+		PetOwnerVO petOwnerVO=(PetOwnerVO) paramMap.get("povo");
+		String petOwnerTel=petOwnerVO.getPetOwnerTel();
+		String petName=petOwnerVO.getPetVO().get(0).getPetName();
+		List<PetVO> petList=petOwnerVO.getPetVO();
+		System.out.println(petList);
+		for(int li=0; li<list.size(); li++){
+			((TreatmentRecordVO) list.get(li)).getPetOwnerVO().setPetOwnerTel(petOwnerTel);
+			((TreatmentRecordVO) list.get(li)).getPetOwnerVO().setPetVO(petList);
+			
+		}
+		listVO.setList(list);
+		listVO.getPagingBean().setNowPage(((ListVO) paramMap.get("listVO")).getPage());
+		listVO.getPagingBean().setTotalContents(treatmentDAO.findAllTreatmentRecordVetVer(paramMap));
 		return listVO;
 	}
 	

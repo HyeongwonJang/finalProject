@@ -47,12 +47,12 @@ public class TestJUnit {
 		PetOwnerVO paramVO = new PetOwnerVO();
 		List<PetVO> petList = new ArrayList<PetVO>();
 		PetVO petVO = new PetVO();
-		petVO.setPetName("도트");
+		petVO.setPetName("송이");
 		petList.add(petVO);
 		paramVO.setPetOwnerNo(1);
 		paramVO.setPetOwnerTel("01011112222");
 		paramVO.setPetVO(petList);
-		ListVO listVO = new ListVO(null, "2010-03-10", "2015-12-06", 1, null);
+		ListVO listVO = new ListVO(null, "2007-03-10", "2015-12-06", 1, null);
 		//System.out.println("동물:"paramVO.getPetVO().get(0));
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("povo", paramVO);
@@ -63,6 +63,6 @@ public class TestJUnit {
 		//System.out.println(petOwnerService.findPetListByTel(paramVO));
 		//System.out.println(treatmentDAO.findTreatmentRecordByPage(map));
 		//System.out.println("총 게시물수:" + treatmentDAO.findAllTreatmentRecord(map));
-		System.out.println("리스트VO:" + treatmentService.findTreatmentRecordByPage(map));
+		System.out.println("리스트VO:" + treatmentService.findTreatmentRecordVetVerByPage(map));
 	}
 }

@@ -32,6 +32,18 @@ public class TreatmentDAOImpl implements TreatmentDAO {
 		return sqlSessionTemplate.selectOne("treatmentRecord.findAllTreatmentRecord", paramMap);
 	}
 	
+	@Override
+	public int findAllTreatmentRecordVetVer(Map<String, Object> paramMap) {
+		return sqlSessionTemplate.selectOne("treatmentRecord.findAllTreatmentRecordVetVer", paramMap);
+	}
+
+
+	@Override
+	public List<Object> findTreatmentRecordVetVerByPage(
+			Map<String, Object> paramMap) {
+		return sqlSessionTemplate.selectList("treatmentRecord.findTreatmentRecordVetVerByPage", paramMap);
+	}
+	
 	
 		
 }

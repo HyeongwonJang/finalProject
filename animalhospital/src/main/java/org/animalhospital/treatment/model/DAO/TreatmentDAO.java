@@ -19,5 +19,10 @@ public interface TreatmentDAO {
 			Map<String, Object> paramMap);
 
 	public int findAllTreatmentRecord(Map<String, Object> paramMap);
+
+	public List<Object> findTreatmentRecordVetVerByPage(
+			Map<String, Object> paramMap);
+
+	int findAllTreatmentRecordVetVer(Map<String, Object> paramMap);
 	
 }
