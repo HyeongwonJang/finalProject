@@ -7,12 +7,36 @@
 <c:if test="${continueParam['listVO'] ne null}">
 	<script type="text/javascript">
 		$(document).ready(function() {
+			//startDat, endDate, petOwnerTel 검색조건 유지
 			$('#daterangePicker span').html("${continueParam['listVO'].startDate}" 
 					+ ' - ' + "${continueParam['listVO'].endDate}");
 	        $('#startDate').attr('value', "${continueParam['listVO'].startDate}");
 	  		$('#endDate').attr('value', "${continueParam['listVO'].endDate}");
-	    	$("#petName").val("${ continueParam['povo'].petVO[0].petName }");
 	    	$("#petOwnerTel").val("${continueParam['povo'].petOwnerTel}");
+	    	
+	    	//petOwnerTel 검색조건을 이용하여 반려동물 이름 리스트를 가져온다
+	    	$.ajax({
+			    type: "post", // get 또는 post로 설정
+			    url: "findPetListByTel.do", // 이동할 url 설정
+			    data: "petOwnerTel="+$("#petOwnerTel").val(),
+			    dataType:"json",      
+			    success: function(petList){		     
+			   		var searchPetList = '';
+			    	$.each(petList.petVO, function(li) {
+			    		searchPetList += "<option value=" + petList.petVO[li].petName +">"
+			    						+ petList.petVO[li].petName +"</option>";
+			    	});
+			    	$("#petListSelect").html(searchPetList);
+			    	// 검색조건(petName)을 유지시킨다
+					$("#petListSelect").val("${continueParam['povo'].petVO[0].petName}").attr("selected", "selected");
+			    	
+			    	$(".select2_single").select2({
+						placeholder : "해당 항목을 선택해주세요",
+						allowClear : false
+					});
+					
+			    }	
+			});
 		});
 	</script>
 </c:if>
@@ -29,8 +53,38 @@
 	</script>
 </c:if>
            
+           
 <script type="text/javascript">
 	$(document).ready(function() {
+		// 보호자 전화번호를 입력하면 자동으로 PetNameList를 가져온다
+		$("#petOwnerTel").keyup(function(){
+			if($(this).val().length>=10){
+				$.ajax({
+				    type: "post", // get 또는 post로 설정
+				    url: "findPetListByTel.do", // 이동할 url 설정
+				    data: "petOwnerTel="+$(this).val(),
+				    dataType:"json",      
+				    success: function(petList){		     
+				   		var searchPetList = '';
+				    	$.each(petList.petVO, function(li) {
+				    		searchPetList += "<option value=" + petList.petVO[li].petName +">"
+				    						+ petList.petVO[li].petName +"</option>";
+				    	});
+				    	$("#petListSelect").html(searchPetList);
+
+				    	$(".select2_single").select2({
+							placeholder : "해당 항목을 선택해주세요",
+							allowClear : false
+						});
+						
+				    }	
+				});
+			}
+		});
+		
+		
+		
+		
 		
 		// submit 버튼 클릭시 실행되는 함수
 		// 페이지 값이 공백이면 1페이지부터 시작한다
@@ -74,11 +128,14 @@
 	<!-- 데이터 입력부분 -->
 	<div class="x_content">
 		<form action="findTreatmentRecordByPetOwnerTel.do" method="post" id="recordSearchForm">
-			<label>반려동물명:</label>
-			<input type="text" name="petVO[0].petName" id="petName">
-			<p>
 			<label>반려동물 보호자 전화번호:</label>
-			<input type="text" name="petOwnerTel" id="petOwnerTel">
+			<input type="text" name="petOwnerTel" id="petOwnerTel" placeholder="보호자의 전화번호를 입력해주세요">
+			<p>
+			<label>반려동물명:</label>
+			<select class="select2_single form-control" id="petListSelect" name="petVO[0].petName">
+			</select>
+			<!-- <input type="text" name="petVO[0].petName" id="petName"> -->
+			<p>
 			<div class="form-group">
 				<label>검색 기간: </label>	
 				<div id="daterangePicker" class=""
@@ -90,8 +147,6 @@
 					<b 	class="caret"></b>
 				</div>
 			</div>
-			<%-- <input type="hidden" name="petOwnerNo" value="${sessionScope.loginVO.petOwnerNo}"> --%>
-			<!-- <input type="hidden" id ="petName" name="petVO[0].petName"> -->
 			<input type="hidden" id="page" name="page">
 			<button type="submit" class="btn btn-default" id="recordSearchBtn">검색</button>
 		</form>

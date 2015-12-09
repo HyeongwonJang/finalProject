@@ -17,12 +17,6 @@ public class PetOwnerController {
 	@Resource
 	private PetOwnerService petOwnerService;
 	
-	@RequestMapping("findPetListByTel.do")
-	@ResponseBody
-	public PetOwnerVO findPetListByTel(HttpServletRequest request){
-		PetOwnerVO vo = (PetOwnerVO) request.getSession(false).getAttribute("loginVO");
-		return petOwnerService.findPetListByTel(vo);
-	}
 	/**
 	 * 보호자 로그인
 	 * userLevel로 수의사와 보호자를 구분한다
