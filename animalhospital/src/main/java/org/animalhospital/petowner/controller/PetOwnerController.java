@@ -67,6 +67,16 @@ public class PetOwnerController {
 		return petOwnerService.telCheckPetOwner(povo);
 	}
 	
+	//펫 등록
+		@RequestMapping(value = "registerPet.do")
+		public String registerPet(PetOwnerVO povo){
+			petOwnerService.registerPet(povo);
+			return "redirect:registerPetResult.do?" + povo.getPetOwnerNo();
+		}
+		@RequestMapping("registerPetResult.do")
+		public String registerPetResult(){
+			return "account/register_pet_result";
+		}
 	
 	//보호자 회원 가입
 	@RequestMapping(value = "registerPetOwner.do", method = RequestMethod.POST)

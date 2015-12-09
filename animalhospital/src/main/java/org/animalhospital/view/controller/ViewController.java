@@ -82,6 +82,14 @@ public class ViewController {
 	public String registerPetOwnerView() {
 		return "/account/register_petowner";
 	}
+	/**
+	 * 동물 등록 페이지
+	 * @return
+	 */
+	@RequestMapping("registerPetView.do")
+	public String registerPet(){
+		return "pet_register";
+	}
 
 	/**
 	 * 보호자 회원가입 완료 페이지
@@ -92,6 +100,7 @@ public class ViewController {
 	public String registerPetOwnerResultView() {
 		return "/account/register_petowner_result";
 	}
+	
 
 	/**
 	 * 진료기록 페이지
