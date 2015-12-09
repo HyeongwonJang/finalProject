@@ -22,4 +22,7 @@ public interface TreatmentDAO {
 	public int findAllTreatmentRecord(Map<String, Object> paramMap);
 	public TreatmentRecordVO findDetailTreatmentRecordByTreatmentNo(int treatmentNo);
 	public PetVO findDetailPetRecordByTreatmentNo(int treatmentNo);
+	public List<Object> findTreatmentRecordVetVerByPage(
+			Map<String, Object> paramMap);
+	int findAllTreatmentRecordVetVer(Map<String, Object> paramMap);
 }

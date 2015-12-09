@@ -84,6 +84,9 @@
 												<li><a
 													href="${initparam.root}registerTreatmentRecordView.do">진료등록</a>
 												</li>
+												<li><a
+													href="${initparam.root}viewTreatmentRecordVetVerPage.do">진료기록조회</a>
+												</li>
 											</c:when>
 											<c:when test="${sessionScope.userLevel == 'petOwner' }">
 												<li><a

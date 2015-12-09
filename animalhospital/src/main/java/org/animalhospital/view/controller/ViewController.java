@@ -2,11 +2,11 @@ package org.animalhospital.view.controller;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.animalhospital.petowner.model.VO.PetOwnerVO;
 import org.animalhospital.petowner.service.PetOwnerService;
+import org.animalhospital.vet.model.VO.HospitalVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -26,6 +26,16 @@ public class ViewController {
 		
 		return new ModelAndView("find_petOwner_treatmentRecord", "findPetResult",
 				petOwnerService.findPetListByTel(vo));
+	}
+	
+	/**
+	 * 수의사 진료조회 페이지
+	 * @return
+	 */
+	@RequestMapping("viewTreatmentRecordVetVerPage.do")
+	public String viewTreatmentRecordVetVerPage() {
+
+		return "find_vet_treatmentRecord";
 	}
 	
 	/**
@@ -97,9 +107,11 @@ public class ViewController {
 	 */
 	@RequestMapping("testTreatmentView.do")
 	public String treatmentRecordTest() {
-		return "test_treatmentRecord";
+		return "find_vet_treatmentRecord";
 	}
+	
 
+	
 	/**
 	 * 수의사 회원정보수정 페이지
 	 * @return

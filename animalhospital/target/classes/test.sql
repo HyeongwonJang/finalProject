@@ -245,8 +245,40 @@ alter table Pet modify constraints pk_Pet_id enable validate;
 alter table Pet modify constraints fk_Pet_Owner_tel enable validate;
 
 
+from(
+			select Treatment_Record_no, Treatment_hours, Treatment_content, Pet_owner_name, 
+				Disease_name, Disease_symptom, ceil(rownum/5) as page from(
+				select t.Treatment_Record_no, to_char(t.Treatment_hours, 'YYYY-MM-DD')
+				as Treatment_hours,
+				t.Treatment_content, t.Disease_name, d.Disease_symptom, po.Pet_owner_name 
+				from TREATMENT_RECORD t, DISEASE d, PET_OWNER po 
+				where t.Disease_name = d.Disease_name
+				and t.Pet_Owner_no = po.Pet_Owner_no 
+				and t.Pet_name = '송이' 
+				and po.Pet_Owner_tel = '01011112222' 
+				and t.Treatment_hours
+				between to_date('2011-11-11') and to_date('2015-12-08')
+			order by t.Treatment_Record_no desc
+			);
+		) 
 
 
 
-
-
+select Treatment_Record_no, Treatment_hours, Treatment_content,
+				Disease_name, Disease_symptom, Pet_Owner_name 
+		from(
+			select Treatment_Record_no, Treatment_hours, Treatment_content, Pet_Owner_name, 
+				Disease_name, Disease_symptom, ceil(rownum/5) as page from(
+				select t.Treatment_Record_no, to_char(t.Treatment_hours, 'YYYY-MM-DD')
+				as Treatment_hours,
+				t.Treatment_content, t.Disease_name, d.Disease_symptom, po.Pet_Owner_name 
+				from TREATMENT_RECORD t, DISEASE d, PET_OWNER po 
+				where t.Disease_name = d.Disease_name
+				and t.Pet_Owner_no = po.Pet_Owner_no 
+				and t.Pet_name = '송이' 
+				and po.Pet_Owner_tel = '01011112222'
+				and t.Treatment_hours
+				between to_date('2010-11-11') and to_date('2015-11-11')
+			order by t.Treatment_Record_no desc
+			)
+		) where page = 1;
