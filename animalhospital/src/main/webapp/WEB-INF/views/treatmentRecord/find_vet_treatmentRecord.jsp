@@ -110,22 +110,6 @@
 			$("#recordSearchForm").submit();	
 		});
 		
-		
-		// 모달 페이지
-		$(".detailView").click(function() {
-			//alert($(this).parent().siblings().eq(0).text());
-			var treatmentRecordNo=$(this).parent().siblings().eq(0).text();
-			$.ajax({
-				type: "post",
-				url: "findDetailTreatmentRecordByTreatmentNo.do",
-				data: "treatmentRecordNo="+treatmentRecordNo,
-				dataType: "json",
-				success: function(findTreatmentRecordDetaileResult){
-					alert(findTreatmentRecordDetaileResult.treatmentHours);
-				}
-			});
-			$('div.modal').modal({}); 
-		});
 	});
 </script>
 
@@ -139,9 +123,9 @@
 	</div>
 	<!-- 데이터 입력부분 -->
 	<div class="x_content">
-		<form action="findTreatmentRecordByPetOwnerTel.do" method="post" id="recordSearchForm">
+		<form action="findTreatmentRecordByPetOwnerTelAndPetName.do" method="post" id="recordSearchForm">
 			<label>반려동물 보호자 전화번호:</label>
-			<input type="text" name="petOwnerTel" id="petOwnerTel" placeholder="보호자의 전화번호를 입력해주세요">
+			<input type="text" class="form-control" name="petOwnerTel" id="petOwnerTel" placeholder="보호자의 전화번호를 입력해주세요">
 			<p>
 			<label>반려동물명:</label>
 			<select class="select2_single form-control" id="petListSelect" name="petVO[0].petName">

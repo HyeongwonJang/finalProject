@@ -68,17 +68,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			and Treatment_Record_no = #{value}
 	</select>
 	
-	<select id="findAllTreatmentRecord"  parameterType="map" resultType="int"> 
-		select count(*)
-		from TREATMENT_RECORD t, DISEASE d 
-		where t.Disease_name = d.Disease_name 
-		and t.Pet_Owner_no = #{povo.petOwnerNo}
-		and t.Pet_name = #{povo.petVO[0].petName}
-		and t.Treatment_hours 
-		between to_date(#{listVO.startDate}, 'YYYY-MM-DD') and to_date(#{listVO.endDate}, 'YYYY-MM-DD')
-	</select>
 	
-		<select id="findAllTreatmentRecordVetVer"  parameterType="map" resultType="int"> 
+	<select id="findAllTreatmentRecord"  parameterType="map" resultType="int"> 
 		select count(*)
 		from TREATMENT_RECORD t, DISEASE d, PET_OWNER po 
 		where t.Disease_name = d.Disease_name
@@ -88,28 +79,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		between to_date(#{listVO.startDate}, 'YYYY-MM-DD') and to_date(#{listVO.endDate}, 'YYYY-MM-DD')
 	</select>
 	
-	<select id="findTreatmentRecordByPage"  parameterType="map" resultMap="tvoRM">
-		select Treatment_Record_no, Treatment_hours, Treatment_content,
-				Disease_name, Disease_symptom
-		from(
-			select Treatment_Record_no, Treatment_hours, Treatment_content,
-				Disease_name, Disease_symptom, ceil(rownum/5) as page from(
-				select t.Treatment_Record_no, to_char(t.Treatment_hours, 'YYYY-MM-DD')
-				as Treatment_hours,
-				t.Treatment_content, t.Disease_name, d.Disease_symptom
-				from TREATMENT_RECORD t, DISEASE d
-				where t.Disease_name = d.Disease_name
-				and t.Pet_Owner_no = #{povo.petOwnerNo}
-				and t.Pet_name = #{povo.petVO[0].petName}
-				and t.Treatment_hours
-				between to_date(#{listVO.startDate}, 'YYYY-MM-DD') and to_date(#{listVO.endDate},
-				'YYYY-MM-DD')
-			order by t.Treatment_Record_no desc
-			)
-		) where page = #{listVO.page}
-	</select>
-	
-		<select id="findTreatmentRecordVetVerByPage"  parameterType="map" resultMap="tvoRM">
+	<select id="findTreatmentRecordByPetOwnerTelAndPetName"  parameterType="map" resultMap="tvoRM">
 		select Treatment_Record_no, Treatment_hours, Treatment_content,
 				Disease_name, Disease_symptom, Pet_Owner_name 
 		from(
@@ -125,7 +95,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				and po.Pet_Owner_tel = #{povo.petOwnerTel} 
 				and t.Treatment_hours
 				between to_date(#{listVO.startDate}, 'YYYY-MM-DD') and to_date(#{listVO.endDate},
-				'YYYY-MM-DD')
+				'YYYY-MM-DD') + 0.9999
 			order by t.Treatment_Record_no desc
 			)
 		) where page = #{listVO.page}
