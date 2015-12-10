@@ -1,7 +1,6 @@
 package org.animalhospital.treatment.controller;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -37,6 +36,14 @@ public class TreatmentController {
 	 * return treatmentService.findTreatmentRecordByNoAndName(paramMap); }
 	 */
 
+	@RequestMapping("findDetailTreatmentRecordByTreatmentNo.do")
+	@ResponseBody
+	public TreatmentRecordVO findDetailTreatmentRecordByTreatmentNo(int treatmentRecordNo){
+		System.out.println(treatmentRecordNo);
+		return treatmentService.findDetailTreatmentRecordByTreatmentNo(treatmentRecordNo);
+	}
+	
+	
 	@RequestMapping("findTreatmentRecordByPetOwner.do")
 	public ModelAndView findTreatmentRecordByPetOwner(PetOwnerVO povo,
 			ListVO lvo) {

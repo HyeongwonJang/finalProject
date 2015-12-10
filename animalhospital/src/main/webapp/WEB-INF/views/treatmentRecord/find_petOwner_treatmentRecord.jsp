@@ -84,8 +84,7 @@
 			$("#page").val("${requestScope.recordList.pagingBean.startPageOfPageGroup-1}");
 			$("#recordSearchForm").submit();	
 		});
-		
-	});
+	});	
 </script>
 
 

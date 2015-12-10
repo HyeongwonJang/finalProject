@@ -40,7 +40,6 @@ public class TreatmentServiceImpl implements TreatmentService {
 		List<Object> list = treatmentDAO.findTreatmentRecordVetVerByPage(paramMap);
 		PetOwnerVO petOwnerVO=(PetOwnerVO) paramMap.get("povo");
 		String petOwnerTel=petOwnerVO.getPetOwnerTel();
-		String petName=petOwnerVO.getPetVO().get(0).getPetName();
 		List<PetVO> petList=petOwnerVO.getPetVO();
 		System.out.println(petList);
 		for(int li=0; li<list.size(); li++){

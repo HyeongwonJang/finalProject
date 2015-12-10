@@ -39,7 +39,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		  select문을 두 개로 나눈다
 	 -->
 	 <select id="findDetailPetRecordByTreatmentNo" resultMap="pvoRM" parameterType="int">
-	 	select p.pet_name, p.pet_gender, p.Animal_kind_name
+	 	select p.pet_name, p.pet_gender, p.Animal_kind_name, p.Pet_birthday
 		from PET p, TREATMENT_RECORD t
 		where t.pet_owner_no = p.pet_owner_no
 		and t.pet_name = p.pet_name
@@ -61,11 +61,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			h.hospital_tel
 		from Treatment_Record t, PET_OWNER po, VET_LICENSE vl, VET v, HOSPITAL h, disease d
 		where t.pet_owner_no = po.pet_owner_no
-		and t.Disease_name = d.Disease_name
-		and t.Vet_License_no = vl.Vet_License_no
-		and vl.Vet_License_no = v.Vet_License_no
-		and v.hospital_id = h.hospital_id
-		and Treatment_Record_no = #{value}
+			and t.Disease_name = d.Disease_name
+			and t.Vet_License_no = vl.Vet_License_no
+			and vl.Vet_License_no = v.Vet_License_no
+			and v.hospital_id = h.hospital_id
+			and Treatment_Record_no = #{value}
 	</select>
 	
 	<select id="findAllTreatmentRecord"  parameterType="map" resultType="int"> 

@@ -5,20 +5,27 @@
 	// 각 테이블에 값들을 세팅하는 스크립트 문
 	$(document).ready(function() {
 		$(".detailView").click(function() {
-			
-			alert($(this).parent().siblings().eq(0).text());
-			$("#modalRecordHours").text("테스트 종료");
-			$("#modalHospitalName").text();
-			$("#modalHospitalTel").text();
-			$("#modalVetName").text();
-			$("#modalPetName").text();
-			$("#modalPetGender").text();
-			$("#modalPetKind").text();
-			$("#modalPetWeight").text();
-			$("#modalPetBirthDay").text();
-			$("#modalPetOwnerName").text();
-			$("#modalPetOwnerTel").text();
-			$("#modalRecordContent").text();
+			var treatmentRecordNo=$(this).parent().siblings().eq(0).text();
+			$.ajax({
+				type: "post",
+				url: "findDetailTreatmentRecordByTreatmentNo.do",
+				data: "treatmentRecordNo="+treatmentRecordNo,
+				dataType: "json",
+				success: function(findTreatmentRecordDetaileResult){
+					$("#modalRecordHours").text(findTreatmentRecordDetaileResult.treatmentHours);
+					$("#modalHospitalName").text(findTreatmentRecordDetaileResult.hospitalVO.hospitalName);
+					$("#modalHospitalTel").text(findTreatmentRecordDetaileResult.hospitalVO.hospitalTel);
+					$("#modalVetName").text(findTreatmentRecordDetaileResult.hospitalVO.vetList[0].vetLicenseVO.vetName);
+					$("#modalPetName").text(findTreatmentRecordDetaileResult.petOwnerVO.petVO[0].petName);
+					$("#modalPetGender").text(findTreatmentRecordDetaileResult.petOwnerVO.petVO[0].petGender);
+					$("#modalPetKind").text(findTreatmentRecordDetaileResult.petOwnerVO.petVO[0].animalKindName);
+					$("#modalPetWeight").text(findTreatmentRecordDetaileResult.petWeight);
+					$("#modalPetBirthDay").text(findTreatmentRecordDetaileResult.petOwnerVO.petVO[0].petBirthday);
+					$("#modalPetOwnerName").text(findTreatmentRecordDetaileResult.petOwnerVO.petOwnerName);
+					$("#modalPetOwnerTel").text(findTreatmentRecordDetaileResult.petOwnerVO.petOwnerTel);
+					$("#modalRecordContent").text(findTreatmentRecordDetaileResult.treatmentContent);
+				}
+			});
 			$('div.modal').modal({});
 		});
 	});
@@ -30,7 +37,7 @@
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
            	<h4 class="modal-title">진료기록상세</h4>
            	<p class="text-right">진료일시: 
-           		<strong id="modalRecordDate"></strong>
+           		<strong id="modalRecordHours"></strong>
            	</p>
           </div>
           <div class="modal-body" id="modalBody">
