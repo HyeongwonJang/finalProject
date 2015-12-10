@@ -84,10 +84,12 @@ public class TreatmentController {
 	@RequestMapping("findPetListByTel.do")
 	@ResponseBody
 	public PetOwnerVO findPetListByTel(HttpServletRequest request, PetOwnerVO petOwnerVO){
-		if(petOwnerVO == null){
+		if(petOwnerVO.getPetOwnerTel() == null){
 			petOwnerVO = (PetOwnerVO) request.getSession(false).getAttribute("loginVO");
+			return petOwnerService.findPetListByTel(petOwnerVO);
+		} else {
+			return petOwnerService.findPetListByTel(petOwnerVO);
 		}
-		return petOwnerService.findPetListByTel(petOwnerVO);
 	}	
 
 	@RequestMapping("registerTreatmentRecord.do")

@@ -103,7 +103,7 @@
 	<div class="x_content">
 		<form action="findTreatmentRecordByPetOwner.do" method="get" id="recordSearchForm">
 			<label>반려동물명:</label>
-			<select class="select2_single form-control" id="petListSelect" name="petVO[0].petName">
+			<select class="select2_single form-control" id="petListSelect" name="petVO[0].petName" required="required">
 			</select>
 			<br>
 			
