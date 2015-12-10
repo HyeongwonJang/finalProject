@@ -20,8 +20,8 @@ public class VetServiceImpl implements VetService{
 		vetDAO.registerVet(hvo);
 	}
 	@Override
-	public List<HospitalVO> findHospital(String hospitalName) {
-		return vetDAO.findHospital(hospitalName);
+	public List<HospitalVO> findHospital(HospitalVO hvo) {
+		return vetDAO.findHospital(hvo);
 	}
 	
 	/**

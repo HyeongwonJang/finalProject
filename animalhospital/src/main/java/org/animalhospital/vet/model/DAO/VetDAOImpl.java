@@ -16,8 +16,8 @@ public class VetDAOImpl implements VetDAO {
 	private SqlSessionTemplate sqlSessionTemplate;
 
 	@Override
-	public List<HospitalVO> findHospital(String hospitalName) {
-		return sqlSessionTemplate.selectList("vet.findHospital", hospitalName);
+	public List<HospitalVO> findHospital(HospitalVO hvo) {
+		return sqlSessionTemplate.selectList("vet.findHospital", hvo);
 	}
 
 	@Override

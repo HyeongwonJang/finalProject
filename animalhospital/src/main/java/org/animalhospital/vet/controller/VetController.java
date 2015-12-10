@@ -50,8 +50,8 @@ public class VetController {
 	 */
 	@RequestMapping("findHospital.do")
 	@ResponseBody
-	public List<HospitalVO> findHospital(HttpServletRequest request, String hospitalName) {
-		List<HospitalVO> hospitalList = vetService.findHospital(hospitalName);
+	public List<HospitalVO> findHospital(HttpServletRequest request, HospitalVO hvo) {
+		List<HospitalVO> hospitalList = vetService.findHospital(hvo);
 		return hospitalList;
 	}
 

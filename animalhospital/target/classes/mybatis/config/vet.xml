@@ -112,7 +112,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select
 		a.hospital_id,a.hospital_name,a.hospital_address,a.hospital_tel,b.vet_id,c.vet_name
 		from HOSPITAL a, vet b,vet_license c
-		where a.hospital_name like '%${value}%'
+		where a.hospital_name like '%${hospitalName}%'
+		and
+		a.hospital_address like '%${hospitalAddress}%'
 		and
 		a.hospital_id=b.hospital_id
 		and b.vet_license_no=c.vet_license_no

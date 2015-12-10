@@ -10,10 +10,10 @@ public interface VetDAO {
 
 	/**
 	 * 용도 후에 적기
-	 * @param searchValue
+	 * @param hvo
 	 * @return
 	 */
-	public List<HospitalVO> findHospital(String searchValue);
+	public List<HospitalVO> findHospital(HospitalVO hvo);
 	/**
 	 * 의사를 등록하는 메서드
 	 * @param hvo
