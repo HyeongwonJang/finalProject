@@ -84,10 +84,7 @@
 			$("#page").val("${requestScope.recordList.pagingBean.startPageOfPageGroup-1}");
 			$("#recordSearchForm").submit();	
 		});
-		$(".detailView").click(function() {
-			alert($(this).parent().siblings().eq(0).text());
-			$('div.modal').modal({});
-		});
+		
 	});
 </script>
 
