@@ -90,7 +90,7 @@
 											</c:when>
 											<c:when test="${sessionScope.userLevel == 'petOwner' }">
 												<li><a
-													href="${initparam.root}registerVaccinationRecordView.do">예방접종등록</a>
+													href="${initparam.root}viewRegisterVaccination.do">예방접종등록</a>
 												</li>
 												<li><a
 													href="${initparam.root}viewTreatmentRecordPage.do">진료기록조회</a>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- MyBatis에서 namespace는 필수적으로 명시해야 함 -->
+ <mapper namespace="vaccination">
+ <resultMap type="vrvo" id="vrvoRM">
+ 		<id column="Vaccination_Record_no" property="vaccinationRecordno"/>
+ 		<id column="Vaccination_hours" property="vaccinationHours"/>
+ 		<id column="Vaccination_content" property="vaccinationContent"/>
+ 		<id column="Pet_weight" property="TreatmentRecordVO.petWeight"/>
+ 		
+ 		<id column="Pet_Owner_no" property="PetOwnerVO.petOwnerNo"/>
+ 		<id column="Pet_name" property="PetOwner.PetVO[0].petName"/>
+ 		
+ 		<id column="Vet_License_no" property="VetLicenseVO.vetLicenseNo"/>
+ 		<id column="Vaccination_name" property="VaccinationVO.vaccinationName"/>
+ 	</resultMap>
+ 	
+ 	<resultMap type="vavo" id="vavoRM">
+ 		<id column="Vaccination_name" property="vaccinationName"/>
+ 	</resultMap>
+ 	
+ 	<resultMap type="dvo" id="dvoRM">
+ 		<id column="Disease_name" property="diseaseName"/>
+ 		<id column="Disease_symptom" property="diseaseSymptom"/>
+ 	</resultMap>
+ 			
+ 	<resultMap type="povo" id="povoRM">
+ 		<id column="Pet_Owner_no" property="petOwnerNo"/>
+ 		<id column="Pet_Owner_tel" property="petOwnerTel"/>
+ 		<id column="Pet_Owner_name" property="petOwnerName"/>
+ 		<id column="Pet_Owner_id" property="petOwnerId"/>
+ 		<id column="Pet_Owner_password" property="petOwnerPassword"/>
+ 		<id column="Pet_Owner_address" property="petOwnerAddress"/>
+ 		<collection property="petVO" ofType="pvo">
+ 			<id column="Pet_name" property="petName"/>
+ 			<id column="Pet_birthday" property="petBirthday"/>
+ 			<id column="Pet_gender" property="petGender"/>
+ 			<id column="Pet_note" property="petNote"/>
+ 			<id column="Animal_kind_name" property="animalKindName"/>
+ 		</collection>
+ 	</resultMap>		
+ 	
+ 	<!-- 예방접종 등록 -->
+ 	<insert id="registerVaccination" parameterType="vrvo">
+ 		insert into Vaccination_Record(Vaccination_Record_no,Vaccination_hours,Vaccination_content
+ 		Pet_weight,Pet_Owner_no,Pet_name,Vet_License_no,Vaccination_name) 
+ 		values(Vaccination_Record_no.nextVal,sysdate,#{vaccinationContent},#{TreatmentRecordVO.petWeight},
+ 		#{PetOwnerVO.petOwnerNo},#{PetOwner.PetVO[0].petName},null,#{VaccinationVO.vaccinationName}))
+ 	</insert>	
+ 	
+ 	
+ 	<!-- 백신 목록리스트 조회 -->
+ 	<select id="findAllVaccination" resultMap="vavoRM">
+ 		select Vaccination_name from Vaccination
+ 	</select>
+
+ 	<!-- 질병 목록리스트 조회 -->
+ 	<select id="findAllDisease" resultMap="dvoRM">
+ 		select Disease_name from Disease 	
+ 	</select>
+ 	
+ 	<!-- 아이디로 반려동물 조회 -->
+ 	<select id="findPetListById"  parameterType="povo" resultMap="povoRM">
+ 		select p.Pet_name, p.Pet_birthday, p.Pet_gender, p.Pet_note, p.Animal_kind_name, p.Pet_Owner_no
+		from Pet_Owner po, Pet p
+		where  po.Pet_Owner_no = p.Pet_Owner_no and po.Pet_Owner_id=#{petOwnerId}
+ 	</select>
+ 	
+ </mapper>

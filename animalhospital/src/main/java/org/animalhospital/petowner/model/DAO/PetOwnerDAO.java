@@ -17,5 +17,6 @@ public interface PetOwnerDAO {
 	public PetOwnerVO findPetListByTel(PetOwnerVO povo);
 	public TreatmentRecordVO findTreatmentRecordById(PetOwnerVO povo);
 	public PetOwnerVO findPetListByPetownerTel(String petOwnerTel);
+	public PetOwnerVO findPetByTel(PetOwnerVO povo);
 	
 }

@@ -11,6 +11,7 @@
 <context:component-scan base-package="org.animalhospital.vet.controller" />
 <context:component-scan base-package="org.animalhospital.view.controller" />
 <context:component-scan base-package="org.animalhospital.treatment.controller" />
+<context:component-scan base-package="org.animalhospital.vaccination.controller" />
 	<!-- Tile Framework 연동 설정 -->
 	<bean id="tilesConfig"
 		class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
