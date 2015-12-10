@@ -32,7 +32,7 @@
 
 <script type='text/javascript'>
 // 모달창 검색어 검색 필터
-	function filter(){
+ 	function filter(){
 		if($('#txtFilter').val()=="")
 			$("#modalTableInfo tr").css('display','');			
 		else{
@@ -40,7 +40,7 @@
 			$("#modalTableInfo tr[name*='"+$('#txtFilter').val().toLowerCase()+"']").css('display','');
 		}
 		return false;
-	}
+	} 
 </script>
 
 <script type="text/javascript">

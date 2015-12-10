@@ -61,11 +61,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			h.hospital_tel
 		from Treatment_Record t, PET_OWNER po, VET_LICENSE vl, VET v, HOSPITAL h, disease d
 		where t.pet_owner_no = po.pet_owner_no
-		and t.Disease_name = d.Disease_name
-		and t.Vet_License_no = vl.Vet_License_no
-		and vl.Vet_License_no = v.Vet_License_no
-		and v.hospital_id = h.hospital_id
-		and Treatment_Record_no = #{value}
+			and t.Disease_name = d.Disease_name
+			and t.Vet_License_no = vl.Vet_License_no
+			and vl.Vet_License_no = v.Vet_License_no
+			and v.hospital_id = h.hospital_id
+			and Treatment_Record_no = #{value}
 	</select>
 	
 	<select id="findAllTreatmentRecord"  parameterType="map" resultType="int"> 

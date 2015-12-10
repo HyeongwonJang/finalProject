@@ -86,6 +86,16 @@
 		});
 		$(".detailView").click(function() {
 			alert($(this).parent().siblings().eq(0).text());
+			var treatmentRecordNo=$(this).parent().siblings().eq(0).text();
+			$.ajax({
+				type: "post",
+				url: "findDetailTreatmentRecordByTreatmentNo.do",
+				data: "treatmentRecordNo="+treatmentRecordNo,
+				dataType: "json",
+				success: function(findTreatmentRecordDetaileResult){
+					alert(findTreatmentRecordDetaileResult.treatmentHours);
+				}
+			});
 			$('div.modal').modal({});
 		});
 	});

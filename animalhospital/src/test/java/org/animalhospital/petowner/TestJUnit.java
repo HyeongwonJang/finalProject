@@ -44,7 +44,7 @@ public class TestJUnit {
 	
 	@Test
 	public void TestDao2(){
-		PetOwnerVO paramVO = new PetOwnerVO();
+		/*PetOwnerVO paramVO = new PetOwnerVO();
 		List<PetVO> petList = new ArrayList<PetVO>();
 		PetVO petVO = new PetVO();
 		petVO.setPetName("송이");
@@ -66,6 +66,7 @@ public class TestJUnit {
 		//System.out.println("리스트VO:" + treatmentService.findTreatmentRecordByPage(map));
 		//System.out.println("검색결과: " + treatmentDAO.findDetailTreatmentRecordByTreatmentNo(42));
 		System.out.println("반려동물 검색결과: " + treatmentService.findDetailTreatmentRecordByTreatmentNo(42));
-		System.out.println("리스트VO:" + treatmentService.findTreatmentRecordVetVerByPage(map));
+		System.out.println("리스트VO:" + treatmentService.findTreatmentRecordVetVerByPage(map));*/
+		System.out.println("진료기록 상세조회 : " + treatmentService.findDetailTreatmentRecordByTreatmentNo(1));
 	}
 }
