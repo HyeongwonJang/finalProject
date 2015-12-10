@@ -35,11 +35,12 @@
 						allowClear : false
 					});
 					
-			    }	
+				}	
 			});
 		});
 	</script>
 </c:if>
+
 <!-- 유지되는 매개변수가 없을 시 moment.js를 이용하여 현재 시간에 맞추어서 날짜를 세팅한다 -->
 <c:if test="${continueParam['listVO'] eq null}">
 	<script type="text/javascript">
@@ -48,12 +49,10 @@
 					+ ' - ' + moment().format('YYYY-MM-DD'));
 	        $('#startDate').attr('value', moment().subtract(29, 'days').format('YYYY-MM-DD'));
 	      	$('#endDate').attr('value', moment().format('YYYY-MM-DD'));
-
 		});
 	</script>
 </c:if>
-           
-           
+             
 <script type="text/javascript">
 	$(document).ready(function() {
 		// 보호자 전화번호를 입력하면 자동으로 PetNameList를 가져온다
@@ -76,16 +75,12 @@
 							placeholder : "해당 항목을 선택해주세요",
 							allowClear : false
 						});
-						
-				    }	
+					}	
 				});
 			}
 		});
 		
-		
-		
-		
-		
+
 		// submit 버튼 클릭시 실행되는 함수
 		// 페이지 값이 공백이면 1페이지부터 시작한다
 		$("#recordSearchForm").submit(function() {
@@ -114,12 +109,22 @@
 			$("#page").val("${requestScope.recordList.pagingBean.startPageOfPageGroup-1}");
 			$("#recordSearchForm").submit();	
 		});
+		
+		
 		// 모달 페이지
 		$(".detailView").click(function() {
-			
-			$('div.modal').modal({
-				
+			//alert($(this).parent().siblings().eq(0).text());
+			var treatmentRecordNo=$(this).parent().siblings().eq(0).text();
+			$.ajax({
+				type: "post",
+				url: "findDetailTreatmentRecordByTreatmentNo.do",
+				data: "treatmentRecordNo="+treatmentRecordNo,
+				dataType: "json",
+				success: function(findTreatmentRecordDetaileResult){
+					alert(findTreatmentRecordDetaileResult.treatmentHours);
+				}
 			});
+			$('div.modal').modal({}); 
 		});
 	});
 </script>
@@ -141,7 +146,6 @@
 			<label>반려동물명:</label>
 			<select class="select2_single form-control" id="petListSelect" name="petVO[0].petName">
 			</select>
-			<!-- <input type="text" name="petVO[0].petName" id="petName"> -->
 			<p>
 			<div class="form-group">
 				<label>검색 기간: </label>	
@@ -163,8 +167,7 @@
 		</c:if>
 		
 		<c:if test="${fn:length(recordList.list) != 0}">
-			<table
-			class="table table-striped responsive-utilities jambo_table bulk_action">
+			<table class="table table-striped responsive-utilities jambo_table bulk_action">
 			<thead>
 				<tr class="headings">
 					<th class="column-title">No.</th>
@@ -180,13 +183,13 @@
 			<tbody id='treatmentRecordInfo'>
 				<c:forEach items="${recordList.list}" var="recordList">
 					<tr class="odd pointer">
-			    	<td>${ recordList.treatmentRecordNo }</td>
-			    	<td>${ recordList.diseaseVO.diseaseName }</td>
-			    	<td>${ recordList.diseaseVO.diseaseSymptom }</td>
-			    	<td>${ recordList.treatmentHours }</td>
-			    	<td>${ recordList.petOwnerVO.petVO[0].petName }</td>
-			    	<td>${recordList.petOwnerVO.petOwnerName}</td>
-			    	<td class="detailView"><a href="#" >View</a></td>
+				    	<td>${ recordList.treatmentRecordNo }</td>
+				    	<td>${ recordList.diseaseVO.diseaseName }</td>
+				    	<td>${ recordList.diseaseVO.diseaseSymptom }</td>
+				    	<td>${ recordList.treatmentHours }</td>
+				    	<td>${ recordList.petOwnerVO.petVO[0].petName }</td>
+				    	<td>${recordList.petOwnerVO.petOwnerName}</td>
+				    	<td ><a class="detailView" >View</a></td>
 			    	</tr>
 				</c:forEach>	
 			</tbody>
@@ -218,8 +221,8 @@
             </div>
   			<div class="col-md-4"></div>
 		</div>
-        </div>	
-		</c:if>
+	</div>	
+	</c:if>
 
 		
 	</div>
