@@ -24,5 +24,7 @@ public interface VaccinationDAO {
 
 	public int findAllVaccinationRecord(Map<String, Object> paramMap);
 
+	int registerVetVaccination(VaccinationRecordVO vrvo);
+
 	
 }
