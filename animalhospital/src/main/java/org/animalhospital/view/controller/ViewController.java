@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.animalhospital.petowner.model.VO.PetOwnerVO;
 import org.animalhospital.petowner.service.PetOwnerService;
 import org.animalhospital.treatment.service.TreatmentService;
+import org.animalhospital.vaccination.service.VaccinationService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -17,7 +18,8 @@ public class ViewController {
 	private PetOwnerService petOwnerService;
 	@Resource
 	private TreatmentService treatmentService;
-	
+	@Resource
+	private VaccinationService vaccinationService;
 	/**
 	 * 보호자 진료조회 페이지
 	 * @author 민호
@@ -152,5 +154,28 @@ public class ViewController {
 	@RequestMapping("registerVaccinationRecordView.do")
 	public String registerVaccinationRecordView() {
 		return "register_vaccinationRecord";
+	}
+	
+
+
+	/**
+	 * 예방접종등록 페이지를 호출하는 컨트롤러
+	 * 반려동물 정보를 세션에 담긴 정보를 기반으로 호출한다
+	 * 또한 예방접종목록 정보를 호출한다
+	 * @return
+	 */
+	@RequestMapping("registerVaccinationView.do")
+	public ModelAndView registerVaccinationView() {
+		return new ModelAndView("register_petOwner_vaccination", 
+				"VaccinationList", vaccinationService.findAllVaccination());
+	}
+	
+	/**
+	 * 	수의사 예방접종 등록 페이지
+	 */
+	@RequestMapping("viewVaccinationVetVerPage.do")
+	public ModelAndView viewVaccinationVetVerPage(){
+		return new ModelAndView("register_vet_vaccination", 
+				"VaccinationList", vaccinationService.findAllVaccination());
 	}
 }
