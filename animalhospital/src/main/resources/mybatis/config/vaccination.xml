@@ -43,7 +43,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		insert into Vaccination_Record(Vaccination_Record_no, Vaccination_hours, Vaccination_content,
  		Pet_weight, Pet_Owner_no, Pet_name, Vet_License_no, Vaccination_name) 
  		values(Vaccination_Record_no.nextval, sysdate, #{vaccinationContent}, #{petWeight},
- 		#{petOwnerVO.petOwnerNo}, #{petOwnerVO.petVO[0].petName}, null, #{vaccinationVO.vaccinationName})
+ 		#{petOwnerVO.petOwnerNo}, #{petOwnerVO.petVO[0].petName}, #{hospitalVO.vetList[0].vetLicenseVO.vetLicenseNo}, #{vaccinationVO.vaccinationName})
  	</insert>	
  	
  	
