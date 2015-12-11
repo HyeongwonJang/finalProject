@@ -73,9 +73,6 @@
 							<ul class="nav side-menu">
 								<li><a href="${initparam.root}findHospitalView.do"><i
 										class="fa fa-search"></i> 병원검색 </a></li>
-								<li><a href="${initparam.root}testTreatmentView.do"> <i
-										class="fa fa-search"></i> 테스트 페이지
-								</a></li>
 								<li><a><i class="fa fa-clipboard"></i> 진료관리 <span
 										class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu" style="display: none">
@@ -87,6 +84,9 @@
 												<li><a
 													href="${initparam.root}findTreatmentRecordPageVetView.do">진료기록조회</a>
 												</li>
+												<li><a
+													href="${initparam.root}viewVaccinationVetVerPage.do">예방접종등록</a>
+												</li>
 											</c:when>
 											<c:when test="${sessionScope.userLevel == 'petOwner' }">
 												<li><a
@@ -95,6 +95,10 @@
 												<li><a
 													href="${initparam.root}findTreatmentRecordPagePetOwnerView.do">진료기록조회</a>
 												</li>
+												<li><a
+													href="${initparam.root}findTreatmentRecordPagePetOwnerView.do">진료기록조회</a>
+												</li>
+												
 											</c:when>
 										</c:choose>
 
