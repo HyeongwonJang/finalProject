@@ -82,7 +82,18 @@ public class PetOwnerController {
 	public String registerPetOwnerResult(){
 		return "account/register_petowner_result";
 	}
-		
+	//비회원 보호자 회원 가입
+	@RequestMapping(value = "registerPetOwnerByTel.do", method = RequestMethod.POST)
+	public String registerPetOwnerByTel(PetOwnerVO povo) {
+		petOwnerService.registerPetOwnerByTel(povo);		
+		return "redirect:registerPetOwnerResult.do";
+	}
+	
+	@RequestMapping("findPetOwnerById.do")
+	@ResponseBody
+	public String findPetOwnerById(PetOwnerVO povo) {
+		return petOwnerService.findPetOwnerById(povo);
+	}
 		
 	
 	

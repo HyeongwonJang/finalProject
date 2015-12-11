@@ -27,7 +27,7 @@ public class PetOwnerDAOImpl implements PetOwnerDAO {
 		sqlSessionTemplate.update("petOwner.updatePetOwner",povo);
 	}
 	@Override
-	public int telCheckPetOwner(PetOwnerVO povo) {
+	public PetOwnerVO telCheckPetOwner(PetOwnerVO povo) {
 		return sqlSessionTemplate.selectOne("petOwner.telCheckPetOwner",povo);
 	}
 	@Override
@@ -62,6 +62,15 @@ public class PetOwnerDAOImpl implements PetOwnerDAO {
 	public PetOwnerVO findPetListByPetownerTel(String petOwnerTel){
 		return sqlSessionTemplate.selectOne("petOwner.findPetListByPetownerTel",petOwnerTel);
 	}
-	
+
+	@Override
+	public int findPetOwnerById(PetOwnerVO povo) {
+		return sqlSessionTemplate.selectOne("petOwner.findPetOwnerById", povo);
+	}
+
+	@Override
+	public void registerPetOwnerByTel(PetOwnerVO povo) {
+		sqlSessionTemplate.update("petOwner.registerPetOwnerByTel", povo);
+	}
 	
 }

@@ -8,7 +8,7 @@
 			$.ajax({
 			    type: "post", // get 또는 post로 설정
 			    url: "findHospital.do", // 이동할 url 설정
-			    data: $(this).serialize(),
+			    data: $("#"findHospitalForm").serialize(),
 			    dataType:"json",      
 			    success: function(hospitalList){
 			    	var str = "";
@@ -65,7 +65,7 @@
 	</div>
 	<!-- 데이터 입력부분 -->
 	<div class="x_content">
-		<form method="post" id="recordSearchForm">
+		<form method="post" id="findHospitalForm">
 			<label>병원 이름 : </label> <input type="text" name="hospitalName"
 				id="hospitalName"><br> <label>병원 주소 : </label> <input
 				type="text" name="hospitalAddress" id="hospitalAddress"><br>

@@ -36,8 +36,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where Pet_Owner_id = #{petOwnerId}  
  	</update>
  	<!-- 보호자 전화번호 중복 검사 -->
- 	<select id = "telCheckPetOwner" resultType="int" >
-		select count(*) 
+ 	<select id = "telCheckPetOwner" resultType="povo" resultMap="povoRM">
+		select Pet_Owner_no, Pet_Owner_id, Pet_Owner_tel
 		from Pet_Owner 
 		where Pet_Owner_tel = #{petOwnerTel}
  	</select>
@@ -87,5 +87,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where o.pet_owner_no=p.pet_owner_no
 		and o.pet_owner_tel=#{value}
 	</select>
- 	
+ 	<!-- 보호자 아이디 중복 검사 -->
+ 	<select id = "findPetOwnerById" resultType="int" >
+		select count(*) 
+		from Pet_Owner 
+		where Pet_Owner_id = #{petOwnerId}
+ 	</select>
+	<!-- 번호로 비회원 보호자 회원 가입 -->
+ 	<update id="registerPetOwnerByTel" parameterType="povo">
+ 		update Pet_Owner
+		set Pet_Owner_id=#{petOwnerId}, Pet_Owner_name=#{petOwnerName},
+			 Pet_Owner_password=#{petOwnerPassword}, Pet_Owner_address = #{petOwnerAddress}
+		where Pet_Owner_tel=#{petOwnerTel}
+ 	</update>
  </mapper>

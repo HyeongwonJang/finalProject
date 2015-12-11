@@ -25,6 +25,71 @@
 <script src="${initparam.root}resources/js/bootstrap.min.js"></script>
 </head>
 
+<script type="text/javascript">
+	$(document).ready(function() {
+		var submitFlag = false;
+		var registerType = "insert";
+		$("#petOwnerId").keyup(function() {
+			if($(this).val().length > 0) {
+				$.ajax({
+				    type: "post", // get 또는 post로 설정
+				    url: "findPetOwnerById.do", // 이동할 url 설정
+				    data: "petOwnerId=" + $(this).val(),
+				    success: function(searchResult){
+				    	if(searchResult == "ok"){
+				   			$("#idSearchMessage").text("사용하지 않은 아이디입니다!");
+				   			$("#idSearchMessage").attr('class', 'text-primary');
+				   			submitFlag = true;
+				   		} else {
+				   			$("#idSearchMessage").text("이미 사용하고 있는 아이디입니다!");
+				   			$("#idSearchMessage").attr('class', 'text-danger');
+				   			submitFlag = false;
+				   		}
+				    }
+				});
+			} else {
+				$("#idSearchMessage").text("");
+			}
+		});
+		$("#petOwnerTel").keyup(function() {
+			if($(this).val().length == 11) {
+				$.ajax({
+				    type: "post", // get 또는 post로 설정
+				    url: "telCheckAjax.do", // 이동할 url 설정
+				    data: "petOwnerTel=" + $(this).val(),
+				    success: function(searchResult){
+				    	if(searchResult == "ok"){
+				   			$("#telSearchMessage").text("사용가능");
+				   			$("#telSearchMessage").attr('class', 'text-primary');
+				   			submitFlag = true;
+				   		} else if (searchResult == "ok_update"){
+				   			$("#telSearchMessage").text("사용가능");
+				   			$("#telSearchMessage").attr('class', 'text-primary');
+				   			submitFlag = true;
+				   			registerType = "update";
+				   		} else {
+				   			$("#telSearchMessage").text("사용불가");
+				   			$("#telSearchMessage").attr('class', 'text-danger');
+				   			submitFlag = false;
+				   		}
+				    }
+				});
+			} else {
+				$("#telSearchMessage").text("");
+			}
+		});
+		
+		$("#registerForm").submit(function() {
+			if(submitFlag==false)
+				return false;
+			if(registerType == "update") {
+				$('#registerForm').attr('action', "registerPetOwnerByTel.do");
+			}
+				
+		});
+	});
+</script>
+
 <body style="background: #F7F7F7;">
 	<div class="">
 		<a class="hiddenanchor" id="toregister"></a>
@@ -44,14 +109,20 @@
 		</div>
 		<div class="x_content">
 			<br>
-			<form id="pet-form" class="form-horizontal form-label-left" action="registerPetOwner.do" method="post">
+			<form id="registerForm" class="form-horizontal form-label-left" action="registerPetOwner.do" method="post">
 				<div class="form-group">
 					<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
 						<span class="required">* </span>아이디 
 					</label>
 					<div class="col-md-4 col-sm-6 col-xs-12">
 						<!-- 아이디 input 입력란 -->
-						<input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12" name="petOwnerId">
+						<input type="text" id="petOwnerId" required="required" class="form-control col-md-7 col-xs-12" name="petOwnerId">
+					</div>
+					<div>
+							<!-- 텍스트 색깔은 text-primary text-danger 이거 사용-->
+							<h3></h3>
+							<span class="text-danger" id="idSearchMessage"
+								style="font-weight: bold"></span>
 					</div>
 				</div>
 				<div class="form-group">
@@ -78,7 +149,13 @@
 					</label>
 					<div class="col-md-4 col-sm-6 col-xs-12">
 						<!-- 휴대폰 번호 input 입력란 -->
-						<input id="last-name" class="form-control col-md-7 col-xs-12" type="text" required="required" name="petOwnerTel">
+						<input id="petOwnerTel" class="form-control col-md-7 col-xs-12" type="text" required="required" name="petOwnerTel">
+					</div>
+					<div>
+							<!-- 텍스트 색깔은 text-primary text-danger 이거 사용-->
+							<h3></h3>
+							<span class="text-danger" id="telSearchMessage"
+								style="font-weight: bold"></span>
 					</div>
 				</div>
 				<div class="form-group">

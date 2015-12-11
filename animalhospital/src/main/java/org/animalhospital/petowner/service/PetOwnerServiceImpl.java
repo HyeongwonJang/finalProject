@@ -25,9 +25,17 @@ public class PetOwnerServiceImpl implements PetOwnerService {
 	}
 	@Override
 	public String telCheckPetOwner(PetOwnerVO povo) {
-		int count = petOwnerDAO.telCheckPetOwner(povo);
-		System.out.println(povo);
-		return (count==0) ? "ok":"fail";
+		PetOwnerVO telCheckedpovo = petOwnerDAO.telCheckPetOwner(povo);
+		String flag = "fail";
+		if(telCheckedpovo != null) {
+			if(telCheckedpovo.getPetOwnerTel() != null)
+				flag = "fail";
+			if(telCheckedpovo.getPetOwnerId() == null) {
+				flag = "ok_update";
+			}
+		} else 
+			flag = "ok";
+		return flag;
 	}
 	
 
@@ -35,7 +43,6 @@ public class PetOwnerServiceImpl implements PetOwnerService {
 	public void registerPetOwner(PetOwnerVO povo) {
 		petOwnerDAO.registerPetOwner(povo);
 		HashMap<String, Object> pom = new HashMap<String, Object>();
-		System.out.println(povo);
 		pom.put("petOwnerNo", povo.getPetOwnerNo());
 		if(povo.getPetVO()!=null) {
 			for(int i=0; i<povo.getPetVO().size(); i++) {
@@ -64,6 +71,24 @@ public class PetOwnerServiceImpl implements PetOwnerService {
 	}
 	public PetOwnerVO findPetListByPetownerTel(String petOwnerTel){
 		return petOwnerDAO.findPetListByPetownerTel(petOwnerTel);
+	}
+
+	@Override
+	public String findPetOwnerById(PetOwnerVO povo) {
+		return petOwnerDAO.findPetOwnerById(povo)==0 ? "ok" : "fail";
+	}
+
+	@Override
+	public void registerPetOwnerByTel(PetOwnerVO povo) {
+		petOwnerDAO.registerPetOwnerByTel(povo);
+		HashMap<String, Object> pom = new HashMap<String, Object>();
+		pom.put("petOwnerNo", petOwnerDAO.loginPetOwner(povo).getPetOwnerNo());
+		if(povo.getPetVO()!=null) {
+			for(int i=0; i<povo.getPetVO().size(); i++) {
+				pom.put("petVO", povo.getPetVO().get(i));
+				petOwnerDAO.registerPet(pom);
+			}
+		}
 	}
 	
 	
