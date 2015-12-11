@@ -8,13 +8,12 @@
 <!-- 컨트롤러에서 view name을 아래 definition name으로
 	  반환하면 TilesViewResolver에 의해 include 된 여러 페이지
 	  조합결과 화면이 반환된다. 
+	  find_petOwner_treatmentRecord
  -->       
 <tiles-definitions>
 	<definition name="*_treatmentRecord" extends="home">
 		<put-attribute name="main" value="/WEB-INF/views/treatmentRecord/{1}_treatmentRecord.jsp"/>
-	</definition>	
-	<definition name="*_*_treatmentRecord" extends="home">
-		<put-attribute name="main" value="/WEB-INF/views/treatmentRecord/{1}_{2}_treatmentRecord.jsp"/>
+		<put-attribute name="modal" value="/WEB-INF/views/treatmentRecord/treatment_modal_page.jsp" />
 	</definition>	
 </tiles-definitions>
 

@@ -45,10 +45,11 @@
 <c:if test="${continueParam['listVO'] eq null}">
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$('#daterangePicker span').html(moment().subtract(29, 'days').format('YYYY-MM-DD') 
+			$('#daterangePicker span').html(moment().subtract(355, 'days').format('YYYY-MM-DD') 
 					+ ' - ' + moment().format('YYYY-MM-DD'));
-	        $('#startDate').attr('value', moment().subtract(29, 'days').format('YYYY-MM-DD'));
+	        $('#startDate').attr('value', moment().subtract(355, 'days').format('YYYY-MM-DD '));
 	      	$('#endDate').attr('value', moment().format('YYYY-MM-DD'));
+	  		//alert($("#endDate").val());
 		});
 	</script>
 </c:if>
@@ -125,7 +126,8 @@
 	<div class="x_content">
 		<form action="findTreatmentRecordByPetOwnerTelAndPetName.do" method="post" id="recordSearchForm">
 			<label>반려동물 보호자 전화번호:</label>
-			<input type="text" class="form-control" name="petOwnerTel" id="petOwnerTel" placeholder="보호자의 전화번호를 입력해주세요">
+			<input type="text" class="form-control" name="petOwnerTel" id="petOwnerTel"
+				placeholder="보호자의 전화번호를 입력해주세요" required="required">
 			<p>
 			<label>반려동물명:</label>
 			<select class="select2_single form-control" id="petListSelect" name="petVO[0].petName">
@@ -147,7 +149,15 @@
 		</form>
 		<hr>
 		<c:if test="${fn:length(recordList.list) == 0}">
-			<p class="text-center"><h2>검색결과가 없습니다! 검색을 다시 해주세요!</h2></p>
+			<div class="col-md-12"></div>
+			<div class="col-md-12"></div>
+			<div class="col-md-12"></div>
+			<div class="col-md-4"></div>
+  			<div class="col-md-4" align="center">
+  				<h2>검색결과가 없습니다!<br><br>
+  					검색을 다시 해주세요!</h2>	
+  			</div>
+  			<div class="col-md-4"></div>
 		</c:if>
 		
 		<c:if test="${fn:length(recordList.list) != 0}">
@@ -205,8 +215,9 @@
             </div>
   			<div class="col-md-4"></div>
 		</div>
+		</c:if>
 	</div>	
-	</c:if>
+	
 
 		
 	</div>

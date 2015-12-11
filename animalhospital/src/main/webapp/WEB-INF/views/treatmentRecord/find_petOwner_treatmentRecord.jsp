@@ -189,8 +189,6 @@
             </div>
   			<div class="col-md-4"></div>
 		</div>
-        </div>	
 		</c:if>
-		
-		
+        </div>	
 	</div>
