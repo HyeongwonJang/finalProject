@@ -20,41 +20,33 @@ public class TreatmentServiceImpl implements TreatmentService {
 	@Resource
 	private ListVO listVO;
 	
-	
+
 	/**
-	 * 진료기록 검색결과를 반환하는 메서드
+	 * 진료기록을 조회하는 메서드
+	 * 매개변수는 Map에 담겨있다 -> 시작일, 종료일, 반려동물이름, 보호자 전화번호, 페이지
+	 * 검색결과를 DAO에서 받아온 뒤 매개변수로 다시 petLIst를 세팅한다
+	 * (resultMap으로 반려동물의 정보를 한 번에 담는 것이 불가능하기 때문)
+	 * @author 민호, 윤아
 	 */
-	public ListVO findTreatmentRecordByPage(Map<String, Object> paramMap){
-		List<Object> list = treatmentDAO.findTreatmentRecordByPage(paramMap);
+	public ListVO findTreatmentRecordByByPetOwnerTelAndPetName(Map<String, Object> paramMap) {
+		System.out.println("매개변수:" + paramMap);
+		List<Object> list = treatmentDAO.findTreatmentRecordByPetOwnerTelAndPetName(paramMap);
+		List<PetVO> petList=((PetOwnerVO) paramMap.get("povo")).getPetVO();
 		for(int li=0; li<list.size(); li++){
-			((TreatmentRecordVO) list.get(li)).setPetOwnerVO((PetOwnerVO) paramMap.get("povo"));
+			((TreatmentRecordVO) list.get(li)).getPetOwnerVO().setPetVO(petList);
 		}
 		listVO.setList(list);
 		listVO.getPagingBean().setNowPage(((ListVO) paramMap.get("listVO")).getPage());
 		listVO.getPagingBean().setTotalContents(treatmentDAO.findAllTreatmentRecord(paramMap));
 		return listVO;
-	}
-
-	@Override
-	public ListVO findTreatmentRecordVetVerByPage(Map<String, Object> paramMap) {
-		List<Object> list = treatmentDAO.findTreatmentRecordVetVerByPage(paramMap);
-		PetOwnerVO petOwnerVO=(PetOwnerVO) paramMap.get("povo");
-		String petOwnerTel=petOwnerVO.getPetOwnerTel();
-		List<PetVO> petList=petOwnerVO.getPetVO();
-		System.out.println(petList);
-		for(int li=0; li<list.size(); li++){
-			((TreatmentRecordVO) list.get(li)).getPetOwnerVO().setPetOwnerTel(petOwnerTel);
-			((TreatmentRecordVO) list.get(li)).getPetOwnerVO().setPetVO(petList);
-			
-		}
-		listVO.setList(list);
-		listVO.getPagingBean().setNowPage(((ListVO) paramMap.get("listVO")).getPage());
-		listVO.getPagingBean().setTotalContents(treatmentDAO.findAllTreatmentRecordVetVer(paramMap));
-		return listVO;
+		
 	}
 	
 	/**
 	 * 진료기록 상세보기를 출력하는 메서드
+	 * 반려동물에 대한 정보, 그 외의 정보를 나누어 DAO에서 정보를 받은 뒤 합쳐서 정보를 제공한다
+	 * (resultMap으로 반려동물의 정보를 한 번에 담는 것이 불가능하기 때문)
+	 * @author 민호, 윤아
 	 */
 	public TreatmentRecordVO findDetailTreatmentRecordByTreatmentNo(int treatmentNo){
 		PetVO detailPetVO = treatmentDAO.findDetailPetRecordByTreatmentNo(treatmentNo);

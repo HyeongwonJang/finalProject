@@ -23,59 +23,43 @@ public class TreatmentController {
 	@Resource
 	private PetOwnerService petOwnerService;
 
-	/*
-	 * // ajax를 이용한 진료기록 가지고 오기
-	 * 
-	 * @RequestMapping("findTreatmentRecordByPetOwner.do")
-	 * 
-	 * @ResponseBody public List<TreatmentRecordVO>
-	 * findTreatmentRecordByPetOwner(PetOwnerVO povo, String startDate, String
-	 * endDate){ Map<String, Object> paramMap = new HashMap<String, Object>();
-	 * paramMap.put("startDate", startDate); paramMap.put("endDate", endDate);
-	 * paramMap.put("povo", povo); System.out.println("매개변수: " + paramMap);
-	 * return treatmentService.findTreatmentRecordByNoAndName(paramMap); }
+	/**
+	 * 진료기록번호로 상세진료목록을 가져오는 메서드
+	 * ajax와 연동되는 메서드
+	 * @param treatmentRecordNo
+	 * @return
 	 */
-
 	@RequestMapping("findDetailTreatmentRecordByTreatmentNo.do")
 	@ResponseBody
 	public TreatmentRecordVO findDetailTreatmentRecordByTreatmentNo(int treatmentRecordNo){
-		System.out.println(treatmentRecordNo);
 		return treatmentService.findDetailTreatmentRecordByTreatmentNo(treatmentRecordNo);
 	}
 	
-	
-	@RequestMapping("findTreatmentRecordByPetOwner.do")
-	public ModelAndView findTreatmentRecordByPetOwner(PetOwnerVO povo,
-			ListVO lvo) {
+	/**
+	 * 검색조건으로 진료기록목록을 가져오는 메서드
+	 * 검색조건: 시작 날짜, 끝 날짜, 보호자 전화번호, 반려동물 이름, 페이지
+	 * 매개변수를 Map에 담아 mybatis를 실행하고 
+	 * ModelAndView에 url, 유지시킬 검색조건, 검색결과를 담아 View에 보낸다
+	 * @param povo
+	 * @param lvo
+	 * @return
+	 */
+	@RequestMapping("findTreatmentRecordByPetOwnerTelAndPetName.do")
+	public ModelAndView findTreatmentRecordByPetOwnerTelAndPetName(PetOwnerVO povo,
+			ListVO lvo, HttpServletRequest request) {
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("povo", povo);
 		paramMap.put("listVO", lvo);
-		System.out.println("매개변수:" + paramMap);
-		System.out.println("결과값: "
-				+ treatmentService.findTreatmentRecordByPage(paramMap));
-		ModelAndView mav = new ModelAndView("find_petOwner_treatmentRecord",
-				"recordList",
-				treatmentService.findTreatmentRecordByPage(paramMap));
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("recordList", treatmentService.findTreatmentRecordByByPetOwnerTelAndPetName(paramMap));
 		mav.addObject("continueParam", paramMap);
+		System.out.println(paramMap);
+		if(request.getSession(false).getAttribute("userLevel").equals("vet")){
+			mav.setViewName("find_vet_treatmentRecord");
+		} else if(request.getSession(false).getAttribute("userLevel").equals("petOwner")){
+			mav.setViewName("find_petOwner_treatmentRecord");
+		}
 		return mav;
-
-	}
-
-	@RequestMapping("findTreatmentRecordByPetOwnerTel.do")
-	public ModelAndView findTreatmentRecordByPetOwnerTel(PetOwnerVO povo,
-			ListVO lvo) {
-		Map<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("povo", povo);
-		paramMap.put("listVO", lvo);
-		System.out.println("매개변수:" + paramMap);
-		System.out.println("결과값: "
-				+ treatmentService.findTreatmentRecordVetVerByPage(paramMap));
-		ModelAndView mav = new ModelAndView("find_vet_treatmentRecord",
-				"recordList",
-				treatmentService.findTreatmentRecordVetVerByPage(paramMap));
-		mav.addObject("continueParam", paramMap);
-		return mav;
-
 	}
 	
 	

@@ -5,51 +5,50 @@
 <script>
 
 	$(document).ready(function() {
-	
 		$("#petOwnerTel").keyup(function(){
+			$("#selectPet").html("<option></option>");
+			//보호자 전화번호값이 9자 이하인 경우
 			if($("#petOwnerTel").val().length<10){
 				$("#checkTel").html("전화번호입력해라");
 				$("#checkTel").attr('class', 'text-danger');
 			}else{
+			//보호자 전화번호값이 10자 이상인 경우 전화번호를 이용하여 petList를 불러옴
 				$.ajax({
-					type:"get",
+					type:"post",
 					data:"petOwnerTel="+$("#petOwnerTel").val(),
-					url:"findPetListByPetOwnerTel.do",
+					url:"findPetListByTel.do",
 					success: function(PetOwnerVO){//전화번호로 검색하여 PetOwnerVO를 가져온다.
 						var petVO=PetOwnerVO.petVO;
 						var result="";
 						 if(PetOwnerVO == ""){
-								$("#checkTel").html("정확히 입력하세요");
-								$("#checkTel").attr('class','text-danger');
-						}else{	//if-end ,else-begin			
+							$("#checkTel").html("정확히 입력하세요");
+							$("#checkTel").attr('class','text-danger');
+						}else{	//if-end ,else-begin		
 							$.each(petVO, function(pi) {
 								result+="<option>"+petVO[pi].petName+"</option>"
 							});
-								$("#checkTel").html(PetOwnerVO.petOwnerName);
-								$("#checkTel").attr('class','text-primary');
-								$("#petOwnerNo").attr('value', PetOwnerVO.petOwnerNo);
-								
-							}//else 
-								$("#selectPet").append(result); 
+							$("#checkTel").html(PetOwnerVO.petOwnerName);
+							$("#checkTel").attr('class','text-primary');
+							$("#petOwnerNo").attr('value', PetOwnerVO.petOwnerNo);
+							$("#selectPet").append(result); 
+						}//else 
 					}//success
-				})//ajax종료
-				
+				});//ajax종료
 			}
-			//
-		})
+		});
 		$("#cancelBtn").click(function(){
 			location.href="home.do";
-		})
-		$(".select2_single").select2({
+		});
+ 		$(".select2_single").select2({
 			placeholder : "해당 항목을 선택해주세요",
 			allowClear : true
-		});
-		$(".select2_group").select2({});
+		}); 
+  		$(".select2_group").select2({});
 		$(".select2_multiple").select2({
 			maximumSelectionLength : 4,
 			placeholder : "With Max Selection limit 4",
 			allowClear : true
-		});
+		});  
 	});
 </script>
 <!-- /select2 -->
@@ -76,14 +75,14 @@
 			value="${sessionScope.loginVO.vetList[0].vetLicenseVO.vetLicenseNo }">
 			<label>반려동물 - 보호자 전화번호로 검색</label>
 				 <select class="select2_single form-control" tabindex="-1" id="selectPet" 
-				 name="petOwnerVO.petVO[0].petName" required="required">
+				 		name="petOwnerVO.petVO[0].petName" required="required">
 					<option></option>
-				</select>  
+				</select>
 			<label for="inputInfo" >몸무게:</label> 
 			<input type="text" id="petWeight" class="form-control" name="petWeight" required="required"/>
 			<label>질병종류</label>
 				<select class="select2_single form-control" tabindex="-1" name="diseaseVO.diseaseName"required="required">
-				<option></option>
+					<option></option>
 					<c:forEach var="disease" items="${requestScope.DiseaseList }">
 						<option>${disease.diseaseName }</option>
 					</c:forEach> 

@@ -21,9 +21,9 @@
 		$(document).ready(function() {
 			$('#daterangePicker span').html(moment().subtract(355, 'days').format('YYYY-MM-DD') 
 					+ ' - ' + moment().format('YYYY-MM-DD'));
-	        $('#startDate').attr('value', moment().subtract(355, 'days').format('YYYY-MM-DD'));
+	        $('#startDate').attr('value', moment().subtract(355, 'days').format('YYYY-MM-DD '));
 	      	$('#endDate').attr('value', moment().format('YYYY-MM-DD'));
-	  		//alert($("#startDate").val())
+	  		//alert($("#endDate").val());
 		});
 	</script>
 </c:if>
@@ -34,6 +34,7 @@
 		$.ajax({
 			    type: "post", // get 또는 post로 설정
 			    url: "findPetListByTel.do", // 이동할 url 설정
+			    data: "petOwnerTel="+$("#petOwnerTel").val(),
 			    dataType:"json",      
 			    success: function(petList){
 			    	//alert(petList.petVO[0].petName)
@@ -97,7 +98,7 @@
 	</div>
 	<!-- 데이터 입력부분 -->
 	<div class="x_content">
-		<form action="findTreatmentRecordByPetOwner.do" method="get" id="recordSearchForm">
+		<form action="findTreatmentRecordByPetOwnerTelAndPetName.do" method="post" id="recordSearchForm">
 			<label>반려동물명:</label>
 			<select class="select2_single form-control" id="petListSelect" name="petVO[0].petName" required="required">
 			</select>
@@ -115,8 +116,8 @@
 				</div>
 			</div>
 			<input type="hidden" name="petOwnerNo" value="${sessionScope.loginVO.petOwnerNo}">
-			<!-- <input type="hidden" id ="petName" name="petVO[0].petName"> -->
 			<input type="hidden" id="page" name="page">
+			<input type="hidden"name="petOwnerTel" id="petOwnerTel" value="${sessionScope.loginVO.petOwnerTel}">
 			<button type="submit" class="btn btn-default" id="recordSearchBtn">검색</button>
 		</form>
 		<hr>
