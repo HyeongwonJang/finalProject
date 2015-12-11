@@ -13,6 +13,7 @@
 	<definition name="*_vaccination" extends="home">
 		<put-attribute name="main"  value="/WEB-INF/views/vaccination/{1}_vaccination.jsp"  />
 	</definition>	
+	
 </tiles-definitions>
 
 

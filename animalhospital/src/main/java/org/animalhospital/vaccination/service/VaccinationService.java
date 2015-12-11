@@ -1,9 +1,10 @@
 package org.animalhospital.vaccination.service;
 
 import java.util.List;
+import java.util.Map;
 
+import org.animalhospital.paging.model.VO.ListVO;
 import org.animalhospital.petowner.model.VO.PetOwnerVO;
-import org.animalhospital.treatment.model.VO.DiseaseVO;
 import org.animalhospital.vaccination.model.VO.VaccinationRecordVO;
 import org.animalhospital.vaccination.model.VO.VaccinationVO;
 
@@ -16,16 +17,11 @@ public interface VaccinationService {
 	 * @return
 	 */
 	public PetOwnerVO findPetByTel(PetOwnerVO povo);
-	
-	/**
-	 * 질병목록을 전부 다 가져오는 서비스
-	 * 
-	 */
+
 	public List<VaccinationVO> findAllVaccination();
 
-	public List<DiseaseVO> findAllDisease();
-
-	public PetOwnerVO findPetListById(PetOwnerVO povo);
-
 	public int registerVaccination(VaccinationRecordVO vrvo);
+
+	public ListVO findVaccinationRecordByPetOwnerTelAndPetName(
+			Map<String, Object> paramMap);
 }
