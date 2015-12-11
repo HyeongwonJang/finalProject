@@ -4,44 +4,39 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- MyBatis에서 namespace는 필수적으로 명시해야 함 -->
  <mapper namespace="vaccination">
- <resultMap type="vrvo" id="vrvoRM">
- 		<id column="Vaccination_Record_no" property="vaccinationRecordNo"/>
- 		<result column="Vaccination_hours" property="vaccinationHours"/>
- 		<result column="Vaccination_content" property="vaccinationContent"/>
- 		<result column="Pet_weight" property="petWeight"/>
- 		<result column="Pet_Owner_no" property="petOwnerVO.petOwnerNo"/>
- 		
- 		<result column="Vet_License_no" property="vetVO.vetLicenseVO.vetLicenseNo"/>
- 		<result column="Vaccination_name" property="vaccinationVO.vaccinationName"/>
- 		<collection property="petVO" ofType="pvo">
- 			<id column="Pet_name" property="petName"/>
- 		</collection>
- 	</resultMap>
- 	
- 	<resultMap type="vavo" id="vavoRM">
+ 
+ 	<!-- PetVO ResultMap -->
+ 	<resultMap type="pvo" id="pvoRM">
+		<id column="Pet_name" property="petName"/>
+ 		<result column="Pet_birthday" property="petBirthday"/>
+ 		<result column="Pet_gender" property="petGender"/>
+ 		<result column="Pet_note" property="petNote"/>
+ 		<result column="Animal_kind_name" property="animalKindName"/>
+	</resultMap>
+	
+	<!-- VaccinationVO ResultMap -->
+	<resultMap type="vavo" id="vavoRM">
  		<id column="Vaccination_name" property="vaccinationName"/>
  	</resultMap>
- 	
- 	<resultMap type="dvo" id="dvoRM">
- 		<id column="Disease_name" property="diseaseName"/>
- 		<id column="Disease_symptom" property="diseaseSymptom"/>
- 	</resultMap>
- 			
- 	<resultMap type="povo" id="povoRM">
- 		<id column="Pet_Owner_no" property="petOwnerNo"/>
- 		<result column="Pet_Owner_tel" property="petOwnerTel"/>
- 		<result column="Pet_Owner_name" property="petOwnerName"/>
- 		<result column="Pet_Owner_id" property="petOwnerId"/>
- 		<result column="Pet_Owner_password" property="petOwnerPassword"/>
- 		<result column="Pet_Owner_address" property="petOwnerAddress"/>
- 		<collection property="petVO" ofType="pvo">
- 			<result column="Pet_name" property="petName"/>
- 			<result column="Pet_birthday" property="petBirthday"/>
- 			<result column="Pet_gender" property="petGender"/>
- 			<result column="Pet_note" property="petNote"/>
- 			<result column="Animal_kind_name" property="animalKindName"/>
- 		</collection>
- 	</resultMap>		
+
+	<!-- VaccinationRecordVO ResultMap -->
+	<resultMap type="vrvo" id="vrvoRM">
+		<id column="vaccination_record_no;" property="vaccinationRecordNo;" />
+		<result column="vaccination_hours;" property="vaccinationHours;" />
+		<result column="vaccination_content;" property="vaccinationContent;" />
+		<result column="pet_weight;" property="petWeight;" />
+		<result column="Vaccination_name" property="vaccinationVO.vaccinationName" />
+		<result column="Pet_Owner_name" property="petOwnerVO.petOwnerName"/>
+		<result column="Pet_Owner_tel" property="petOwnerVO.petOwnerTel"/>
+		<result column="hospital_name" property="hospitalVO.hospitalName"/>
+		<result column="hospital_tel" property="hospitalVO.hospitalTel"/>
+		<collection property="hospitalVO.vetList" ofType="vvo">
+			<result column="vet_tel" property="vetTel" />
+			<result column="vet_name" property="vetLicenseVO.vetName" />
+		</collection>
+	</resultMap>
+
+
  	
  	<!-- 예방접종 등록 -->
  	<insert id="registerVaccination">

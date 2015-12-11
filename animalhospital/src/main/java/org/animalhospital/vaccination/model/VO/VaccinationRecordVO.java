@@ -1,7 +1,7 @@
 package org.animalhospital.vaccination.model.VO;
 
 import org.animalhospital.petowner.model.VO.PetOwnerVO;
-import org.animalhospital.vet.model.VO.VetVO;
+import org.animalhospital.vet.model.VO.HospitalVO;
 
 public class VaccinationRecordVO {
 	private int vaccinationRecordNo;
@@ -9,15 +9,16 @@ public class VaccinationRecordVO {
 	private String vaccinationContent;
 	private String petWeight;
 	private PetOwnerVO petOwnerVO;
-	private VetVO vetVO;
+	private HospitalVO hospitalVO;
 	private VaccinationVO vaccinationVO;
+	
+	
 	public VaccinationRecordVO() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public VaccinationRecordVO(int vaccinationRecordNo,
 			String vaccinationHours, String vaccinationContent,
-			String petWeight, PetOwnerVO petOwnerVO, VetVO vetVO,
+			String petWeight, PetOwnerVO petOwnerVO, HospitalVO hospitalVO,
 			VaccinationVO vaccinationVO) {
 		super();
 		this.vaccinationRecordNo = vaccinationRecordNo;
@@ -25,9 +26,11 @@ public class VaccinationRecordVO {
 		this.vaccinationContent = vaccinationContent;
 		this.petWeight = petWeight;
 		this.petOwnerVO = petOwnerVO;
-		this.vetVO = vetVO;
+		this.hospitalVO = hospitalVO;
 		this.vaccinationVO = vaccinationVO;
 	}
+	
+	
 	public int getVaccinationRecordNo() {
 		return vaccinationRecordNo;
 	}
@@ -58,11 +61,11 @@ public class VaccinationRecordVO {
 	public void setPetOwnerVO(PetOwnerVO petOwnerVO) {
 		this.petOwnerVO = petOwnerVO;
 	}
-	public VetVO getVetVO() {
-		return vetVO;
+	public HospitalVO getHospitalVO() {
+		return hospitalVO;
 	}
-	public void setVetVO(VetVO vetVO) {
-		this.vetVO = vetVO;
+	public void setHospitalVO(HospitalVO hospitalVO) {
+		this.hospitalVO = hospitalVO;
 	}
 	public VaccinationVO getVaccinationVO() {
 		return vaccinationVO;
@@ -70,15 +73,15 @@ public class VaccinationRecordVO {
 	public void setVaccinationVO(VaccinationVO vaccinationVO) {
 		this.vaccinationVO = vaccinationVO;
 	}
+	
+	
 	@Override
 	public String toString() {
 		return "VaccinationRecordVO [vaccinationRecordNo="
 				+ vaccinationRecordNo + ", vaccinationHours="
 				+ vaccinationHours + ", vaccinationContent="
 				+ vaccinationContent + ", petWeight=" + petWeight
-				+ ", petOwnerVO=" + petOwnerVO + ", vetVO=" + vetVO
+				+ ", petOwnerVO=" + petOwnerVO + ", hospitalVO=" + hospitalVO
 				+ ", vaccinationVO=" + vaccinationVO + "]";
 	}
-	
-	
 }
