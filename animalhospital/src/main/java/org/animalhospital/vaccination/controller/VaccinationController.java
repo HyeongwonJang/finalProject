@@ -24,22 +24,16 @@ public class VaccinationController {
 	 * 또한 예방접종목록 정보를 호출한다
 	 * @return
 	 */
-	@RequestMapping("registerVaccinationView.do")
-	public ModelAndView registerVaccinationView() {
-		return new ModelAndView("register_vaccination", 
-				"VaccinationList", vaccinationService.findAllVaccination());
-	}
 
 	@RequestMapping("registerVaccination.do")
 	public String registerVaccination(VaccinationRecordVO vrvo){
-		System.out.println(vrvo);
 		vaccinationService.registerVaccination(vrvo);
 		return "redirect:registerVaccinationResult.do";
 	}
 	
 	@RequestMapping("registerVaccinationResult.do")
 	public String registerVaccinationResult(){
-		return "vaccination/register_vaccination_result";
+		return "vaccination/register_result_vaccination";
 	}
 	
 	
