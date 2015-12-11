@@ -26,7 +26,7 @@ $(function(){
 		// 페이지 로딩 시 자동으로 ajax를 실행하여 petList를 가져온다
 		$.ajax({
 			    type: "post", // get 또는 post로 설정
-			    url: "findPetListById.do", // 이동할 url 설정
+			    url: "findPetListByTel.do", // 이동할 url 설정
 			    dataType:"json",      
 			    success: function(petList){
 			    	//alert(petList.petVO[0].petName)

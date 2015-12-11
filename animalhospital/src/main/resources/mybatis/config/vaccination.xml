@@ -21,10 +21,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- VaccinationRecordVO ResultMap -->
 	<resultMap type="vrvo" id="vrvoRM">
-		<id column="vaccination_record_no;" property="vaccinationRecordNo;" />
-		<result column="vaccination_hours;" property="vaccinationHours;" />
-		<result column="vaccination_content;" property="vaccinationContent;" />
-		<result column="pet_weight;" property="petWeight;" />
+		<id column="vaccination_record_no" property="vaccinationRecordNo" />
+		<result column="vaccination_hours" property="vaccinationHours" />
+		<result column="vaccination_content" property="vaccinationContent" />
+		<result column="pet_weight" property="petWeight" />
 		<result column="Vaccination_name" property="vaccinationVO.vaccinationName" />
 		<result column="Pet_Owner_name" property="petOwnerVO.petOwnerName"/>
 		<result column="Pet_Owner_tel" property="petOwnerVO.petOwnerTel"/>
@@ -52,16 +52,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		select Vaccination_name from Vaccination
  	</select>
 
- 	<!-- 질병 목록리스트 조회 -->
- 	<select id="findAllDisease" resultMap="dvoRM">
- 		select Disease_name from Disease 	
- 	</select>
- 	
- 	<!-- 아이디로 반려동물 조회 -->
- 	<select id="findPetListById"  parameterType="povo" resultMap="povoRM">
- 		select p.Pet_name, p.Pet_birthday, p.Pet_gender, p.Pet_note, p.Animal_kind_name, p.Pet_Owner_no
-		from Pet_Owner po, Pet p
-		where  po.Pet_Owner_no = p.Pet_Owner_no and po.Pet_Owner_id=#{petOwnerId}
- 	</select>
+
  	
  </mapper>
