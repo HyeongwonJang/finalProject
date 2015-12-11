@@ -93,7 +93,7 @@ public class TreatmentController {
 	@RequestMapping("registerTreatmentRecord_result.do")
 	public String registerTreatmentRecordResult(HttpServletRequest request,
 			TreatmentRecordVO treatmentRecordVO) {
-		return "treatmentRecord/treatment_record_result";
+		return "treatmentRecord/register_treatmentRecord_result";
 	}
 
 	@RequestMapping(value = "findPetListByPetOwnerTel.do")

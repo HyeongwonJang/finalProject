@@ -9,7 +9,7 @@
 			$("#selectPet").html("<option></option>");
 			//보호자 전화번호값이 9자 이하인 경우
 			if($("#petOwnerTel").val().length<10){
-				$("#checkTel").html("전화번호입력해라");
+				$("#checkTel").html("전화번호를 9자리 이상 입력해주세요");
 				$("#checkTel").attr('class', 'text-danger');
 			}else{
 			//보호자 전화번호값이 10자 이상인 경우 전화번호를 이용하여 petList를 불러옴
@@ -21,13 +21,13 @@
 						var petVO=PetOwnerVO.petVO;
 						var result="";
 						 if(PetOwnerVO == ""){
-							$("#checkTel").html("정확히 입력하세요");
+							$("#checkTel").html("전화번호가 맞지 않습니다");
 							$("#checkTel").attr('class','text-danger');
 						}else{	//if-end ,else-begin		
 							$.each(petVO, function(pi) {
 								result+="<option>"+petVO[pi].petName+"</option>"
 							});
-							$("#checkTel").html(PetOwnerVO.petOwnerName);
+							$("#checkTel").html("전화번호가 확인되었습니다. 다음 단계로 진행하세요");
 							$("#checkTel").attr('class','text-primary');
 							$("#petOwnerNo").attr('value', PetOwnerVO.petOwnerNo);
 							$("#selectPet").append(result); 
@@ -41,14 +41,9 @@
 		});
  		$(".select2_single").select2({
 			placeholder : "해당 항목을 선택해주세요",
-			allowClear : true
+			allowClear : false
 		}); 
-  		$(".select2_group").select2({});
-		$(".select2_multiple").select2({
-			maximumSelectionLength : 4,
-			placeholder : "With Max Selection limit 4",
-			allowClear : true
-		});  
+  		  
 	});
 </script>
 <!-- /select2 -->
@@ -88,7 +83,8 @@
 					</c:forEach> 
 				</select>
 			<label>진료내용</label>
-			<textarea class="form-control" rows="8" name="treatmentContent" required="required"  placeholder="진료내용을 입력해주세요"></textarea>
+			<textarea class="form-control" rows="8" name="treatmentContent" required="required" 
+				 placeholder="진료내용을 입력해주세요"></textarea>
 			
 			<div class="ln_solid"></div>
 			<div class="form-group">

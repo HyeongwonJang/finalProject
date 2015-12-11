@@ -17,14 +17,16 @@ public class ViewController {
 	private PetOwnerService petOwnerService;
 	@Resource
 	private TreatmentService treatmentService;
+	
 	/**
 	 * 보호자 진료조회 페이지
+	 * @author 민호
 	 * @return
 	 */
-	@RequestMapping("viewTreatmentRecordPage.do")
+	@RequestMapping("findTreatmentRecordPagePetOwnerView.do")
 	public ModelAndView viewFindPetOwnerTreatmentRecord(HttpServletRequest request){
 		PetOwnerVO vo = (PetOwnerVO) request.getSession(false).getAttribute("loginVO");
-		
+		System.out.println("타일즈 테스트");
 		return new ModelAndView("find_petOwner_treatmentRecord", "findPetResult",
 				petOwnerService.findPetListByTel(vo));
 	}
@@ -32,10 +34,10 @@ public class ViewController {
 	/**
 	 * 수의사 진료조회 페이지
 	 * @return
+	 * @author 윤아
 	 */
-	@RequestMapping("viewTreatmentRecordVetVerPage.do")
+	@RequestMapping("findTreatmentRecordPageVetView.do")
 	public String viewTreatmentRecordVetVerPage() {
-
 		return "find_vet_treatmentRecord";
 	}
 	
@@ -51,7 +53,6 @@ public class ViewController {
 		if (session == null || session.getAttribute("loginVO") == null) {
 			return "index";
 		} else {
-			System.out.println("타일즈 정상수행");
 			return "home";
 		}
 	}
@@ -120,8 +121,6 @@ public class ViewController {
 	public String treatmentRecordTest() {
 		return "find_vet_treatmentRecord";
 	}
-	
-
 	
 	/**
 	 * 수의사 회원정보수정 페이지

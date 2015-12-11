@@ -85,7 +85,7 @@
 													href="${initparam.root}registerTreatmentRecordView.do">진료등록</a>
 												</li>
 												<li><a
-													href="${initparam.root}viewTreatmentRecordVetVerPage.do">진료기록조회</a>
+													href="${initparam.root}findTreatmentRecordPageVetView.do">진료기록조회</a>
 												</li>
 											</c:when>
 											<c:when test="${sessionScope.userLevel == 'petOwner' }">
@@ -93,7 +93,7 @@
 													href="${initparam.root}registerVaccinationView.do">예방접종등록</a>
 												</li>
 												<li><a
-													href="${initparam.root}viewTreatmentRecordPage.do">진료기록조회</a>
+													href="${initparam.root}findTreatmentRecordPagePetOwnerView.do">진료기록조회</a>
 												</li>
 											</c:when>
 										</c:choose>
@@ -181,9 +181,7 @@
 		<div id="notif-group" class="tabbed_notifications"></div>
 	</div>
 	<!-- 모달 페이지 푸터에서 공통적으로 사용하는 것 테스트 -->
-	<footer>
-		<tiles:insertAttribute name="footer" />
-	</footer>
+	<tiles:insertAttribute name="modal" />
 	<!-- 부트스트랩 자바스크립트 -->
 	<script src="${initparam.root}resources/js/bootstrap.min.js"></script>
 	<!-- chart js -->
