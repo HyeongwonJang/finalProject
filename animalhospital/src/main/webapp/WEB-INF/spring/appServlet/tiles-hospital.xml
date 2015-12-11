@@ -12,6 +12,7 @@
 <tiles-definitions>
 	<definition name="*_hospital" extends="home">
 		<put-attribute name="main"  value="/WEB-INF/views/hospital/{1}_hospital.jsp"  />
+		<put-attribute name="modal" value="/WEB-INF/views/hospital/hospital_modal_page.jsp" />
 	</definition>	
 </tiles-definitions>
 
