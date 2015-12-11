@@ -20,6 +20,7 @@ public class ViewController {
 	private TreatmentService treatmentService;
 	@Resource
 	private VaccinationService vaccinationService;
+	
 	/**
 	 * 보호자 진료조회 페이지
 	 * @author 민호
@@ -28,7 +29,6 @@ public class ViewController {
 	@RequestMapping("findTreatmentRecordPagePetOwnerView.do")
 	public ModelAndView viewFindPetOwnerTreatmentRecord(HttpServletRequest request){
 		PetOwnerVO vo = (PetOwnerVO) request.getSession(false).getAttribute("loginVO");
-		System.out.println("타일즈 테스트");
 		return new ModelAndView("find_petOwner_treatmentRecord", "findPetResult",
 				petOwnerService.findPetListByTel(vo));
 	}
@@ -114,15 +114,6 @@ public class ViewController {
 		request.setAttribute("DiseaseList",treatmentService.allDiseaseList());
 		return "register_treatmentRecord";
 	}
-
-	/**
-	 * 진료조회 페이지
-	 * @return
-	 */
-	@RequestMapping("testTreatmentView.do")
-	public String treatmentRecordTest() {
-		return "find_vet_treatmentRecord";
-	}
 	
 	/**
 	 * 수의사 회원정보수정 페이지
@@ -178,4 +169,14 @@ public class ViewController {
 		return new ModelAndView("register_vet_vaccination", 
 				"VaccinationList", vaccinationService.findAllVaccination());
 	}
+	
+	/**
+	 * 보호자 예방접종조회 페이지
+	 * 
+	 */
+	@RequestMapping("findVaccinationRecordPagePetOwnerView.do")
+	public String findVaccinationRecordPagePetOwnerView(){
+		return "find_petOwner_vaccination";
+	}
+	
 }

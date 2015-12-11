@@ -93,7 +93,7 @@
 													href="${initparam.root}registerVaccinationView.do">예방접종등록</a>
 												</li>
 												<li><a
-													href="${initparam.root}findTreatmentRecordPagePetOwnerView.do">진료기록조회</a>
+													href="${initparam.root}findVaccinationRecordPagePetOwnerView.do">예방접종조회</a>
 												</li>
 												<li><a
 													href="${initparam.root}findTreatmentRecordPagePetOwnerView.do">진료기록조회</a>
