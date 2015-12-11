@@ -25,9 +25,11 @@ public class VaccinationDAOImpl implements VaccinationDAO {
 
 	@Override
 	public int registerVaccination(VaccinationRecordVO vrvo){
-		//System.out.println("date"+ vrvo);
-		//System.out.println(sqlSessionTemplate.insert("Vaccination.registerVaccination", vrvo));
 		return sqlSessionTemplate.insert("vaccination.registerVaccination", vrvo);
+	}
+	@Override
+	public int registerVetVaccination(VaccinationRecordVO vrvo){
+		return sqlSessionTemplate.insert("vaccination.registerVetVaccination", vrvo);
 	}
 
 
