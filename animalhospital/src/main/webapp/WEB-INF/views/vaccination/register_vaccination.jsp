@@ -16,13 +16,7 @@ $(function(){
 	$(document).ready(function() {
 		$(".select2_single").select2({
 			placeholder : "해당 항목을 선택해주세요",
-			allowClear : true
-		});
-		$(".select2_group").select2({});
-		$(".select2_multiple").select2({
-			maximumSelectionLength : 4,
-			placeholder : "With Max Selection limit 4",
-			allowClear : true
+			allowClear : false
 		});
 	});
 </script>
@@ -66,25 +60,26 @@ $(function(){
 	</div>
 	<div class="x_content">
 
-		<form id="vaccinationForm" action="registerVaccination_result.do" method="post">
+		<form id="vaccinationForm" action="registerVaccination.do" method="post">
 		<label for="inputInfo">예방접종일시:</label> 
-			<input type="text"  id="datepicker" class="form-control" />
+			<input type="text"  id="datepicker" class="form-control" name="vaccinationHours"/>
 			<hr><label>반려동물 이름을 선택해주세요 </label> 
-			<select class="select2_single form-control" id="petListSelect" name="petVO[0].petName">
+			<select class="select2_single form-control" id="petListSelect" name="petOwnerVO.petVO[0].petName">
 			</select>
 			<br><br>
 			<label for="inputInfo" >몸무게:</label> 
-			<input type="text" id="petWeight" class="form-control" name="petWeight" required="required"/>
-
-			 <hr> <label>예방접종종류</label> <select class="select2_single form-control"
-				tabindex="-1">
+			<input type="text" id="petWeight" class="form-control" name="petWeight" required="required" />
+			<input type="hidden" id="petOwnerNo" name="PetOwnerVO.petOwnerNo" value="${sessionScope.loginVO.petOwnerNo }" >
+			
+			 <hr> <label>예방접종종류</label> <select class="select2_single form-control" 
+			 name="vaccinationVO.vaccinationName"	required="required" tabindex="-1">
 				<c:forEach var="vaccination" items="${requestScope.VaccinationList }">
 					<option>${vaccination.vaccinationName }</option>
 				</c:forEach>
 			</select>
 			
 			<hr><label>특이사항</label>
-			<textarea class="form-control" rows="8" placeholder="특이사항을 입력해주세요"></textarea>
+			<textarea class="form-control" name="vaccinationContent" rows="8" placeholder="특이사항을 입력해주세요"></textarea>
 
 <div class="ln_solid"></div>
 			<div class="form-group">

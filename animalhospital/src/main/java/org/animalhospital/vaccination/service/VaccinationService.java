@@ -27,5 +27,5 @@ public interface VaccinationService {
 
 	public PetOwnerVO findPetListById(PetOwnerVO povo);
 
-	public void registerVaccination(VaccinationRecordVO vrvo);
+	public int registerVaccination(VaccinationRecordVO vrvo);
 }

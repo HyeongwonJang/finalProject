@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.animalhospital.petowner.model.VO.PetOwnerVO;
 import org.animalhospital.vaccination.model.VO.VaccinationRecordVO;
+import org.animalhospital.vaccination.model.VO.VaccinationVO;
 import org.animalhospital.vaccination.service.VaccinationService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,16 +24,22 @@ public class VaccinationController {
 	 * 또한 예방접종목록 정보를 호출한다
 	 * @return
 	 */
-	@RequestMapping("viewRegisterVaccination.do")
-	public ModelAndView viewRegisterVaccination(HttpServletRequest request,VaccinationRecordVO vrvo) {
-		request.setAttribute("VaccinationList", vaccinationService.findAllVaccination());
-		return new ModelAndView("register_vaccination");
-}
+	@RequestMapping("registerVaccinationView.do")
+	public ModelAndView registerVaccinationView() {
+		return new ModelAndView("register_vaccination", 
+				"VaccinationList", vaccinationService.findAllVaccination());
+	}
+
+	@RequestMapping("registerVaccination.do")
+	public String registerVaccination(VaccinationRecordVO vrvo){
+		System.out.println(vrvo);
+		vaccinationService.registerVaccination(vrvo);
+		return "redirect:registerVaccinationResult.do";
+	}
 	
-	
-	@RequestMapping("registerVaccination_result.do")
-	public String viewRegisterVaccinationResult(HttpServletRequest request, VaccinationRecordVO vrvo){
-		return "account/register_vaccination_result";
+	@RequestMapping("registerVaccinationResult.do")
+	public String registerVaccinationResult(){
+		return "vaccination/register_vaccination_result";
 	}
 	
 	

@@ -5,16 +5,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- MyBatis에서 namespace는 필수적으로 명시해야 함 -->
  <mapper namespace="vaccination">
  <resultMap type="vrvo" id="vrvoRM">
- 		<id column="Vaccination_Record_no" property="vaccinationRecordno"/>
- 		<id column="Vaccination_hours" property="vaccinationHours"/>
- 		<id column="Vaccination_content" property="vaccinationContent"/>
- 		<id column="Pet_weight" property="TreatmentRecordVO.petWeight"/>
+ 		<id column="Vaccination_Record_no" property="vaccinationRecordNo"/>
+ 		<result column="Vaccination_hours" property="vaccinationHours"/>
+ 		<result column="Vaccination_content" property="vaccinationContent"/>
+ 		<result column="Pet_weight" property="petWeight"/>
+ 		<result column="Pet_Owner_no" property="petOwnerVO.petOwnerNo"/>
  		
- 		<id column="Pet_Owner_no" property="PetOwnerVO.petOwnerNo"/>
- 		<id column="Pet_name" property="PetOwner.PetVO[0].petName"/>
- 		
- 		<id column="Vet_License_no" property="VetLicenseVO.vetLicenseNo"/>
- 		<id column="Vaccination_name" property="VaccinationVO.vaccinationName"/>
+ 		<result column="Vet_License_no" property="vetVO.vetLicenseVO.vetLicenseNo"/>
+ 		<result column="Vaccination_name" property="vaccinationVO.vaccinationName"/>
+ 		<collection property="petVO" ofType="pvo">
+ 			<id column="Pet_name" property="petName"/>
+ 		</collection>
  	</resultMap>
  	
  	<resultMap type="vavo" id="vavoRM">
@@ -28,26 +29,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			
  	<resultMap type="povo" id="povoRM">
  		<id column="Pet_Owner_no" property="petOwnerNo"/>
- 		<id column="Pet_Owner_tel" property="petOwnerTel"/>
- 		<id column="Pet_Owner_name" property="petOwnerName"/>
- 		<id column="Pet_Owner_id" property="petOwnerId"/>
- 		<id column="Pet_Owner_password" property="petOwnerPassword"/>
- 		<id column="Pet_Owner_address" property="petOwnerAddress"/>
+ 		<result column="Pet_Owner_tel" property="petOwnerTel"/>
+ 		<result column="Pet_Owner_name" property="petOwnerName"/>
+ 		<result column="Pet_Owner_id" property="petOwnerId"/>
+ 		<result column="Pet_Owner_password" property="petOwnerPassword"/>
+ 		<result column="Pet_Owner_address" property="petOwnerAddress"/>
  		<collection property="petVO" ofType="pvo">
- 			<id column="Pet_name" property="petName"/>
- 			<id column="Pet_birthday" property="petBirthday"/>
- 			<id column="Pet_gender" property="petGender"/>
- 			<id column="Pet_note" property="petNote"/>
- 			<id column="Animal_kind_name" property="animalKindName"/>
+ 			<result column="Pet_name" property="petName"/>
+ 			<result column="Pet_birthday" property="petBirthday"/>
+ 			<result column="Pet_gender" property="petGender"/>
+ 			<result column="Pet_note" property="petNote"/>
+ 			<result column="Animal_kind_name" property="animalKindName"/>
  		</collection>
  	</resultMap>		
  	
  	<!-- 예방접종 등록 -->
- 	<insert id="registerVaccination" parameterType="vrvo">
- 		insert into Vaccination_Record(Vaccination_Record_no,Vaccination_hours,Vaccination_content
- 		Pet_weight,Pet_Owner_no,Pet_name,Vet_License_no,Vaccination_name) 
- 		values(Vaccination_Record_no.nextVal,sysdate,#{vaccinationContent},#{TreatmentRecordVO.petWeight},
- 		#{PetOwnerVO.petOwnerNo},#{PetOwner.PetVO[0].petName},null,#{VaccinationVO.vaccinationName}))
+ 	<insert id="registerVaccination">
+ 		insert into Vaccination_Record(Vaccination_Record_no, Vaccination_hours, Vaccination_content,
+ 		Pet_weight, Pet_Owner_no, Pet_name, Vet_License_no, Vaccination_name) 
+ 		values(Vaccination_Record_no.nextval, sysdate, #{vaccinationContent}, #{petWeight},
+ 		#{petOwnerVO.petOwnerNo}, #{petOwnerVO.petVO[0].petName}, null, #{vaccinationVO.vaccinationName})
  	</insert>	
  	
  	

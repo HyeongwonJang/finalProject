@@ -9,7 +9,7 @@ import org.animalhospital.vaccination.model.VO.VaccinationVO;
 
 public interface VaccinationDAO {
 
-	public void registerVaccination(VaccinationRecordVO vrvo);
+	
 	
 	/**
 	 * 질병목록을 전부 다 가져오는 서비스
@@ -20,6 +20,8 @@ public interface VaccinationDAO {
 	public List<DiseaseVO> findAllDisease();
 
 	public PetOwnerVO findPetListById(PetOwnerVO povo);
+
+	public int registerVaccination(VaccinationRecordVO vrvo);
 
 	
 }

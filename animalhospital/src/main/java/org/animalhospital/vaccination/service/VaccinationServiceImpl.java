@@ -25,8 +25,8 @@ public class VaccinationServiceImpl implements VaccinationService {
 	 * @see org.animalhospital.vaccination.service.VaccinationService#registerVaccination(org.animalhospital.vaccination.model.VO.VaccinationVO)
 	 */
 	@Override
-	public void registerVaccination(VaccinationRecordVO vrvo){
-		vaccinationDAO.registerVaccination(vrvo);
+	public int registerVaccination(VaccinationRecordVO vrvo){
+		return vaccinationDAO.registerVaccination(vrvo);
 	}
 
 	@Override

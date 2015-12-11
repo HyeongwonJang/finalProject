@@ -22,9 +22,10 @@ public class VaccinationDAOImpl implements VaccinationDAO {
 	 * @see org.animalhospital.vaccination.model.DAO.VaccinationDAO#registerVaccination(org.animalhospital.vaccination.model.VO.VaccinationVO)
 	 */
 	@Override
-	public void registerVaccination(VaccinationRecordVO vrvo){
-		System.out.println("date"+ vrvo);
-		sqlSessionTemplate.insert("Vaccination.registerVaccination", vrvo);
+	public int registerVaccination(VaccinationRecordVO vrvo){
+		//System.out.println("date"+ vrvo);
+		//System.out.println(sqlSessionTemplate.insert("Vaccination.registerVaccination", vrvo));
+		return sqlSessionTemplate.insert("vaccination.registerVaccination", vrvo);
 	}
 
 
