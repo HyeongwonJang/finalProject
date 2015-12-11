@@ -24,9 +24,6 @@
 					$("#modalPetOwnerName").text(findTreatmentRecordDetaileResult.petOwnerVO.petOwnerName);
 					$("#modalPetOwnerTel").text(findTreatmentRecordDetaileResult.petOwnerVO.petOwnerTel);
 					$("#modalRecordContent").text(findTreatmentRecordDetaileResult.treatmentContent);
-					$("#modalDiseaseName").text(findTreatmentRecordDetaileResult.diseaseVO.diseaseName);
-					$("#modalDiseaseSymptom").text(findTreatmentRecordDetaileResult.diseaseVO.diseaseSymptom)
-					
 				}
 			});
 			$('div.modal').modal({});
@@ -38,7 +35,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-           	<h4 class="modal-title">진료기록상세</h4>
+           	<h4 class="modal-title">예방접종상세</h4>
            	<p class="text-right">진료일시: 
            		<strong id="modalRecordHours"></strong>
            	</p>
@@ -108,16 +105,12 @@
                 </tr>
                 <tr>
                   <td align="center">
-                    <b>질병</b>
+                    <b>예방접종</b>
                   </td>
                   <td>
-                    <b>질병명</b>
+                    <b>예방접종명</b>
                   </td>
-                  <td colspan="2" id="modalDiseaseName"></td>
-                  <td>
-                    <b>증상</b>
-                  </td>
-                  <td colspan="5" id="modalDiseaseSymptom"></td>
+                  <td colspan="7" id="modalVaccinationName"></td>
                 </tr>
                 <tr>
                   <td colspan="9" align="center">

@@ -7,14 +7,40 @@
 <c:if test="${continueParam['listVO'] ne null}">
 	<script type="text/javascript">
 		$(document).ready(function() {
+			//startDat, endDate, petOwnerTel 검색조건 유지
 			$('#daterangePicker span').html("${continueParam['listVO'].startDate}" 
 					+ ' - ' + "${continueParam['listVO'].endDate}");
 	        $('#startDate').attr('value', "${continueParam['listVO'].startDate}");
 	  		$('#endDate').attr('value', "${continueParam['listVO'].endDate}");
-	  		
+	    	$("#petOwnerTel").val("${continueParam['povo'].petOwnerTel}");
+	    	
+	    	//petOwnerTel 검색조건을 이용하여 반려동물 이름 리스트를 가져온다
+	    	$.ajax({
+			    type: "post", // get 또는 post로 설정
+			    url: "findPetListByTel.do", // 이동할 url 설정
+			    data: "petOwnerTel="+$("#petOwnerTel").val(),
+			    dataType:"json",      
+			    success: function(petList){		     
+			   		var searchPetList = '';
+			    	$.each(petList.petVO, function(li) {
+			    		searchPetList += "<option value=" + petList.petVO[li].petName +">"
+			    						+ petList.petVO[li].petName +"</option>";
+			    	});
+			    	$("#petListSelect").html(searchPetList);
+			    	// 검색조건(petName)을 유지시킨다
+					$("#petListSelect").val("${continueParam['povo'].petVO[0].petName}").attr("selected", "selected");
+			    	
+			    	$(".select2_single").select2({
+						placeholder : "해당 항목을 선택해주세요",
+						allowClear : false
+					});
+					
+				}	
+			});
 		});
 	</script>
 </c:if>
+
 <!-- 유지되는 매개변수가 없을 시 moment.js를 이용하여 현재 시간에 맞추어서 날짜를 세팅한다 -->
 <c:if test="${continueParam['listVO'] eq null}">
 	<script type="text/javascript">
@@ -27,36 +53,35 @@
 		});
 	</script>
 </c:if>
-           
+             
 <script type="text/javascript">
 	$(document).ready(function() {
-		// 페이지 로딩 시 자동으로 ajax를 실행하여 petList를 가져온다
-		$.ajax({
-			    type: "post", // get 또는 post로 설정
-			    url: "findPetListByTel.do", // 이동할 url 설정
-			    data: "petOwnerTel="+$("#petOwnerTel").val(),
-			    dataType:"json",      
-			    success: function(petList){
-			    	//alert(petList.petVO[0].petName)
-			     
-			   		var searchPetList = '';
-			    	$.each(petList.petVO, function(li) {
-			    		searchPetList += "<option value=" + petList.petVO[li].petName +">"
-			    						+ petList.petVO[li].petName +"</option>";
-			    	});
-			    	//alert("옵션 결과: " + searchPetList);
-			    	$("#petListSelect").html(searchPetList);
-			    	// 검색조건(petName)을 유지시킨다
-			    	$("#petListSelect").val("${continueParam['povo'].petVO[0].petName}").attr("selected", "selected");
-			    	
-			    	$(".select2_single").select2({
-						placeholder : "해당 항목을 선택해주세요",
-						allowClear : false
-					});
-					
-			    }	
+		// 보호자 전화번호를 입력하면 자동으로 PetNameList를 가져온다
+		$("#petOwnerTel").keyup(function(){
+			if($(this).val().length>=10){
+				$.ajax({
+				    type: "post", // get 또는 post로 설정
+				    url: "findPetListByTel.do", // 이동할 url 설정
+				    data: "petOwnerTel="+$(this).val(),
+				    dataType:"json",      
+				    success: function(petList){		     
+				   		var searchPetList = '';
+				    	$.each(petList.petVO, function(li) {
+				    		searchPetList += "<option value=" + petList.petVO[li].petName +">"
+				    						+ petList.petVO[li].petName +"</option>";
+				    	});
+				    	$("#petListSelect").html(searchPetList);
+
+				    	$(".select2_single").select2({
+							placeholder : "해당 항목을 선택해주세요",
+							allowClear : false
+						});
+					}	
+				});
+			}
 		});
 		
+
 		// submit 버튼 클릭시 실행되는 함수
 		// 페이지 값이 공백이면 1페이지부터 시작한다
 		$("#recordSearchForm").submit(function() {
@@ -85,7 +110,8 @@
 			$("#page").val("${requestScope.recordList.pagingBean.startPageOfPageGroup-1}");
 			$("#recordSearchForm").submit();	
 		});
-	});	
+		
+	});
 </script>
 
 
@@ -99,11 +125,14 @@
 	<!-- 데이터 입력부분 -->
 	<div class="x_content">
 		<form action="findVaccinationRecordByPetOwnerTelAndPetName.do" method="post" id="recordSearchForm">
+			<label>반려동물 보호자 전화번호:</label>
+			<input type="text" class="form-control" name="petOwnerTel" id="petOwnerTel"
+				placeholder="보호자의 전화번호를 입력해주세요" required="required">
+			<p>
 			<label>반려동물명:</label>
-			<select class="select2_single form-control" id="petListSelect" name="petVO[0].petName" required="required">
+			<select class="select2_single form-control" id="petListSelect" name="petVO[0].petName">
 			</select>
-			<br>
-			
+			<p>
 			<div class="form-group">
 				<label>검색 기간: </label>	
 				<div id="daterangePicker" class=""
@@ -115,9 +144,7 @@
 					<b 	class="caret"></b>
 				</div>
 			</div>
-			<input type="hidden" name="petOwnerNo" value="${sessionScope.loginVO.petOwnerNo}">
 			<input type="hidden" id="page" name="page">
-			<input type="hidden"name="petOwnerTel" id="petOwnerTel" value="${sessionScope.loginVO.petOwnerTel}">
 			<button type="submit" class="btn btn-default" id="recordSearchBtn">검색</button>
 		</form>
 		<hr>
@@ -134,8 +161,7 @@
 		</c:if>
 		
 		<c:if test="${fn:length(recordList.list) != 0}">
-			<table
-			class="table table-striped responsive-utilities jambo_table bulk_action">
+			<table class="table table-striped responsive-utilities jambo_table bulk_action">
 			<thead>
 				<tr class="headings">
 					<th class="column-title">No.</th>
@@ -143,7 +169,7 @@
 					<th class="column-title">접종시간</th>
 					<th class="column-title">반려동물명</th>
 					<th class="column-title">보호자명</th>
-					<th class="column-title no-link last"><span class="nobr">상세조회</span></th>
+					<th class="column-title">상세조회</th>
 				</tr>
 			</thead>
 			<!-- 페이지 부분 -->
@@ -154,7 +180,7 @@
 			    	<td>${ recordList.vaccinationVO.vaccinationName }</td>
 			    	<td>${ recordList.vaccinationHours }</td>
 			    	<td>${ recordList.petOwnerVO.petVO[0].petName }</td>
-			    	<td>${sessionScope.loginVO.petOwnerName}</td>
+			    	<td>${recordList.petOwnerVO.petOwnerName}</td>
 			    	<td class=" last"><a class="detailView">View</a></td>
 			    	</tr>
 				</c:forEach>	
@@ -187,6 +213,6 @@
             </div>
   			<div class="col-md-4"></div>
 		</div>
-        	</c:if>
-        </div>	
+		</c:if>
+	</div>	
 	</div>

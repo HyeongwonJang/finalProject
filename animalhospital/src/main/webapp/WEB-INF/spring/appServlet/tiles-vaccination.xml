@@ -12,6 +12,7 @@
 <tiles-definitions>
 	<definition name="*_vaccination" extends="home">
 		<put-attribute name="main"  value="/WEB-INF/views/vaccination/{1}_vaccination.jsp"  />
+		<put-attribute name="modal"  value="/WEB-INF/views/vaccination/vaccination_modal_page.jsp"  />
 	</definition>	
 	
 </tiles-definitions>

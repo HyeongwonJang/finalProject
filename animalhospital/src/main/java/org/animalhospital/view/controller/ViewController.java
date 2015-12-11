@@ -178,5 +178,13 @@ public class ViewController {
 	public String findVaccinationRecordPagePetOwnerView(){
 		return "find_petOwner_vaccination";
 	}
+	/**
+	 * 수의사 예방접종조회 페이지
+	 * 
+	 */
+	@RequestMapping("findVaccinationRecordPageVetView.do")
+	public String findVaccinationRecordPageVetView(){
+		return "find_vet_vaccination";
+	}
 	
 }

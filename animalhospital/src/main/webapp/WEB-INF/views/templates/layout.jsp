@@ -79,7 +79,7 @@
 										<c:choose>
 											<c:when test="${sessionScope.userLevel == 'vet' }">
 												<li><a
-													href="${initparam.root}registerTreatmentRecordView.do">진료등록</a>
+													href="${initparam.root}registerTreatmentRecordView.do">진료기록등록</a>
 												</li>
 												<li><a
 													href="${initparam.root}findTreatmentRecordPageVetView.do">진료기록조회</a>
@@ -87,13 +87,16 @@
 												<li><a
 													href="${initparam.root}viewVaccinationVetVerPage.do">예방접종등록</a>
 												</li>
+												<li>
+												<a href="${initparam.root}findVaccinationRecordPageVetView.do">예방접종조회</a>
+												</li>
 											</c:when>
 											<c:when test="${sessionScope.userLevel == 'petOwner' }">
 												<li><a
 													href="${initparam.root}registerVaccinationView.do">예방접종등록</a>
 												</li>
-												<li><a
-													href="${initparam.root}findVaccinationRecordPagePetOwnerView.do">예방접종조회</a>
+												<li>
+												<a href="${initparam.root}findVaccinationRecordPagePetOwnerView.do">예방접종조회</a>
 												</li>
 												<li><a
 													href="${initparam.root}findTreatmentRecordPagePetOwnerView.do">진료기록조회</a>
