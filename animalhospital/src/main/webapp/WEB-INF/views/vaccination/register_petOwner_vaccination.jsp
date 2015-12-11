@@ -2,15 +2,7 @@
     pageEncoding="UTF-8"%>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<!-- 달력 -->
-<script type="text/javascript">
-$(function(){
-		$("#datepicker").datepicker({
-			dateFormat:"yy-mm-dd",
-			dayNamesMin:['일','월','화','수','목','금','토']
-		});
-});		
-</script>
+
 <!-- select2 -->
 <script>
 	$(document).ready(function() {

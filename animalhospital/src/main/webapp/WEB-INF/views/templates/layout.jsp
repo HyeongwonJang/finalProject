@@ -87,6 +87,9 @@
 												<li><a
 													href="${initparam.root}findTreatmentRecordPageVetView.do">진료기록조회</a>
 												</li>
+												<li><a
+													href="${initparam.root}viewVaccinationVetVerPage.do">예방접종등록</a>
+												</li>
 											</c:when>
 											<c:when test="${sessionScope.userLevel == 'petOwner' }">
 												<li><a

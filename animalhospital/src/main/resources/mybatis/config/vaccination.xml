@@ -46,7 +46,56 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		#{petOwnerVO.petOwnerNo}, #{petOwnerVO.petVO[0].petName}, #{hospitalVO.vetList[0].vetLicenseVO.vetLicenseNo}, #{vaccinationVO.vaccinationName})
  	</insert>	
  	
+ 	<!-- 예방접종 조회 페이징, 기간 미적용 Version-->
+<!--  	<select id="findVaccinationRecordByPetOwnerTelAndPetName" parameterType="vrvo"    resultMap="vrvoRM">
+		select vr.Vaccination_Record_no, 
+			to_char(vr.Vaccination_hours, 'YYYY-MM-DD') as Vaccination_hours, 
+			po.Pet_Owner_name, 
+			vr.Vaccination_name 
+		from VACCINATION_RECORD vr, VACCINATION v, PET_OWNER po 
+		where vr.Pet_Owner_no=po.Pet_Owner_no
+			and vr.Vaccination_name=v.Vaccination_name
+			and vr.Pet_name=#{petOwnerVO.petVO[0].petName} 
+			and po.Pet_Owner_tel=#{petOwnerVO.petOwnerTel}
+ 	</select> 
+ 	 -->
  	
+ 	 <!-- 예방접종 조회 기간 적용 Version-->
+ 	<select id="findVaccinationRecordByPetOwnerTelAndPetName" parameterType="map"    resultMap="vrvoRM">
+ 		select Vaccination_Record_no, Vaccination_hours,
+				Vaccination_name, Pet_Owner_name 
+		from(
+			select Vaccination_Record_no, Vaccination_hours, 
+				Vaccination_name, Pet_Owner_name, 
+				ceil(rownum/5) as page from(
+				select vr.Vaccination_Record_no, 
+					to_char(vr.Vaccination_hours, 'YYYY-MM-DD') as Vaccination_hours, 
+					po.Pet_Owner_name, 
+					vr.Vaccination_name 
+				from VACCINATION_RECORD vr, VACCINATION v, PET_OWNER po 
+				where vr.Pet_Owner_no=po.Pet_Owner_no
+					and vr.Vaccination_name=v.Vaccination_name
+					and vr.Pet_name=#{povo.petVO[0].petName} 
+					and po.Pet_Owner_tel=#{povo.petOwnerTel}
+					and vr.Vaccination_hours
+						between to_date(#{listVO.startDate}, 'YYYY-MM-DD') 
+						and to_date(#{listVO.endDate}, 'YYYY-MM-DD') + 0.9999
+				order by vr.Vaccination_Record_no desc
+				)
+		) where page = #{listVO.page}
+ 	</select>
+ 	
+ 	<select id="findAllVaccinationRecord"  parameterType="map" resultType="int"> 
+		select count(*)
+		from Vaccination_RECORD vr, VACCINATION v, PET_OWNER po 
+		where vr.Vaccination_name = v.Vaccination_name
+			and vr.Pet_Owner_no = po.Pet_Owner_no 
+			and vr.Pet_name = #{povo.petVO[0].petName}
+			and vr.Vaccination_hours 
+				between to_date(#{listVO.startDate}, 'YYYY-MM-DD') and to_date(#{listVO.endDate}, 'YYYY-MM-DD')
+	</select>
+ 	
+ 
  	<!-- 백신 목록리스트 조회 -->
  	<select id="findAllVaccination" resultMap="vavoRM">
  		select Vaccination_name from Vaccination
