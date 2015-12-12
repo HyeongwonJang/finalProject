@@ -1,21 +1,14 @@
 package org.animalhospital.petowner;
 
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import javax.annotation.Resource;
 
-import org.animalhospital.paging.model.VO.ListVO;
 import org.animalhospital.petowner.model.DAO.PetOwnerDAO;
-import org.animalhospital.petowner.model.VO.PetOwnerVO;
-import org.animalhospital.petowner.model.VO.PetVO;
 import org.animalhospital.petowner.service.PetOwnerService;
 import org.animalhospital.treatment.model.DAO.TreatmentDAO;
 import org.animalhospital.treatment.service.TreatmentService;
 import org.animalhospital.vaccination.model.DAO.VaccinationDAO;
+import org.animalhospital.vaccination.service.VaccinationService;
 import org.animalhospital.vet.model.DAO.VetDAO;
 import org.animalhospital.vet.model.VO.VetLicenseVO;
 import org.animalhospital.vet.service.VetService;
@@ -44,10 +37,12 @@ public class TestJUnit {
 	private TreatmentService treatmentService;
 	@Resource
 	private VaccinationDAO vaccinationDAO;
+	@Resource
+	private VaccinationService vaccinationService;
 	
 	@Test
 	public void TestDao2(){
-		PetOwnerVO paramVO = new PetOwnerVO();
+		/*PetOwnerVO paramVO = new PetOwnerVO();
 		List<PetVO> petList = new ArrayList<PetVO>();
 		PetVO petVO = new PetVO();
 		petVO.setPetName("송이");
@@ -59,7 +54,7 @@ public class TestJUnit {
 		//System.out.println("동물:"paramVO.getPetVO().get(0));
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("povo", paramVO);
-		map.put("listVO", listVO);
+		map.put("listVO", listVO);*/
 		//System.out.println("매개변수:" + map);
 		//System.out.println(PetOwnerDAO.findPetByTel(paramVO));
 		//System.out.println(treatmentService.findTreatmentRecordByNoAndName(map));
@@ -73,5 +68,6 @@ public class TestJUnit {
 		System.out.println("진료기록 상세조회 : " + treatmentService.findDetailTreatmentRecordByTreatmentNo(1));*/
 		VetLicenseVO vo = new VetLicenseVO(4, "이윤아", 0, null);
 		System.out.println("서비스 테스트:" + vetService.checkVetLicense(vo));
+		System.out.println(vaccinationService.findDetailVaccinationRecordByVaccinationRecordNo(1));
 	}
 }
