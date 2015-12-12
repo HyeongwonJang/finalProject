@@ -40,27 +40,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	
  	<!-- 예방접종 등록 -->
  	<insert id="registerVaccination">
- 		insert into Vaccination_Record(Vaccination_Record_no, Vaccination_hours, Vaccination_content,
- 		Pet_weight, Pet_Owner_no, Pet_name, Vet_License_no, Vaccination_name) 
- 		values(Vaccination_Record_no.nextval, sysdate, #{vaccinationContent}, #{petWeight},
- 		#{petOwnerVO.petOwnerNo}, #{petOwnerVO.petVO[0].petName}, #{hospitalVO.vetList[0].vetLicenseVO.vetLicenseNo}, #{vaccinationVO.vaccinationName})
+ 		insert into Vaccination_Record(
+ 			Vaccination_Record_no, 
+ 			Vaccination_hours, 
+ 			Vaccination_content,
+ 			Pet_weight, 
+ 			Pet_Owner_no, 
+ 			Pet_name, 
+ 			Vet_License_no, 
+ 			Vaccination_name
+ 		) 
+ 		values(
+ 			Vaccination_Record_no.nextval, 
+ 			sysdate, 
+ 			#{vaccinationContent}, 
+ 			#{petWeight},
+ 			#{petOwnerVO.petOwnerNo}, 
+ 			#{petOwnerVO.petVO[0].petName},
+ 			#{hospitalVO.vetList[0].vetLicenseVO.vetLicenseNo}, 
+ 			#{vaccinationVO.vaccinationName})
  	</insert>	
- 	
- 	<!-- 예방접종 조회 페이징, 기간 미적용 Version-->
-<!--  	<select id="findVaccinationRecordByPetOwnerTelAndPetName" parameterType="vrvo"    resultMap="vrvoRM">
-		select vr.Vaccination_Record_no, 
-			to_char(vr.Vaccination_hours, 'YYYY-MM-DD') as Vaccination_hours, 
-			po.Pet_Owner_name, 
-			vr.Vaccination_name 
-		from VACCINATION_RECORD vr, VACCINATION v, PET_OWNER po 
-		where vr.Pet_Owner_no=po.Pet_Owner_no
-			and vr.Vaccination_name=v.Vaccination_name
-			and vr.Pet_name=#{petOwnerVO.petVO[0].petName} 
-			and po.Pet_Owner_tel=#{petOwnerVO.petOwnerTel}
- 	</select> 
- 	 -->
- 	
- 	 <!-- 예방접종 조회 기간 적용 Version-->
+
+
+ 	 <!-- 예방접종 조회 -->
  	<select id="findVaccinationRecordByPetOwnerTelAndPetName" parameterType="map"    resultMap="vrvoRM">
  		select Vaccination_Record_no, Vaccination_hours,
 				Vaccination_name, Pet_Owner_name 
@@ -84,7 +86,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				)
 		) where page = #{listVO.page}
  	</select>
- 	
  	<select id="findAllVaccinationRecord"  parameterType="map" resultType="int"> 
 		select count(*)
 		from Vaccination_RECORD vr, VACCINATION v, PET_OWNER po 
@@ -95,6 +96,34 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				between to_date(#{listVO.startDate}, 'YYYY-MM-DD') and to_date(#{listVO.endDate}, 'YYYY-MM-DD')
 	</select>
  	
+ 	
+ 	
+ 	
+	<!-- 예방접종 상세페이지 조회, 예방접종 번호로 조회한다 -->
+	<!-- 펫에 대한 정보를 resultMap으로 분류가 불가능하여
+		  select문을 두 개로 나눈다 -->
+	<select id="findDetailVaccinationRecordByVaccinationRecordNo" resultMap="vrvoRM" parameterType="int">
+		select 
+			vr.Vaccination_hours, vr.Vaccination_name, 
+			po.Pet_Owner_name, po.Pet_Owner_tel, 
+			vr.Pet_weight, vl.Vet_name, 
+			h.Hospital_name, h.Hospital_tel 
+		from VACCINATION_RECORD vr, PET_OWNER po, VET_LICENSE vl, VET v, HOSPITAL h, VACCINATION va 
+		where vr.pet_owner_no = po.pet_owner_no 
+			and vr.Vaccination_name = va.Vaccination_name 
+			and vr.Vet_License_no = vl.Vet_License_no(+) 
+			and vl.Vet_License_no = v.Vet_License_no(+)
+			and v.Hospital_id = h.Hospital_id(+) 
+			and Vaccination_Record_no = #{value}
+	</select>
+	<select id="findDetailPetRecordByVaccinationtRecordNo" resultMap="pvoRM" parameterType="int">
+	 	select p.pet_name, p.pet_gender, p.Animal_kind_name, p.Pet_birthday
+		from PET p, VACCINATION_RECORD vr 
+		where vr.pet_owner_no = p.pet_owner_no
+		and vr.pet_name = p.pet_name
+		and Vaccination_Record_no = #{value}
+	 </select>
+ 
  
  	<!-- 백신 목록리스트 조회 -->
  	<select id="findAllVaccination" resultMap="vavoRM">
