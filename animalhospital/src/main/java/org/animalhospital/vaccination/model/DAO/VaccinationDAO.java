@@ -18,11 +18,10 @@ public interface VaccinationDAO {
 			Map<String, Object> paramMap);
 
 	public int findAllVaccinationRecord(Map<String, Object> paramMap);
-
 	public VaccinationRecordVO findDetailVaccinationRecordByVaccinationRecordNo(
 			int vaccinationRecordNo);
-
 	public PetVO findDetailPetRecordByVaccinationtRecordNo(int vaccinationRecordNo);
+	int registerVetVaccination(VaccinationRecordVO vrvo);
 
 	
 }

@@ -101,4 +101,9 @@ public class VetController {
 //		request.getSession().setAttribute("loginVO", hospitalVO);
 		return "home";
 	}
+	@RequestMapping("findHospitalDetail.do")
+	public String findHospitalDetail(String hospitalId) {
+		System.out.println(hospitalId);
+		return "hello";
+	}
 }

@@ -34,8 +34,11 @@ public class VaccinationController {
 	public String registerVaccination(HttpServletRequest request, VaccinationRecordVO vrvo){
 		if(request.getSession().getAttribute("userLevel").equals("vet")){
 			vrvo.setHospitalVO(((HospitalVO)request.getSession().getAttribute("loginVO")));
+			vaccinationService.registerVetVaccination(vrvo);
 		}
-		vaccinationService.registerVaccination(vrvo);
+		else{
+			vaccinationService.registerVaccination(vrvo);
+		}
 		return "redirect:registerVaccinationResult.do";
 	}
 	@RequestMapping("registerVaccinationResult.do")

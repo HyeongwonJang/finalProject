@@ -30,7 +30,10 @@ public class VaccinationServiceImpl implements VaccinationService {
 	public int registerVaccination(VaccinationRecordVO vrvo){
 		return vaccinationDAO.registerVaccination(vrvo);
 	}
-
+	@Override
+	public int registerVetVaccination(VaccinationRecordVO vrvo){
+		return vaccinationDAO.registerVetVaccination(vrvo);
+	}
 	@Override
 	public PetOwnerVO findPetByTel(PetOwnerVO povo) {
 		return petOwnerDAO.findPetByTel(povo);

@@ -8,19 +8,20 @@
 			$.ajax({
 			    type: "post", // get 또는 post로 설정
 			    url: "findHospital.do", // 이동할 url 설정
-			    data: $("#"findHospitalForm").serialize(),
+			    data: $("#findHospitalForm").serialize(),
 			    dataType:"json",      
 			    success: function(hospitalList){
 			    	var str = "";
 			    	$.each(hospitalList, function(index) {
 			    		//alert(hospitalList[index].hospitalName);
 						str += "<tr class='odd pointer'>";
+						str += "<td style ='display:none;'>" + ( hospitalList[index].hospitalId) + "</td>";
 			    		str += "<td>" + ( hospitalList[index].hospitalName ) + "</td>";
 			    		str += "<td>" + ( hospitalList[index].hospitalAddress ) + "</td>";
 			    		str += "<td>" + ( hospitalList[index].hospitalTel ) + "</td>";
-				    	str += "<td class='last'><a href='#'>View</a></td></tr>";
+				    	str += "<td class='detailView'><a href='#'>View</a></td></tr>";
 			    	});
-			    	$("#hospitalInfo").html("<tr class='headings'><th class='column-title'>병원 이름</th>	<th class='column-title'>주소</th><th class='column-title'>전화번호</th><th class='column-title no-link last'><span class='nobr'>상세조회</span></th></tr>");
+			    	$("#hospitalInfo").html("<tr class='headings'><th class='column-title' style ='display:none;'>병원 번호</th><th class='column-title'>병원 이름</th><th class='column-title'>주소</th><th class='column-title'>전화번호</th><th class='column-title no-link last'><span class='nobr'>상세조회</span></th></tr>");
 					$("#hospitalListInfo").html(str);
 			    }
 			});
