@@ -1,3 +1,7 @@
+select count(*)
+		from vet
+		where vet_tel='01011112222'
+
 select p.pet_name, p.pet_gender, p.Animal_kind_name, p.Pet_birthday
 		from PET p, TREATMENT_RECORD t
 		where t.pet_owner_no = p.pet_owner_no

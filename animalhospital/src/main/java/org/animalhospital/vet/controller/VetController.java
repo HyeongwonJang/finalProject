@@ -22,6 +22,12 @@ public class VetController {
 	@Resource
 	private VetService vetService;
 	
+	@RequestMapping("checkVetByTel.do")
+	@ResponseBody
+	public int checkVetByTel(VetVO vetVO){
+		return vetService.checkVetByTel( vetVO);
+	}
+	
 	@RequestMapping("test.do")
 	public String test(HospitalVO vo, VetVO vvo){
 		vo.addListObject(vvo);

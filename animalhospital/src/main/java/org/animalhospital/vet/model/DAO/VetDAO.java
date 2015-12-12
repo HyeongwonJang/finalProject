@@ -48,4 +48,5 @@ public interface VetDAO {
 	public List<HospitalVO> findAllHospital();
 	public int updateVet(HospitalVO hospitalVO);
 	public List<VetLicenseVO> findVetLicenseByHospitalId(String hospitalId);
+	public int checkVetByTel(VetVO vetVO);
 }
