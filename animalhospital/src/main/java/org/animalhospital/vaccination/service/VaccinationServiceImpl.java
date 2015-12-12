@@ -9,7 +9,6 @@ import org.animalhospital.paging.model.VO.ListVO;
 import org.animalhospital.petowner.model.DAO.PetOwnerDAO;
 import org.animalhospital.petowner.model.VO.PetOwnerVO;
 import org.animalhospital.petowner.model.VO.PetVO;
-import org.animalhospital.treatment.model.VO.TreatmentRecordVO;
 import org.animalhospital.vaccination.model.DAO.VaccinationDAO;
 import org.animalhospital.vaccination.model.VO.VaccinationRecordVO;
 import org.animalhospital.vaccination.model.VO.VaccinationVO;
@@ -41,16 +40,6 @@ public class VaccinationServiceImpl implements VaccinationService {
 	public List<VaccinationVO> findAllVaccination() {
 		return vaccinationDAO.findAllVaccination();
 	}
-/*	
-	@Override
-	public List<DiseaseVO> findAllDisease(){
-		return vaccinationDAO.findAllDisease();
-	}
-	
-	@Override
-	public PetOwnerVO findPetListById(PetOwnerVO povo) {
-		return vaccinationDAO.findPetListById(povo);
-	}*/
 
 	@Override
 	public ListVO findVaccinationRecordByPetOwnerTelAndPetName(
@@ -64,5 +53,15 @@ public class VaccinationServiceImpl implements VaccinationService {
 		listVO.getPagingBean().setNowPage(((ListVO) paramMap.get("listVO")).getPage());
 		listVO.getPagingBean().setTotalContents(vaccinationDAO.findAllVaccinationRecord(paramMap));
 		return listVO;
+	}
+
+	@Override
+	public VaccinationRecordVO findDetailVaccinationRecordByVaccinationRecordNo(
+			int vaccinationRecordNo) {
+		PetVO detailPetVO = vaccinationDAO.findDetailPetRecordByVaccinationtRecordNo(vaccinationRecordNo);
+		System.out.println(detailPetVO);
+		VaccinationRecordVO searchVaccinationVO = vaccinationDAO.findDetailVaccinationRecordByVaccinationRecordNo(vaccinationRecordNo);
+		searchVaccinationVO.getPetOwnerVO().addPetVO(detailPetVO);
+		return searchVaccinationVO;
 	}
 }

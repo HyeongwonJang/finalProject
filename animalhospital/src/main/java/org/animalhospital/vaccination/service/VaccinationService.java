@@ -24,4 +24,7 @@ public interface VaccinationService {
 
 	public ListVO findVaccinationRecordByPetOwnerTelAndPetName(
 			Map<String, Object> paramMap);
+
+	public VaccinationRecordVO findDetailVaccinationRecordByVaccinationRecordNo(
+			int vaccinationRecordNo);
 }

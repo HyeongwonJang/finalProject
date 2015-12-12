@@ -5,8 +5,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.animalhospital.petowner.model.VO.PetOwnerVO;
-import org.animalhospital.treatment.model.VO.DiseaseVO;
+import org.animalhospital.petowner.model.VO.PetVO;
 import org.animalhospital.vaccination.model.VO.VaccinationRecordVO;
 import org.animalhospital.vaccination.model.VO.VaccinationVO;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -18,10 +17,6 @@ public class VaccinationDAOImpl implements VaccinationDAO {
 	@Resource
 	private SqlSessionTemplate sqlSessionTemplate;
 	
-	@Override
-	public List<VaccinationRecordVO> findVaccinationRecordByPetOwnerTelAndPetName(VaccinationRecordVO vrvo){
-		return sqlSessionTemplate.selectList("vaccination.findVaccinationRecordByPetOwnerTelAndPetName",vrvo);
-	}
 
 	@Override
 	public int registerVaccination(VaccinationRecordVO vrvo){
@@ -42,9 +37,21 @@ public class VaccinationDAOImpl implements VaccinationDAO {
 		return sqlSessionTemplate.selectList("vaccination.findVaccinationRecordByPetOwnerTelAndPetName", paramMap);
 	}
 
+
 	@Override
 	public int findAllVaccinationRecord(Map<String, Object> paramMap) {
 		return sqlSessionTemplate.selectOne("vaccination.findAllVaccinationRecord", paramMap);
+	}
+
+	@Override
+	public VaccinationRecordVO findDetailVaccinationRecordByVaccinationRecordNo(
+			int vaccinationRecordNo) {
+		return sqlSessionTemplate.selectOne(
+				"vaccination.findDetailVaccinationRecordByVaccinationRecordNo",vaccinationRecordNo);
+	}
+	@Override
+	public PetVO findDetailPetRecordByVaccinationtRecordNo(int vaccinationRecordNo){
+		return sqlSessionTemplate.selectOne("vaccination.findDetailPetRecordByVaccinationtRecordNo", vaccinationRecordNo);
 	}
 
 }

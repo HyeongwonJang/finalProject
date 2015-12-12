@@ -1,7 +1,6 @@
 package org.animalhospital.vaccination.controller;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -23,10 +22,17 @@ public class VaccinationController {
 	@Resource(name="vaccinationServiceImpl")
 	private VaccinationService vaccinationService;
 
+	/**
+	 * 예방접종 등록
+	 * userLevel이 vet인 경우 
+	 * 예방접종 등록페이지에서 받아온 vrvo의 hospitalVO에 session loginVO정보를 등록한 뒤 service로 보냄 
+	 * @param request
+	 * @param vrvo
+	 * @return
+	 */
 	@RequestMapping("registerVaccination.do")
 	public String registerVaccination(HttpServletRequest request, VaccinationRecordVO vrvo){
 		if(request.getSession().getAttribute("userLevel").equals("vet")){
-			System.out.println(request.getSession().getAttribute("userLevel"));
 			vrvo.setHospitalVO(((HospitalVO)request.getSession().getAttribute("loginVO")));
 		}
 		vaccinationService.registerVaccination(vrvo);
@@ -37,6 +43,13 @@ public class VaccinationController {
 		return "vaccination/register_result_vaccination";
 	}
 	
+	/**
+	 * 백신진료내역 조회
+	 * @param request
+	 * @param povo
+	 * @param lvo
+	 * @return
+	 */
 	@RequestMapping("findVaccinationRecordByPetOwnerTelAndPetName.do")
 	public ModelAndView findVaccinationRecordByPetOwnerTelAndPetName(
 			HttpServletRequest request, PetOwnerVO povo, ListVO lvo){
@@ -55,15 +68,10 @@ public class VaccinationController {
 		return mav;
 	}
 	
-	
-	
-/*	*//**
-	 * 아이디를 통하여 반려동물 조회
-	 *//*
-	@RequestMapping("findPetListById.do")
+	@RequestMapping("findDetailVaccinationRecordByVaccinationRecordNo.do")
 	@ResponseBody
-	public PetOwnerVO findPetListById(HttpServletRequest request ){
-		PetOwnerVO povo = (PetOwnerVO) request.getSession(false).getAttribute("loginVO");
-		return vaccinationService.findPetListById(povo);
-	}*/
+	public VaccinationRecordVO findDetailVaccinationRecordByVaccinationRecordNo(int VaccinationRecordNo){
+		return vaccinationService.findDetailVaccinationRecordByVaccinationRecordNo(VaccinationRecordNo);
+	}
+
 }
