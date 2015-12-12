@@ -29,7 +29,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="resident_no" property="vetLicenseVO.residentNo"/>
 		<result column="get_license_date" property="vetLicenseVO.getLicenseDate"/>
 	</resultMap>
-
+	
+	<resultMap type="lvo" id="lvoRM">
+		<id column="vet_license_no" property="vetLicenseNo" />
+		<result column="vet_name" property="vetName"/>
+		<result column="resident_no" property="residentNo"/>
+		<result column="get_license_date" property="getLicenseDate"/>
+	</resultMap>
+	
 	<!-- 로그인을 위한 sql문 -->
 	<select id="loginVet" parameterType="vvo" resultMap="hvoRM">
 		select v.vet_id, v.vet_tel, vl.vet_name, vl.vet_license_no, h.Hospital_id, h.Hospital_name
@@ -139,7 +146,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 hospital_id=#{hospitalId} where vet_id=#{vvo.vetId}
 		 </foreach>
 	</update>
-
+	
+	<!-- 병원 아이디로 의사 면허 조회 -->
+	<select id="findVetLicenseByHospitalId" resultMap="lvoRM">
+		select vl.Vet_License_no, vl.Vet_name, vl.Get_License_date
+			from Vet_License vl, Vet v, Hospital h
+			where vl.Vet_License_no = v.Vet_License_no and v.Hospital_id = h.Hospital_id and h.Hospital_id = #{value}
+	</select>
 </mapper>
  
  

@@ -71,6 +71,28 @@ public class PetOwnerController {
 		public String registerPetResult(){
 			return "account/register_pet_result";
 		}
+		
+		// 펫 정보 수정
+		@RequestMapping("findPetListById.do")
+		@ResponseBody
+		public PetOwnerVO findPetListById(HttpServletRequest request, PetOwnerVO povo){
+			if(povo.getPetOwnerId() == null){
+				povo = (PetOwnerVO) request.getSession(false).getAttribute("loginVO");
+				return petOwnerService.findPetListById(povo);
+			} else {
+				return petOwnerService.findPetListById(povo);
+			}
+		}	
+		@RequestMapping("findPetByPetName.do")
+		public ModelAndView findPetByPetName(PetOwnerVO povo){
+			petOwnerService.findPetByPetName(povo);
+			return new ModelAndView("pet_update","povo",povo);
+		}
+		@RequestMapping("updatePet.do")
+		public String updatePet(PetOwnerVO povo){
+			petOwnerService.updatePet(povo);
+			return "account/update_pet_result";
+		}
 	
 	//보호자 회원 가입
 	@RequestMapping(value = "registerPetOwner.do", method = RequestMethod.POST)

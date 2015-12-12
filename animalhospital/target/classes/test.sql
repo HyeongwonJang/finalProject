@@ -287,3 +287,23 @@ select Treatment_Record_no, Treatment_hours, Treatment_content,
 			order by t.Treatment_Record_no desc
 			)
 		) where page = 1;
+		
+select 
+			vr.Vaccination_hours, vr.Vaccination_name, 
+			po.Pet_Owner_name, po.Pet_Owner_tel, 
+			vr.Pet_weight, vl.Vet_name,  
+			h.Hospital_name, h.Hospital_tel 
+		from VACCINATION_RECORD vr, PET_OWNER po, VET_LICENSE vl, VET v, HOSPITAL h, VACCINATION va 
+		where vr.pet_owner_no = po.pet_owner_no 
+			and vr.Vaccination_name = va.Vaccination_name 
+			and vr.Vet_License_no= vl.Vet_License_no (+)
+			and vl.Vet_License_no = v.Vet_License_no(+)
+			and v.Hospital_id = h.Hospital_id(+)
+			and vr.Vaccination_Record_no = 1;
+			
+select * from VACCINATION_RECORD
+where ;
+
+select vl.Vet_License_no, vl.Vet_Name, vl.Get_License_date
+from Vet_License vl, Vet v, Hospital h
+where vl.Vet_License_no = v.Vet_License_no and v.Hospital_id = h.Hospital_id and h.Hospital_id = 1

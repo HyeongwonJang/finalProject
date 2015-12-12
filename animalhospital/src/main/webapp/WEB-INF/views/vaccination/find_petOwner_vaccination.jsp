@@ -139,8 +139,8 @@
 			<thead>
 				<tr class="headings">
 					<th class="column-title">No.</th>
-					<th class="column-title">질병명</th>
-					<th class="column-title">진료시간</th>
+					<th class="column-title">예방접종명</th>
+					<th class="column-title">접종시간</th>
 					<th class="column-title">반려동물명</th>
 					<th class="column-title">보호자명</th>
 					<th class="column-title no-link last"><span class="nobr">상세조회</span></th>

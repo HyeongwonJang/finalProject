@@ -13,4 +13,7 @@ public interface PetOwnerService {
 	public PetOwnerVO findPetListByPetownerTel(String petOwnerTel);
 	public String findPetOwnerById(PetOwnerVO povo);
 	public void registerPetOwnerByTel(PetOwnerVO povo);
+	public PetOwnerVO findPetListById(PetOwnerVO povo);
+	public PetOwnerVO findPetByPetName(PetOwnerVO povo);
+	public void updatePet(PetOwnerVO povo);
 }
