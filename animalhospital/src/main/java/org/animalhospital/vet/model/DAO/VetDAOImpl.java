@@ -31,7 +31,7 @@ public class VetDAOImpl implements VetDAO {
 	}
 
 	public int useCheckVetVicense(VetLicenseVO lvo) {
-		return sqlSessionTemplate.selectOne("vet.useCheckVetVicense", lvo);
+		return sqlSessionTemplate.selectOne("vet.useCheckVetLicense", lvo);
 	}
 
 	public List<HospitalVO> findAllHospital() {

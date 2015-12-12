@@ -1,4 +1,22 @@
-
+select l.vet_name
+		from Vet v, Vet_License l
+		where v.Vet_License_no = l.Vet_License_no
+		and l.Vet_License_no = 4
+		
+select
+	vr.Vaccination_hours, vr.Vaccination_name, 
+	po.Pet_Owner_name, po.Pet_Owner_tel, 
+	vr.Pet_weight, vl.vet_name 
+from VACCINATION_RECORD vr, PET_OWNER po, Pet p, VET_LICENSE vl, VET v
+where vr.pet_owner_no = po.pet_owner_no
+and po.pet_owner_no = p.pet_owner_no
+and vr.pet_name = p.pet_name
+--and vr.Vet_License_no= vl.Vet_License_no 
+--and vl.Vet_License_no = v.Vet_License_no 
+and vr.Vet_License_no = vl.Vet_License_no(+)
+and vl.Vet_License_no = v.Vet_License_no(+)
+and 
+and Vaccination_Record_no = 1;
 
 
 select sys from dual;

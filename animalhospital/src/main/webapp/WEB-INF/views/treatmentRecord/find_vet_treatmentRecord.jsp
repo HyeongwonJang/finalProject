@@ -56,8 +56,16 @@
              
 <script type="text/javascript">
 	$(document).ready(function() {
-		// 보호자 전화번호를 입력하면 자동으로 PetNameList를 가져온다
+		var submitFlag = false;
 		$("#petOwnerTel").keyup(function(){
+			// 보호자 전화번호 양식 걸러주기
+			$(this).val( $(this).val().replace(/[^0-9]/g,""));
+			if($(this).val().length > 11){
+				$(this).val($(this).val().replace($(this).val(),$(this).val().substring(0,11)));
+				alert("전화번호 양식에 맞게 작성해주세요!");
+			}
+			
+			// 보호자 전화번호를 입력하면 자동으로 PetNameList를 가져온다	
 			if($(this).val().length>=10){
 				$.ajax({
 				    type: "post", // get 또는 post로 설정
@@ -66,11 +74,23 @@
 				    dataType:"json",      
 				    success: function(petList){		     
 				   		var searchPetList = '';
-				    	$.each(petList.petVO, function(li) {
-				    		searchPetList += "<option value=" + petList.petVO[li].petName +">"
-				    						+ petList.petVO[li].petName +"</option>";
-				    	});
-				    	$("#petListSelect").html(searchPetList);
+				   		alert("넘어오는 값 테스트:" + searchPetList);
+				   		if(petList == ""){
+							$("#checkTel").html("전화번호가 맞지 않습니다");
+							$("#checkTel").attr('class','text-danger');
+							submitFlag = false;
+						}else{	//if-end ,else-begin
+							$("#checkTel").html("전화번호가 확인되었습니다. 다음 단계로 진행하세요");
+							$("#checkTel").attr('class','text-primary');
+							
+					    	$.each(petList.petVO, function(li) {
+					    		searchPetList += "<option value=" + petList.petVO[li].petName +">"
+					    						+ petList.petVO[li].petName +"</option>";			    						
+					    	});
+					    	submitFlag = true;
+					    	$("#petListSelect").html(searchPetList);
+						}	
+				    	
 
 				    	$(".select2_single").select2({
 							placeholder : "해당 항목을 선택해주세요",
@@ -88,6 +108,7 @@
 			if($("#page").val() == ""){
 				$("#page").val(1);	
 			}
+			return submitFlag;
 		});
 		
 		// 페이지 번호 클릭시 이동
@@ -125,7 +146,7 @@
 	<!-- 데이터 입력부분 -->
 	<div class="x_content">
 		<form action="findTreatmentRecordByPetOwnerTelAndPetName.do" method="post" id="recordSearchForm">
-			<label>반려동물 보호자 전화번호:</label>
+			<label>반려동물 보호자 전화번호:</label><span id="checkTel"></span>
 			<input type="text" class="form-control" name="petOwnerTel" id="petOwnerTel"
 				placeholder="보호자의 전화번호를 입력해주세요" required="required">
 			<p>

@@ -37,7 +37,8 @@ public class VetController {
 	}
 
 	/**
-	 * 라이센스 체크 라이센스의 이름과 번호가 존재하는지 확인하여 count(*) return 존재하면 1 존재하지 않으면 0
+	 * 라이센스 체크 라이센스의 이름과 번호가 존재하는지 확인하여 count(*) 
+	 * return 존재하면 1 존재하지 않으면 0
 	 */
 	@RequestMapping("checkVetLicense.do")
 	@ResponseBody

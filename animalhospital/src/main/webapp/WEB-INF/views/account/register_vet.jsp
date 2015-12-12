@@ -47,7 +47,7 @@
 	var submitFlag = false;
 
 	$(document).ready(function() {
-		$("#cancel").click(function(){
+		$("#cancleBtn").click(function(){
 			if(confirm("회원 가입을 취소하시겠습니까?")){
 				location.href="home.do";
 			}
@@ -113,24 +113,26 @@
 		});
 		
 		// ajax를 이용하여 면허증과 이름을 체크한다.
-		$("#vetLicenseNo, #vetName").keyup(function() {
-			$.ajax({
-			    type: "post", 
-			    url: "checkVetLicense.do", 
-			    data: "vetLicenseNo=" + $("#vetLicenseNo").val() + "&vetName=" + $("#vetName").val(),
-			    success: function(searchResult){
-			   		if(searchResult == 0){
-			   			$("#licenseSearchMessage").text("면허번호와 이름이 일치하지 않거나 이미 사용하고 있는 면허번호입니다!");
-			   			$("#licenseSearchMessage").attr('class', 'text-danger');
-			   			submitFlag = false;
-			   		} else {
-			   			$("#licenseSearchMessage").text("면허증 번호와 이름이 일치합니다!");
-			   			$("#licenseSearchMessage").attr('class', 'text-primary');
-			   			submitFlag = true;
-			   		}
-			    }
+		if($("#vetLicenseNo").val() != "" && )
+			$("#vetLicenseNo, #vetName").keyup(function() {
+				$.ajax({
+				    type: "post", 
+				    url: "checkVetLicense.do", 
+				    data: "vetLicenseNo=" + $("#vetLicenseNo").val() + "&vetName=" + $("#vetName").val(),
+				    success: function(searchResult){
+				   		if(searchResult == 0){
+				   			$("#licenseSearchMessage").text("면허번호와 이름이 일치하지 않거나 이미 사용하고 있는 면허번호입니다!");
+				   			$("#licenseSearchMessage").attr('class', 'text-danger');
+				   			submitFlag = false;
+				   		} else {
+				   			$("#licenseSearchMessage").text("면허증 번호와 이름이 일치합니다!");
+				   			$("#licenseSearchMessage").attr('class', 'text-primary');
+				   			submitFlag = true;
+				   		}
+				    }
+				});
 			});
-		});
+		
 		
 		
 		//숫자만 입력할 수 있도록 정의
@@ -248,7 +250,7 @@
 					<div class="col-md-2 col-sm-6 col-xs-12">
 						<!-- 수의사 이름에 대한 input -->
 						<input id="vetName" class="form-control col-md-7 col-xs-10 test"
-							type="text" name="vetList[0].vetLicenseVO.vetLicenseName"
+							type="text" name="vetList[0].vetLicenseVO.vetLicenseNo.vetName"
 							required="required">
 					</div>
 				</div>
@@ -271,8 +273,7 @@
 						<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
 							<!-- 등록과 취소 버튼 -->
 							<button type="submit" class="btn btn-success">등록</button>
-							<button type="button" class="btn btn-primary"
-								onClick="location.href='home.do'">취소</button>
+							<button type="button" class="btn btn-primary" id="cancleBtn">취소</button>
 						</div>
 					</div>
 				</div>
