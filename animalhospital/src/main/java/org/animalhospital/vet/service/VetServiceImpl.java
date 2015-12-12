@@ -59,6 +59,10 @@ public class VetServiceImpl implements VetService{
 	public int updateVet(HospitalVO hospitalVO){
 		return vetDAO.updateVet(hospitalVO);
 	}
+	@Override
+	public List<VetLicenseVO> findVetLicenseByHospitalId(String hospitalId) {
+		return vetDAO.findVetLicenseByHospitalId(hospitalId);
+	}
 	
 	
 }

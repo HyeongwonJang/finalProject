@@ -12,6 +12,7 @@ import org.animalhospital.vet.model.VO.HospitalVO;
 import org.animalhospital.vet.model.VO.VetLicenseVO;
 import org.animalhospital.vet.model.VO.VetVO;
 import org.animalhospital.vet.service.VetService;
+import org.codehaus.jackson.map.util.JSONPObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -101,9 +102,9 @@ public class VetController {
 //		request.getSession().setAttribute("loginVO", hospitalVO);
 		return "home";
 	}
-	@RequestMapping("findHospitalDetail.do")
-	public String findHospitalDetail(String hospitalId) {
-		System.out.println(hospitalId);
-		return "hello";
+	@RequestMapping("findVetLicenseByHospitalId.do")
+	@ResponseBody
+	public List<VetLicenseVO> findVetLicenseByHospitalId(String hospitalId) {
+		return vetService.findVetLicenseByHospitalId(hospitalId);
 	}
 }

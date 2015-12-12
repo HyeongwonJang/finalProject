@@ -303,3 +303,7 @@ select
 			
 select * from VACCINATION_RECORD
 where ;
+
+select vl.Vet_License_no, vl.Vet_Name, vl.Get_License_date
+from Vet_License vl, Vet v, Hospital h
+where vl.Vet_License_no = v.Vet_License_no and v.Hospital_id = h.Hospital_id and h.Hospital_id = 1
