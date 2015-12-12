@@ -5,25 +5,32 @@
 	// 각 테이블에 값들을 세팅하는 스크립트 문
 	$(document).ready(function() {
 		$(".detailView").click(function() {
-			var treatmentRecordNo=$(this).parent().siblings().eq(0).text();
+			var vaccinationRecordNo=$(this).parent().siblings().eq(0).text();
 			$.ajax({
 				type: "post",
-				url: "findDetailTreatmentRecordByTreatmentNo.do",
-				data: "treatmentRecordNo="+treatmentRecordNo,
+				url: "findDetailVaccinationRecordByVaccinationRecordNo.do",
+				data: "vaccinationRecordNo="+vaccinationRecordNo,
 				dataType: "json",
-				success: function(findTreatmentRecordDetaileResult){
-					$("#modalRecordHours").text(findTreatmentRecordDetaileResult.treatmentHours);
-					$("#modalHospitalName").text(findTreatmentRecordDetaileResult.hospitalVO.hospitalName);
-					$("#modalHospitalTel").text(findTreatmentRecordDetaileResult.hospitalVO.hospitalTel);
-					$("#modalVetName").text(findTreatmentRecordDetaileResult.hospitalVO.vetList[0].vetLicenseVO.vetName);
-					$("#modalPetName").text(findTreatmentRecordDetaileResult.petOwnerVO.petVO[0].petName);
-					$("#modalPetGender").text(findTreatmentRecordDetaileResult.petOwnerVO.petVO[0].petGender);
-					$("#modalPetKind").text(findTreatmentRecordDetaileResult.petOwnerVO.petVO[0].animalKindName);
-					$("#modalPetWeight").text(findTreatmentRecordDetaileResult.petWeight);
-					$("#modalPetBirthDay").text(findTreatmentRecordDetaileResult.petOwnerVO.petVO[0].petBirthday);
-					$("#modalPetOwnerName").text(findTreatmentRecordDetaileResult.petOwnerVO.petOwnerName);
-					$("#modalPetOwnerTel").text(findTreatmentRecordDetaileResult.petOwnerVO.petOwnerTel);
-					$("#modalRecordContent").text(findTreatmentRecordDetaileResult.treatmentContent);
+				success: function(findVaccinationRecordDetailResult){
+					if(findVaccinationRecordDetailResult.hospitalVO.hospitalName == null){
+						$("#modalHospitalName").text("보호자 등록");
+						$("#modalHospitalTel").text("보호자 등록");
+						$("#modalVetName").text("보호자 등록");		
+					} else {
+						$("#modalHospitalName").text(findVaccinationRecordDetailResult.hospitalVO.hospitalName);
+						$("#modalHospitalTel").text(findVaccinationRecordDetailResult.hospitalVO.hospitalTel);
+						$("#modalVetName").text(findVaccinationRecordDetailResult.hospitalVO.vetList[0].vetLicenseVO.vetName);
+					}
+					$("#modalRecordHours").text(findVaccinationRecordDetailResult.vaccinationHours);
+					$("#modalPetName").text(findVaccinationRecordDetailResult.petOwnerVO.petVO[0].petName);
+					$("#modalPetGender").text(findVaccinationRecordDetailResult.petOwnerVO.petVO[0].petGender);
+					$("#modalPetKind").text(findVaccinationRecordDetailResult.petOwnerVO.petVO[0].animalKindName);
+					$("#modalPetWeight").text(findVaccinationRecordDetailResult.petWeight);
+					$("#modalPetBirthDay").text(findVaccinationRecordDetailResult.petOwnerVO.petVO[0].petBirthday);
+					$("#modalPetOwnerName").text(findVaccinationRecordDetailResult.petOwnerVO.petOwnerName);
+					$("#modalPetOwnerTel").text(findVaccinationRecordDetailResult.petOwnerVO.petOwnerTel);
+					$("#modalRecordContent").text(findVaccinationRecordDetailResult.vaccinationContent);
+					$("#modalVaccinationName").text(findVaccinationRecordDetailResult.vaccinationVO.vaccinationName);
 				}
 			});
 			$('div.modal').modal({});

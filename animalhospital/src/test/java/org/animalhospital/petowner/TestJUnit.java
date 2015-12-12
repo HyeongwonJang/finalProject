@@ -67,7 +67,8 @@ public class TestJUnit {
 		System.out.println("리스트VO:" + treatmentService.findTreatmentRecordVetVerByPage(map));
 		System.out.println("진료기록 상세조회 : " + treatmentService.findDetailTreatmentRecordByTreatmentNo(1));*/
 		VetLicenseVO vo = new VetLicenseVO(4, "이윤아", 0, null);
-		System.out.println("서비스 테스트:" + vetService.checkVetLicense(vo));
+		System.out.println("서비스 테스트:" + treatmentService.findDetailTreatmentRecordByTreatmentNo(48));
 		System.out.println(vaccinationService.findDetailVaccinationRecordByVaccinationRecordNo(1));
+
 	}
 }

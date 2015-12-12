@@ -74,7 +74,6 @@
 				    dataType:"json",      
 				    success: function(petList){		     
 				   		var searchPetList = '';
-				   		alert("넘어오는 값 테스트:" + searchPetList);
 				   		if(petList == ""){
 							$("#checkTel").html("전화번호가 맞지 않습니다");
 							$("#checkTel").attr('class','text-danger');

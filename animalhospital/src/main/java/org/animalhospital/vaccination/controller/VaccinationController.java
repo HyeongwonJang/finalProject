@@ -73,8 +73,10 @@ public class VaccinationController {
 	
 	@RequestMapping("findDetailVaccinationRecordByVaccinationRecordNo.do")
 	@ResponseBody
-	public VaccinationRecordVO findDetailVaccinationRecordByVaccinationRecordNo(int VaccinationRecordNo){
-		return vaccinationService.findDetailVaccinationRecordByVaccinationRecordNo(VaccinationRecordNo);
+	public VaccinationRecordVO findDetailVaccinationRecordByVaccinationRecordNo(int vaccinationRecordNo){
+		System.out.println("ajax 실행결과: " 
+				+ vaccinationService.findDetailVaccinationRecordByVaccinationRecordNo(vaccinationRecordNo));
+		return vaccinationService.findDetailVaccinationRecordByVaccinationRecordNo(vaccinationRecordNo);
 	}
 
 }

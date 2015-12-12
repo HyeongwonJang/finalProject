@@ -109,7 +109,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		  select문을 두 개로 나눈다 -->
 	<select id="findDetailVaccinationRecordByVaccinationRecordNo" resultMap="vrvoRM" parameterType="int">
 		select 
-			vr.Vaccination_hours, vr.Vaccination_name, 
+			vr.Vaccination_hours, vr.Vaccination_name,
 			po.Pet_Owner_name, po.Pet_Owner_tel, 
 			vr.Pet_weight, vl.Vet_name, 
 			h.Hospital_name, h.Hospital_tel 

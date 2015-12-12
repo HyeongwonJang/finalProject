@@ -1,3 +1,39 @@
+select p.pet_name, p.pet_gender, p.Animal_kind_name, p.Pet_birthday
+		from PET p, TREATMENT_RECORD t
+		where t.pet_owner_no = p.pet_owner_no
+		and t.pet_name = p.pet_name
+		and Treatment_Record_no = 48
+select 
+			t.Treatment_hours,
+			t.Treatment_content,
+			t.Disease_name,
+			d.Disease_symptom,
+			po.Pet_Owner_name,
+			po.Pet_Owner_tel,
+			t.pet_weight,
+			vl.vet_name,
+			h.hospital_name,
+			h.hospital_tel
+		from Treatment_Record t, PET_OWNER po, VET_LICENSE vl, VET v, HOSPITAL h, disease d
+		where t.pet_owner_no = po.pet_owner_no
+			and t.Disease_name = d.Disease_name
+			and t.Vet_License_no = vl.Vet_License_no
+			and vl.Vet_License_no = v.Vet_License_no
+			and v.hospital_id = h.hospital_id
+			and Treatment_Record_no = 48		
+
+select 
+			vr.Vaccination_hours, vr.Vaccination_name, 
+			po.Pet_Owner_name, po.Pet_Owner_tel, 
+			vr.Pet_weight, vl.Vet_name, 
+			h.Hospital_name, h.Hospital_tel 
+		from VACCINATION_RECORD vr, PET_OWNER po, VET_LICENSE vl, VET v, HOSPITAL h 
+		where vr.pet_owner_no = po.pet_owner_no 
+			and vr.Vet_License_no = vl.Vet_License_no
+			and vl.Vet_License_no = v.Vet_License_no
+			and v.Hospital_id = h.Hospital_id
+			and Vaccination_Record_no = 4
+
 select l.vet_name
 		from Vet v, Vet_License l
 		where v.Vet_License_no = l.Vet_License_no

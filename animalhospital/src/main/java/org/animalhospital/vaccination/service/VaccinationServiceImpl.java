@@ -62,7 +62,6 @@ public class VaccinationServiceImpl implements VaccinationService {
 	public VaccinationRecordVO findDetailVaccinationRecordByVaccinationRecordNo(
 			int vaccinationRecordNo) {
 		PetVO detailPetVO = vaccinationDAO.findDetailPetRecordByVaccinationtRecordNo(vaccinationRecordNo);
-		System.out.println(detailPetVO);
 		VaccinationRecordVO searchVaccinationVO = vaccinationDAO.findDetailVaccinationRecordByVaccinationRecordNo(vaccinationRecordNo);
 		searchVaccinationVO.getPetOwnerVO().addPetVO(detailPetVO);
 		return searchVaccinationVO;

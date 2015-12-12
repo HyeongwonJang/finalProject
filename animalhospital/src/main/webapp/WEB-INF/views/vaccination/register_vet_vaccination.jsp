@@ -95,8 +95,8 @@
 			<div class="form-group">
 				<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
 					<p align="center">
-						<button type="submit" class="btn btn-primary">Submit</button>
-						<button type="button" class="btn btn-success" id="cancelBtn">Cancel</button>
+						<button type="submit" class="btn btn-primary">등록</button>
+						<button type="button" class="btn btn-success" id="cancelBtn">취소</button>
 					</p>
 				</div>
 			</div>
