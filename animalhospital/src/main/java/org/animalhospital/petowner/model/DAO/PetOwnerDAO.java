@@ -1,7 +1,6 @@
 package org.animalhospital.petowner.model.DAO;
 
 import java.util.HashMap;
-
 import org.animalhospital.petowner.model.VO.PetOwnerVO;
 import org.animalhospital.treatment.model.VO.TreatmentRecordVO;
 

@@ -91,5 +91,26 @@ public class PetOwnerServiceImpl implements PetOwnerService {
 		}
 	}
 	
+	@Override
+	public PetOwnerVO findPetListById(PetOwnerVO povo) {
+		return petOwnerDAO.findPetListById(povo);
+	}
+	@Override
+	public PetOwnerVO findPetByPetName(PetOwnerVO povo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		System.out.println(povo);
+		map.put("petOwnerNo", povo.getPetOwnerNo());
+		if(povo.getPetVO()!=null) {
+			for(int i=0; i<povo.getPetVO().size(); i++) {
+				map.put("petVO", povo.getPetVO().get(i));
+			}
+		}
+		return petOwnerDAO.findPetByPetName(map);
+	}
+	@Override
+	public void updatePet(PetOwnerVO povo) {
+		petOwnerDAO.updatePet(povo);
+	}
+	
 	
 }
