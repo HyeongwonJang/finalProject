@@ -87,12 +87,28 @@ public class ViewController {
 	}
 	/**
 	 * 동물 등록 페이지
-	 * @return
+	 * @return 신후
 	 */
 	@RequestMapping("registerPetView.do")
 	public String registerPet(){
 		return "pet_register";
 	}
+	/**
+	 * 동물 리스트 페이지
+	 * @return 신후
+	 */
+	@RequestMapping("listPetView.do")
+	public String listPet(){
+		return "pet_list";
+	}
+	/**
+	 * 동물 정보수정 페이지
+	 * @return 신후
+	 */
+	@RequestMapping("updatePetView.do")
+	public String updatePet(){
+		return "pet_update";
+	}		
 
 	/**
 	 * 보호자 회원가입 완료 페이지

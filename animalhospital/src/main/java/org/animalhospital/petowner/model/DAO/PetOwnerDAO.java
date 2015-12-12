@@ -17,4 +17,7 @@ public interface PetOwnerDAO {
 	public PetOwnerVO findPetByTel(PetOwnerVO povo);
 	public int findPetOwnerById(PetOwnerVO povo);
 	public void registerPetOwnerByTel(PetOwnerVO povo);
+	public PetOwnerVO findPetListById(PetOwnerVO povo);
+	public PetOwnerVO findPetByPetName(HashMap<String, Object> map);
+	public void updatePet(PetOwnerVO povo);
 }

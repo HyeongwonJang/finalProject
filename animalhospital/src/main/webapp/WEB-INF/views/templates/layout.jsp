@@ -152,6 +152,8 @@
 													class="fa fa-user"></i> 회원정보수정</a></li>
 											<li><a href="${initparam.root}registerPetView.do"><i
 													class="fa fa-paw"></i> 동물등록</a></li>
+											<li><a href="${initparam.root}listPetView.do"><i
+													class="fa fa-paw"></i> 동물정보수정</a></li>
 										</c:when>
 									</c:choose>
 									<li><a href="${initparam.root}logout.do"><i

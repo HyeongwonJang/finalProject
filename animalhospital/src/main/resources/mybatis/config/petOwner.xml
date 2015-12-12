@@ -61,6 +61,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into Pet(Pet_Owner_no, Pet_name, Pet_birthday, Pet_gender, Pet_note, Animal_kind_name)
 		values(#{petOwnerNo}, #{petVO.petName}, #{petVO.petBirthday}, #{petVO.petGender}, #{petVO.petNote}, #{petVO.animalKindName}) 	
  	</insert>
+ 	<!-- 반려동물 정보 수정 -->
+ 	<!-- 아이디로 보유 동물 목록 조회 -->
+ 	<select id="findPetListById" parameterType="povo" resultMap="povoRM">
+ 		select po.Pet_Owner_no, p.Pet_name
+		from Pet p, Pet_Owner po
+		where po.Pet_Owner_id=#{petOwnerId} and po.Pet_Owner_no = p.Pet_Owner_no
+ 	</select>
+ 	<!-- PetName으로 반려동물 조회 -->
+ 	<select id="findPetByPetName" parameterType="map" resultMap="povoRM">
+ 		select  po.Pet_Owner_no, p.Pet_name, p.Pet_birthday, p.Pet_gender, p.Pet_note, p.Animal_kind_name
+		from Pet p, Pet_Owner po
+		where p.Pet_name=#{petVO.petName} and po.Pet_Owner_no = p.Pet_Owner_no and po.Pet_Owner_no = #{petOwnerNo}
+ 	</select>
+ 	<update id="updatePet" parameterType="povo">
+ 		update Pet 
+		set Pet_name = #{petVO[0].petName}, Pet_birthday = #{petVO[0].petBirthday}, 
+			  Pet_gender=#{petVO[0].petGender}, Pet_note=#{petVO[0].petNote}, 
+			  Animal_kind_name=#{petVO[0].animalKindName}
+		where Pet_name = #{petVO[0].petName}  
+				 and Pet_Owner_no = #{petOwnerNo}
+ 	</update>
  	
  	
  	<!-- 전화번호로 반려동물 조회 -->

@@ -72,5 +72,17 @@ public class PetOwnerDAOImpl implements PetOwnerDAO {
 	public void registerPetOwnerByTel(PetOwnerVO povo) {
 		sqlSessionTemplate.update("petOwner.registerPetOwnerByTel", povo);
 	}
+	@Override
+	public PetOwnerVO findPetListById(PetOwnerVO povo) {
+		return sqlSessionTemplate.selectOne("petOwner.findPetListById",povo);
+	}
+	@Override
+	public PetOwnerVO findPetByPetName(HashMap<String, Object> map) {
+		return sqlSessionTemplate.selectOne("petOwner.findPetByPetName",map);
+	}
+	@Override
+	public void updatePet(PetOwnerVO povo) {
+		sqlSessionTemplate.update("petOwner.updatePet",povo);
+	}
 	
 }
