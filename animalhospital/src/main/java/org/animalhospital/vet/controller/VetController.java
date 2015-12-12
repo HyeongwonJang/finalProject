@@ -96,9 +96,9 @@ public class VetController {
 
 	@RequestMapping("updateVet.do")
 	public String updateVet(HttpServletRequest request, HospitalVO hospitalVO) {
-		System.out.println(hospitalVO);
-//		vetService.updateVet(hospitalVO);
-//		request.getSession().setAttribute("loginVO", hospitalVO);
+		//System.out.println(hospitalVO);
+		vetService.updateVet(hospitalVO);
+		request.getSession().setAttribute("loginVO", hospitalVO);
 		return "home";
 	}
 	@RequestMapping("findHospitalDetail.do")

@@ -134,9 +134,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="updateVet" >
 		update vet 
 		set 
-		<foreach collection="vetList" item="vetvo"></foreach>
-		vet_password=#{vetvo.vetPassword}, vet_tel=#{vetvo.vetTel},
-		 hospital_id=#{hospitalId} where vet_id=#{vetvo.vetId}
+		<foreach collection="vetList" item="vvo"> 
+		vet_password=#{vvo.vetPassword}, vet_tel= #{vvo.vetTel},
+		 hospital_id=#{hospitalId} where vet_id=#{vvo.vetId}
+		 </foreach>
 	</update>
 
 </mapper>
