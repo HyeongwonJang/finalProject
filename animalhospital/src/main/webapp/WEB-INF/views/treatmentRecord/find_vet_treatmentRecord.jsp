@@ -7,7 +7,6 @@
 <c:if test="${continueParam['listVO'] ne null}">
 	<script type="text/javascript">
 		$(document).ready(function() {
-			//startDat, endDate, petOwnerTel 검색조건 유지
 			$('#daterangePicker span').html("${continueParam['listVO'].startDate}" 
 					+ ' - ' + "${continueParam['listVO'].endDate}");
 	        $('#startDate').attr('value', "${continueParam['listVO'].startDate}");
@@ -203,7 +202,7 @@
 				    	<td>${ recordList.treatmentHours }</td>
 				    	<td>${ recordList.petOwnerVO.petVO[0].petName }</td>
 				    	<td>${recordList.petOwnerVO.petOwnerName}</td>
-				    	<td ><a class="detailView" >View</a></td>
+				    	<td  class=" last"><a class="detailView" >View</a></td>
 			    	</tr>
 				</c:forEach>	
 			</tbody>
