@@ -11,6 +11,14 @@
 		}
 		return false;
 	}
+	function checkList(){
+		if($("#vetTel").val().length<10){
+			alert("전화번호를 제대로 입력해 주세요");
+			return false;
+		 }else{
+			$("#vetForm").submit();
+		}
+	}
 </script>
 
 <script type="text/javascript">
@@ -49,45 +57,6 @@
 				
 			});
 		});
-		
-		
-		
-		// ajax를 이용하여 id의 중복체크를 한다.
-		$("#vetId").keyup(function() {
-			$.ajax({
-			    type: "post", // get 또는 post로 설정
-			    url: "findVetById.do", // 이동할 url 설정
-			    data: "vetId=" + $(this).val(),
-			    success: function(searchResult){
-			   		if(searchResult == 0){
-			   			$("#idSearchMessage").text("사용하지 않은 아이디입니다!");
-			   			$("#idSearchMessage").attr('class', 'text-primary');
-			   		} else {
-			   			$("#idSearchMessage").text("이미 사용하고 있는 아이디입니다!");
-			   			$("#idSearchMessage").attr('class', 'text-danger');
-			   		}
-			    }
-			});
-		});
-		
-		// ajax를 이용하여 면허증과 이름을 체크한다.
-		$("#vetLicenseNo, #vetName").keyup(function() {
-			$.ajax({
-			    type: "post", 
-			    url: "licenseCheck.do", 
-			    data: "vetLicenseNo=" + $("#vetLicenseNo").val() + "&vetName=" + $("#vetName").val(),
-			    success: function(searchResult){
-			   		if(searchResult == 0){
-			   			$("#licenseSearchMessage").text("면허번호와 이름이 일치하지 않거나 이미 사용하고 있는 면허번호입니다!");
-			   			$("#licenseSearchMessage").attr('class', 'text-danger');
-			   		} else {
-			   			$("#licenseSearchMessage").text("면허증 번호와 이름이 일치합니다!");
-			   			$("#licenseSearchMessage").attr('class', 'text-primary');
-			   		}
-			    }
-			});
-		});
-		
 		
 		//숫자만 입력할 수 있도록 정의
 		$("#vetTel").keyup(function(){
@@ -186,9 +155,9 @@
             <div class="col-md-2 col-sm-6 col-xs-12">
             	<!-- 병원 이름에 대한 input -->
               	<input id="hospitalName" class="form-control col-md-7 col-xs-10 test" type="text" name="hospitalName"
-              	required="required" value="${sessionScope.loginVO.hospitalName}" readonly>
+              	required="required" value="${sessionScope.loginVO.hospitalName}" readonly >
             </div>
-            <input type="hidden" name="hospitalId" id="hospitalId" value="${sessionScope.loginVO.hospitalId}">
+            <input type="hidden" name="hospitalId" id="hospitalId" value="${sessionScope.loginVO.hospitalId}" required="required">
             <div>
               <button type="button" class="btn btn-info" id="popbutton">조회</button>
             </div>
@@ -196,7 +165,7 @@
             <div class="form-group">
               <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
               	<!-- 등록과 취소 버튼 -->
-                <button type="submit" class="btn btn-success" >등록</button>
+                <button type="button" class="btn btn-success" onclick="return checkList()">등록</button>
                 <button type="button" class="btn btn-primary" onClick="location.href='home.do'">취소</button>
               </div>
             </div>
@@ -209,8 +178,6 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" id="dismiss" name="selectHospitalBtn"
-						aria-hidden="true" data-dismiss="modal">×</button>
 					검색: <input type='text' id='txtFilter' class="form-control" 
 					  		onkeyup='{filter();return false}' 
 					  		onkeypress='javascript:if(event.keyCode==13){ filter(); return false;}'>
