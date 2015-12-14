@@ -7,7 +7,7 @@
 <c:if test="${continueParam['listVO'] ne null}">
 	<script type="text/javascript">
 		$(document).ready(function() {
-			//startDat, endDate, petOwnerTel 검색조건 유지
+			submitFlag=true;
 			$('#daterangePicker span').html("${continueParam['listVO'].startDate}" 
 					+ ' - ' + "${continueParam['listVO'].endDate}");
 	        $('#startDate').attr('value', "${continueParam['listVO'].startDate}");
@@ -55,14 +55,15 @@
 </c:if>
              
 <script type="text/javascript">
+var submitFlag = false;
 	$(document).ready(function() {
-		var submitFlag = false;
 		$("#petOwnerTel").keyup(function(){
 			// 보호자 전화번호 양식 걸러주기
 			$(this).val( $(this).val().replace(/[^0-9]/g,""));
 			if($(this).val().length > 11){
 				$(this).val($(this).val().replace($(this).val(),$(this).val().substring(0,11)));
 				alert("전화번호 양식에 맞게 작성해주세요!");
+				submitFlag=false;
 			}
 			
 			// 보호자 전화번호를 입력하면 자동으로 PetNameList를 가져온다	
@@ -150,7 +151,7 @@
 				placeholder="보호자의 전화번호를 입력해주세요" required="required">
 			<p>
 			<label>반려동물명:</label>
-			<select class="select2_single form-control" id="petListSelect" name="petVO[0].petName">
+			<select class="select2_single form-control" id="petListSelect" name="petVO[0].petName" required="required">
 			</select>
 			<p>
 			<div class="form-group">
@@ -203,7 +204,7 @@
 				    	<td>${ recordList.treatmentHours }</td>
 				    	<td>${ recordList.petOwnerVO.petVO[0].petName }</td>
 				    	<td>${recordList.petOwnerVO.petOwnerName}</td>
-				    	<td ><a class="detailView" >View</a></td>
+				    	<td  class=" last"><a class="detailView" >View</a></td>
 			    	</tr>
 				</c:forEach>	
 			</tbody>

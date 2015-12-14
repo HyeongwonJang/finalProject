@@ -85,8 +85,8 @@ public class PetOwnerController {
 		}	
 		@RequestMapping("findPetByPetName.do")
 		public ModelAndView findPetByPetName(PetOwnerVO povo){
-			petOwnerService.findPetByPetName(povo);
-			return new ModelAndView("pet_update","povo",povo);
+			
+			return new ModelAndView("pet_update","povo",petOwnerService.findPetByPetName(povo));
 		}
 		@RequestMapping("updatePet.do")
 		public String updatePet(PetOwnerVO povo){

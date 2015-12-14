@@ -43,7 +43,7 @@
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
            	<h4 class="modal-title">예방접종상세</h4>
-           	<p class="text-right">진료일시: 
+           	<p class="text-right">예방접종일시: 
            		<strong id="modalRecordHours"></strong>
            	</p>
           </div>
@@ -117,17 +117,12 @@
                   <td>
                     <b>예방접종명</b>
                   </td>
-                  <td colspan="7" id="modalVaccinationName"></td>
-                </tr>
-                <tr>
-                  <td colspan="9" align="center">
-                    <b>진료내용</b>
+                  <td colspan="2" id="modalVaccinationName"></td>
+                  <td colspan="1">
+                    <b>예방접종상세내용</b>
                   </td>
-                </tr>
-                <tr>
-                  <td colspan="9">
-                    <pre class="pre-scrollable" id="modalRecordContent">
-                    </pre>
+                  <td colspan="4" id="modalRecordContent">
+                    
                   </td>
                 </tr>
             </table>

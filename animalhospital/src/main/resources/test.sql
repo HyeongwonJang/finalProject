@@ -1,3 +1,7 @@
+select count(*)
+		from vet
+		where vet_tel='01011112222'
+
 select p.pet_name, p.pet_gender, p.Animal_kind_name, p.Pet_birthday
 		from PET p, TREATMENT_RECORD t
 		where t.pet_owner_no = p.pet_owner_no
@@ -365,3 +369,7 @@ select vl.Vet_License_no, vl.Vet_Name, vl.Get_License_date
 from Vet_License vl, Vet v, Hospital h
 where vl.Vet_License_no = v.Vet_License_no and v.Hospital_id = h.Hospital_id and h.Hospital_id = 1
 >>>>>>> branch 'master' of https://github.com/prototype01/finalProject.git
+
+
+select * from pet_owner
+select * from pet

@@ -71,6 +71,6 @@ public class TestJUnit {
 		System.out.println("서비스 테스트:" + treatmentService.findDetailTreatmentRecordByTreatmentNo(48));
 		System.out.println(vaccinationService.findDetailVaccinationRecordByVaccinationRecordNo(1));
 		*/
-		
+		System.out.println(vetService.checkVetByTel(new VetVO(null,null, "01011112222", null)));
 	}
 }

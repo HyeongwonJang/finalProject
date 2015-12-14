@@ -101,8 +101,10 @@
 												<li><a
 													href="${initparam.root}findTreatmentRecordPagePetOwnerView.do">진료기록조회</a>
 												</li>
+												
 											</c:when>
 										</c:choose>
+
 									</ul></li>
 							</ul>
 						</div>

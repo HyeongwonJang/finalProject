@@ -112,7 +112,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			vr.Vaccination_hours, vr.Vaccination_name,
 			po.Pet_Owner_name, po.Pet_Owner_tel, 
 			vr.Pet_weight, vl.Vet_name, 
-			h.Hospital_name, h.Hospital_tel 
+			h.Hospital_name, h.Hospital_tel, vr.vaccination_content 
 		from VACCINATION_RECORD vr, PET_OWNER po, VET_LICENSE vl, VET v, HOSPITAL h, VACCINATION va 
 		where vr.pet_owner_no = po.pet_owner_no 
 			and vr.Vaccination_name = va.Vaccination_name 
