@@ -25,7 +25,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		select po.Pet_Owner_no, po.Pet_Owner_id, po.Pet_Owner_name, po.Pet_Owner_tel, po.Pet_Owner_address
 		from  Pet_Owner po, Pet p
 		where po.Pet_Owner_id = #{petOwnerId} and po.Pet_Owner_password =#{petOwnerPassword} 
-			and po.Pet_Owner_no = p.Pet_Owner_no			
  	</select>
  	
  	<!-- 회원 정보 수정 -->
