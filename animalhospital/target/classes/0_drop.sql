@@ -3,6 +3,7 @@ drop sequence Treatment_Record_no;
 drop table Treatment_Record;
 drop table Disease;
 
+drop sequence Vaccination_No_seq;
 drop sequence Vaccination_Record_no;
 drop table Vaccination_Record;
 drop table Vaccination;

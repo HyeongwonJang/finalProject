@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 
 <!-- 달력 -->
 <script type="text/javascript">
@@ -48,9 +49,43 @@ $(function(){
                
              }   
       });
+      
+      // 백신 예방접종 차수를 등록에 추가함
+      var vaccinationMaximumSection = 0;
+      var optionInfo = "";
+      vaccinationMaximumSection = ${requestScope.VaccinationList[0].vaccinationMaximumSection }
+      for (var mi = 0; mi < vaccinationMaximumSection; mi++) {
+			optionInfo += "<option value=" + (mi+1) +">" + (mi+1)+"차" + "</option>";
+		}
+      optionInfo += "<option value=" + (vaccinationMaximumSection+1) +">" 
+		+ "기준 차수 초과" + "</option>"
+      $("#vaccinationCurrentSection").html(optionInfo);
+      
+      
+    $("#vaccinationName").change(function() {
+    	vaccinationMaximumSection =0;
+    	optionInfo = "";
+    	<c:forEach var="vaccination" items="${requestScope.VaccinationList }">
+    		if($("#vaccinationName option:selected").text() == "${vaccination.vaccinationName }"){
+    			vaccinationMaximumSection = 	${vaccination.vaccinationMaximumSection }
+    		}
+ 		</c:forEach>
+ 		if (vaccinationMaximumSection == 0) {
+ 			optionInfo = "<option value='0'>예방접종 기준 차수 없음</option>";
+		} else {
+			for (var mi = 0; mi < vaccinationMaximumSection; mi++) {
+				optionInfo += "<option value=" + (mi+1) +">" + (mi+1)+"차" + "</option>";
+			}
+			optionInfo += "<option value=" + (vaccinationMaximumSection+1) +">" 
+					+ "기준 차수 초과" + "</option>"
+		}
+ 		$("#vaccinationCurrentSection").html(optionInfo);
+ 		
+	});
+      
+      
    });
 </script>
-
 <div class="x_panel">
    <div class="x_title">
       <h2>
@@ -73,12 +108,15 @@ $(function(){
          <input type="hidden" id="petOwnerNo" name="PetOwnerVO.petOwnerNo" value="${sessionScope.loginVO.petOwnerNo }" >
          
           <hr> <label>예방접종종류</label> <select class="select2_single form-control" 
-          name="vaccinationVO.vaccinationName"   required="required" tabindex="-1">
+          name="vaccinationVO.vaccinationNo"   required="required" id="vaccinationName">
             <c:forEach var="vaccination" items="${requestScope.VaccinationList }">
-               <option>${vaccination.vaccinationName }</option>
+               <option value="${vaccination.vaccinationNo }">${vaccination.vaccinationName }</option>
             </c:forEach>
          </select>
-         
+         <label>예방접종차수</label> 
+         <select class="form-control" name="vaccinationCurrentSection"
+         	required="required" id="vaccinationCurrentSection">
+         </select>
          <hr><label>특이사항</label>
          <textarea class="form-control" name="vaccinationContent" rows="8" placeholder="특이사항을 입력해주세요"></textarea>
 

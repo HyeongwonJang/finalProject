@@ -49,6 +49,42 @@
 			placeholder : "With Max Selection limit 4",
 			allowClear : true
 		});  
+		
+		 
+	      // 백신 예방접종 차수를 등록에 추가함
+	      var vaccinationMaximumSection = 0;
+	      var optionInfo = "";
+	      vaccinationMaximumSection = ${requestScope.VaccinationList[0].vaccinationMaximumSection }
+	      for (var mi = 0; mi < vaccinationMaximumSection; mi++) {
+				optionInfo += "<option value=" + (mi+1) +">" + (mi+1)+"차" + "</option>";
+			}
+	      optionInfo += "<option value=" + (vaccinationMaximumSection+1) +">" 
+			+ "기준 차수 초과" + "</option>"
+	      $("#vaccinationCurrentSection").html(optionInfo);
+	      
+	      
+	    $("#vaccinationName").change(function() {
+	    	vaccinationMaximumSection =0;
+	    	optionInfo = "";
+	    	<c:forEach var="vaccination" items="${requestScope.VaccinationList }">
+	    		if($("#vaccinationName option:selected").text() == "${vaccination.vaccinationName }"){
+	    			vaccinationMaximumSection = 	${vaccination.vaccinationMaximumSection }
+	    		}
+	 		</c:forEach>
+	 		if (vaccinationMaximumSection == 0) {
+	 			optionInfo = "<option value='0'>예방접종 기준 차수 없음</option>";
+			} else {
+				for (var mi = 0; mi < vaccinationMaximumSection; mi++) {
+					optionInfo += "<option value=" + (mi+1) +">" + (mi+1)+"차" + "</option>";
+				}
+				optionInfo += "<option value=" + (vaccinationMaximumSection+1) +">" 
+						+ "기준 차수 초과" + "</option>"
+			}
+	 		$("#vaccinationCurrentSection").html(optionInfo);
+	 		
+		});
+	      
+	      
 	});
 </script>
 <!-- /select2 -->
@@ -82,12 +118,16 @@
 			<input type="text" id="petWeight" class="form-control" name="petWeight" required="required"/>
 			
 			 <hr> <label>예방접종종류</label> <select class="select2_single form-control" 
-			 name="vaccinationVO.vaccinationName"	required="required" tabindex="-1">
-				<c:forEach var="vaccination" items="${requestScope.VaccinationList }">
-					<option>${vaccination.vaccinationName }</option>
-				</c:forEach>
+          name="vaccinationVO.vaccinationNo"   required="required" id="vaccinationName">
+            <c:forEach var="vaccination" items="${requestScope.VaccinationList }">
+               <option value="${vaccination.vaccinationNo }">${vaccination.vaccinationName }</option>
+            </c:forEach>
+         </select>
+			<label>예방접종차수</label>
+			<select class="form-control"
+				name="vaccinationCurrentSection" required="required"
+				id="vaccinationCurrentSection">
 			</select>
-			
 			<label>진료내용</label>
 			<textarea class="form-control" rows="8" name="vaccinationContent" required="required"  placeholder="진료내용을 입력해주세요"></textarea>
 			

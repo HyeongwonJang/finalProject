@@ -11,7 +11,6 @@
 					+ ' - ' + "${continueParam['listVO'].endDate}");
 	        $('#startDate').attr('value', "${continueParam['listVO'].startDate}");
 	  		$('#endDate').attr('value', "${continueParam['listVO'].endDate}");
-	  		
 		});
 	</script>
 </c:if>
