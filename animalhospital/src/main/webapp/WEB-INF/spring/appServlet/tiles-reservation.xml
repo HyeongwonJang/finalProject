@@ -11,9 +11,9 @@
 	  find_petOwner_treatmentRecord
  -->       
 <tiles-definitions>
-	<definition name="*_treatmentRecord" extends="home">
-		<put-attribute name="main" value="/WEB-INF/views/treatmentRecord/{1}_treatmentRecord.jsp"/>
-		<put-attribute name="modal" value="/WEB-INF/views/treatmentRecord/treatment_modal_page.jsp" />
+	<definition name="*_reservation" extends="home">
+		<put-attribute name="main" value="/WEB-INF/views/reservation/{1}_reservation.jsp"/>
+		<put-attribute name="modal" value="/WEB-INF/views/reservation/reservation_modal_page.jsp" />
 	</definition>	
 </tiles-definitions>
 
