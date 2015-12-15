@@ -1,3 +1,7 @@
+select DISTINCT Vaccination_no
+from Vaccination_Record
+where Pet_Owner_no = 1
+
 select count(*)
 		from vet
 		where vet_tel='01011112222'

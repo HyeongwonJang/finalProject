@@ -3,21 +3,22 @@ package org.animalhospital.vaccination.model.VO;
 public class VaccinationVO {
 	private int vaccinationNo;
 	private String vaccinationName;
-	private String vaccinationBasicPeriod;
-	private String vaccinationAddPeriod;
+	private int vaccinationBasicPeriod;
+	private int vaccinationAddPeriod;
 	private int vaccinationMaximumSection;
-	
 	public VaccinationVO() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
 	public VaccinationVO(int vaccinationNo, String vaccinationName,
-			String vaccinationBasicPeriod, String vaccinationAddPeriod,  int vaccinationMaximumSection) {
+			int vaccinationBasicPeriod, int vaccinationAddPeriod,
+			int vaccinationMaximumSection) {
 		super();
 		this.vaccinationNo = vaccinationNo;
 		this.vaccinationName = vaccinationName;
 		this.vaccinationBasicPeriod = vaccinationBasicPeriod;
 		this.vaccinationAddPeriod = vaccinationAddPeriod;
-		this.vaccinationMaximumSection=vaccinationMaximumSection;
+		this.vaccinationMaximumSection = vaccinationMaximumSection;
 	}
 	public int getVaccinationNo() {
 		return vaccinationNo;
@@ -31,16 +32,16 @@ public class VaccinationVO {
 	public void setVaccinationName(String vaccinationName) {
 		this.vaccinationName = vaccinationName;
 	}
-	public String getVaccinationBasicPeriod() {
+	public int getVaccinationBasicPeriod() {
 		return vaccinationBasicPeriod;
 	}
-	public void setVaccinationBasicPeriod(String vaccinationBasicPeriod) {
+	public void setVaccinationBasicPeriod(int vaccinationBasicPeriod) {
 		this.vaccinationBasicPeriod = vaccinationBasicPeriod;
 	}
-	public String getVaccinationAddPeriod() {
+	public int getVaccinationAddPeriod() {
 		return vaccinationAddPeriod;
 	}
-	public void setVaccinationAddPeriod(String vaccinationAddPeriod) {
+	public void setVaccinationAddPeriod(int vaccinationAddPeriod) {
 		this.vaccinationAddPeriod = vaccinationAddPeriod;
 	}
 	public int getVaccinationMaximumSection() {
@@ -58,6 +59,6 @@ public class VaccinationVO {
 				+ ", vaccinationMaximumSection=" + vaccinationMaximumSection
 				+ "]";
 	}
-
+	
 	
 }

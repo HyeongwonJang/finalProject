@@ -1,6 +1,11 @@
 package org.animalhospital.petowner;
 
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 import javax.annotation.Resource;
 
 import org.animalhospital.petowner.model.DAO.PetOwnerDAO;
@@ -10,8 +15,6 @@ import org.animalhospital.treatment.service.TreatmentService;
 import org.animalhospital.vaccination.model.DAO.VaccinationDAO;
 import org.animalhospital.vaccination.service.VaccinationService;
 import org.animalhospital.vet.model.DAO.VetDAO;
-import org.animalhospital.vet.model.VO.VetLicenseVO;
-import org.animalhospital.vet.model.VO.VetVO;
 import org.animalhospital.vet.service.VetService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -72,5 +75,58 @@ public class TestJUnit {
 		System.out.println(vaccinationService.findDetailVaccinationRecordByVaccinationRecordNo(1));
 		*/
 		//System.out.println(vetService.checkVetByTel(new VetVO(null,null, "01011112222", null)));
+		testCompareSection();
+	}
+	public void testCompareSection(){
+		int currentSection = 3;
+		int maximumSection = 5;
+		// 최근예방접종일시 + basic or add <= 현재 날짜 <= 최근예방접종일시 + basic or add + 7일
+		// 15-12-10 <= 15-12-15 <= 15-12-17
+		// 이면 메세지 전송
+		String latelyVaccinationDate = "2015-12-10";
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		Calendar cal = Calendar.getInstance();
+		try {
+			Date latelyDate = formatter.parse(latelyVaccinationDate);
+			cal.setTime(latelyDate);
+			cal.add(Calendar.DAY_OF_YEAR, 4);
+			latelyDate = cal.getTime();
+			cal.add(Calendar.DAY_OF_YEAR, 7);
+			Date lastDate = cal.getTime();
+			if(latelyDate.getTime() <= new Date().getTime() && new Date().getTime() <= lastDate.getTime()){
+				System.out.println("성공 테스트");
+			}
+			/*System.out.println("****");
+			System.out.println("첫 번째 비교시간:" + latelyDate);
+			System.out.println("현재시간:" + new Date());
+			System.out.println("마지막 비교시간:" + lastDate);
+			System.out.println("****");
+			*/
+			System.out.println("현재 시간:" + new Date());
+			System.out.println("테스트 시간: " + latelyDate);
+			long currentLong = new Date().getTime();
+			long latelyLong = latelyDate.getTime();
+			
+			if(latelyLong >= currentLong){
+				System.out.println("********");
+				System.out.println("정상작동");
+				System.out.println("********");
+			}
+			
+			cal.setTime(latelyDate);
+			cal.add(Calendar.DAY_OF_YEAR, 30 + 7);
+			
+			System.out.println(formatter.format(cal.getTime()));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		if(currentSection < maximumSection){
+			System.out.println("최대차수가 더 크므로 basic date 연산");
+		} else {
+			System.out.println("최대 차수가 더 작으므로 add date 연산");
+		}
 	}
 }
