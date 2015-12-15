@@ -4,7 +4,9 @@
 <script type="text/javascript">
 	$(document).ready(function () {
 		$("#hospitalName").click(function() {
-			alert();
+			$('div.modal').fadeIn();
+			$('div.modal').modal({
+			});
 		});
 	});
 </script>
@@ -21,8 +23,8 @@
 		<!-- 폼 시작부 -->
 		<form id="treatmentForm" action="registerTreatmentRecord.do" method="post">
 			<label for="inputInfo">병원검색</label> <span id="checkTel"></span>
-			<input type="text" id="hospitalName" class="form-control" name="" required="required" readonly value='클릭하여 병원을 선택하여 주세요.'/>
-			<input type="hidden" id="hospitalNo" name="petOwnerVO.petOwnerNo" >
+			<input type="text" id="hospitalName" class="form-control" required="required" readonly value='클릭하여 병원을 검색하여 주세요.'/>
+			<input type="hidden" id="hospitalId" name="hospitalId">
 			<input type="hidden" id="vetLicenseNo" 
 			name="hospitalVO.vetList[0].vetLicenseVO.vetLicenseNo"
 			value="">
