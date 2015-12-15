@@ -81,7 +81,7 @@ public class VaccinationServiceImpl implements VaccinationService {
 	 * @throws ParseException
 	 * @author 민호
 	 */
-	private boolean isCompareVaccinationAlarmDate(VaccinationRecordVO paramVO) throws ParseException{
+	public boolean isCompareVaccinationAlarmDate(VaccinationRecordVO paramVO) throws ParseException{
 		boolean flag = false;
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		Calendar cal = Calendar.getInstance();
