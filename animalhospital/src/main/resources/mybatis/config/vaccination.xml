@@ -45,18 +45,34 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
  
  <insert id="registerVaccination">
- 		insert into Vaccination_Record(Vaccination_Record_no, Vaccination_hours, Vaccination_content,
- 		Pet_weight, Pet_Owner_no, Pet_name, Vet_License_no, Vaccination_no) 
- 		values(Vaccination_Record_no.nextval, #{vaccinationHours}, #{vaccinationContent}, #{petWeight},
- 		#{petOwnerVO.petOwnerNo}, #{petOwnerVO.petVO[0].petName}, null, #{vaccinationVO.vaccinationNo})
+ 		insert into Vaccination_Record(
+ 			Vaccination_Record_no,
+ 			Vaccination_hours,
+ 			Vaccination_content,
+ 			Pet_weight,
+ 			Pet_Owner_no,
+ 			Pet_name,
+ 			Vet_License_no,
+ 			Vaccination_no,
+ 			vaccination_Current_Section) 
+ 		values(
+ 			Vaccination_Record_no.nextval,
+ 			#{vaccinationHours},
+ 			#{vaccinationContent},
+ 			#{petWeight},
+ 			#{petOwnerVO.petOwnerNo},
+ 			#{petOwnerVO.petVO[0].petName},
+ 			null,
+ 			#{vaccinationVO.vaccinationNo},
+ 			#{vaccinationCurrentSection})
  	</insert>
  	 
  	<!-- 수의사 예방접종 등록 -->
  	 <insert id="registerVetVaccination">
  		insert into Vaccination_Record(Vaccination_Record_no, Vaccination_hours, Vaccination_content,
- 		Pet_weight, Vaccination_Current_section, Pet_Owner_no, Pet_name, Vet_License_no, Vaccination_name) 
- 		values(Vaccination_Record_no.nextval, sysdate, #{vaccinationContent}, #{petWeight}, #{vaccinationCurrentSection}+1, 
- 		#{petOwnerVO.petOwnerNo}, #{petOwnerVO.petVO[0].petName}, #{hospitalVO.vetList[0].vetLicenseVO.vetLicenseNo}, #{vaccinationVO.vaccinationName})
+ 		Pet_weight, Vaccination_Current_section, Pet_Owner_no, Pet_name, Vet_License_no, Vaccination_no) 
+ 		values(Vaccination_Record_no.nextval, sysdate, #{vaccinationContent}, #{petWeight}, #{vaccinationCurrentSection}, 
+ 		#{petOwnerVO.petOwnerNo}, #{petOwnerVO.petVO[0].petName}, #{hospitalVO.vetList[0].vetLicenseVO.vetLicenseNo}, #{vaccinationVO.vaccinationNo})
  	</insert>
  	
  	<!-- 예방접종 조회 페이징, 기간 미적용 Version-->
@@ -138,7 +154,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  
  	<!-- 백신 목록리스트 조회 -->
  	<select id="findAllVaccination" resultMap="vavoRM">
- 		select Vaccination_name from Vaccination
+ 		select Vaccination_no, Vaccination_name, Vaccination_Maximum_section
+ 		from Vaccination
  	</select>
 
 

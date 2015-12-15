@@ -10,10 +10,13 @@ create table Vaccination (
 	Vaccination_Basic_period number(15) not null,
 	Vaccination_Add_period number(15)
 );
+select * from Vaccination
+update Vaccination set Vaccination_Maximum_section=0
+where vaccination_no = 2;
 insert into VACCINATION values(vaccination_no_seq.nextval, '종합백신', 30, 365);
 insert into VACCINATION(Vaccination_no, Vaccination_name, Vaccination_Basic_period) 
 	values(vaccination_no_seq.nextval, '광견병', 180);
-insert into VACCINATION values(vaccination_no_seq.nextval, '코로나', 30, 365);
+insert into VACCINATION values(vaccination_no_seq.nextval, '코로나', 30, 365, 3);
 insert into VACCINATION(Vaccination_no, Vaccination_name, Vaccination_Basic_period) 
 	values(vaccination_no_seq.nextval, '광견병', 180);
 
