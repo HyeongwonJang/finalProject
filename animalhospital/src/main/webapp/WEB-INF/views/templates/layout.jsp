@@ -104,8 +104,35 @@
 												</li>
 											</c:when>
 										</c:choose>
+										
 									</ul>
 								</li>
+								<c:choose>
+									<c:when test="${sessionScope.userLevel == 'vet' }">
+										<li><a><i class="fa fa-clipboard"></i> 스케줄관리 <span
+												class="fa fa-chevron-down"></span></a>
+											<ul class="nav child_menu" style="display: none">
+												<li><a
+													href="${initparam.root}registerScheduleView.do">스케줄예약</a>
+												</li>
+												<li><a
+													href="${initparam.root}findSchedule.do">스케줄조회</a>
+												</li>
+											</ul>
+									</c:when>
+									<c:when test="${sessionScope.userLevel == 'petOwner' }">
+										<li><a><i class="fa fa-clipboard"></i> 예약관리 <span
+												class="fa fa-chevron-down"></span></a>
+											<ul class="nav child_menu" style="display: none">
+												<li><a
+													href="${initparam.root}registerReservationView.do">진료예약</a>
+												</li>
+												<li><a
+													href="${initparam.root}findReservation.do">예약조회</a>
+												</li>
+											</ul>
+									</c:when>
+								</c:choose>
 							</ul>
 						</div>
 						<div class="menu_section">
