@@ -28,5 +28,5 @@ public interface VaccinationService {
 	public VaccinationRecordVO findDetailVaccinationRecordByVaccinationRecordNo(
 			int vaccinationRecordNo);
 	int registerVetVaccination(VaccinationRecordVO vrvo);
-	
+	public List<Object> findAlarmListByPetOwnerTel(String petOwnerTel) throws ParseException;
 }

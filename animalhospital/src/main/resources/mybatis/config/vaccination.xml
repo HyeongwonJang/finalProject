@@ -169,7 +169,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where vr.vaccination_no=va.vaccination_no 
 			and vr.pet_owner_no=po.pet_owner_no 
 			and vr.pet_name=p.pet_name 
-			and po.pet_owner_no=#{petOwnerNo}
+			and po.pet_owner_tel=#{petOwnerTel}
 			and vr.pet_name=#{petName}
 	</select>
 	<!-- vaccinationNo로 펫의 가장 최근 예방접종정보 반환 -->
@@ -185,7 +185,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			where vr.vaccination_no=va.vaccination_no 
 				and vr.pet_owner_no=po.pet_owner_no 
 				and vr.pet_name=p.pet_name 
-				and po.pet_owner_no=#{petOwnerNo}
+				and po.pet_owner_tel=#{petOwnerTel}
 				and vr.pet_name=#{petName}
 				and vr.vaccination_no=#{vaccinationNo}
 			order by vr.vaccination_hours desc

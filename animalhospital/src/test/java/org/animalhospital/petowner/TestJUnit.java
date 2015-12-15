@@ -1,6 +1,8 @@
 package org.animalhospital.petowner;
 
 
+import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +17,7 @@ import org.animalhospital.treatment.service.TreatmentService;
 import org.animalhospital.vaccination.model.DAO.VaccinationDAO;
 import org.animalhospital.vaccination.model.VO.VaccinationRecordVO;
 import org.animalhospital.vaccination.service.VaccinationService;
+import org.animalhospital.vaccination.service.VaccinationServiceImpl;
 import org.animalhospital.vet.model.DAO.VetDAO;
 import org.animalhospital.vet.service.VetService;
 import org.junit.Test;
@@ -46,38 +49,9 @@ public class TestJUnit {
 	private VaccinationService vaccinationService;
 	
 	@Test
-	public void TestDao2(){
-		/*PetOwnerVO paramVO = new PetOwnerVO();
-		List<PetVO> petList = new ArrayList<PetVO>();
-		PetVO petVO = new PetVO();
-		petVO.setPetName("송이");
-		petList.add(petVO);
-		paramVO.setPetOwnerNo(1);
-		paramVO.setPetOwnerTel("01011112222");
-		paramVO.setPetVO(petList);
-		ListVO listVO = new ListVO(null, "2000-03-10", "2015-12-06", 1, null);
-		//System.out.println("동물:"paramVO.getPetVO().get(0));
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("povo", paramVO);
-		map.put("listVO", listVO);*/
-		//System.out.println("매개변수:" + map);
-		//System.out.println(PetOwnerDAO.findPetByTel(paramVO));
-		//System.out.println(treatmentService.findTreatmentRecordByNoAndName(map));
-		//System.out.println(petOwnerService.findPetListByTel(paramVO));
-		//System.out.println(treatmentDAO.findTreatmentRecordByPage(map));
-		//System.out.println("총 게시물수:" + treatmentDAO.findAllTreatmentRecord(map));
-		//System.out.println("리스트VO:" + treatmentService.findTreatmentRecordByPage(map));
-		//System.out.println("검색결과: " + treatmentDAO.findDetailTreatmentRecordByTreatmentNo(42));
-/*		System.out.println("반려동물 검색결과: " + treatmentService.findDetailTreatmentRecordByTreatmentNo(42));
-		System.out.println("리스트VO:" + treatmentService.findTreatmentRecordVetVerByPage(map));
-		System.out.println("진료기록 상세조회 : " + treatmentService.findDetailTreatmentRecordByTreatmentNo(1));*/
-		/*VetLicenseVO vo = new VetLicenseVO(4, "이윤아", 0, null);
-		System.out.println("서비스 테스트:" + treatmentService.findDetailTreatmentRecordByTreatmentNo(48));
-		System.out.println(vaccinationService.findDetailVaccinationRecordByVaccinationRecordNo(1));
-		*/
-		//System.out.println(vetService.checkVetByTel(new VetVO(null,null, "01011112222", null)));
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("petOwnerNo", 1);
+	public void TestDao2() throws ParseException{
+		/*Map<String, Object> map = new HashMap<String, Object>();
+		map.put("petOwnerTel", "01011111111");
 		map.put("petName", "두부");
 		List<Integer> vaccinationNoList=vaccinationDAO.findVaccinationNoList(map);
 		for(int i=0; i<vaccinationNoList.size(); i++){
@@ -85,7 +59,38 @@ public class TestJUnit {
 			VaccinationRecordVO vaccinationRecordHistoryInfo=vaccinationDAO.findLastVaccinationHistoryInfo(map);
 			vaccinationRecordHistoryInfo.getPetOwnerVO().addPetVO(new PetVO("두부",null,null,null,null));
 			System.out.println(vaccinationRecordHistoryInfo);
-		}
+		}*/
+		System.out.println(vaccinationService.findAlarmListByPetOwnerTel("01011111111"));
+		
+		
 
 	}
+	/*
+	public List<VaccinationRecordVO> findVaccinationRecordAlarmByPetOwnerNo(String petOwnerTel) throws ParseException{
+		List<VaccinationRecordVO> alarmList = new ArrayList<VaccinationRecordVO>();
+		ArrayList<VaccinationRecordVO> latelyRecord = new ArrayList<VaccinationRecordVO>();
+		List<PetVO> petList = PetOwnerDAO.findPetListByPetownerTel(petOwnerTel).getPetVO();
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("petOwnerTel", petOwnerTel);
+		// 펫 마리수만큼 반복
+		for(int pi=0; pi<petList.size(); pi++){
+			paramMap.put("petName", petList.get(pi).getPetName());
+			List<Integer> vaccinationList = vaccinationDAO.findVaccinationNoList(paramMap);
+			// 접종 받은 예방접종 종류만큼 반복
+			for(int vi=0; vi<vaccinationList.size(); vi++){
+				paramMap.put("vaccinationNo", vaccinationList.get(vi));
+				//최신 예방접종 조회
+				latelyRecord.add(vaccinationDAO.findLastVaccinationHistoryInfo(paramMap));
+				latelyRecord.get(vi).getPetOwnerVO().addPetVO(
+						new PetVO(petList.get(pi).getPetName(), null, null, null, null));
+			}
+		}
+		for(int ai=0; ai<latelyRecord.size(); ai++){
+			if(((VaccinationServiceImpl) vaccinationService).
+					isCompareVaccinationAlarmDate(latelyRecord.get(ai))){
+				alarmList.add(latelyRecord.get(ai));
+			} 
+		}
+		return alarmList;
+	}*/
 }
