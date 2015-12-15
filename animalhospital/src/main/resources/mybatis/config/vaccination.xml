@@ -32,6 +32,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="Vaccination_Current_section" property="vaccinationCurrentSection" />
 		<result column="Vaccination_no" property="vaccinationVO.vaccinationNo" />
 		<result column="Vaccination_name" property="vaccinationVO.vaccinationName" />
+		<result column="Vaccination_Basic_period" property="vaccinationVO.vaccinationBasicPeriod" />
+		<result column="Vaccination_Add_period" property="vaccinationVO.vaccinationAddPeriod" />
+		<result column="Vaccination_Maximum_section" property="vaccinationVO.vaccinationMaximumSection" />
+		<result column="Pet_Owner_no" property="petOwnerVO.petOwnerNo"/>
 		<result column="Pet_Owner_name" property="petOwnerVO.petOwnerName"/>
 		<result column="Pet_Owner_tel" property="petOwnerVO.petOwnerTel"/>
 		<result column="hospital_name" property="hospitalVO.hospitalName"/>
@@ -158,6 +162,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		from Vaccination
  	</select>
 
+	<!-- petOwnerNo와 petName 정보를 이용 펫이 처치받은 예방접종내역의 백신번호 종류만 반환  -->
+	<select id="findVaccinationNoList" resultType="int" parameterType="map">
+		select distinct vr.vaccination_no 
+		from vaccination_record vr, vaccination va, pet_owner po, pet p 
+		where vr.vaccination_no=va.vaccination_no 
+			and vr.pet_owner_no=po.pet_owner_no 
+			and vr.pet_name=p.pet_name 
+			and po.pet_owner_no=#{petOwnerNo}
+			and vr.pet_name=#{petName}
+	</select>
+	<!-- vaccinationNo로 펫의 가장 최근 예방접종정보 반환 -->
+	<select id="findLastVaccinationHistoryInfoByVaccinationNo" resultMap="vrvoRM" parameterType="map">
+		select vaccination_hours, vaccination_current_section, 
+			vaccination_Basic_Period, vaccination_Add_Period, 
+			vaccination_Maximum_Section, Pet_Owner_name
+		from(
+			select vr.vaccination_hours, vr.vaccination_current_section, 
+				 va.vaccination_Basic_Period, va.vaccination_Add_Period, 
+				 va.vaccination_Maximum_Section, po.Pet_Owner_name, rownum 
+			from vaccination_record vr, vaccination va, pet_owner po, pet p 
+			where vr.vaccination_no=va.vaccination_no 
+				and vr.pet_owner_no=po.pet_owner_no 
+				and vr.pet_name=p.pet_name 
+				and po.pet_owner_no=#{petOwnerNo}
+				and vr.pet_name=#{petName}
+				and vr.vaccination_no=#{vaccinationNo}
+			order by vr.vaccination_hours desc
+		) where rownum=1
+	</select>
 
  	
  </mapper>
