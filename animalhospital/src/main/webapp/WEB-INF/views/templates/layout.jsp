@@ -113,10 +113,10 @@
 												class="fa fa-chevron-down"></span></a>
 											<ul class="nav child_menu" style="display: none">
 												<li><a
-													href="${initparam.root}registerScheduleView.do">스케줄예약</a>
+													href="${initparam.root}registerVetReservationView.do">스케줄예약</a>
 												</li>
 												<li><a
-													href="${initparam.root}findSchedule.do">스케줄조회</a>
+													href="${initparam.root}findVetReservation.do">스케줄조회</a>
 												</li>
 											</ul>
 									</c:when>
@@ -125,10 +125,10 @@
 												class="fa fa-chevron-down"></span></a>
 											<ul class="nav child_menu" style="display: none">
 												<li><a
-													href="${initparam.root}registerReservationView.do">진료예약</a>
+													href="${initparam.root}registerPetOwnerReservationView.do">진료예약</a>
 												</li>
 												<li><a
-													href="${initparam.root}findReservation.do">예약조회</a>
+													href="${initparam.root}findPetOwnerReservation.do">예약조회</a>
 												</li>
 											</ul>
 									</c:when>
