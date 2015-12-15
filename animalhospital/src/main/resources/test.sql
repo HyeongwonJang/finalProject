@@ -1,7 +1,3 @@
-select DISTINCT Vaccination_no
-from Vaccination_Record
-where Pet_Owner_no = 1
-
 select count(*)
 		from vet
 		where vet_tel='01011112222'
@@ -403,3 +399,42 @@ select * from pet
 						between to_date('2000-01-01') 
 						and to_date('2015-12-15') + 0.9999
 				order by vr.Vaccination_Record_no desc;
+				
+--전체 진료기록에서 진료날짜 순으로 정렬 후 백신명이 중복되지 않도록 조회
+select  distinct vaccination_name, vaccination_hours 
+	from(
+		select vr.vaccination_Record_no, vr.vaccination_hours,  vr.vaccination_no, va.vaccination_name, p.pet_name
+		from VACCINATION_RECORD vr, VACCINATION va, PET_OWNER po, PET p 
+		where vr.vaccination_no=va.vaccination_no
+			and vr.pet_owner_no=po.pet_owner_no
+			and vr.pet_name=p.pet_name;
+		order by vr.vaccination_hours desc;
+	) ;
+
+	
+	
+
+	
+	--1
+	select distinct vr.vaccination_no 
+from vaccination_record vr, vaccination va, pet_owner po, pet p 
+where vr.vaccination_no=va.vaccination_no 
+	and vr.pet_owner_no=po.pet_owner_no 
+	and vr.pet_name=p.pet_name 
+	and po.pet_owner_no='1';
+	
+	--2
+select vaccination_hours, vaccination_current_section, vaccination_Basic_Period, vaccination_Add_Period, vaccination_Maximum_Section 
+from(
+	select vr.vaccination_hours, vr.vaccination_current_section, 
+		 va.vaccination_Basic_Period, va.vaccination_Add_Period, va.vaccination_Maximum_Section, rownum 
+	from vaccination_record vr, vaccination va, pet_owner po, pet p 
+	where vr.vaccination_no=va.vaccination_no 
+		and vr.pet_owner_no=po.pet_owner_no 
+		and vr.pet_name=p.pet_name 
+		and po.pet_owner_no='1' 
+		and vr.vaccination_no='1'
+		
+	order by vr.vaccination_hours desc
+) where rownum=1;
+				
