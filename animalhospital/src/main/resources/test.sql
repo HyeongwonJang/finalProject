@@ -373,3 +373,29 @@ where vl.Vet_License_no = v.Vet_License_no and v.Hospital_id = h.Hospital_id and
 
 select * from pet_owner
 select * from pet
+
+		select 
+			vr.Vaccination_hours, va.Vaccination_name,
+			po.Pet_Owner_name, po.Pet_Owner_tel, 
+			vr.Pet_weight, vl.Vet_name, 
+			h.Hospital_name, h.Hospital_tel, vr.vaccination_content 
+		from VACCINATION_RECORD vr, PET_OWNER po, VET_LICENSE vl, VET v, HOSPITAL h, VACCINATION va 
+		where vr.pet_owner_no = po.pet_owner_no 
+			and vr.Vaccination_no = va.Vaccination_no 
+			and vr.Vet_License_no = vl.Vet_License_no(+) 
+			and vl.Vet_License_no = v.Vet_License_no(+)
+			and v.Hospital_id = h.Hospital_id(+) 
+			and Vaccination_Record_no = 1;
+				select vr.Vaccination_Record_no, 
+					to_char(vr.Vaccination_hours, 'YYYY-MM-DD') as Vaccination_hours, 
+					po.Pet_Owner_name, 
+					v.Vaccination_name 
+				from VACCINATION_RECORD vr, VACCINATION v, PET_OWNER po 
+				where vr.Pet_Owner_no=po.Pet_Owner_no
+					and vr.Vaccination_no=v.Vaccination_no
+					and vr.Pet_name='두부'
+					and po.Pet_Owner_tel='01011111111'
+					and vr.Vaccination_hours
+						between to_date('2000-01-01') 
+						and to_date('2015-12-15') + 0.9999
+				order by vr.Vaccination_Record_no desc;

@@ -87,26 +87,6 @@
 					<option>${vaccination.vaccinationName }</option>
 				</c:forEach>
 			</select>
-			<!-- 
-				if문 집어넣어서 vaccinationMaximum 수가 0이면 
-				'접종차수 기준 없음' 이라는 문구 출력
-				value=0으로 들어가게 세팅 
-			-->
-			<c:choose>
-				<c:when test="">
-				
-				</c:when>
-				<c:otherwise>
-				
-				</c:otherwise>
-			</c:choose>
-			<!-- vaccinationMaximum가 1이상이면 아래의 반복문을 실행시켜 차수 출력 -->
-			<label>예방접종차수</label> 
-			<select class="form-control" name="vaccinationCurrentSection" required="required">
-				<c:forEach var="index"  begin="1" end="3">
-					<option value="${index}">${index}차</option>
-				</c:forEach>
-			</select>
 			
 			<label>진료내용</label>
 			<textarea class="form-control" rows="8" name="vaccinationContent" required="required"  placeholder="진료내용을 입력해주세요"></textarea>
