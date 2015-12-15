@@ -55,5 +55,15 @@ public class VaccinationDAOImpl implements VaccinationDAO {
 	public PetVO findDetailPetRecordByVaccinationtRecordNo(int vaccinationRecordNo){
 		return sqlSessionTemplate.selectOne("vaccination.findDetailPetRecordByVaccinationtRecordNo", vaccinationRecordNo);
 	}
+	
+	@Override
+	public List<Integer> findVaccinationNoList(Map<String, Object> paramMap){
+		return sqlSessionTemplate.selectList("vaccination.findVaccinationNoList", paramMap);
+	}
+	@Override
+	public VaccinationRecordVO findLastVaccinationHistoryInfo(
+			Map<String, Object> paramMap) {
+		return sqlSessionTemplate.selectOne("vaccination.findLastVaccinationHistoryInfoByVaccinationNo", paramMap);
+	}
 
 }

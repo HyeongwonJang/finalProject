@@ -1,17 +1,21 @@
 package org.animalhospital.petowner;
 
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import org.animalhospital.petowner.model.DAO.PetOwnerDAO;
+import org.animalhospital.petowner.model.VO.PetVO;
 import org.animalhospital.petowner.service.PetOwnerService;
 import org.animalhospital.treatment.model.DAO.TreatmentDAO;
 import org.animalhospital.treatment.service.TreatmentService;
 import org.animalhospital.vaccination.model.DAO.VaccinationDAO;
+import org.animalhospital.vaccination.model.VO.VaccinationRecordVO;
 import org.animalhospital.vaccination.service.VaccinationService;
 import org.animalhospital.vet.model.DAO.VetDAO;
-import org.animalhospital.vet.model.VO.VetLicenseVO;
-import org.animalhospital.vet.model.VO.VetVO;
 import org.animalhospital.vet.service.VetService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -72,5 +76,16 @@ public class TestJUnit {
 		System.out.println(vaccinationService.findDetailVaccinationRecordByVaccinationRecordNo(1));
 		*/
 		//System.out.println(vetService.checkVetByTel(new VetVO(null,null, "01011112222", null)));
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("petOwnerNo", 1);
+		map.put("petName", "두부");
+		List<Integer> vaccinationNoList=vaccinationDAO.findVaccinationNoList(map);
+		for(int i=0; i<vaccinationNoList.size(); i++){
+			map.put("vaccinationNo", vaccinationNoList.get(i));
+			VaccinationRecordVO vaccinationRecordHistoryInfo=vaccinationDAO.findLastVaccinationHistoryInfo(map);
+			vaccinationRecordHistoryInfo.getPetOwnerVO().addPetVO(new PetVO("두부",null,null,null,null));
+			System.out.println(vaccinationRecordHistoryInfo);
+		}
+
 	}
 }
