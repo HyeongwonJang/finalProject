@@ -11,6 +11,7 @@ import org.animalhospital.vaccination.model.DAO.VaccinationDAO;
 import org.animalhospital.vaccination.service.VaccinationService;
 import org.animalhospital.vet.model.DAO.VetDAO;
 import org.animalhospital.vet.model.VO.VetLicenseVO;
+import org.animalhospital.vet.model.VO.VetVO;
 import org.animalhospital.vet.service.VetService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -66,9 +67,10 @@ public class TestJUnit {
 /*		System.out.println("반려동물 검색결과: " + treatmentService.findDetailTreatmentRecordByTreatmentNo(42));
 		System.out.println("리스트VO:" + treatmentService.findTreatmentRecordVetVerByPage(map));
 		System.out.println("진료기록 상세조회 : " + treatmentService.findDetailTreatmentRecordByTreatmentNo(1));*/
-		VetLicenseVO vo = new VetLicenseVO(4, "이윤아", 0, null);
+		/*VetLicenseVO vo = new VetLicenseVO(4, "이윤아", 0, null);
 		System.out.println("서비스 테스트:" + treatmentService.findDetailTreatmentRecordByTreatmentNo(48));
 		System.out.println(vaccinationService.findDetailVaccinationRecordByVaccinationRecordNo(1));
-
+		*/
+		System.out.println(vetService.checkVetByTel(new VetVO(null,null, "01011112222", null)));
 	}
 }

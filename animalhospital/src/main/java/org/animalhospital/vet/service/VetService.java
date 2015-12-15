@@ -25,4 +25,6 @@ public interface VetService {
 	public int updateVet(HospitalVO hospitalVO);
 
 	public List<VetLicenseVO> findVetLicenseByHospitalId(String hospitalId);
+
+	public int checkVetByTel(VetVO vetVO);
 }

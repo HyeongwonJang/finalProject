@@ -76,6 +76,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from HOSPITAL
 	</select>
 	
+	<select id="checkVetByTel"  parameterType="vvo"  resultType="int">
+		select count(*)
+		from vet
+		where vet_tel=#{vetTel}
+	</select>
 	
 
 

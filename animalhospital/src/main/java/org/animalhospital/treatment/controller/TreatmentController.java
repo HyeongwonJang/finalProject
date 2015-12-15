@@ -53,7 +53,7 @@ public class TreatmentController {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("recordList", treatmentService.findTreatmentRecordByByPetOwnerTelAndPetName(paramMap));
 		mav.addObject("continueParam", paramMap);
-		System.out.println(paramMap);
+		System.out.println("param : " + paramMap);
 		if(request.getSession(false).getAttribute("userLevel").equals("vet")){
 			mav.setViewName("find_vet_treatmentRecord");
 		} else if(request.getSession(false).getAttribute("userLevel").equals("petOwner")){

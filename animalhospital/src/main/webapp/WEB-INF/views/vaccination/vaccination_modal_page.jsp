@@ -29,7 +29,7 @@
 					$("#modalPetBirthDay").text(findVaccinationRecordDetailResult.petOwnerVO.petVO[0].petBirthday);
 					$("#modalPetOwnerName").text(findVaccinationRecordDetailResult.petOwnerVO.petOwnerName);
 					$("#modalPetOwnerTel").text(findVaccinationRecordDetailResult.petOwnerVO.petOwnerTel);
-					$("#modalRecordContent").text(findVaccinationRecordDetailResult.vaccinationVO.vaccinationContent);
+					$("#modalRecordContent").text(findVaccinationRecordDetailResult.vaccinationContent);
 					$("#modalVaccinationName").text(findVaccinationRecordDetailResult.vaccinationVO.vaccinationName);
 				}
 			});
