@@ -16,7 +16,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- VaccinationVO ResultMap -->
 	<resultMap type="vavo" id="vavoRM">
- 		<id column="Vaccination_name" property="vaccinationName"/>
+		<id column="Vaccination_no" property="vaccinationNo" />
+ 		<result column="Vaccination_name" property="vaccinationName"/>
+		<result column="Vaccination_Basic_period" property="vaccinationBasicPeriod"/>
+		<result column="Vaccination_Add_period" property="vaccinationAddPeriod"/>
+		<result column="Vaccination_Maximum_section" property="vaccinationMaximumSection"/>
  	</resultMap>
 
 	<!-- VaccinationRecordVO ResultMap -->
@@ -25,6 +29,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="vaccination_hours" property="vaccinationHours" />
 		<result column="vaccination_content" property="vaccinationContent" />
 		<result column="pet_weight" property="petWeight" />
+		<result column="Vaccination_Current_section" property="vaccinationCurrentSection" />
+		<result column="Vaccination_no" property="vaccinationVO.vaccinationNo" />
 		<result column="Vaccination_name" property="vaccinationVO.vaccinationName" />
 		<result column="Pet_Owner_name" property="petOwnerVO.petOwnerName"/>
 		<result column="Pet_Owner_tel" property="petOwnerVO.petOwnerTel"/>
@@ -40,16 +46,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  
  <insert id="registerVaccination">
  		insert into Vaccination_Record(Vaccination_Record_no, Vaccination_hours, Vaccination_content,
- 		Pet_weight, Pet_Owner_no, Pet_name, Vet_License_no, Vaccination_name) 
+ 		Pet_weight, Pet_Owner_no, Pet_name, Vet_License_no, Vaccination_no) 
  		values(Vaccination_Record_no.nextval, #{vaccinationHours}, #{vaccinationContent}, #{petWeight},
- 		#{petOwnerVO.petOwnerNo}, #{petOwnerVO.petVO[0].petName}, null, #{vaccinationVO.vaccinationName})
+ 		#{petOwnerVO.petOwnerNo}, #{petOwnerVO.petVO[0].petName}, null, #{vaccinationVO.vaccinationNo})
  	</insert>
  	 
  	<!-- 수의사 예방접종 등록 -->
  	 <insert id="registerVetVaccination">
  		insert into Vaccination_Record(Vaccination_Record_no, Vaccination_hours, Vaccination_content,
- 		Pet_weight, Pet_Owner_no, Pet_name, Vet_License_no, Vaccination_name) 
- 		values(Vaccination_Record_no.nextval, sysdate, #{vaccinationContent}, #{petWeight},
+ 		Pet_weight, Vaccination_Current_section, Pet_Owner_no, Pet_name, Vet_License_no, Vaccination_name) 
+ 		values(Vaccination_Record_no.nextval, sysdate, #{vaccinationContent}, #{petWeight}, #{vaccinationCurrentSection}+1, 
  		#{petOwnerVO.petOwnerNo}, #{petOwnerVO.petVO[0].petName}, #{hospitalVO.vetList[0].vetLicenseVO.vetLicenseNo}, #{vaccinationVO.vaccinationName})
  	</insert>
  	
@@ -78,10 +84,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				select vr.Vaccination_Record_no, 
 					to_char(vr.Vaccination_hours, 'YYYY-MM-DD') as Vaccination_hours, 
 					po.Pet_Owner_name, 
-					vr.Vaccination_name 
+					v.Vaccination_name 
 				from VACCINATION_RECORD vr, VACCINATION v, PET_OWNER po 
 				where vr.Pet_Owner_no=po.Pet_Owner_no
-					and vr.Vaccination_name=v.Vaccination_name
+					and vr.Vaccination_no=v.Vaccination_no
 					and vr.Pet_name=#{povo.petVO[0].petName} 
 					and po.Pet_Owner_tel=#{povo.petOwnerTel}
 					and vr.Vaccination_hours
@@ -94,7 +100,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	<select id="findAllVaccinationRecord"  parameterType="map" resultType="int"> 
 		select count(*)
 		from Vaccination_RECORD vr, VACCINATION v, PET_OWNER po 
-		where vr.Vaccination_name = v.Vaccination_name
+		where vr.Vaccination_no = v.Vaccination_no
 			and vr.Pet_Owner_no = po.Pet_Owner_no 
 			and vr.Pet_name = #{povo.petVO[0].petName}
 			and vr.Vaccination_hours 
@@ -109,13 +115,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		  select문을 두 개로 나눈다 -->
 	<select id="findDetailVaccinationRecordByVaccinationRecordNo" resultMap="vrvoRM" parameterType="int">
 		select 
-			vr.Vaccination_hours, vr.Vaccination_name,
+			vr.Vaccination_hours, va.Vaccination_name,
 			po.Pet_Owner_name, po.Pet_Owner_tel, 
 			vr.Pet_weight, vl.Vet_name, 
 			h.Hospital_name, h.Hospital_tel, vr.vaccination_content 
 		from VACCINATION_RECORD vr, PET_OWNER po, VET_LICENSE vl, VET v, HOSPITAL h, VACCINATION va 
 		where vr.pet_owner_no = po.pet_owner_no 
-			and vr.Vaccination_name = va.Vaccination_name 
+			and vr.Vaccination_no = va.Vaccination_no 
 			and vr.Vet_License_no = vl.Vet_License_no(+) 
 			and vl.Vet_License_no = v.Vet_License_no(+)
 			and v.Hospital_id = h.Hospital_id(+) 

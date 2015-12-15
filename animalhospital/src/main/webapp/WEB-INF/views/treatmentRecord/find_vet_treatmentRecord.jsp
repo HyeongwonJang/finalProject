@@ -98,6 +98,8 @@ var submitFlag = false;
 						});
 					}	
 				});
+			}else{
+				submitFlag=false;
 			}
 		});
 		
