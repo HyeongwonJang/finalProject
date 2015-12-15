@@ -203,4 +203,20 @@ public class ViewController {
 		return "find_vet_vaccination";
 	}
 	
+	/**
+	 * 수의사 스케줄예약 페이지
+	 */
+	@RequestMapping("registerVetReservationView.do")
+	public String registerScheduleView() {
+		return "register_vet_reservation";
+	}
+
+	/**
+	 * 보호자 진료예약 페이지
+	 */
+	@RequestMapping("registerPetOwnerReservationView.do")
+	public String registerReservationView() {
+		return "register_petOwner_reservation";
+	}
+
 }
