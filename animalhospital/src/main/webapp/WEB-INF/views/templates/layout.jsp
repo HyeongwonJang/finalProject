@@ -185,29 +185,38 @@
 											class="fa fa-sign-out pull-right"></i> Log Out</a></li>
 								</ul>
 							</li>
-							
-							<li role="presentation" class="dropdown">
-                                <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-                                   
-                                    <i class="fa fa-envelope-o"></i>
-                                    
-                                </a>
-                                <ul id="menu1" class="dropdown-menu list-unstyled msg_list animated fadeInDown" role="menu">
-                                    <li>
-                                        <a>
-                                            <span class="image">
-                                    </span>
-                                            <span>
-                                        <span>John Smith</span>
-                                            <span class="time">3 mins ago</span>
-                                            </span>
-                                            <span class="message">
-                                        Film festivals used to be do-or-die moments for movie makers. They were where... 
-                                    </span>
-                                        </a>
-                                    </li>
-                                    						</ul>
 
+							<li role="presentation" class="dropdown"><a
+								href="javascript:;" class="dropdown-toggle info-number"
+								data-toggle="dropdown" aria-expanded="false">
+								 <i class="fa -o fa-bell"></i>
+                                    <span class="badge bg-green">6</span>
+
+							</a>
+								<ul id="menu1"
+									class="dropdown-menu list-unstyled msg_list animated fadeInDown"
+									role="menu">
+									<li><a> <span class="image"> </span> <span> 
+											<span>두부</span>
+											<span class="time">12.04</span>
+										</span> 
+										<span class="message">
+											 xx에 대한 xx 예방접종 xx차를 맞아야 함</span>
+									</a>
+									
+									</li>
+									<li ><a><span class="image"></span> <span> 
+											<span>두부</span>
+											<span class="time">12.04</span>
+										</span> 
+										<span class="message">
+											 xx에 대한 xx 예방접종 xx차를 맞아야 함</span>
+									</a>
+									
+									</li>
+								</ul>
+								
+						</li>		
 					</nav>
 				</div>
 			</div>
