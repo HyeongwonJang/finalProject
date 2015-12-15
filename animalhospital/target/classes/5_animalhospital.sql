@@ -43,9 +43,11 @@ set Pet_Owner_id=null, Pet_Owner_password=null, Pet_Owner_address=null
 where Pet_Owner_id = 'tp2';
 
 -- Hospital
-insert into Hospital values(Hospital_id_seq.nextval, 'KOSTA 동물병원', '성남시 분당구 백현동', '031-123-4567');
-insert into Hospital values(Hospital_id_seq.nextval, 'TOMCAT 동물병원', '성남시 분당구 운중동', '031-123-4568');
-insert into Hospital values(Hospital_id_seq.nextval, 'EXCEPTION 동물병원', '서울시 마포구 상암동', '02-123-4569');
+insert into Hospital values(Hospital_id_seq.nextval, 'KOSTA 동물병원', '성남시 분당구 백현동', '0311234567');
+insert into Hospital values(Hospital_id_seq.nextval, 'TOMCAT 동물병원', '성남시 분당구 운중동', '0311234568');
+insert into Hospital values(Hospital_id_seq.nextval, 'EXCEPTION 동물병원', '서울시 마포구 상암동', '021234569');
+
+
 -- Vet
 insert into Vet_License values(Vet_License_no_seq.nextval, '강소라', 881001, to_date('1999-12-20'));
 insert into Vet_License values(Vet_License_no_seq.nextval, '임창정', 731130, to_date('1993-11-30'));
@@ -117,8 +119,26 @@ insert into Vaccination(Vaccination_name) values('Feline Leukemia');
 insert into Vaccination(Vaccination_name) values('Chlamydia');
 insert into Vaccination(Vaccination_name) values('Feline Infectious Peritonitis');
 -- Vaccination_Record
-insert into Vaccination_Record(Vaccination_Record_no, Vaccination_hours, Vaccination_content, Pet_weight, Pet_Owner_no, Pet_name, Vet_License_no, Vaccination_name)
-values(Vaccination_Record_no.nextval, '2004_10_1', '1차', 2.4, 1, '송이', null, 'DHPPL');
+insert into Vaccination_Record(
+Vaccination_Record_no,
+Vaccination_hours,
+Vaccination_content,
+Pet_weight,
+Pet_Owner_no,
+Pet_name,
+Vet_License_no,
+Vaccination_no,
+Vaccination_current_section)
+values(
+Vaccination_Record_no.nextval,
+sysdate,
+'알림 기능 추가 테스트 2 6차까지 끝남',
+2.4,
+1,
+'두부',
+null,
+1,
+6);
 insert into Vaccination_Record(Vaccination_Record_no, Vaccination_hours, Vaccination_content, Pet_weight, Pet_Owner_no, Pet_name, Vet_License_no, Vaccination_name)
 values(Vaccination_Record_no.nextval, '2004_12_1', '2차', 2.8, 1, '송이', null, 'DHPPL');
 insert into Vaccination_Record(Vaccination_Record_no, Vaccination_hours, Vaccination_content, Pet_weight, Pet_Owner_no, Pet_name, Vet_License_no, Vaccination_name)

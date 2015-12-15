@@ -6,6 +6,8 @@ create table Vaccination (
 	Vaccination_name varchar2(50) primary key
 );
 select * from Vaccination;
+alter table Vaccination add(criteria_date_range number(10));
+alter table Vaccination rename column maximum_period_section to vaccination_maximum_section
 
 -- Vaccination_Record
 create sequence Vaccination_Record_no nocache;
@@ -22,4 +24,5 @@ create table Vaccination_Record (
 	constraint fk_vr_Vet_License_no foreign key(Vet_License_no) references Vet_License,
 	constraint fk_vr_Vaccination_name foreign key(Vaccination_name) references Vaccination
 );
+alter table Vaccination_Record add(vaccination_current_section number(10));
 select * from Vaccination_Record;
