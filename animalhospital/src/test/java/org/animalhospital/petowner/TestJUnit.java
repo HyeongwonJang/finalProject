@@ -12,6 +12,8 @@ import javax.annotation.Resource;
 import org.animalhospital.petowner.model.DAO.PetOwnerDAO;
 import org.animalhospital.petowner.model.VO.PetVO;
 import org.animalhospital.petowner.service.PetOwnerService;
+import org.animalhospital.reservation.model.DAO.ReservationDAO;
+import org.animalhospital.reservation.model.VO.ReservationVO;
 import org.animalhospital.treatment.model.DAO.TreatmentDAO;
 import org.animalhospital.treatment.service.TreatmentService;
 import org.animalhospital.vaccination.model.DAO.VaccinationDAO;
@@ -47,6 +49,8 @@ public class TestJUnit {
 	private VaccinationDAO vaccinationDAO;
 	@Resource
 	private VaccinationService vaccinationService;
+	@Resource
+	private ReservationDAO reservationDAO; 
 	
 	@Test
 	public void TestDao2() throws ParseException{
@@ -63,7 +67,11 @@ public class TestJUnit {
 		//vaccinationService.findAlarmListByPetOwnerTel("01011111111");
 		System.out.println(vaccinationService.findAlarmListByPetOwnerTel("01011111111"));
 		//System.out.println(vaccinationDAO.findTookVaccinationPetListByPetOwnerTel("01011111111"));
-		
+//		System.out.println(vaccinationService.findAlarmListByPetOwnerTel("01011111111"));
+		System.out.println(reservationDAO.findPetOwnerReservation("tp1"));
+		vaccinationService.findAlarmListByPetOwnerTel("01011111111");
+		//System.out.println(vaccinationService.findAlarmListByPetOwnerTel("01011111111"));
+
 
 	}
 	

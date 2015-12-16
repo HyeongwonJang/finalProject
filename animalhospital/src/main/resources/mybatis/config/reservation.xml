@@ -4,6 +4,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- MyBatis에서 namespace는 필수적으로 명시해야 함 -->
 <mapper namespace="reservation">
-	
+	<resultMap type="rvo" id="rvoRM">
+		<id column="Reservation_no" property="reservationNo"/>
+		<result column="reservation_date" property="reservationDate"/>
+		<result column="Reservation_time" property="reservationTimeVO.reservationTime"/>
+		<result column="hospital_name" property="hospitalVO.hospitalName"/>
+		<result column="hospital_tel" property="hospitalVO.hospitalTel"/>
+		<!-- <result column="vet_name" property="hospitalVO.vetList[0].vetLicenseVO.vetName"/> -->
+		<result column="Pet_owner_name" property="petOwnerVO.petOwnerName"/>
+		<!-- <result column="pet_name" property="petOwnerVO.petVO[0].petName"/> -->
+		<result column="reservation_content" property="reservationContent"/>
+		<collection property="hospitalVO.vetList" ofType="vvo">
+			<result column="vet_name" property="vetLicenseVO.vetName" />
+		</collection>
+		<collection property="petOwnerVO.petVO" ofType="pvo">
+			<result column="pet_name" property="petName" />
+		</collection>
+	</resultMap>
+	<select id="findPetOwnerReservation" parameterType="String" resultMap="rvoRM">
+	<![CDATA[
+			select r.Reservation_no, to_char(r.reservation_date, 'yyyy-mm-dd') as reservation_date, rt.Reservation_time, h.hospital_name,h.hospital_tel, vl.vet_name, po.Pet_owner_name, p.pet_name, r.reservation_content
+			from Reservation_Time rt, Reservation r, Pet p,Vet v, Vet_License vl, Hospital h, Pet_Owner po
+			where rt.Time_no = r.Time_no and h.Hospital_id = v.Hospital_id and vl.Vet_License_no = v.Vet_License_no
+				and po.Pet_Owner_no=p.Pet_Owner_no and r.Vet_License_no = vl.Vet_License_no and r.Pet_Owner_no = p.Pet_Owner_no
+				and r.Pet_name = p.Pet_name and r.reservation_date >= (select to_char(sysdate, 'yyyy-mm-dd') from dual)
+				and po.Pet_Owner_id = #{value}
+			order by r.reservation_date asc
+			]]>
+	</select>
 	
 </mapper>	
