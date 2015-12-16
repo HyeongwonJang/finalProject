@@ -64,15 +64,10 @@ public class TestJUnit {
 			vaccinationRecordHistoryInfo.getPetOwnerVO().addPetVO(new PetVO("두부",null,null,null,null));
 			System.out.println(vaccinationRecordHistoryInfo);
 		}*/
-<<<<<<< HEAD
 //		System.out.println(vaccinationService.findAlarmListByPetOwnerTel("01011111111"));
 		System.out.println(reservationDAO.findPetOwnerReservation("tp1"));
-=======
-		vaccinationService.findAlarmListByPetOwnerTel("01011111111");
+		//vaccinationService.findAlarmListByPetOwnerTel("01011111111");
 		//System.out.println(vaccinationService.findAlarmListByPetOwnerTel("01011111111"));
-		
->>>>>>> branch 'master' of https://github.com/prototype01/finalProject.git
-		
 
 	}
 	
