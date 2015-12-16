@@ -1,41 +1,39 @@
 package org.animalhospital.reservation.model.VO;
 
 import org.animalhospital.petowner.model.VO.PetOwnerVO;
+import org.animalhospital.vet.model.VO.HospitalVO;
 import org.animalhospital.vet.model.VO.VetVO;
 
 public class ReservationVO {
-	private int ReservationNo;									//seq 를 이용하여 no지정
-	private String ReservationDate;							//예약 날짜 년월일 
+	private int reservationNo;									//seq 를 이용하여 no지정
+	private String reservationDate;							//예약 날짜 년월일 
 	private ReservationTimeVO reservationTimeVO; // 예약 시간
-	private VetVO vetVO;										//수의사의 정보 LicenseNo 입력
+	private HospitalVO hospitalVO;
 	private PetOwnerVO petOwnerVO;						//petOwnerNo,와 PetName 입력
-	private String ReservationContent;						//상세내역 입력
-	public ReservationVO(int reservationNo, String reservationDate,
-			ReservationTimeVO reservationTimeVO, VetVO vetVO,
-			PetOwnerVO petOwnerVO, String reservationContent) {
-		super();
-		ReservationNo = reservationNo;
-		ReservationDate = reservationDate;
-		this.reservationTimeVO = reservationTimeVO;
-		this.vetVO = vetVO;
-		this.petOwnerVO = petOwnerVO;
-		ReservationContent = reservationContent;
-	}
+	private String reservationContent;						//상세내역 입력
 	public ReservationVO() {
 		super();
-		// TODO Auto-generated constructor stub
+	}
+	public ReservationVO(int reservationNo, String reservationDate, ReservationTimeVO reservationTimeVO,
+			HospitalVO hospitalVO, PetOwnerVO petOwnerVO, String reservationContent) {
+		this.reservationNo = reservationNo;
+		this.reservationDate = reservationDate;
+		this.reservationTimeVO = reservationTimeVO;
+		this.hospitalVO = hospitalVO;
+		this.petOwnerVO = petOwnerVO;
+		this.reservationContent = reservationContent;
 	}
 	public int getReservationNo() {
-		return ReservationNo;
+		return reservationNo;
 	}
 	public void setReservationNo(int reservationNo) {
-		ReservationNo = reservationNo;
+		this.reservationNo = reservationNo;
 	}
 	public String getReservationDate() {
-		return ReservationDate;
+		return reservationDate;
 	}
 	public void setReservationDate(String reservationDate) {
-		ReservationDate = reservationDate;
+		this.reservationDate = reservationDate;
 	}
 	public ReservationTimeVO getReservationTimeVO() {
 		return reservationTimeVO;
@@ -43,11 +41,11 @@ public class ReservationVO {
 	public void setReservationTimeVO(ReservationTimeVO reservationTimeVO) {
 		this.reservationTimeVO = reservationTimeVO;
 	}
-	public VetVO getVetVO() {
-		return vetVO;
+	public HospitalVO getHospitalVO() {
+		return hospitalVO;
 	}
-	public void setVetVO(VetVO vetVO) {
-		this.vetVO = vetVO;
+	public void setHospitalVO(HospitalVO hospitalVO) {
+		this.hospitalVO = hospitalVO;
 	}
 	public PetOwnerVO getPetOwnerVO() {
 		return petOwnerVO;
@@ -56,19 +54,16 @@ public class ReservationVO {
 		this.petOwnerVO = petOwnerVO;
 	}
 	public String getReservationContent() {
-		return ReservationContent;
+		return reservationContent;
 	}
 	public void setReservationContent(String reservationContent) {
-		ReservationContent = reservationContent;
+		this.reservationContent = reservationContent;
 	}
 	@Override
 	public String toString() {
-		return "ReservationVO [ReservationNo=" + ReservationNo
-				+ ", ReservationDate=" + ReservationDate
-				+ ", reservationTimeVO=" + reservationTimeVO + ", vetVO="
-				+ vetVO + ", petOwnerVO=" + petOwnerVO
-				+ ", ReservationContent=" + ReservationContent + "]";
+		return "ReservationVO [reservationNo=" + reservationNo + ", reservationDate=" + reservationDate
+				+ ", reservationTimeVO=" + reservationTimeVO + ", hospitalVO=" + hospitalVO + ", petOwnerVO="
+				+ petOwnerVO + ", reservationContent=" + reservationContent + "]";
 	}
-	
 	
 }

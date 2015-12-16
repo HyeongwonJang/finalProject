@@ -1,34 +1,30 @@
 package org.animalhospital.reservation.model.VO;
 
 public class ReservationTimeVO {
-	private int TimeNo;
-	private String ReservationTime;
-	
+	private int timeNo;
+	private String reservationTime;
 	public ReservationTimeVO() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public ReservationTimeVO(int timeNo, String reservationTime) {
 		super();
-		TimeNo = timeNo;
-		ReservationTime = reservationTime;
+		this.timeNo = timeNo;
+		this.reservationTime = reservationTime;
 	}
 	public int getTimeNo() {
-		return TimeNo;
+		return timeNo;
 	}
 	public void setTimeNo(int timeNo) {
-		TimeNo = timeNo;
+		this.timeNo = timeNo;
 	}
 	public String getReservationTime() {
-		return ReservationTime;
+		return reservationTime;
 	}
 	public void setReservationTime(String reservationTime) {
-		ReservationTime = reservationTime;
+		this.reservationTime = reservationTime;
 	}
 	@Override
 	public String toString() {
-		return "ReservationTime [TimeNo=" + TimeNo + ", ReservationTime="
-				+ ReservationTime + "]";
+		return "ReservationTimeVO [timeNo=" + timeNo + ", reservationTime=" + reservationTime + "]";
 	}
-	
 }
