@@ -92,6 +92,17 @@ public class PetOwnerVO {
 			petVO.add(vo);
 		}
 	}
+	public void addPetName(String petName){
+		PetVO tempVO = new PetVO();
+		if(petVO == null){
+			petVO = new ArrayList<PetVO>();
+			tempVO.setPetName(petName);
+			petVO.add(tempVO);
+		} else {
+			tempVO.setPetName(petName);
+			petVO.add(tempVO);
+		}
+	}
 	@Override
 	public String toString() {
 		return "PetOwnerVO [petOwnerNo=" + petOwnerNo + ", petOwnerTel="
