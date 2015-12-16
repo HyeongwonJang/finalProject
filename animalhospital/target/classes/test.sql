@@ -1,3 +1,43 @@
+select distinct vr.pet_name 
+from vaccination_record vr, pet_owner po 
+where vr.pet_owner_no=po.pet_owner_no
+   and po.pet_owner_tel='01011111111'
+
+select vaccination_hours, vaccination_current_section, 
+			vaccination_Basic_Period, vaccination_Add_Period, 
+			vaccination_Maximum_Section, Pet_Owner_name, Vaccination_name
+		from(
+			select vr.vaccination_hours, vr.vaccination_current_section, 
+				 va.vaccination_Basic_Period, va.vaccination_Add_Period, va.Vaccination_name,
+				 va.vaccination_Maximum_Section, po.Pet_Owner_name, rownum 
+			from vaccination_record vr, vaccination va, pet_owner po, pet p 
+			where vr.vaccination_no=va.vaccination_no 
+				and vr.pet_owner_no=po.pet_owner_no 
+				and vr.pet_name=p.pet_name 
+				and po.pet_owner_tel=#{petOwnerTel}
+				and vr.pet_name=#{petName}
+				and vr.vaccination_no=#{vaccinationNo}
+			order by vr.vaccination_hours desc
+		) where rownum=1
+		
+		select vr.vaccination_hours, vr.vaccination_current_section, 
+				 va.vaccination_Basic_Period, va.vaccination_Add_Period, va.Vaccination_name,
+				 va.vaccination_Maximum_Section, po.Pet_Owner_name, rownum, distinct vr.vaccination_no 
+			from vaccination_record vr, vaccination va, pet_owner po, pet p 
+			where vr.vaccination_no=va.vaccination_no 
+				and vr.pet_owner_no=po.pet_owner_no 
+				and vr.pet_name=p.pet_name 
+				and po.pet_owner_tel='01011111111'
+				and vr.pet_name='두부' 
+				order by vr.vaccination_hours desc
+				
+select * 
+from vaccination_record
+group by vaccination_no
+
+
+
+
 select count(*)
 		from vet
 		where vet_tel='01011112222'

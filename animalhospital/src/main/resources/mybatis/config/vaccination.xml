@@ -192,5 +192,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		) where rownum=1
 	</select>
 
+	<select id="findTookVaccinationPetListByPetOwnerTel" resultMap="pvoRM" >
+		select distinct vr.pet_name 
+		from vaccination_record vr, pet_owner po 
+		where vr.pet_owner_no=po.pet_owner_no
+   		and po.pet_owner_tel=#{value}
+	</select>
  	
  </mapper>

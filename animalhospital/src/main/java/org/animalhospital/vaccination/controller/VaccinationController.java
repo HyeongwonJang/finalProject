@@ -64,7 +64,6 @@ public class VaccinationController {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("recordList", vaccinationService.findVaccinationRecordByPetOwnerTelAndPetName(paramMap));
 		mav.addObject("continueParam", paramMap);
-		System.out.println(paramMap);
 		if(request.getSession(false).getAttribute("userLevel").equals("vet")){
 			mav.setViewName("find_vet_vaccination");
 		} else if(request.getSession(false).getAttribute("userLevel").equals("petOwner")){
@@ -76,8 +75,6 @@ public class VaccinationController {
 	@RequestMapping("findDetailVaccinationRecordByVaccinationRecordNo.do")
 	@ResponseBody
 	public VaccinationRecordVO findDetailVaccinationRecordByVaccinationRecordNo(int vaccinationRecordNo){
-		System.out.println("ajax 실행결과: " 
-				+ vaccinationService.findDetailVaccinationRecordByVaccinationRecordNo(vaccinationRecordNo));
 		return vaccinationService.findDetailVaccinationRecordByVaccinationRecordNo(vaccinationRecordNo);
 	}
 
@@ -87,6 +84,7 @@ public class VaccinationController {
 	 * 차후 테이블을 새로 생성하여 쿼리의 부담을 덜어주게 할 예정
 	 * @param petOwnerTel
 	 * @return
+	 * @author 민호
 	 */
 	@RequestMapping("findAllAlarmDataByPetOwnerTel.do")
 	@ResponseBody
@@ -95,6 +93,7 @@ public class VaccinationController {
 		try {
 			list = vaccinationService.findAlarmListByPetOwnerTel(petOwnerTel);
 		} catch (ParseException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return list;

@@ -82,11 +82,12 @@ public class VaccinationServiceImpl implements VaccinationService {
 	 * @throws ParseException
 	 * @author 민호
 	 */
-	public List<Object> findAlarmListByPetOwnerTel(String petOwnerTel) throws ParseException{
+	public List<Object> findAlarmListByPetOwnerTel(String petOwnerTel){
 		List<Object> alarmList = new ArrayList<Object>();
 		List<VaccinationRecordVO> vaccinationList = findVaccinationRecordAlarmByPetOwnerNo(petOwnerTel);
-		alarmList.addAll(vaccinationList);
-		
+		if(vaccinationList != null){
+			alarmList.addAll(vaccinationList);
+		} 	
 		return alarmList;
 	}
 	
@@ -104,30 +105,35 @@ public class VaccinationServiceImpl implements VaccinationService {
 	 * @throws ParseException
 	 * @author 민호
 	 */
-	private List<VaccinationRecordVO> findVaccinationRecordAlarmByPetOwnerNo(String petOwnerTel) throws ParseException{
-		List<VaccinationRecordVO> alarmList = new ArrayList<VaccinationRecordVO>();
-		ArrayList<VaccinationRecordVO> latelyRecord = new ArrayList<VaccinationRecordVO>();
-		List<PetVO> petList = petOwnerDAO.findPetListByPetownerTel(petOwnerTel).getPetVO();
-		Map<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("petOwnerTel", petOwnerTel);
-		// 펫 마리수만큼 반복
-		for(int pi=0; pi<petList.size(); pi++){
-			paramMap.put("petName", petList.get(pi).getPetName());
-			List<Integer> vaccinationList = vaccinationDAO.findVaccinationNoList(paramMap);
-			// 접종 받은 예방접종 종류만큼 반복
-			for(int vi=0; vi<vaccinationList.size(); vi++){
-				paramMap.put("vaccinationNo", vaccinationList.get(vi));
-				//최신 예방접종 조회
-				VaccinationRecordVO tempVO = vaccinationDAO.findLastVaccinationHistoryInfo(paramMap);
-				tempVO.getPetOwnerVO().addPetName((String) paramMap.get("petName"));
-				latelyRecord.add(tempVO);
+	private List<VaccinationRecordVO> findVaccinationRecordAlarmByPetOwnerNo(String petOwnerTel) {
+		ArrayList<VaccinationRecordVO> alarmList = new ArrayList<VaccinationRecordVO>();
+		List<PetVO> petList = vaccinationDAO.findTookVaccinationPetListByPetOwnerTel(petOwnerTel);
+		if(petList != null){
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+			paramMap.put("petOwnerTel", petOwnerTel);
+			// 펫 마리수만큼 반복
+			for(int pi=0; pi<petList.size(); pi++){
+				paramMap.put("petName", petList.get(pi).getPetName());
+				List<Integer> vaccinationList = vaccinationDAO.findVaccinationNoList(paramMap);
+				// 접종 받은 예방접종 종류만큼 반복
+				for(int vi=0; vi<vaccinationList.size(); vi++){
+					paramMap.put("vaccinationNo", vaccinationList.get(vi));
+					//최신 예방접종 조회
+					VaccinationRecordVO tempVO = vaccinationDAO.findLastVaccinationHistoryInfo(paramMap);
+					tempVO.getPetOwnerVO().addPetName((String) paramMap.get("petName"));
+					try {
+						if(isCompareVaccinationAlarmDate(tempVO)){
+							alarmList.add(tempVO);
+						}
+					} catch (ParseException e) {
+						e.printStackTrace();
+					}
+				}
 			}
+		} else {
+			alarmList = null;
 		}
-		for(int ai=0; ai<latelyRecord.size(); ai++){
-			if(isCompareVaccinationAlarmDate(latelyRecord.get(ai))){
-				alarmList.add(latelyRecord.get(ai));
-			} 
-		}
+		
 		return alarmList;
 	}
 	

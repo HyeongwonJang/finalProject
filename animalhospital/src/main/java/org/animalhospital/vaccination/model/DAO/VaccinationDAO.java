@@ -26,6 +26,7 @@ public interface VaccinationDAO {
 	public List<Integer> findVaccinationNoList(Map<String, Object> paramMap);
 
 	public VaccinationRecordVO findLastVaccinationHistoryInfo(Map<String, Object> paramMap);
-
+	
+	public List<PetVO> findTookVaccinationPetListByPetOwnerTel(String petOwnerTel);
 	
 }

@@ -187,7 +187,7 @@
 							</li>
 							<c:choose>
 								<c:when test="${sessionScope.userLevel == 'petOwner' }">
-									<li role="presentation" class="dropdown"><a
+									<li role="presentation" class="dropdown" id="alarmDropdown"><a
 										href="javascript:;" class="dropdown-toggle info-number"
 										data-toggle="dropdown" aria-expanded="false"> <i
 											class="fa -o fa-bell"></i> <span class="badge bg-green" id="alarmCount"></span>
@@ -262,16 +262,20 @@
 						success : function(alarmMessageData) {
 							var alarmLength = Object.keys(alarmMessageData).length;
 							var messageInfo = "";
-							$("#alarmCount").text(alarmLength);
-							$.each(alarmMessageData, function(i) {
-								messageInfo += "<li><a><span class='image'></span><span>"
-								messageInfo += "<span>" + alarmMessageData[i].petOwnerVO.petVO[0].petName + "</span>"
-								messageInfo += "<span class='time'>" + moment().format('YYYY-MM-DD') +"</span>"
-								messageInfo += "</span><span class='message'>"
-								messageInfo += alarmMessageData[i].vaccinationVO.vaccinationName + " 예방접종을 맞을 시기입니다!"
-								messageInfo += "</span></a></li>"
-							});
-							$("#alarmMessage").html(messageInfo);
+							if(alarmLength == 0){
+								$("#alarmDropdown").html("");
+							} else {
+								$("#alarmCount").text(alarmLength);
+								$.each(alarmMessageData, function(i) {
+									messageInfo += "<li><a><span class='image'></span><span>"
+									messageInfo += "<span>" + alarmMessageData[i].petOwnerVO.petVO[0].petName + "</span>"
+									messageInfo += "<span class='time'>" + moment().format('YYYY-MM-DD') +"</span>"
+									messageInfo += "</span><span class='message'>"
+									messageInfo += alarmMessageData[i].vaccinationVO.vaccinationName + " 예방접종을 맞을 시기입니다!"
+									messageInfo += "</span></a></li>"
+								});
+								$("#alarmMessage").html(messageInfo);	
+							}
 						},
 						complete: poll,
 						timeout: 30000
