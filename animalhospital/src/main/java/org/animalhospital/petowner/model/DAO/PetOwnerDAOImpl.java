@@ -1,13 +1,11 @@
 package org.animalhospital.petowner.model.DAO;
 
 
-import java.util.List;
 import java.util.HashMap;
 
 import javax.annotation.Resource;
 
 import org.animalhospital.petowner.model.VO.PetOwnerVO;
-import org.animalhospital.petowner.model.VO.PetVO;
 import org.animalhospital.treatment.model.VO.TreatmentRecordVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;

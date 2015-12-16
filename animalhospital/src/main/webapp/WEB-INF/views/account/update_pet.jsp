@@ -14,7 +14,7 @@
 		</div>
 		<div class="x_content">
 			<br>
-			<form id="petForm" class="form-horizontal form-label-left" action="updatePet.do" method="get">
+			<form id="petForm" class="form-horizontal form-label-left" action="updatePet.do" method="post">
 			<input type="hidden" name = "petOwnerNo" value="${sessionScope.loginVO.petOwnerNo }">
 			
 			 <!-- 펫 Name -->
