@@ -15,6 +15,7 @@ public class ReservationDAOImpl implements ReservationDAO {
 	
 	@Override
 	public List<ReservationVO> findPetOwnerReservation(String petOwnerId) {
+		System.out.println(petOwnerId);
 		return sqlSessionTemplate.selectList("reservation.findPetOwnerReservation", petOwnerId);
 	}
 }
