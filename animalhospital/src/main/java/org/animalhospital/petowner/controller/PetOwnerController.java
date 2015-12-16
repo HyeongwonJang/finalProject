@@ -73,7 +73,7 @@ public class PetOwnerController {
 		}
 		
 		// 펫 정보 수정
-		@RequestMapping("findPetListById.do")
+		@RequestMapping(value="findPetListById.do", method = RequestMethod.POST)
 		@ResponseBody
 		public PetOwnerVO findPetListById(HttpServletRequest request, PetOwnerVO povo){
 			if(povo.getPetOwnerId() == null){
@@ -83,9 +83,8 @@ public class PetOwnerController {
 				return petOwnerService.findPetListById(povo);
 			}
 		}	
-		@RequestMapping("findPetByPetName.do")
+		@RequestMapping(value="findPetByPetName.do", method = RequestMethod.POST)
 		public ModelAndView findPetByPetName(PetOwnerVO povo){
-			
 			return new ModelAndView("pet_update","povo",petOwnerService.findPetByPetName(povo));
 		}
 		@RequestMapping("updatePet.do")

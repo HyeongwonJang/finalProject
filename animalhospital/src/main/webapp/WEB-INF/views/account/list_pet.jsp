@@ -44,7 +44,7 @@
 		<div class="clearfix"></div>
 	</div>
 	<div class="x_content">
-		<form action="findPetByPetName.do" method="get" id="petListForm" >
+		<form action="findPetByPetName.do" method="post" id="petListForm" >
 		<input type="hidden" name="petOwnerNo" value="${sessionScope.loginVO.petOwnerNo }">
 			<label>반려동물명</label>
 			<select class="select1_single form-control" id="petListSelect" name="petVO[0].petName" required="required">
