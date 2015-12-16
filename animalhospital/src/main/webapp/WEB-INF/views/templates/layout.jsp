@@ -185,38 +185,22 @@
 											class="fa fa-sign-out pull-right"></i> Log Out</a></li>
 								</ul>
 							</li>
-
-							<li role="presentation" class="dropdown"><a
-								href="javascript:;" class="dropdown-toggle info-number"
-								data-toggle="dropdown" aria-expanded="false">
-								 <i class="fa -o fa-bell"></i>
-                                    <span class="badge bg-green">6</span>
-
-							</a>
-								<ul id="menu1"
-									class="dropdown-menu list-unstyled msg_list animated fadeInDown"
-									role="menu">
-									<li><a> <span class="image"> </span> <span> 
-											<span>두부</span>
-											<span class="time">12.04</span>
-										</span> 
-										<span class="message">
-											 xx에 대한 xx 예방접종 xx차를 맞아야 함</span>
+							<c:choose>
+								<c:when test="${sessionScope.userLevel == 'petOwner' }">
+									<li role="presentation" class="dropdown"><a
+										href="javascript:;" class="dropdown-toggle info-number"
+										data-toggle="dropdown" aria-expanded="false"> <i
+											class="fa -o fa-bell"></i> <span class="badge bg-green" id="alarmCount"></span>
 									</a>
-									
+										<ul id="alarmMessage"
+											class="dropdown-menu list-unstyled msg_list animated fadeInDown"
+											role="menu" >
+											
+										</ul>
 									</li>
-									<li ><a><span class="image"></span> <span> 
-											<span>두부</span>
-											<span class="time">12.04</span>
-										</span> 
-										<span class="message">
-											 xx에 대한 xx 예방접종 xx차를 맞아야 함</span>
-									</a>
-									
-									</li>
-								</ul>
-								
-						</li>		
+								</c:when>
+							</c:choose>
+						</ul>
 					</nav>
 				</div>
 			</div>
@@ -259,6 +243,45 @@
 		src="${initparam.root}resources/js/nicescroll/jquery.nicescroll.min.js"></script>
 	<script src="${initparam.root}resources/js/icheck/icheck.min.js"></script>
 	<script src="${initparam.root}resources/js/custom.js"></script>
+
+	<!-- 
+		알림기능 구현.ver 1
+		간단한 ajax 동작으로 알림기능 구현하기
+		layout이 로딩될 때마다 알람을 불러온다
+	-->
+	<c:choose>
+		<c:when test="${sessionScope.userLevel == 'petOwner' }">
+			<script type="text/javascript">
+				(function poll() {
+					$.ajax({
+						type : "post", // get 또는 post로 설정
+						url : "findAllAlarmDataByPetOwnerTel.do", // 이동할 url 설정
+						data : "petOwnerTel=${sessionScope.loginVO.petOwnerTel}",
+						dataType : "json",
+						// ajax가 성공적으로 작동할 시 시행할 기능을 명시
+						success : function(alarmMessageData) {
+							var alarmLength = Object.keys(alarmMessageData).length;
+							var messageInfo = "";
+							$("#alarmCount").text(alarmLength);
+							$.each(alarmMessageData, function(i) {
+								messageInfo += "<li><a><span class='image'></span><span>"
+								messageInfo += "<span>" + alarmMessageData[i].petOwnerVO.petVO[0].petName + "</span>"
+								messageInfo += "<span class='time'>" + moment().format('YYYY-MM-DD') +"</span>"
+								messageInfo += "</span><span class='message'>"
+								messageInfo += alarmMessageData[i].vaccinationVO.vaccinationName + " 예방접종을 맞을 시기입니다!"
+								messageInfo += "</span></a></li>"
+							});
+							$("#alarmMessage").html(messageInfo);
+						},
+						complete: poll,
+						timeout: 30000
+					});
+				})();
+				
+			</script>
+		</c:when>
+	</c:choose>
+	
 
 	<!-- datepicker -->
 	<script type="text/javascript">

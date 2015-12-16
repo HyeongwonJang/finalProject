@@ -118,9 +118,9 @@ public class VaccinationServiceImpl implements VaccinationService {
 			for(int vi=0; vi<vaccinationList.size(); vi++){
 				paramMap.put("vaccinationNo", vaccinationList.get(vi));
 				//최신 예방접종 조회
-				latelyRecord.add(vaccinationDAO.findLastVaccinationHistoryInfo(paramMap));
-				latelyRecord.get(vi).getPetOwnerVO().addPetVO(
-						new PetVO(petList.get(pi).getPetName(), null, null, null, null));
+				VaccinationRecordVO tempVO = vaccinationDAO.findLastVaccinationHistoryInfo(paramMap);
+				tempVO.getPetOwnerVO().addPetName((String) paramMap.get("petName"));
+				latelyRecord.add(tempVO);
 			}
 		}
 		for(int ai=0; ai<latelyRecord.size(); ai++){

@@ -176,10 +176,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="findLastVaccinationHistoryInfoByVaccinationNo" resultMap="vrvoRM" parameterType="map">
 		select vaccination_hours, vaccination_current_section, 
 			vaccination_Basic_Period, vaccination_Add_Period, 
-			vaccination_Maximum_Section, Pet_Owner_name
+			vaccination_Maximum_Section, Pet_Owner_name, Vaccination_name
 		from(
 			select vr.vaccination_hours, vr.vaccination_current_section, 
-				 va.vaccination_Basic_Period, va.vaccination_Add_Period, 
+				 va.vaccination_Basic_Period, va.vaccination_Add_Period, va.Vaccination_name,
 				 va.vaccination_Maximum_Section, po.Pet_Owner_name, rownum 
 			from vaccination_record vr, vaccination va, pet_owner po, pet p 
 			where vr.vaccination_no=va.vaccination_no 
