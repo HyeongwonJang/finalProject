@@ -8,4 +8,6 @@ public interface ReservationDAO {
 
 	List<ReservationVO> findPetOwnerReservation(String petOwnerId);
 
+	List<ReservationVO> findVetReservation(int hospitalId);
+
 }

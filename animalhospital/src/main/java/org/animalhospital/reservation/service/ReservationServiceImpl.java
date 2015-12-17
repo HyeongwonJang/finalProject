@@ -17,4 +17,9 @@ public class ReservationServiceImpl implements ReservationService {
 	public List<ReservationVO> findPetOwnerReservation(String petOwnerId) {
 		return reservationDAO.findPetOwnerReservation(petOwnerId);
 	}
+
+	@Override
+	public List<ReservationVO> findVetReservation(int hospitalId) {
+		return reservationDAO.findVetReservation(hospitalId);
+	}
 }

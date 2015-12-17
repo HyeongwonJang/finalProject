@@ -5,8 +5,9 @@ Reservation_time varchar2(6) unique
 
 select * from reservation_time
 
-create sequence reservation_seq;
-
+drop sequence reservation_seq;
+create sequence reservation_seq nocache;
+drop table reservation;
 create table reservation(
 Reservation_no number(10) primary key,
 Reservation_date date not null,
@@ -44,12 +45,15 @@ insert into reservation_time values(18,'17:30');
 
 
 insert into reservation (Reservation_no ,Reservation_date,Time_no,Vet_License_no,Pet_name,Pet_Owner_no,reservation_content )
-values(reservation_seq.nextval,to_date('2015/12/15'),3,3,'비지',1,'비지비지');
+values(reservation_seq.nextval,to_date('2015/12/23'),2,1,'비지',1,'예방접종');
 insert into reservation (Reservation_no ,Reservation_date,Time_no,Vet_License_no,Pet_name,Pet_Owner_no,reservation_content )
-values(reservation_seq.nextval,to_date('2015/12/15'),6,3,'매주',2,'주인이 아이유');
+values(reservation_seq.nextval,to_date('2015/12/23'),3,2,'매주',2,'정기검진');
 insert into reservation (Reservation_no ,Reservation_date,Time_no,Vet_License_no,Pet_name,Pet_Owner_no,reservation_content )
-values(reservation_seq.nextval,to_date('2015/12/17'),6,6,'매주',2,'주인이 아이유');
-
+values(reservation_seq.nextval,to_date('2015/12/27'),3,1,'비지',1,'정기검진');
+insert into reservation (Reservation_no ,Reservation_date,Time_no,Vet_License_no,Pet_name,Pet_Owner_no,reservation_content )
+values(reservation_seq.nextval,to_date('2015/12/27'),4,1,'두부',1,'정기검진');
+insert into reservation (Reservation_no ,Reservation_date,Time_no,Vet_License_no,Pet_name,Pet_Owner_no,reservation_content )
+values(reservation_seq.nextval,to_date('2015/12/23'),8,1,'비지',1,'정기검진');
 
 
 select t.timeNo,t.timeList
