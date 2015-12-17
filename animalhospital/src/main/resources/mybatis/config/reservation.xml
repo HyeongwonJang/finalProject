@@ -20,6 +20,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<result column="pet_name" property="petName" />
 		</collection>
 	</resultMap>
+	
+	<resultMap type="rtvo" id="rtvoRM">
+		<id column="time_no" property="timeNo"></id>
+		<result column="reservation_time" property="reservationTime"/>
+	</resultMap>
+	
 	<select id="findPetOwnerReservation" parameterType="String" resultMap="rvoRM">
 	<![CDATA[
 			select r.Reservation_no, to_char(r.reservation_date, 'yyyy-mm-dd') as reservation_date, rt.Reservation_time, h.hospital_name,h.hospital_tel, vl.vet_name, po.Pet_owner_name, p.pet_name, r.reservation_content
@@ -42,4 +48,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			order by r.reservation_date asc, rt.Reservation_time asc, vl.Vet_License_no asc
 		]]>
 	</select>
+	
+	<select id="findPossableReservationTime" parameterType="map" resultMap="rtvoRM">
+		select t.Time_no,t.Reservation_time
+		from (select Time_no
+			 from reservation
+			 where Reservation_date=#{reservation_date}
+			 and Vet_License_no=#{vet_license_no})r, reservation_time t
+		where r.Time_no(+)= t.Time_no
+		and r.Time_no is null
+		order by t.Time_no asc
+	</select>
+	
+	<insert id="registerPetOwnerReservation" parameterType="rvo" >
+		insert into reservation 
+		(Reservation_no ,Reservation_date,Time_no,
+		Vet_License_no,Pet_name,Pet_Owner_no,reservation_content )
+		values(reservation_seq.nextval,#{reservationDate},#{reservationTimeVO.timeNo},
+		#{hospitalVO.vetList[0].vetLicenseVO.vetLicenseNo},
+		#{petOwnerVO.petVO[0].petName},#{petOwnerVO.petOwnerNo},#{reservationContent})
+	</insert>
 </mapper>	
