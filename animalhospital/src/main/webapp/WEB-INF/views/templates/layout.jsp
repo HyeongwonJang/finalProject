@@ -109,7 +109,7 @@
 								</li>
 								<c:choose>
 									<c:when test="${sessionScope.userLevel == 'vet' }">
-										<li><a><i class="fa fa-clipboard"></i> 스케줄관리 <span
+										<li><a><i class="fa -o fa-clock-o"></i> 스케줄관리 <span
 												class="fa fa-chevron-down"></span></a>
 											<ul class="nav child_menu" style="display: none">
 												<li><a
@@ -121,7 +121,7 @@
 											</ul>
 									</c:when>
 									<c:when test="${sessionScope.userLevel == 'petOwner' }">
-										<li><a><i class="fa fa-clipboard"></i> 예약관리 <span
+										<li><a><i class="fa -o fa-clock-o"></i> 예약관리 <span
 												class="fa fa-chevron-down"></span></a>
 											<ul class="nav child_menu" style="display: none">
 												<li><a
