@@ -91,10 +91,7 @@ function changePet(){
 		$("#cancelBtn").click(function(){
 			location.href="home.do";
 		});
- 		$(".select2_single").select2({
-			placeholder : "해당 항목을 선택해주세요",
-			allowClear : true
-		}); 
+ 	
   		$("#treatmentForm").submit(function() {
 			return submitFlag;
 		});  
