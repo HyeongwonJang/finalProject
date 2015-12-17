@@ -6,7 +6,7 @@
 </script>
 <div class="x_panel">
 		<div class="x_title">
-			<h2>펫 정보 수정</h2>
+			<h2>펫 등록</h2>
 			<ul class="nav navbar-right panel_toolbox">
 				<li></li>
 			</ul>
