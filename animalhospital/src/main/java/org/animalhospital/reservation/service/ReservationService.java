@@ -8,4 +8,6 @@ public interface ReservationService {
 
 	List<ReservationVO> findPetOwnerReservation(String petOwnerId);
 
+	List<ReservationVO> findVetReservation(int hospitalId);
+
 }

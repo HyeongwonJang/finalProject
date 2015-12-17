@@ -6,6 +6,8 @@ import javax.servlet.http.HttpSession;
 
 import org.animalhospital.petowner.model.VO.PetOwnerVO;
 import org.animalhospital.reservation.service.ReservationService;
+import org.animalhospital.vet.model.VO.HospitalVO;
+import org.animalhospital.vet.model.VO.VetVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -19,10 +21,10 @@ public class ReservationController {
 	public ModelAndView findPetOwnerReservation(HttpServletRequest request) {
 		PetOwnerVO povo = (PetOwnerVO)request.getSession().getAttribute("loginVO");
 		return new ModelAndView("find_petOwner_reservation", "reservationList", reservationService.findPetOwnerReservation(povo.getPetOwnerId()));
-//		return new ModelAndView("find_petOwner_reservation");
 	}
 	@RequestMapping("findVetReservation.do")
-	public String findVetOwnerReservation() {
-		return "find_vet_reservation";
+	public ModelAndView findVetOwnerReservation(HttpServletRequest request) {
+		HospitalVO hvo = (HospitalVO)request.getSession().getAttribute("loginVO");
+		return new ModelAndView("find2_vet_reservation", "reservationList", reservationService.findVetReservation(hvo.getHospitalId()));
 	}
 }
