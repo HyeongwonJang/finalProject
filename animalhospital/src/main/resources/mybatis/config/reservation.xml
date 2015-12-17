@@ -10,9 +10,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="Reservation_time" property="reservationTimeVO.reservationTime"/>
 		<result column="hospital_name" property="hospitalVO.hospitalName"/>
 		<result column="hospital_tel" property="hospitalVO.hospitalTel"/>
-		<!-- <result column="vet_name" property="hospitalVO.vetList[0].vetLicenseVO.vetName"/> -->
 		<result column="Pet_owner_name" property="petOwnerVO.petOwnerName"/>
-		<!-- <result column="pet_name" property="petOwnerVO.petVO[0].petName"/> -->
+		<result column="Pet_owner_tel" property="petOwnerVO.petOwnerTel"/>
 		<result column="reservation_content" property="reservationContent"/>
 		<collection property="hospitalVO.vetList" ofType="vvo">
 			<result column="vet_name" property="vetLicenseVO.vetName" />
@@ -32,5 +31,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			order by r.reservation_date asc
 			]]>
 	</select>
-	
+	<select id="findVetReservation" parameterType="String" resultMap="rvoRM">
+	<![CDATA[
+		select r.Reservation_no, to_char(r.reservation_date, 'yyyy-mm-dd') as reservation_date, rt.Reservation_time, vl.vet_name, po.Pet_owner_name, p.pet_name, po.Pet_Owner_tel, r.reservation_content
+		from Reservation_Time rt, Reservation r, Pet p,Vet v, Vet_License vl, Hospital h, Pet_Owner po
+		where rt.Time_no = r.Time_no and h.Hospital_id = v.Hospital_id and vl.Vet_License_no = v.Vet_License_no
+			and po.Pet_Owner_no=p.Pet_Owner_no and r.Vet_License_no = vl.Vet_License_no and r.Pet_Owner_no = p.Pet_Owner_no
+			and r.Pet_name = p.Pet_name and r.reservation_date >= '2015-12-01' and r.reservation_date < '2016-01-01'
+			and v.vet_id = #{value}
+		order by r.reservation_date asc;
+		]]>
+	</select>
 </mapper>	
