@@ -1,3 +1,21 @@
+select Treatment_Record_no, Treatment_hours, Treatment_content,
+				Disease_name, Disease_symptom, Pet_Owner_name, pet_name 
+		from(
+			select Treatment_Record_no, Treatment_hours, Treatment_content, Pet_Owner_name, 
+				Disease_name, Disease_symptom, ceil(rownum/5) as page, pet_name 
+					from(
+					select t.Treatment_Record_no, to_char(t.Treatment_hours, 'YYYY-MM-DD')
+					as Treatment_hours,
+					t.Treatment_content, t.Disease_name, d.Disease_symptom, po.Pet_Owner_name, t.Pet_name 
+					from TREATMENT_RECORD t, DISEASE d, PET_OWNER po
+					where t.Disease_name = d.Disease_name
+					and t.Pet_Owner_no = po.Pet_Owner_no 
+					and po.Pet_Owner_tel = '01011111111' 
+					order by t.Treatment_Record_no desc
+					)
+		) where page = 1
+
+
 select count(*)
 		from vet
 		where vet_tel='01011112222'

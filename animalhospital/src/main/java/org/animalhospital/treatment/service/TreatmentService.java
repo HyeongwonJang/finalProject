@@ -24,4 +24,6 @@ public interface TreatmentService {
 	public TreatmentRecordVO findDetailTreatmentRecordByTreatmentNo(int treatmentNo);
 	public List<DiseaseVO> allDiseaseList();
 	public int registerTreatmentRecord(TreatmentRecordVO treatmentRecordVO);
+	
+	public List<TreatmentRecordVO> findTreatmentRecordByPetOwnerTel(String petOwnerTel);
 }

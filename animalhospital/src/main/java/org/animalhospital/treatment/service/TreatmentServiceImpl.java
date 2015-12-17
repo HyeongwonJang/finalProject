@@ -20,6 +20,7 @@ public class TreatmentServiceImpl implements TreatmentService {
 	@Resource
 	private ListVO listVO;
 	
+	
 
 	/**
 	 * 진료기록을 조회하는 메서드
@@ -61,6 +62,12 @@ public class TreatmentServiceImpl implements TreatmentService {
 	}
 	public int registerTreatmentRecord(TreatmentRecordVO treatmentRecordVO){
 		return treatmentDAO.registerTreatmentRecord(treatmentRecordVO);
+	}
+
+	@Override
+	public List<TreatmentRecordVO> findTreatmentRecordByPetOwnerTel(
+			String petOwnerTel) {
+		return treatmentDAO.findTreatmentRecordByPetOwnerTel(petOwnerTel);
 	}
 	
 }

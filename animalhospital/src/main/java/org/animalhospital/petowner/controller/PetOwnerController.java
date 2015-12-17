@@ -32,7 +32,7 @@ public class PetOwnerController {
 			HttpSession session = request.getSession();
 			session.setAttribute("loginVO", petOwnerVO);
 			session.setAttribute("userLevel", "petOwner");
-			return "home";
+			return "redirect:home.do";
 		} else {
 			return "account/login_fail";
 		}
@@ -52,7 +52,7 @@ public class PetOwnerController {
 	public String updatePetOwner(HttpServletRequest request,PetOwnerVO povo){
 		petOwnerService.updatePetOwner(povo);
 		request.getSession().setAttribute("loginVO", povo);
-		return "home";
+		return "home_petOwner";
 	}
 	// 보호자 전화번호 중복 체크
 	@RequestMapping("telCheckAjax.do")

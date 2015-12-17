@@ -14,6 +14,10 @@ public class TreatmentDAOImpl implements TreatmentDAO {
 	@Resource
 	private SqlSessionTemplate sqlSessionTemplate;
 	
+	public List<TreatmentRecordVO> findTreatmentRecordByPetOwnerTel(String petOwnerTel){
+		return sqlSessionTemplate.selectList("treatmentRecord.findTreatmentRecordByPetOwnerTel", petOwnerTel);
+	}
+	
 	/**
 	 * 진료기록상세조회 중 반려동물에 대한 정보를 제외한 정보를 받아온다
 	 * @author 민호
@@ -50,7 +54,6 @@ public class TreatmentDAOImpl implements TreatmentDAO {
 	@Override
 	public List<Object> findTreatmentRecordByPetOwnerTelAndPetName(
 			Map<String, Object> paramMap) {
-		System.out.println("넘어오는 매개변수:" + paramMap);
 		return sqlSessionTemplate.selectList("treatmentRecord.findTreatmentRecordByPetOwnerTelAndPetName", paramMap);
 	}
 	

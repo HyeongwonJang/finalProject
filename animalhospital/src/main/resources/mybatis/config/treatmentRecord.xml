@@ -26,6 +26,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="Disease_symptom" property="diseaseVO.diseaseSymptom" />
 		<result column="Pet_Owner_name" property="petOwnerVO.petOwnerName"/>
 		<result column="Pet_Owner_tel" property="petOwnerVO.petOwnerTel"/>
+		<result column="Pet_Name" property="petVO.petName"/>
 		<result column="hospital_name" property="hospitalVO.hospitalName"/>
 		<result column="hospital_tel" property="hospitalVO.hospitalTel"/>
 		<collection property="hospitalVO.vetList" ofType="vvo">
@@ -77,6 +78,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		and t.Pet_name = #{povo.petVO[0].petName}
 		and t.Treatment_hours 
 		between to_date(#{listVO.startDate}, 'YYYY-MM-DD') and to_date(#{listVO.endDate}, 'YYYY-MM-DD')
+	</select>
+	
+	<select id="findTreatmentRecordByPetOwnerTel" parameterType="string" resultMap="tvoRM">
+		select Treatment_Record_no, Treatment_hours, Treatment_content,
+				Disease_name, Disease_symptom, Pet_Owner_name, pet_name 
+		from(
+			select Treatment_Record_no, Treatment_hours, Treatment_content, Pet_Owner_name, 
+				Disease_name, Disease_symptom, ceil(rownum/5) as page, pet_name 
+					from(
+					select t.Treatment_Record_no, to_char(t.Treatment_hours, 'YYYY-MM-DD')
+					as Treatment_hours,
+					t.Treatment_content, t.Disease_name, d.Disease_symptom, po.Pet_Owner_name, t.Pet_name 
+					from TREATMENT_RECORD t, DISEASE d, PET_OWNER po
+					where t.Disease_name = d.Disease_name
+					and t.Pet_Owner_no = po.Pet_Owner_no 
+					and po.Pet_Owner_tel = #{value} 
+					order by t.Treatment_Record_no desc
+					)
+		) where page = 1
 	</select>
 	
 	<select id="findTreatmentRecordByPetOwnerTelAndPetName"  parameterType="map" resultMap="tvoRM">

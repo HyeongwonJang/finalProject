@@ -22,6 +22,31 @@ public class ViewController {
 	private VaccinationService vaccinationService;
 	
 	/**
+	 * 가장 첫 페이지를 출력하는 메서드 세션이 있으면 타일즈로 구성된 인덱스 페이지를 출력한다
+	 * 세션이 없으면 로그인과 회원가입만 가능한
+	 * 인덱스 페이지를 출력한다
+	 * @return
+	 */
+	@RequestMapping("home.do")
+	public ModelAndView homeView(HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		ModelAndView mav = new ModelAndView();
+		String url = "";
+		if (session == null || session.getAttribute("loginVO") == null) {
+			url = "index"; 
+		} else if(session.getAttribute("userLevel").equals("vet")){
+			url = "home_vet";
+		} else if(session.getAttribute("userLevel").equals("petOwner")){
+			mav.addObject("treatmentList", treatmentService.findTreatmentRecordByPetOwnerTel(
+					((PetOwnerVO) session.getAttribute("loginVO")).getPetOwnerTel()));
+			url = "home_petOwner";
+		}
+		mav.setViewName(url);
+		return mav;
+	}
+	
+	
+	/**
 	 * 보호자 진료조회 페이지
 	 * @author 민호
 	 * @return
@@ -43,21 +68,7 @@ public class ViewController {
 		return "find_vet_treatmentRecord";
 	}
 	
-	/**
-	 * 가장 첫 페이지를 출력하는 메서드 세션이 있으면 타일즈로 구성된 인덱스 페이지를 출력한다
-	 * 세션이 없으면 로그인과 회원가입만 가능한
-	 * 인덱스 페이지를 출력한다
-	 * @return
-	 */
-	@RequestMapping("home.do")
-	public String homeView(HttpServletRequest request) {
-		HttpSession session = request.getSession(false);
-		if (session == null || session.getAttribute("loginVO") == null) {
-			return "index";
-		} else {
-			return "home";
-		}
-	}
+	
 
 	/**
 	 * 로그인 페이지

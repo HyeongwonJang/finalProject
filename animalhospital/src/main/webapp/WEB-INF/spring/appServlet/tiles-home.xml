@@ -11,9 +11,14 @@
  -->       
 <tiles-definitions>
 	<definition name="home" template="/WEB-INF/views/templates/layout.jsp">
-		<put-attribute name="main"  value="/WEB-INF/views/templates/blank.jsp"  />
+		<put-attribute name="main"  value="/WEB-INF/views/templates/main_vet.jsp"  />
 		<put-attribute name="modal" value="" />
 	</definition>	
+	
+	<definition name="home_*" extends="home">
+		<put-attribute name="main"  value="/WEB-INF/views/templates/main_{1}.jsp"  />
+	</definition>	
+	
 </tiles-definitions>
 
 

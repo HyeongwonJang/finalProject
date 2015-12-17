@@ -1,5 +1,6 @@
 package org.animalhospital.treatment.model.VO;
 import org.animalhospital.petowner.model.VO.PetOwnerVO;
+import org.animalhospital.petowner.model.VO.PetVO;
 import org.animalhospital.vet.model.VO.HospitalVO;
 
 public class TreatmentRecordVO {
@@ -8,6 +9,7 @@ public class TreatmentRecordVO {
 	private String treatmentContent;
 	private double petWeight;
 	private PetOwnerVO petOwnerVO;
+	private PetVO petVO;
 	private HospitalVO hospitalVO;
 	private DiseaseVO diseaseVO;
 	public TreatmentRecordVO() {
@@ -16,7 +18,7 @@ public class TreatmentRecordVO {
 	}
 	public TreatmentRecordVO(int treatmentRecordNo, String treatmentHours,
 			String treatmentContent, double petWeight, PetOwnerVO petOwnerVO,
-			HospitalVO hospitalVO, DiseaseVO diseaseVO) {
+			HospitalVO hospitalVO, DiseaseVO diseaseVO, PetVO petVO) {
 		super();
 		this.treatmentRecordNo = treatmentRecordNo;
 		this.treatmentHours = treatmentHours;
@@ -25,6 +27,7 @@ public class TreatmentRecordVO {
 		this.petOwnerVO = petOwnerVO;
 		this.hospitalVO = hospitalVO;
 		this.diseaseVO = diseaseVO;
+		this.petVO = petVO;
 	}
 	public int getTreatmentRecordNo() {
 		return treatmentRecordNo;
@@ -68,6 +71,13 @@ public class TreatmentRecordVO {
 	public void setDiseaseVO(DiseaseVO diseaseVO) {
 		this.diseaseVO = diseaseVO;
 	}
+	
+	public PetVO getPetVO() {
+		return petVO;
+	}
+	public void setPetVO(PetVO petVO) {
+		this.petVO = petVO;
+	}
 	@Override
 	public String toString() {
 		return "TreatmentRecordVO [treatmentRecordNo=" + treatmentRecordNo
@@ -83,7 +93,5 @@ public class TreatmentRecordVO {
 				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
 				+ ", toString()=" + super.toString() + "]";
 	}
-	
-	
 	
 }

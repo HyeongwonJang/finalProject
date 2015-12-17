@@ -96,7 +96,7 @@ public class VetController {
 			HttpSession session = request.getSession();
 			session.setAttribute("loginVO", loginResult);
 			session.setAttribute("userLevel", "vet");
-			return "home";
+			return "home_vet";
 		} else {
 			return "account/login_fail";
 		}
@@ -107,7 +107,7 @@ public class VetController {
 		//System.out.println(hospitalVO);
 		vetService.updateVet(hospitalVO);
 		request.getSession().setAttribute("loginVO", hospitalVO);
-		return "home";
+		return "home_vet";
 	}
 	@RequestMapping("findVetLicenseByHospitalId.do")
 	@ResponseBody
