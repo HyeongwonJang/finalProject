@@ -30,6 +30,21 @@ $(document).ready(function() {
 		$("#hospitalName").val($(this).parent().siblings().eq(1).text());
 		$("#hospitalId").val($(this).parent().siblings().eq(0).text());
 		$('div.modal').fadeOut();
+		$.ajax({
+			type:"post",
+			url:"findVetLicenseByHospitalId.do",
+			data:"hospitalId="+$("#hospitalId").val(),
+			dataType:"json",
+			success:function(vetList){
+				var searchVetList="";
+				$.each(vetList,function(i){
+					searchVetList+= "<option value=" + vetList[i].vetLicenseNo +">"
+					+  vetList[i].vetName +"</option>";
+				})
+				$("#vetListSelect").html(searchVetList);
+			}
+			
+		})
 	});
 });
 </script>

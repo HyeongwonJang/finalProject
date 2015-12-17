@@ -1,10 +1,12 @@
 package org.animalhospital.reservation.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
 
 import org.animalhospital.reservation.model.DAO.ReservationDAO;
+import org.animalhospital.reservation.model.VO.ReservationTimeVO;
 import org.animalhospital.reservation.model.VO.ReservationVO;
 import org.springframework.stereotype.Service;
 
@@ -22,4 +24,15 @@ public class ReservationServiceImpl implements ReservationService {
 	public List<ReservationVO> findVetReservation(int hospitalId) {
 		return reservationDAO.findVetReservation(hospitalId);
 	}
+	
+	@Override
+	public List<ReservationTimeVO> findPossableReservationTime(HashMap map){
+		return reservationDAO.findPossableReservationTime(map);
+	}
+	
+	@Override
+	public int registerPetOwnerReservation(ReservationVO reservationVO){
+		return reservationDAO.registerPetOwnerReservation(reservationVO);
+	}
+	
 }
