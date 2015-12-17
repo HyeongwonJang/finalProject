@@ -453,11 +453,10 @@ insert into reservation (Reservation_no ,Reservation_date,Time_no,Vet_License_no
 values(reservation_seq.nextval,to_date('2015/12/22'),3,3,'두부',1,'정기검진');
 
 
--- 보호자 아이디로 예약 조회
-select r.Reservation_no, to_char(r.reservation_date, 'yyyy-mm-dd'), rt.Reservation_time, h.hospital_name, vl.vet_name, po.Pet_owner_name, p.pet_name, r.reservation_content
+select r.Reservation_no, to_char(r.reservation_date, 'yyyy-mm-dd'), rt.Reservation_time, vl.vet_name, po.Pet_owner_name, p.pet_name, po.Pet_Owner_tel, r.reservation_content
 from Reservation_Time rt, Reservation r, Pet p,Vet v, Vet_License vl, Hospital h, Pet_Owner po
 where rt.Time_no = r.Time_no and h.Hospital_id = v.Hospital_id and vl.Vet_License_no = v.Vet_License_no
 	and po.Pet_Owner_no=p.Pet_Owner_no and r.Vet_License_no = vl.Vet_License_no and r.Pet_Owner_no = p.Pet_Owner_no
-	and r.Pet_name = p.Pet_name and r.reservation_date >= (select sysdate from dual)
-	and po.Pet_Owner_id = 'tp1'
+	and r.Pet_name = p.Pet_name and r.reservation_date >= '2015-12-01' and r.reservation_date < '2016-01-01'
+	and v.vet_id = 'tv3'
 order by r.reservation_date asc;
