@@ -7,6 +7,10 @@ import org.animalhospital.reservation.model.VO.ReservationTimeVO;
 import org.animalhospital.reservation.model.VO.ReservationVO;
 
 public interface ReservationDAO {
+	
+	public List<ReservationVO> findTodayPetOwnerReservation(String petOwnerId);
+	
+	public List<ReservationVO> findTodayVetReservation(int hospitalId);
 
 	List<ReservationVO> findPetOwnerReservation(String petOwnerId);
 

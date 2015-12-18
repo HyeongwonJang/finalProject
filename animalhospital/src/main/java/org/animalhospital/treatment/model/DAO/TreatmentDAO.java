@@ -35,6 +35,7 @@ public interface TreatmentDAO {
 	public List<Object> findTreatmentRecordByPetOwnerTelAndPetName(
 			Map<String, Object> paramMap);
 	public List<TreatmentRecordVO> findTreatmentRecordByPetOwnerTel(String petOwnerTel);
+	public List<TreatmentRecordVO> findTreatmentRecordByVetLicenseNo(int vetLicenseNo);
 	public List<DiseaseVO> allDiseaseList();
 	public int registerTreatmentRecord(TreatmentRecordVO treatmentRecordVO);
 }

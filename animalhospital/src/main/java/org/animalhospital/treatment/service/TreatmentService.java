@@ -2,6 +2,7 @@ package org.animalhospital.treatment.service;
 
 import java.util.List;
 import java.util.Map;
+
 import org.animalhospital.paging.model.VO.ListVO;
 import org.animalhospital.treatment.model.VO.DiseaseVO;
 import org.animalhospital.treatment.model.VO.TreatmentRecordVO;
@@ -26,4 +27,5 @@ public interface TreatmentService {
 	public int registerTreatmentRecord(TreatmentRecordVO treatmentRecordVO);
 	
 	public List<TreatmentRecordVO> findTreatmentRecordByPetOwnerTel(String petOwnerTel);
+	public List<TreatmentRecordVO> findTreatmentRecordByVetLicenseNo(int vetLicenseNo);
 }

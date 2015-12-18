@@ -16,5 +16,4 @@ public interface ReservationService {
 	
 	int registerPetOwnerReservation(ReservationVO reservationVO);
 	
-	public List<ReservationVO> findPetOwnerReservationToTodayReservation(String petOwnerId);
 }

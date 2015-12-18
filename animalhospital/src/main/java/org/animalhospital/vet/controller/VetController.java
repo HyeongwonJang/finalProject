@@ -96,7 +96,7 @@ public class VetController {
 			HttpSession session = request.getSession();
 			session.setAttribute("loginVO", loginResult);
 			session.setAttribute("userLevel", "vet");
-			return "home_vet";
+			return "redirect:home.do";
 		} else {
 			return "account/login_fail";
 		}

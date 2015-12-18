@@ -14,8 +14,26 @@ public class TreatmentDAOImpl implements TreatmentDAO {
 	@Resource
 	private SqlSessionTemplate sqlSessionTemplate;
 	
+	/**
+	 * 진료기록 목록을 보호자 전화번호 기준으로 5개만 가지고 온다
+	 * 사용용도: 메인페이지 조회
+	 * @author 민호
+	 */
 	public List<TreatmentRecordVO> findTreatmentRecordByPetOwnerTel(String petOwnerTel){
-		return sqlSessionTemplate.selectList("treatmentRecord.findTreatmentRecordByPetOwnerTel", petOwnerTel);
+		return sqlSessionTemplate.selectList(
+				"treatmentRecord.findTreatmentRecordByPetOwnerTel", petOwnerTel);
+	}
+	
+	/**
+	 * 진료기록 목록을 수의사 면허번호 기준으로 5개만 가지고 온다
+	 * 사용용도: 메인페이지 조회
+	 * @param vetLicenseNo
+	 * @return
+	 * @author 민호
+	 */
+	public List<TreatmentRecordVO> findTreatmentRecordByVetLicenseNo(int vetLicenseNo){
+		return sqlSessionTemplate.selectList(
+				"treatmentRecord.findTreatmentRecordByVetLicenseNo", vetLicenseNo);
 	}
 	
 	/**

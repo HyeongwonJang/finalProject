@@ -9,6 +9,8 @@ import org.animalhospital.petowner.service.PetOwnerService;
 import org.animalhospital.reservation.service.ReservationService;
 import org.animalhospital.treatment.service.TreatmentService;
 import org.animalhospital.vaccination.service.VaccinationService;
+import org.animalhospital.vet.model.VO.HospitalVO;
+import org.animalhospital.view.service.ViewService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -22,13 +24,17 @@ public class ViewController {
 	@Resource
 	private VaccinationService vaccinationService;
 	@Resource
-	private ReservationService reservationService;
+	private ViewService viewService;
 	
 	
 	/**
 	 * 가장 첫 페이지를 출력하는 메서드 세션이 있으면 타일즈로 구성된 인덱스 페이지를 출력한다
 	 * 세션이 없으면 로그인과 회원가입만 가능한
 	 * 인덱스 페이지를 출력한다
+	 * 12.17일부터 마이페이지 추가함 근데 미친듯이 줄 수가 늘어나는 걸 보니
+	 * 나눠야 하나
+	 * 나눈다, 서비스 계층에서 map을 보내 합치는 걸로 합시다
+	 * 
 	 * @return
 	 */
 	@RequestMapping("home.do")
@@ -40,16 +46,12 @@ public class ViewController {
 			url = "index"; 
 		} else if(session.getAttribute("userLevel").equals("vet")){
 			url = "home_vet";
+			HospitalVO hvo = (HospitalVO) request.getSession().getAttribute("loginVO");
+			mav.addAllObjects(viewService.findVetOwnerMainPageData(hvo));
 		} else if(session.getAttribute("userLevel").equals("petOwner")){
 			PetOwnerVO povo = (PetOwnerVO) request.getSession(false).getAttribute("loginVO");
 			url = "home_petOwner";
-			mav.addObject("treatmentList", treatmentService.findTreatmentRecordByPetOwnerTel(
-					povo.getPetOwnerTel()));
-			mav.addObject("reservationList", 
-					reservationService.findPetOwnerReservationToTodayReservation(
-							povo.getPetOwnerId()));
-			mav.addObject("petList", petOwnerService.findPetListByPetownerTel(povo.getPetOwnerTel()));
-			
+			mav.addAllObjects(viewService.findPetOwnerMainPageData(povo));
 		}
 		mav.setViewName(url);
 		return mav;

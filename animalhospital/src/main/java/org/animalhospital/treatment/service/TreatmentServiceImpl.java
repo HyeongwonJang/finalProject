@@ -64,10 +64,26 @@ public class TreatmentServiceImpl implements TreatmentService {
 		return treatmentDAO.registerTreatmentRecord(treatmentRecordVO);
 	}
 
+	/**
+	 * 진료기록 5개를 전화번호 기준으로 호출하는 서비스 계층 메서드 
+	 * 사용용도: 메인페이지 조회
+	 * @author 민호
+	 */
 	@Override
 	public List<TreatmentRecordVO> findTreatmentRecordByPetOwnerTel(
 			String petOwnerTel) {
 		return treatmentDAO.findTreatmentRecordByPetOwnerTel(petOwnerTel);
 	}
+	
+	/**
+	 * 진료기록 5개를 수의사 면허번호 기준으로 호출하는 서비스 계층 메서드 
+	 * 사용용도: 메인페이지 조회
+	 * @author 민호
+	 */
+	public List<TreatmentRecordVO> findTreatmentRecordByVetLicenseNo(int vetLicenseNo){
+		return treatmentDAO.findTreatmentRecordByVetLicenseNo(vetLicenseNo);
+	}
+	
+	
 	
 }

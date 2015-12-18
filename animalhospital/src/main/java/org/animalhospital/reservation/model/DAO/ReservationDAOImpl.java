@@ -15,6 +15,14 @@ public class ReservationDAOImpl implements ReservationDAO {
 	@Resource
 	SqlSessionTemplate sqlSessionTemplate;
 	
+	public List<ReservationVO> findTodayPetOwnerReservation(String petOwnerId) {
+		return sqlSessionTemplate.selectList("reservation.findTodayPetOwnerReservation", petOwnerId);
+	}
+	
+	public List<ReservationVO> findTodayVetReservation(int hospitalId) {
+		return sqlSessionTemplate.selectList("reservation.findTodayVetReservation", hospitalId);
+	}
+	
 	@Override
 	public List<ReservationVO> findPetOwnerReservation(String petOwnerId) {
 		return sqlSessionTemplate.selectList("reservation.findPetOwnerReservation", petOwnerId);
