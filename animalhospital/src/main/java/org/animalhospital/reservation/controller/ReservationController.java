@@ -29,6 +29,7 @@ public class ReservationController {
 		PetOwnerVO povo = (PetOwnerVO)request.getSession().getAttribute("loginVO");
 		return new ModelAndView("find_petOwner_reservation", "reservationList", reservationService.findPetOwnerReservation(povo.getPetOwnerId()));
 	}
+	
 	@RequestMapping("findVetReservation.do")
 	public ModelAndView findVetOwnerReservation(HttpServletRequest request) {
 		HospitalVO hvo = (HospitalVO)request.getSession().getAttribute("loginVO");

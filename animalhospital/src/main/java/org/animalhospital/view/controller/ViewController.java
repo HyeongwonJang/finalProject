@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.animalhospital.petowner.model.VO.PetOwnerVO;
 import org.animalhospital.petowner.service.PetOwnerService;
+import org.animalhospital.reservation.service.ReservationService;
 import org.animalhospital.treatment.service.TreatmentService;
 import org.animalhospital.vaccination.service.VaccinationService;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,9 @@ public class ViewController {
 	private TreatmentService treatmentService;
 	@Resource
 	private VaccinationService vaccinationService;
+	@Resource
+	private ReservationService reservationService;
+	
 	
 	/**
 	 * 가장 첫 페이지를 출력하는 메서드 세션이 있으면 타일즈로 구성된 인덱스 페이지를 출력한다
@@ -37,9 +41,15 @@ public class ViewController {
 		} else if(session.getAttribute("userLevel").equals("vet")){
 			url = "home_vet";
 		} else if(session.getAttribute("userLevel").equals("petOwner")){
-			mav.addObject("treatmentList", treatmentService.findTreatmentRecordByPetOwnerTel(
-					((PetOwnerVO) session.getAttribute("loginVO")).getPetOwnerTel()));
+			PetOwnerVO povo = (PetOwnerVO) request.getSession(false).getAttribute("loginVO");
 			url = "home_petOwner";
+			mav.addObject("treatmentList", treatmentService.findTreatmentRecordByPetOwnerTel(
+					povo.getPetOwnerTel()));
+			mav.addObject("reservationList", 
+					reservationService.findPetOwnerReservationToTodayReservation(
+							povo.getPetOwnerId()));
+			mav.addObject("petList", petOwnerService.findPetListByPetownerTel(povo.getPetOwnerTel()));
+			
 		}
 		mav.setViewName(url);
 		return mav;

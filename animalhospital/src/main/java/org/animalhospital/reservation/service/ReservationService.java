@@ -15,4 +15,6 @@ public interface ReservationService {
 	List<ReservationTimeVO> findPossableReservationTime(HashMap map);
 	
 	int registerPetOwnerReservation(ReservationVO reservationVO);
+	
+	public List<ReservationVO> findPetOwnerReservationToTodayReservation(String petOwnerId);
 }
