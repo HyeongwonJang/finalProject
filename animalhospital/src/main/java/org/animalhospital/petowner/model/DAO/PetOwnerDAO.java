@@ -9,8 +9,8 @@ public interface PetOwnerDAO {
 	public void updatePetOwner(PetOwnerVO povo);
 	public PetOwnerVO telCheckPetOwner(PetOwnerVO povo);
 	public void deletePetOwner(PetOwnerVO povo);
-	public void registerPetOwner(PetOwnerVO povo);
-	public void registerPet(HashMap<String, Object> pom);
+	public void registerPetOwner(PetOwnerVO povo) throws Exception;
+	public void registerPet(HashMap<String, Object> pom) throws Exception;
 	public PetOwnerVO findPetListByTel(PetOwnerVO povo);
 	public TreatmentRecordVO findTreatmentRecordById(PetOwnerVO povo);
 	public PetOwnerVO findPetListByPetownerTel(String petOwnerTel);
