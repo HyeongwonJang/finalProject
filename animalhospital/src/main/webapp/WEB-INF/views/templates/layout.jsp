@@ -133,6 +133,13 @@
 											</ul>
 									</c:when>
 								</c:choose>
+								
+									<li><a><i class="fa fa-comments"></i> 커뮤니티 <span
+										class="fa fa-chevron-down"></span></a>
+									<ul class="nav child_menu" style="display: none">
+										<li><a href="${initparam.root}findCommunityBoardList.do">Q&A</a></li>
+									</ul></li>
+									
 							</ul>
 						</div>
 						<div class="menu_section">

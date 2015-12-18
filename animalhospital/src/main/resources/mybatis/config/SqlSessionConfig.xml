@@ -18,7 +18,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	    <typeAlias type="org.animalhospital.vaccination.model.VO.VaccinationVO" alias="vavo"/>
 	    <typeAlias type="org.animalhospital.reservation.model.VO.ReservationVO" alias="rvo"/>
 	    <typeAlias type="org.animalhospital.reservation.model.VO.ReservationTimeVO" alias="rtvo"/>
-      
+	    <typeAlias type="org.animalhospital.community.model.VO.CommunityBoardVO" alias="cbvo"/>
    </typeAliases>   
     <!-- sql mapping config xml 을 연결 -->
    <mappers>
@@ -28,6 +28,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
       <mapper resource="mybatis/config/treatmentRecord.xml"/>
       <mapper resource="mybatis/config/vaccination.xml"/>
       <mapper resource="mybatis/config/reservation.xml"/>
+      <mapper resource="mybatis/config/communityBoard.xml"/>
    </mappers>
    
 </configuration>

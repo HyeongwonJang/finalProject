@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="communityBoard">
+ 	
+ 	 <resultMap type="cbvo" id="cbvoRM">
+   		 <id column="Community_Board_no" property="communityBoardNo"/>
+  		 <id column="Community_Board_title" property="communityBoardTitle"/>
+  		 <id column="Community_Board_content" property="communityBoardContent"/>
+  		 <id column="Community_Board_hours" property="communityBoardHours"/>
+  		 <id column="Community_Board_hit" property="communityBoardHit"/>
+  		 <id column="Community_Board_user_type" property="communityBoardUserType"/>
+   </resultMap>
+   <!-- 글 목록 -->
+   <!-- <select id="getCommunityBoardList" resultMap="cbvoRM">
+      select Community_Board_no,Community_Board_title,Community_Board_content,Community_Board_hours,
+      Community_Board_hit,Community_Board_user_type from (
+         select Community_Board_no,Community_Board_title,Community_Board_content,
+         Community_Board_hours,Community_Board_hit,ceil(rownum/5) as page,Community_Board_user_type from (
+               select Community_Board_no,Community_Board_title,to_char(Community_Board_hours,'YYYY.MM.DD') as Community_Board_hours,
+               Community_Board_hit,Community_Board_user_type 
+               from Community_Board  order by Community_Board_no desc
+           )
+       ) where page=#{value}
+   </select> -->
+   <select id="findCommunityBoardList"  resultType="cbvo" resultMap="cbvoRM">
+   		select Community_Board_no, Community_Board_title, Community_Board_user_type, Community_Board_hours, Community_Board_hit
+   		from Community_Board 
+   		order by Community_Board_no desc
+   </select>
+   <select id="totalContent" resultType="int">
+		select count(*) from Community_Board
+	</select>
+ 	
+ 	<!-- 글작성 -->
+ 	<insert id="writeCommunity" parameterType="cbvo">
+		<selectKey keyProperty="communityBoardNo" resultType="int" order="BEFORE">
+			select Community_Board_no_seq.nextval from dual
+		</selectKey>
+		insert into Community_Board(Community_Board_no,Community_Board_title,Community_Board_content,Community_Board_hours)
+		values(#{communityBoardNo},#{communityBoardTitle},#{communityBoardContent},sysdate)
+	</insert>
+	
+	
+	<!-- 조회수 증가 -->
+	<update id="updateCommunityBoardHit" parameterType="int">
+		update Community_Board 
+		set Community_Board_hit = Community_Board_hit+1 
+		where Community_Board_no=#{communityBoardNo}
+	</update>
+	
+   
+	<!--  상세 보기 -->
+	 <select id="showCommunityBoardContent" resultMap="cbvoRM">
+      select Community_Board_no,Community_Board_title,to_char(Community_Board_hours,'YYYY.MM.DD HH24:MI') as Community_Board_hours,
+     			Community_Board_content,Community_Board_hit
+      from Community_Board 
+      where Community_Board_no=#{value}
+   </select>
+   
+   <!-- 게시판 수정 -->
+   <update id="updateCommunityBoard" parameterType="cbvo" >
+		update Community_Board
+		set Community_Board_title=#{communityBoardTitle}, Community_Board_content=#{communityBoardContent}
+		where Community_Board_no=#{communityBoardNo}
+	</update>	
+	
+	<!-- 게시판 삭제 -->
+	<delete id="deleteCommunityBoard" parameterType="cbvo">
+		delete 
+		from Community_Board 
+		where Community_Board_no = #{communityBoardNo}
+	</delete>
+   
+   
+ </mapper>
