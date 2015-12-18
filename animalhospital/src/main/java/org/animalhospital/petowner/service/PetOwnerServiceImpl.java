@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import org.animalhospital.petowner.model.DAO.PetOwnerDAO;
 import org.animalhospital.petowner.model.VO.PetOwnerVO;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class PetOwnerServiceImpl implements PetOwnerService {
@@ -38,9 +39,9 @@ public class PetOwnerServiceImpl implements PetOwnerService {
 		return flag;
 	}
 	
-
+	@Transactional
 	@Override
-	public void registerPetOwner(PetOwnerVO povo) {
+	public void registerPetOwner(PetOwnerVO povo) throws Exception {
 		petOwnerDAO.registerPetOwner(povo);
 		HashMap<String, Object> pom = new HashMap<String, Object>();
 		pom.put("petOwnerNo", povo.getPetOwnerNo());
@@ -52,8 +53,9 @@ public class PetOwnerServiceImpl implements PetOwnerService {
 		}
 	}
 	
+	@Transactional
 	@Override
-	public void registerPet(PetOwnerVO povo) {
+	public void registerPet(PetOwnerVO povo) throws Exception {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		System.out.println(povo);
 		map.put("petOwnerNo", povo.getPetOwnerNo());
@@ -77,9 +79,9 @@ public class PetOwnerServiceImpl implements PetOwnerService {
 	public String findPetOwnerById(PetOwnerVO povo) {
 		return petOwnerDAO.findPetOwnerById(povo)==0 ? "ok" : "fail";
 	}
-
+	@Transactional
 	@Override
-	public void registerPetOwnerByTel(PetOwnerVO povo) {
+	public void registerPetOwnerByTel(PetOwnerVO povo) throws Exception {
 		petOwnerDAO.registerPetOwnerByTel(povo);
 		HashMap<String, Object> pom = new HashMap<String, Object>();
 		pom.put("petOwnerNo", petOwnerDAO.loginPetOwner(povo).getPetOwnerNo());
@@ -95,6 +97,7 @@ public class PetOwnerServiceImpl implements PetOwnerService {
 	public PetOwnerVO findPetListById(PetOwnerVO povo) {
 		return petOwnerDAO.findPetListById(povo);
 	}
+
 	@Override
 	public PetOwnerVO findPetByPetName(PetOwnerVO povo) {
 		HashMap<String, Object> map = new HashMap<String, Object>();

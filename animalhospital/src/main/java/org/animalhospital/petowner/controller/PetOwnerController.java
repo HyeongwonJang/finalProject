@@ -64,7 +64,11 @@ public class PetOwnerController {
 	//펫 등록
 		@RequestMapping(value = "registerPet.do")
 		public String registerPet(PetOwnerVO povo){
-			petOwnerService.registerPet(povo);
+			try {
+				petOwnerService.registerPet(povo);
+			} catch (Exception e) {
+				return "redirect:home.do";
+			}
 			return "redirect:registerPetResult.do?" + povo.getPetOwnerNo();
 		}
 		@RequestMapping("registerPetResult.do")
@@ -96,7 +100,11 @@ public class PetOwnerController {
 	//보호자 회원 가입
 	@RequestMapping(value = "registerPetOwner.do", method = RequestMethod.POST)
 	public String register(PetOwnerVO povo) {
-		petOwnerService.registerPetOwner(povo);		
+		try {
+			petOwnerService.registerPetOwner(povo);
+		} catch (Exception e) {
+			return "redirect:home.do";
+		}		
 		return "redirect:registerPetOwnerResult.do";
 	}											
 	@RequestMapping("registerPetOwnerResult.do")
@@ -106,7 +114,11 @@ public class PetOwnerController {
 	//비회원 보호자 회원 가입
 	@RequestMapping(value = "registerPetOwnerByTel.do", method = RequestMethod.POST)
 	public String registerPetOwnerByTel(PetOwnerVO povo) {
-		petOwnerService.registerPetOwnerByTel(povo);		
+		try {
+			petOwnerService.registerPetOwnerByTel(povo);
+		} catch (Exception e) {
+			return "redirect:home.do";
+		}		
 		return "redirect:registerPetOwnerResult.do";
 	}
 	
@@ -115,13 +127,4 @@ public class PetOwnerController {
 	public String findPetOwnerById(PetOwnerVO povo) {
 		return petOwnerService.findPetOwnerById(povo);
 	}
-		
-	
-	
-	
-	
-	
-	
-	
-	
 }

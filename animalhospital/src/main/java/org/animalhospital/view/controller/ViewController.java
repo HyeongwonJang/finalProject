@@ -174,7 +174,7 @@ public class ViewController {
 	/**
 	 * 병원 조회 페이지
 	 */
-	@RequestMapping("findHospitalView.do")
+	@RequestMapping("authority_findHospitalView.do")
 	public String findHospitalView() {
 		return "find_hospital";
 	}
@@ -242,5 +242,22 @@ public class ViewController {
 		povo = (PetOwnerVO) request.getSession(false).getAttribute("loginVO");
 		request.setAttribute("petList", petOwnerService.findPetListById(povo));
 		return "register_petOwner_reservation";
+	}
+	
+	/**
+	 * 문의 게시판 목록 페이지
+	 * 
+	 */
+	@RequestMapping("listCommunityBoardQAView.do")
+	public String listCommunityBoardQAView(){
+		return "list_community";
+	}
+	/**
+	 * 문의 게시판 글쓰기 페이지
+	 * 
+	 */
+	@RequestMapping("writeCommunityView.do")
+	public String writeCommunityView(){
+		return "write_community";
 	}
 }

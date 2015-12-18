@@ -1,3 +1,16 @@
+select r.Reservation_no, to_char(r.reservation_date, 'yyyy-mm-dd') as reservation_date, rt.Reservation_time, h.hospital_name,h.hospital_tel, vl.vet_name, po.Pet_owner_name, p.pet_name, r.reservation_content
+			from Reservation_Time rt, Reservation r, Pet p,Vet v, Vet_License vl, Hospital h, Pet_Owner po
+			where rt.Time_no = r.Time_no and h.Hospital_id = v.Hospital_id and vl.Vet_License_no = v.Vet_License_no
+				and po.Pet_Owner_no=p.Pet_Owner_no and r.Vet_License_no = vl.Vet_License_no and r.Pet_Owner_no = p.Pet_Owner_no
+				and r.Pet_name = p.Pet_name 
+				and r.reservation_date = (select to_char(sysdate, 'yyyy-mm-dd') from dual)
+				and po.Pet_Owner_id = 'tp1'
+			order by r.reservation_date asc
+
+select *
+from TREATMENT_RECORD
+where Vet_License_no = 1
+
 select Treatment_Record_no, Treatment_hours, Treatment_content,
 				Disease_name, Disease_symptom, Pet_Owner_name, pet_name 
 		from(

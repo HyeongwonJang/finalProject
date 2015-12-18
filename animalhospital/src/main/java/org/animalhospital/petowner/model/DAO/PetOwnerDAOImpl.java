@@ -34,11 +34,11 @@ public class PetOwnerDAOImpl implements PetOwnerDAO {
 	}
 	
 	@Override
-	public void registerPetOwner(PetOwnerVO povo) {
+	public void registerPetOwner(PetOwnerVO povo) throws Exception{
 		sqlSessionTemplate.insert("petOwner.registerPetOwner", povo);
 	}
 	@Override
-	public void registerPet(HashMap<String, Object> pom) {
+	public void registerPet(HashMap<String, Object> pom) throws Exception{
 		sqlSessionTemplate.insert("petOwner.registerPet", pom);
 	}
 	

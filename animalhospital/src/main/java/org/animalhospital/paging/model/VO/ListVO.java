@@ -3,12 +3,15 @@ package org.animalhospital.paging.model.VO;
 import java.util.List;
 
 import javax.annotation.Resource;
+
+import org.animalhospital.community.model.VO.CommunityBoardVO;
 import org.animalhospital.paging.model.bean.PagingBean;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ListVO {
 	private List<Object> list;
+	private List<CommunityBoardVO> boardList;
 	private String startDate;
 	private String endDate;
 	private int page;
@@ -16,12 +19,17 @@ public class ListVO {
 	private PagingBean pagingBean;
 	public ListVO() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
-	public ListVO(List<Object> list, String startDate, String endDate,
-			int page, PagingBean pagingBean) {
+	public ListVO(List<CommunityBoardVO> boardList, PagingBean pagingBean) {
+		super();
+		this.boardList = boardList;
+		this.pagingBean = pagingBean;
+	}
+	public ListVO(List<Object> list, List<CommunityBoardVO> boardList,
+			String startDate, String endDate, int page, PagingBean pagingBean) {
 		super();
 		this.list = list;
+		this.boardList = boardList;
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.page = page;
@@ -32,6 +40,12 @@ public class ListVO {
 	}
 	public void setList(List<Object> list) {
 		this.list = list;
+	}
+	public List<CommunityBoardVO> getBoardList() {
+		return boardList;
+	}
+	public void setBoardList(List<CommunityBoardVO> boardList) {
+		this.boardList = boardList;
 	}
 	public String getStartDate() {
 		return startDate;
@@ -59,9 +73,9 @@ public class ListVO {
 	}
 	@Override
 	public String toString() {
-		return "ListVO [list=" + list + ", startDate=" + startDate
-				+ ", endDate=" + endDate + ", page=" + page + ", pagingBean="
-				+ pagingBean + "]";
+		return "ListVO [list=" + list + ", boardList=" + boardList
+				+ ", startDate=" + startDate + ", endDate=" + endDate
+				+ ", page=" + page + ", pagingBean=" + pagingBean + "]";
 	}
 	
 	
