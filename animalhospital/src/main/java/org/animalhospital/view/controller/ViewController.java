@@ -151,7 +151,7 @@ public class ViewController {
 	/**
 	 * 병원 조회 페이지
 	 */
-	@RequestMapping("findHospitalView.do")
+	@RequestMapping("authority_findHospitalView.do")
 	public String findHospitalView() {
 		return "find_hospital";
 	}

@@ -61,4 +61,12 @@
 	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg ref="sqlSessionFactory"></constructor-arg>
 	</bean>     
+	<!-- Handler Interceptor 설정 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<!-- <mvc:mapping path="/update.do"/> <mvc:mapping path="/updateView.do"/> -->
+			<mvc:mapping path="/authority_*.do" />
+			<bean class="org.animalhospital.controller.AuthorityController"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
 </beans>

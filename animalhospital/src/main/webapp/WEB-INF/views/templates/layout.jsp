@@ -66,7 +66,7 @@
 							<!-- 왼쪽 메뉴 -->
 							<ul class="nav side-menu">
 								<li>
-									<a href="${initparam.root}findHospitalView.do">
+									<a href="${initparam.root}authority_findHospitalView.do">
 										<i class="fa fa-search"></i> 병원검색 
 									</a>
 								</li>
