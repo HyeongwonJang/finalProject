@@ -78,24 +78,5 @@ public class VaccinationController {
 		return vaccinationService.findDetailVaccinationRecordByVaccinationRecordNo(vaccinationRecordNo);
 	}
 
-	/**
-	 * 세션에 있는 보호자 전화번호를 기준으로 알람데이터를 받아온다
-	 * ajax로 처리하도록 구성
-	 * 차후 테이블을 새로 생성하여 쿼리의 부담을 덜어주게 할 예정
-	 * @param petOwnerTel
-	 * @return
-	 * @author 민호
-	 */
-	@RequestMapping("findAllAlarmDataByPetOwnerTel.do")
-	@ResponseBody
-	public List<Object> findAllAlarmDataByPetOwnerTel(String petOwnerTel){
-		List<Object> list = null;
-		try {
-			list = vaccinationService.findAlarmListByPetOwnerTel(petOwnerTel);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return list;
-	}
+	
 }

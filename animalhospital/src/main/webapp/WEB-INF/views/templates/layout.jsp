@@ -162,13 +162,14 @@
 						<ul class="nav navbar-nav navbar-right">
 							<li class=""><a href="javascript:;"
 								class="user-profile dropdown-toggle" data-toggle="dropdown"
-								aria-expanded="false"> <c:choose>
-										<c:when test="${sessionScope.userLevel == 'vet' }">
-											<i class="fa fa-user-md"></i>
+								aria-expanded="false"> 
+								<c:choose>
+									<c:when test="${sessionScope.userLevel == 'vet' }">
+											<img src="${initparam.root}resources/img/doctor.png" alt="">
                     						${sessionScope.loginVO.vetList[0].vetLicenseVO.vetName}님 환영합니다
                     	</c:when>
 										<c:when test="${sessionScope.userLevel == 'petOwner' }">
-											<i class="fa -md fa-user"></i>
+											<img src="${initparam.root}resources/img/user.png" alt="">
                     						${sessionScope.loginVO.petOwnerName}님 환영합니다	
                     	</c:when>
 									</c:choose> <span class=" fa fa-angle-down"></span>

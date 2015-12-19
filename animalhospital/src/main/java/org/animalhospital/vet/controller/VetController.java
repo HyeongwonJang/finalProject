@@ -1,6 +1,5 @@
 package org.animalhospital.vet.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -12,10 +11,10 @@ import org.animalhospital.vet.model.VO.HospitalVO;
 import org.animalhospital.vet.model.VO.VetLicenseVO;
 import org.animalhospital.vet.model.VO.VetVO;
 import org.animalhospital.vet.service.VetService;
-import org.codehaus.jackson.map.util.JSONPObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class VetController {
@@ -38,8 +37,9 @@ public class VetController {
 	 * 수의사 등록
 	 */
 	@RequestMapping("registerVet.do")
-	public String registerVet(HospitalVO hvo) {
+	public String registerVet(HospitalVO hvo, MultipartFile file) {
 		vetService.registerVet(hvo);
+		System.out.println(file.getOriginalFilename());
 		return "redirect:home.do";
 	}
 
