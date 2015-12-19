@@ -2,7 +2,8 @@ package org.animalhospital.community.controller;
 
 import javax.annotation.Resource;
 
-import org.animalhospital.community.model.VO.CommunityBoardVO;
+import org.animalhospital.community.model.VO.AnswerBoardVO;
+import org.animalhospital.community.model.VO.QuestionBoardVO;
 import org.animalhospital.community.model.service.CommunityBoardService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,40 +14,31 @@ import org.springframework.web.servlet.ModelAndView;
 public class CommunityBoardController {
 	@Resource
 	private CommunityBoardService communityBoardService;
-	/** 
-	 * 게시글을 insert 
-	 * 새로고침시 재입력을 막기 위해 redirect 시킨다. 
-	 * post 방식일때만 등록가능
-	 * 회원정보를 세션에서 반환받아 BoardVO에 할당한다 
-	 */
+	
+	    /**
+	    * 글 작성
+	    */
 	@RequestMapping(value="writeCommunity.do",method=RequestMethod.POST)	
-	public ModelAndView writeCommunity(CommunityBoardVO cbvo) {
-		communityBoardService.writeCommunity(cbvo);
-		return new ModelAndView("redirect:showCommunityBoardContentNoHit.do?communityBoardNo="+cbvo.getCommunityBoardNo());
+	public ModelAndView writeCommunity(QuestionBoardVO qbvo) {
+		communityBoardService.writeCommunity(qbvo);
+		return new ModelAndView("redirect:showCommunityBoardContentNoHit.do?questionBoardNo="+qbvo.getQuestionBoardNo());
 	}	
 	
-	/**
-	    * 게시글 조회 , 조회수 업데이트
-	    * 개별 게시물 보여준다.    
-	    * @param request
-	    * @param response
-	    * @return
-	    * @
+	    /**
+	    * 글 상세 보기, 조회수 증가
 	    */
 	   @RequestMapping("showCommunityBoardContent.do")
-	   public ModelAndView showContent(int communityBoardNo) {      
-	      CommunityBoardVO cbvo=communityBoardService.showCommunityBoardContent(communityBoardNo);   
-	      return new ModelAndView("showContent_community","cbvo",cbvo);
+	   public ModelAndView showContent(int questionBoardNo) {      
+		   QuestionBoardVO qbvo=communityBoardService.showCommunityBoardContent(questionBoardNo);   
+	      return new ModelAndView("showContent_community","qbvo",qbvo);
 	   }
 	   @RequestMapping("showCommunityBoardContentNoHit.do")
-	   public ModelAndView showContentNoHit(int communityBoardNo) {      
-	      return new ModelAndView("showContent_community","cbvo",communityBoardService.showCommunityBoardContentNoHit(communityBoardNo));
+	   public ModelAndView showContentNoHit(int questionBoardNo) {      
+	      return new ModelAndView("showContent_community","qbvo",communityBoardService.showCommunityBoardContentNoHit(questionBoardNo));
 	   }
 	   
 	   /**
 	    * 게시판 목록 
-	    * @param pageNo
-	    * @return
 	    */
 	   @RequestMapping("findCommunityBoardList.do")
 	   public ModelAndView findCommunityBoardList(String pageNo){
@@ -55,29 +47,34 @@ public class CommunityBoardController {
 	   
 	   /**
 	    * 게시판 수정 
-	    * @param pageNo
-	    * @return
 	    */
 	   @RequestMapping("updateCommunityView.do")
-		public ModelAndView updateCommunityView(int communityBoardNo){
-			return new ModelAndView("update_community","cbvo",communityBoardService.showCommunityBoardContentNoHit(communityBoardNo));
+		public ModelAndView updateCommunityView(int questionBoardNo){
+			return new ModelAndView("update_community","qbvo",communityBoardService.showCommunityBoardContentNoHit(questionBoardNo));
 		}
 	   @RequestMapping(value="updateCommunityBoard.do", method = RequestMethod.POST)
-	   public ModelAndView updateCommunityBoard(CommunityBoardVO cbvo){
-		   communityBoardService.updateCommunityBoard(cbvo);
-		   System.out.println(cbvo);
-		   return new ModelAndView("redirect:showCommunityBoardContentNoHit.do?communityBoardNo="+cbvo.getCommunityBoardNo());
+	   public ModelAndView updateCommunityBoard(QuestionBoardVO qbvo){
+		   communityBoardService.updateCommunityBoard(qbvo);
+		   System.out.println(qbvo);
+		   return new ModelAndView("redirect:showCommunityBoardContentNoHit.do?questionBoardNo="+qbvo.getQuestionBoardNo());
 	   }
 	  
 	   /**
 	    * 게시판 삭제 
-	    * @param pageNo
-	    * @return
 	    */
 	   @RequestMapping("deleteCommunityBoard.do")
-	   public ModelAndView deleteCommunityBoard(int communityBoardNo){
-		   communityBoardService.deleteCommunityBoard(communityBoardNo);
+	   public ModelAndView deleteCommunityBoard(int questionBoardNo){
+		   communityBoardService.deleteCommunityBoard(questionBoardNo);
 		   return new ModelAndView("redirect:findCommunityBoardList.do");
 	   }
+	   
+	   /**
+		 * 답변을 처리 
+		 */
+		@RequestMapping("replyCommunity.do")
+		public ModelAndView reply(AnswerBoardVO abvo){		
+			communityBoardService.reply(abvo);		
+			return new ModelAndView("redirect:showContentNoHit.do?questionBoardNo="+abvo.getAnswerBoardNo());
+		}
 	
 }

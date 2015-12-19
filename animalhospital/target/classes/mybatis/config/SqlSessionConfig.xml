@@ -19,6 +19,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	    <typeAlias type="org.animalhospital.reservation.model.VO.ReservationVO" alias="rvo"/>
 	    <typeAlias type="org.animalhospital.reservation.model.VO.ReservationTimeVO" alias="rtvo"/>
 	    <typeAlias type="org.animalhospital.community.model.VO.CommunityBoardVO" alias="cbvo"/>
+	    <typeAlias type="org.animalhospital.community.model.VO.AnswerBoardVO" alias="abvo"/>
+	    <typeAlias type="org.animalhospital.community.model.VO.QuestionBoardVO" alias="qbvo"/>
    </typeAliases>   
     <!-- sql mapping config xml 을 연결 -->
    <mappers>

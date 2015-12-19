@@ -5,7 +5,8 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.animalhospital.community.model.DAO.CommunityBoardDAO;
-import org.animalhospital.community.model.VO.CommunityBoardVO;
+import org.animalhospital.community.model.VO.AnswerBoardVO;
+import org.animalhospital.community.model.VO.QuestionBoardVO;
 import org.animalhospital.paging.model.VO.ListVO;
 import org.animalhospital.paging.model.bean.PagingBean;
 import org.springframework.stereotype.Service;
@@ -16,19 +17,19 @@ public class CommunityBoardServiceImpl implements CommunityBoardService{
 	private CommunityBoardDAO communityBoardDAO;
 	
 	@Override
-	public void writeCommunity(CommunityBoardVO cbvo) {
-			communityBoardDAO.writeCommunity(cbvo);
+	public void writeCommunity(QuestionBoardVO qbvo) {
+			communityBoardDAO.writeCommunity(qbvo);
 	}
 
 	@Override
-	   public CommunityBoardVO showCommunityBoardContent(int communityBoardNo){
-	      communityBoardDAO.updateCount(communityBoardNo);
-	      return communityBoardDAO.showCommunityBoardContent(communityBoardNo);
+	   public QuestionBoardVO showCommunityBoardContent(int questionBoardNo){
+	      communityBoardDAO.updateCount(questionBoardNo);
+	      return communityBoardDAO.showCommunityBoardContent(questionBoardNo);
 	   }
 	
 	@Override
-	public CommunityBoardVO showCommunityBoardContentNoHit(int communityBoardNo) {
-		return communityBoardDAO.showCommunityBoardContent(communityBoardNo);
+	public QuestionBoardVO showCommunityBoardContentNoHit(int questionBoardNo) {
+		return communityBoardDAO.showCommunityBoardContent(questionBoardNo);
 	}
 
 
@@ -36,7 +37,7 @@ public class CommunityBoardServiceImpl implements CommunityBoardService{
 	public ListVO findCommunityBoardList(String pageNo) {
 		if(pageNo==null||pageNo=="") 
 			pageNo="1";
-		List<CommunityBoardVO> boardList=communityBoardDAO.findCommunityBoardList(pageNo);
+		List<QuestionBoardVO> boardList=communityBoardDAO.findCommunityBoardList(pageNo);
 		int total=communityBoardDAO.totalContent();
 		PagingBean paging=new PagingBean(total,Integer.parseInt(pageNo));
 		ListVO lvo=new ListVO(boardList,paging);
@@ -44,13 +45,25 @@ public class CommunityBoardServiceImpl implements CommunityBoardService{
 	}
 
 	@Override
-	public void updateCommunityBoard(CommunityBoardVO cbvo) {
-		communityBoardDAO.updateCommunityBoard(cbvo);
+	public void updateCommunityBoard(QuestionBoardVO qbvo) {
+		communityBoardDAO.updateCommunityBoard(qbvo);
 	}
 
 	@Override
-	public void deleteCommunityBoard(int communityBoardNo) {
-		communityBoardDAO.deleteCommunityBoard(communityBoardNo);
+	public void deleteCommunityBoard(int questionBoardNo) {
+		communityBoardDAO.deleteCommunityBoard(questionBoardNo);
+	}
+
+	
+	@Override
+	public void reply(AnswerBoardVO abvo) {
+		int ref = abvo.getRef();
+		int restep = abvo.getReStep();
+		int relevel = abvo.getReLevel();
+		communityBoardDAO.updateRestep(ref, restep);
+		abvo.setReStep(restep+1);
+		abvo.setReLevel(relevel+1);
+		communityBoardDAO.insertRefContent(abvo);//답변 글 입력								
 	}
 
 	

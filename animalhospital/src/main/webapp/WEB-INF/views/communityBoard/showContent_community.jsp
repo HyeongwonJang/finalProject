@@ -5,10 +5,10 @@
     $(document).ready(function(){
        $("#deleteBtn").click(function(){ 
           if(confirm("게시물을 삭제하시겠습니까?"))
-          location.href="deleteCommunityBoard.do?communityBoardNo=${requestScope.cbvo.communityBoardNo}";
+          location.href="deleteCommunityBoard.do?questionBoardNo=${requestScope.qbvo.questionBoardNo}";
        });
        $("#updateBtn").click(function(){  
-          location.href="updateCommunityView.do?communityBoardNo=${requestScope.cbvo.communityBoardNo}";
+          location.href="updateCommunityView.do?questionBoardNo=${requestScope.qbvo.questionBoardNo}";
        });
     });   
 </script>
@@ -23,23 +23,24 @@
 
    <table class="table table-bordered">
       <tr>
-         <td>NO : ${cbvo.communityBoardNo } </td>
-         <td colspan="2">제목 : ${cbvo.communityBoardTitle} </td>
+         <td>NO : ${qbvo.questionBoardNo } </td>
+         <td colspan="2">제목 : ${qbvo.questionBoardTitle} </td>
       </tr>
       <tr>
-         <td>작성자 :  ${cbvo.communityBoardUserType }</td>
-         <td> 작성날짜 : ${cbvo.communityBoardHours }</td>
-         <td>조회수 : ${cbvo.communityBoardHit }</td>
+         <td>작성자 :  ${qbvo.petOwnerVO.petOwnerName }</td>
+         <td> 작성날짜 : ${qbvo.questionBoardContent }</td>
+         <td>조회수 : ${qbvo.questionBoardHit }</td>
       </tr>
       <tr>
          <td colspan="3">
-         <pre class="pre-scrollable">${requestScope.cbvo.communityBoardContent}</pre>
+         <pre class="pre-scrollable">${requestScope.qbvo.questionBoardContent}</pre>
          </td>
       </tr>
       
       <tr>
          <td valign="middle" align="center" colspan="3">
-            <a class="btn btn-default" href="${initparam.root}findCommunityBoardList.do" role="button">목록</a>
+             <a class="btn btn-default" href="${initparam.root}replyCommunity.do" role="button">답글</a>	  
+              <a class="btn btn-default" href="${initparam.root}findCommunityBoardList.do" role="button">목록</a>
                <input class="btn btn-default" type="button" value="수정" id="updateBtn">   
                <input class="btn btn-default" type="button" value="삭제" id="deleteBtn">
          </td>

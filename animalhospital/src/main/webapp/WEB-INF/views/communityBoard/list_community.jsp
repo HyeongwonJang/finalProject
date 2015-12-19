@@ -35,30 +35,23 @@
 				</tr>
 			</thead>
 		<tbody>
-			<c:forEach items="${requestScope.lvo.boardList}" var="cbvo">
+			<c:forEach items="${requestScope.lvo.boardList}" var="qbvo">
 				<tr>
-					<td>${ cbvo.communityBoardNo }</td>
+					<td>${ qbvo.questionBoardNo }</td>
 					<td><c:choose>
 							<c:when test="${sessionScope.loginVO!=null}">
 								<a
-									href="${initParam.root}showCommunityBoardContent.do?communityBoardNo=${cbvo.communityBoardNo}">
-									${ cbvo.communityBoardTitle  }</a>
+									href="${initParam.root}showCommunityBoardContent.do?questionBoardNo=${qbvo.questionBoardNo}">
+									${ qbvo.questionBoardTitle  }</a>
 							</c:when>
 							<c:otherwise>
-               ${ cbvo.communityBoardTitle  }
-               </c:otherwise>
-						</c:choose></td>
-					<td><c:choose>
-						<c:when test="${sessionScope.userLevel == 'vet' }">
-							${sessionScope.loginVO.vetList[0].vetLicenseVO.vetName}
-						</c:when>
-						<c:otherwise>
-							${ sessionScope.loginVO.petOwnerName }
-						</c:otherwise>
-					</c:choose></td>
-					<td>${ cbvo.communityBoardHours }</td>
-					<td>${ cbvo.communityBoardHit}</td>
-				</tr>
+              					${ qbvo.questionBoardTitle  }
+              				 </c:otherwise>
+								</c:choose></td>
+									<td>${ qbvo.petOwnerVO.petOwnerName}</td>
+									<td>${ qbvo.questionBoardHours }</td>
+									<td>${ qbvo.questionBoardHit}</td>
+						</tr>
 			</c:forEach>
 		</tbody>
 	</table>

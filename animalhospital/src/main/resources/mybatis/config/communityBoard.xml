@@ -12,66 +12,94 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   		 <id column="Community_Board_hit" property="communityBoardHit"/>
   		 <id column="Community_Board_user_type" property="communityBoardUserType"/>
    </resultMap>
+   <resultMap type="qbvo" id="qbvoRM">
+   		<id column="Question_board_no" property="questionBoardNo"/>
+   		<id column="Question_board_title" property="questionBoardTitle"/>
+   		<id column="Question_board_writer" property="petOwnerVO.petOwnerName"/>
+   		<id column="Question_board_content" property="questionBoardContent"/>
+   		<id column="Question_board_hours" property="questionBoardHours"/>
+   		<id column="Question_board_hit" property="questionBoardHit"/>
+   		<collection property="petOwnerVO" ofType="povo">
+ 			<id column="Pet_Owner_name" property="petOwnerName"/>
+ 		</collection>		
+   </resultMap>
+      <resultMap type="abvo" id="abvoRM">
+   		<id column="Answer_board_no" property="answerBoardNo"/>
+   		<id column="Answer_board_title" property="answerBoardTitle"/>
+   		<id column="Answer_board_writer" property="vetLicenseVO.vetName"/>
+   		<id column="Answer_board_content" property="answerBoardContent"/>
+   		<id column="Answer_board_hours" property="answerBoardHours"/>
+   		<id column="Answer_board_hit" property="answerBoardHit"/>
+   		<collection property="hospitalVO" ofType="hvo">
+ 			<id column="Hospital_name" property="HospitalName"/>
+ 		</collection>		
+   </resultMap>
+   
    <!-- 글 목록 -->
-   <!-- <select id="getCommunityBoardList" resultMap="cbvoRM">
-      select Community_Board_no,Community_Board_title,Community_Board_content,Community_Board_hours,
-      Community_Board_hit,Community_Board_user_type from (
-         select Community_Board_no,Community_Board_title,Community_Board_content,
-         Community_Board_hours,Community_Board_hit,ceil(rownum/5) as page,Community_Board_user_type from (
-               select Community_Board_no,Community_Board_title,to_char(Community_Board_hours,'YYYY.MM.DD') as Community_Board_hours,
-               Community_Board_hit,Community_Board_user_type 
-               from Community_Board  order by Community_Board_no desc
-           )
-       ) where page=#{value}
-   </select> -->
-   <select id="findCommunityBoardList"  resultType="cbvo" resultMap="cbvoRM">
-   		select Community_Board_no, Community_Board_title, Community_Board_user_type, Community_Board_hours, Community_Board_hit
-   		from Community_Board 
-   		order by Community_Board_no desc
+   <select id="findCommunityBoardList"  resultType="qbvo" resultMap="qbvoRM">
+   		select q.Question_board_no, q.Question_board_title, p.pet_Owner_name , q.Question_board_hours, q.Question_board_hit
+		from Question_board q, PET_OWNER p
+		where p.Pet_Owner_id = q.Question_board_writer
+		order by Question_board_no desc
    </select>
    <select id="totalContent" resultType="int">
-		select count(*) from Community_Board
+		select count(*) from Question_board
 	</select>
  	
  	<!-- 글작성 -->
- 	<insert id="writeCommunity" parameterType="cbvo">
-		<selectKey keyProperty="communityBoardNo" resultType="int" order="BEFORE">
-			select Community_Board_no_seq.nextval from dual
+ 	<insert id="writeCommunity" parameterType="qbvo">
+		<selectKey keyProperty="questionBoardNo" resultType="int" order="BEFORE">
+			select Question_board_no_seq.nextval from dual
 		</selectKey>
-		insert into Community_Board(Community_Board_no,Community_Board_title,Community_Board_content,Community_Board_hours)
-		values(#{communityBoardNo},#{communityBoardTitle},#{communityBoardContent},sysdate)
+		insert into Question_board(Question_board_no,Question_board_title, Question_board_writer, Question_board_content,Question_board_hours,Question_board_hit)
+		values(#{questionBoardNo},#{questionBoardTitle}, #{petOwnerVO.petOwnerId}, #{questionBoardContent},sysdate,#{questionBoardHit})
 	</insert>
 	
 	
 	<!-- 조회수 증가 -->
 	<update id="updateCommunityBoardHit" parameterType="int">
-		update Community_Board 
-		set Community_Board_hit = Community_Board_hit+1 
-		where Community_Board_no=#{communityBoardNo}
+		update Question_board 
+		set Question_board_hit = Question_board_hit+1 
+		where Question_board_no=#{questionBoardNo}
 	</update>
 	
    
 	<!--  상세 보기 -->
-	 <select id="showCommunityBoardContent" resultMap="cbvoRM">
-      select Community_Board_no,Community_Board_title,to_char(Community_Board_hours,'YYYY.MM.DD HH24:MI') as Community_Board_hours,
-     			Community_Board_content,Community_Board_hit
-      from Community_Board 
-      where Community_Board_no=#{value}
+	 <select id="showCommunityBoardContent" resultMap="qbvoRM">
+      select Question_board_no,Question_board_title,to_char(Question_board_hours,'YYYY.MM.DD HH24:MI') as Question_board_hours,
+     			Question_board_content,Question_board_hit
+      from Question_board 
+      where Question_board_no=#{value}
    </select>
    
    <!-- 게시판 수정 -->
-   <update id="updateCommunityBoard" parameterType="cbvo" >
-		update Community_Board
-		set Community_Board_title=#{communityBoardTitle}, Community_Board_content=#{communityBoardContent}
-		where Community_Board_no=#{communityBoardNo}
+   <update id="updateCommunityBoard" parameterType="qbvo" >
+		update Question_board
+		set Question_board_title=#{questionBoardTitle}, Question_board_content=#{questionBoardContent}
+		where Question_board_no=#{questionBoardNo}
 	</update>	
 	
 	<!-- 게시판 삭제 -->
 	<delete id="deleteCommunityBoard" parameterType="cbvo">
 		delete 
-		from Community_Board 
-		where Community_Board_no = #{communityBoardNo}
+		from Question_board 
+		where Question_board_no = #{questionBoardNo}
 	</delete>
+	
+	<!-- 답글 -->
+	 <update id="updateRestep" parameterType="hashmap">
+	 	update Answer_board 
+		set reStep = reStep+1
+	 	where ref = #{ref} and reStep > #{reStep}
+	 </update>
+	 <insert id="writeReply" parameterType="abvo">
+	 	<selectKey keyProperty="answerBoardNo" resultType="int" order="BEFORE">
+	 		select Communityboard_no_seq.nextval from dual 
+	 	</selectKey>
+	 	insert into Answer_board
+	 	(Answer_board_no,Answer_board_title,Question_board_content,Question_board_hours,ref,reStep,reLevel)
+	 	values(#{answerBoardNo},#{answerBoardTitle},#{answerBoardContent},sysdate, #{ref}, #{reStep}, #{reLevel})
+	 </insert>
    
    
  </mapper>

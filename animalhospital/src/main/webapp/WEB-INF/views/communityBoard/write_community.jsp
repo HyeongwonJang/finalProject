@@ -1,14 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 
 <script type="text/javascript">
 $(document).ready(function() {
 	$("#writeSubmit").click(function(){
 		var f = document.writeForm;
-		if(f.communityBoardTitle.value=""){
+		if(f.questionBoardTitle.value=""){
 			return;
 		}
-		if(f.communityBoardContent.value=""){
+		if(f.questionBoardContent.value=""){
 			return;
 		}
 		$("#writeForm").submit();
@@ -39,22 +41,40 @@ $(document).ready(function() {
 				<span class="required"></span>
 				</label>
 				<div class="col-md-4 col-sm-6 col-xs-12">
-					<input type="text" id="communityBoardTitle" required="required"
-						class="form-control col-md-7 col-xs-12" name="communityBoardTitle"/>
+					<input type="text" id="questionBoardTitle" required="required"
+						class="form-control col-md-7 col-xs-12" name="questionBoardTitle"/>
 					<p class="help-block"></p>
 				</div>
 			</div>
 
 			<!-- 글쓴이 -->
+		<c:choose>
+			<c:when test="${sessionScope.userLevel == 'vet' }">
 			<div class="form-group">
 				<label class="control-label col-md-3 col-sm-3 col-xs-12">
 					글쓴이 <span class="required"></span>
 				</label>
 				<div class="col-md-4 col-sm-6 col-xs-12">
-					<input type="password" id="communityBoardUserType" required="required"
-						class="form-control col-md-7 col-xs-12" name="communityBoardUserType" readonly>
+					<input type="text" id="petOwnerVO.petOwnerName" required="required"
+						class="form-control col-md-7 col-xs-12" name="petOwnerVO.petOwnerName"
+						value="${sessionScope.loginVO.vetList[0].vetLicenseVO.vetName}" readonly>
 				</div>
-			</div>
+			 </div>
+			</c:when>
+			<c:otherwise>
+				<div class="form-group">
+				<label class="control-label col-md-3 col-sm-3 col-xs-12">
+					글쓴이 <span class="required"></span>
+				</label>
+				<div class="col-md-4 col-sm-6 col-xs-12">
+					<input type="text" id="questionBoardWriter" required="required"
+						class="form-control col-md-7 col-xs-12" name="questionBoardWriter"
+						value="${ sessionScope.loginVO.petOwnerName }" readonly>
+						<input type="hidden" name="petOwnerVO.petOwnerId" value="${ sessionScope.loginVO.petOwnerId }">
+				</div>
+			 </div>
+			</c:otherwise>
+		</c:choose>
 
 			<!-- 작성날짜 -->
 		<!-- 	<div class="form-group">
@@ -75,7 +95,7 @@ $(document).ready(function() {
 					for="last-name">* 내용 <span class="required"></span>
 				</label>
 				<div class="col-md-4 col-sm-6 col-xs-12">
-					<textarea class="form-control" rows="8" name="communityBoardContent" 
+					<textarea class="form-control" rows="8" name="questionBoardContent" 
 					required="required"  placeholder="내용을 입력해주세요"></textarea>
 				</div>
 			</div>

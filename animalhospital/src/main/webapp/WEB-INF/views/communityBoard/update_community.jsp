@@ -16,7 +16,7 @@ $(document).ready(function() {
 </script>
 
 <form action="updateCommunityBoard.do" method="post" id="updateForm">
-<input type="hidden" name="communityBoardNo" value="${cbvo.communityBoardNo }">
+<input type="hidden" name="questionBoardNo" value="${qbvo.questionBoardNo }">
    <div class="x_title">
       <h2>글 수정</h2>
       <ul class="nav navbar-right panel_toolbox">
@@ -29,8 +29,8 @@ $(document).ready(function() {
 	<tr>
 		<td>제목</td>
 		<td colspan="3">
-		<input type="text" class="form-control" name="communityBoardTitle" 
-				  value="${cbvo.communityBoardTitle}" required='required' ></td>
+		<input type="text" class="form-control" name="questionBoardTitle" 
+				  value="${qbvo.questionBoardTitle}" required='required' ></td>
 	</tr>
 	<tr>
 		<td>이름</td>
@@ -38,9 +38,9 @@ $(document).ready(function() {
 	</tr>
 	<tr>
 		<td colspan="4" align="left">&nbsp;&nbsp; 
-		<textarea cols="53" rows="15" name="communityBoardContent" class="form-control" 
+		<textarea cols="53" rows="15" name="questionBoardContent" class="form-control" 
 						id="contentArea" required='required' >
-     		${cbvo.communityBoardContent} 
+     		${qbvo.questionBoardContent} 
      	</textarea>
 		</td>
 	</tr>
