@@ -2,7 +2,6 @@ package org.animalhospital.reservation.model.VO;
 
 import org.animalhospital.petowner.model.VO.PetOwnerVO;
 import org.animalhospital.vet.model.VO.HospitalVO;
-import org.animalhospital.vet.model.VO.VetVO;
 
 public class ReservationVO {
 	private int reservationNo;									//seq 를 이용하여 no지정

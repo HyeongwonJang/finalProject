@@ -1,9 +1,11 @@
 package org.animalhospital.view.controller;
 
-import java.util.List;
+import java.util.Map;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
 import org.animalhospital.petowner.model.VO.PetOwnerVO;
 import org.animalhospital.petowner.service.PetOwnerService;
 import org.animalhospital.treatment.service.TreatmentService;
@@ -34,14 +36,35 @@ public class ViewController {
 	 * @return
 	 * @author 민호
 	 */
-	@RequestMapping("findAllAlarmDataByPetOwnerTel.do")
+/*	@RequestMapping("findAllAlarmDataByPetOwnerTel.do")
 	@ResponseBody
 	public List<Object> findAllAlarmDataByPetOwnerTel(String petOwnerTel){
 		List<Object> list = null;
 		list = viewService.findAlarmListByPetOwnerTel(petOwnerTel);
 		return list;
+	}*/
+	@RequestMapping("findAllAlarmDataByPetOwnerTel.do")
+	@ResponseBody
+	public Map<String, Object> findAllAlarmDataByPetOwnerTel(HttpServletRequest request){
+		Map<String, Object> list = null;
+		if(request.getSession(false) != null && request.getSession(false).getAttribute("userLevel") != null){
+			if(request.getSession(false).getAttribute("userLevel").equals("petOwner")){
+				list = viewService.findAlarmListByPetOwnerTel(((PetOwnerVO)request.getSession(false).getAttribute("loginVO")));
+			}
+		} 
+		return list;
 	}
-	
+	@RequestMapping("findAllAlarmDataByVet.do")
+	@ResponseBody
+	public Map<String, Object> findAllAlarmDataByVet(HttpServletRequest request){
+		Map<String, Object> list = null;
+		if(request.getSession(false) != null && request.getSession(false).getAttribute("userLevel") != null){
+			if(request.getSession(false).getAttribute("userLevel").equals("vet")){
+				list = viewService.findAlarmListByVet(((HospitalVO)request.getSession(false).getAttribute("loginVO")));
+			}
+		} 
+		return list;
+	}
 	
 	/**
 	 * 가장 첫 페이지를 출력하는 메서드 세션이 있으면 타일즈로 구성된 인덱스 페이지를 출력한다

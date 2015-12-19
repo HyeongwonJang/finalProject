@@ -63,8 +63,9 @@
 				   			$("#telSearchMessage").attr('class', 'text-primary');
 				   			submitFlag = true;
 				   		} else if (searchResult == "ok_update"){
-				   			$("#telSearchMessage").text("사용가능");
+				   			$("#telSearchMessage").text("진료 기록이 있는 회원입니다 반려동물 추가는 가입 후 수정기능을 이용하여 주세요");
 				   			$("#telSearchMessage").attr('class', 'text-primary');
+				   			$("#addPetView").html("");
 				   			submitFlag = true;
 				   			registerType = "update";
 				   		} else {
@@ -167,7 +168,7 @@
 						<input id="temp_address" class="form-control col-md-7 col-xs-12" type="text" name="petOwnerAddress">
 					</div>
 				</div>
-				<div class="form-group">
+				<div class="form-group" id="addPetView">
 					<label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">
 						반려동물
 					</label>

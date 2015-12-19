@@ -207,6 +207,19 @@
 										</ul>
 									</li>
 								</c:when>
+								<c:when test="${sessionScope.userLevel == 'vet' }">
+									<li role="presentation" class="dropdown" id="alarmDropdown"><a
+										href="javascript:;" class="dropdown-toggle info-number"
+										data-toggle="dropdown" aria-expanded="false"> <i
+											class="fa -o fa-bell"></i> <span class="badge bg-green" id="alarmCount"></span>
+									</a>
+										<ul id="alarmMessage"
+											class="dropdown-menu list-unstyled msg_list animated fadeInDown"
+											role="menu" >
+											
+										</ul>
+									</li>
+								</c:when>
 							</c:choose>
 						</ul>
 					</nav>
@@ -264,24 +277,74 @@
 					$.ajax({
 						type : "post", // get 또는 post로 설정
 						url : "findAllAlarmDataByPetOwnerTel.do", // 이동할 url 설정
-						data : "petOwnerTel=${sessionScope.loginVO.petOwnerTel}",
 						dataType : "json",
 						// ajax가 성공적으로 작동할 시 시행할 기능을 명시
 						success : function(alarmMessageData) {
-							var alarmLength = Object.keys(alarmMessageData).length;
+							var vaccinationAlarmLength = alarmMessageData.vaccinationList.length;
+							var reservationAlarmLength = alarmMessageData.reservationList.length;
 							var messageInfo = "";
-							if(alarmLength == 0){
+							if(vaccinationAlarmLength == 0 && reservationAlarmLength == 0){
 								$("#alarmDropdown").html("");
 							} else {
-								$("#alarmCount").text(alarmLength);
-								$.each(alarmMessageData, function(i) {
-									messageInfo += "<li><a><span class='image'></span><span>"
-									messageInfo += "<span>" + alarmMessageData[i].petOwnerVO.petVO[0].petName + "</span>"
-									messageInfo += "<span class='time'>" + moment().format('YYYY-MM-DD') +"</span>"
-									messageInfo += "</span><span class='message'>"
-									messageInfo += alarmMessageData[i].vaccinationVO.vaccinationName + " 예방접종을 맞을 시기입니다!"
-									messageInfo += "</span></a></li>"
-								});
+								$("#alarmCount").text(
+										vaccinationAlarmLength+reservationAlarmLength);
+								if(reservationAlarmLength != 0){
+									$.each(alarmMessageData.reservationList, function(i) {
+										messageInfo += "<li><a><span class='image'></span><span>"
+										messageInfo += "<span>" + alarmMessageData.reservationList[i].petOwnerVO.petVO[0].petName + "</span>"
+										messageInfo += "<span class='time'>" + moment().format('YYYY-MM-DD') +"</span>"
+										messageInfo += "</span><span class='message'>"
+										messageInfo += /* alarmMessageData.reservationList[i].vaccinationVO.vaccinationName +  */
+											alarmMessageData.reservationList[i].reservationTimeVO.reservationTime + " 에 진료 예약을 하셨습니다"
+										messageInfo += "</span></a></li>"
+									});
+								}
+								if(vaccinationAlarmLength != 0){
+									$.each(alarmMessageData.vaccinationList, function(i) {
+										messageInfo += "<li><a><span class='image'></span><span>"
+										messageInfo += "<span>" + alarmMessageData.vaccinationList[i].petOwnerVO.petVO[0].petName + "</span>"
+										messageInfo += "<span class='time'>" + moment().format('YYYY-MM-DD') +"</span>"
+										messageInfo += "</span><span class='message'>"
+										messageInfo += alarmMessageData.vaccinationList[i].vaccinationVO.vaccinationName + " 예방접종을 맞을 시기입니다!"
+										messageInfo += "</span></a></li>"
+									});
+								}
+								$("#alarmMessage").html(messageInfo);	
+							}
+						},
+						complete: poll,
+						timeout: 30000
+					});
+				})();		
+			</script>
+		</c:when>
+		<c:when test="${sessionScope.userLevel == 'vet' }">
+			<script type="text/javascript">
+				(function poll() {
+					$.ajax({
+						type : "post", // get 또는 post로 설정
+						url : "findAllAlarmDataByVet.do", // 이동할 url 설정
+						dataType : "json",
+						// ajax가 성공적으로 작동할 시 시행할 기능을 명시
+						success : function(alarmMessageData) {
+							var reservationAlarmLength = alarmMessageData.reservationList.length;
+							var messageInfo = "";
+							if(reservationAlarmLength == 0){
+								$("#alarmDropdown").html("");
+							} else {
+								$("#alarmCount").text(
+										reservationAlarmLength);
+								if(reservationAlarmLength != 0){
+									$.each(alarmMessageData.reservationList, function(i) {
+										messageInfo += "<li><a><span class='image'></span><span>"
+										messageInfo += "<span>" + alarmMessageData.reservationList[i].petOwnerVO.petOwnerName + "</span>"
+										messageInfo += "<span class='time'>" + moment().format('YYYY-MM-DD') +"</span>"
+										messageInfo += "</span><span class='message'>"
+										messageInfo += /* alarmMessageData.reservationList[i].vaccinationVO.vaccinationName +  */
+											alarmMessageData.reservationList[i].reservationTimeVO.reservationTime + " 에 진료 예약이 있습니다"
+										messageInfo += "</span></a></li>"
+									});
+								}
 								$("#alarmMessage").html(messageInfo);	
 							}
 						},
@@ -289,7 +352,6 @@
 						timeout: 30000
 					});
 				})();
-				
 			</script>
 		</c:when>
 	</c:choose>

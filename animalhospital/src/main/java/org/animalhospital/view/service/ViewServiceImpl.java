@@ -15,6 +15,7 @@ import org.animalhospital.petowner.model.DAO.PetOwnerDAO;
 import org.animalhospital.petowner.model.VO.PetOwnerVO;
 import org.animalhospital.petowner.model.VO.PetVO;
 import org.animalhospital.reservation.model.DAO.ReservationDAO;
+import org.animalhospital.reservation.model.VO.ReservationVO;
 import org.animalhospital.treatment.model.DAO.TreatmentDAO;
 import org.animalhospital.vaccination.model.DAO.VaccinationDAO;
 import org.animalhospital.vaccination.model.VO.VaccinationRecordVO;
@@ -70,13 +71,29 @@ public class ViewServiceImpl implements ViewService {
 	 * @throws ParseException
 	 * @author 민호
 	 */
-	public List<Object> findAlarmListByPetOwnerTel(String petOwnerTel){
+/*	public List<Object> findAlarmListByPetOwnerTel(String petOwnerTel){
 		List<Object> alarmList = new ArrayList<Object>();
 		List<VaccinationRecordVO> vaccinationList = findVaccinationRecordAlarmByPetOwnerNo(petOwnerTel);
 		if(vaccinationList != null){
 			alarmList.addAll(vaccinationList);
 		} 	
 		return alarmList;
+	}*/
+	public Map<String, Object> findAlarmListByPetOwnerTel(PetOwnerVO povo){
+		HashMap<String, Object> alarmMap = new HashMap<String, Object>();
+		List<VaccinationRecordVO> vaccinationList = findVaccinationRecordAlarmByPetOwnerNo(povo.getPetOwnerTel());
+		List<ReservationVO> reservationList=reservationDAO.findTodayPetOwnerReservation(povo.getPetOwnerId());
+		alarmMap.put("vaccinationList", vaccinationList);
+		alarmMap.put("reservationList", reservationList);
+		return alarmMap;
+	}
+	
+	public Map<String, Object> findAlarmListByVet(HospitalVO hvo){
+		HashMap<String, Object> alarmMap = new HashMap<String, Object>();
+		List<ReservationVO> reservationList=
+				reservationDAO.findTodayVetReservation(hvo.getVetList().get(0).getVetLicenseVO().getVetLicenseNo());
+		alarmMap.put("reservationList", reservationList);
+		return alarmMap;
 	}
 	
 	/**
@@ -161,6 +178,5 @@ public class ViewServiceImpl implements ViewService {
 		return flag;
 	}
 
-	
-	
+
 }
