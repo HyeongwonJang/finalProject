@@ -29,7 +29,8 @@ public class CommunityBoardController {
 	    */
 	   @RequestMapping("showCommunityBoardContent.do")
 	   public ModelAndView showContent(int questionBoardNo) {      
-		   QuestionBoardVO qbvo=communityBoardService.showCommunityBoardContent(questionBoardNo);   
+		   QuestionBoardVO qbvo=communityBoardService.showCommunityBoardContent(questionBoardNo);  
+		   System.out.println("조회값: " + qbvo);
 	      return new ModelAndView("showContent_community","qbvo",qbvo);
 	   }
 	   @RequestMapping("showCommunityBoardContentNoHit.do")

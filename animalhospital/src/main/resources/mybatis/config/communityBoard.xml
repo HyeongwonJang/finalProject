@@ -20,6 +20,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    		<id column="Question_board_hours" property="questionBoardHours"/>
    		<id column="Question_board_hit" property="questionBoardHit"/>
    		<collection property="petOwnerVO" ofType="povo">
+   			<id column="Pet_Owner_id" property="petOwnerId"/>
  			<id column="Pet_Owner_name" property="petOwnerName"/>
  		</collection>		
    </resultMap>
@@ -66,10 +67,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    
 	<!--  상세 보기 -->
 	 <select id="showCommunityBoardContent" resultMap="qbvoRM">
-      select Question_board_no,Question_board_title,to_char(Question_board_hours,'YYYY.MM.DD HH24:MI') as Question_board_hours,
-     			Question_board_content,Question_board_hit
-      from Question_board 
-      where Question_board_no=#{value}
+      select 	q.Question_board_no,
+		      	q.Question_board_title,
+		      	to_char(q.Question_board_hours,'YYYY.MM.DD HH24:MI') as Question_board_hours,
+		     	q.Question_board_content,
+		     	q.Question_board_hit,
+				po.pet_owner_name,
+				po.pet_owner_id
+		from Question_board q, PET_OWNER po
+		where q.Question_board_writer = po.pet_owner_id
+		and Question_board_no=#{value}
    </select>
    
    <!-- 게시판 수정 -->

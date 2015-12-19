@@ -290,7 +290,7 @@
 						</label>
 						<div class="col-md-2 col-sm-6 col-xs-12">
 							<!-- 수의사 이름에 대한 input -->
-							<input id="fileList"  type="file" name="" >
+							<input id="imgFile"  type="file" name="" >
 						</div>
 					</div>
 					<div class="ln_solid"></div>

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script type="text/javascript">
     $(document).ready(function(){
        $("#deleteBtn").click(function(){ 
@@ -41,8 +41,10 @@
          <td valign="middle" align="center" colspan="3">
              <a class="btn btn-default" href="${initparam.root}replyCommunity.do" role="button">답글</a>	  
               <a class="btn btn-default" href="${initparam.root}findCommunityBoardList.do" role="button">목록</a>
-               <input class="btn btn-default" type="button" value="수정" id="updateBtn">   
-               <input class="btn btn-default" type="button" value="삭제" id="deleteBtn">
+               <c:if test="${ requestScope.qbvo.petOwnerVO.petOwnerId == sessionScope.loginVO.petOwnerId }">
+               		<input class="btn btn-default" type="button" value="삭제" id="deleteBtn">
+               		<input class="btn btn-default" type="button" value="수정" id="updateBtn">
+               </c:if>
          </td>
       </tr>
    </table>
