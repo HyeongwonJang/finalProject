@@ -28,7 +28,7 @@
       </tr>
       <tr>
          <td>작성자 :  ${qbvo.petOwnerVO.petOwnerName }</td>
-         <td> 작성날짜 : ${qbvo.questionBoardContent }</td>
+         <td> 작성날짜 : ${qbvo.questionBoardHours }</td>
          <td>조회수 : ${qbvo.questionBoardHit }</td>
       </tr>
       <tr>
