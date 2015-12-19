@@ -3,6 +3,7 @@ package org.animalhospital.treatment.model.DAO;
 import java.util.List;
 import java.util.Map;
 
+import org.animalhospital.petowner.model.VO.PetOwnerVO;
 import org.animalhospital.petowner.model.VO.PetVO;
 import org.animalhospital.treatment.model.VO.DiseaseVO;
 import org.animalhospital.treatment.model.VO.TreatmentRecordVO;
@@ -38,4 +39,6 @@ public interface TreatmentDAO {
 	public List<TreatmentRecordVO> findTreatmentRecordByVetLicenseNo(int vetLicenseNo);
 	public List<DiseaseVO> allDiseaseList();
 	public int registerTreatmentRecord(TreatmentRecordVO treatmentRecordVO);
+	public int registerNonMember(PetOwnerVO petOwnerVO);
+	public int registerNonMemberPet(PetOwnerVO petOwnerVO);
 }

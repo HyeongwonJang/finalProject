@@ -2,7 +2,10 @@ package org.animalhospital.treatment.model.DAO;
 
 import java.util.List;
 import java.util.Map;
+
 import javax.annotation.Resource;
+
+import org.animalhospital.petowner.model.VO.PetOwnerVO;
 import org.animalhospital.petowner.model.VO.PetVO;
 import org.animalhospital.treatment.model.VO.DiseaseVO;
 import org.animalhospital.treatment.model.VO.TreatmentRecordVO;
@@ -83,6 +86,15 @@ public class TreatmentDAOImpl implements TreatmentDAO {
 		//System.out.println("input date : "+treatmentRecordVO);
 		return sqlSessionTemplate.insert("treatmentRecord.registerTreatmentRecord", treatmentRecordVO);
 	}
-
-		
+	/**
+	 * 비회원 insert, 비회원 pet 
+	 * @param petOwnerVO
+	 * @return
+	 */
+	public int registerNonMember(PetOwnerVO petOwnerVO){
+		return sqlSessionTemplate.insert("treatmentRecord.registerNonMember",petOwnerVO);
+	}
+	public int registerNonMemberPet(PetOwnerVO petOwnerVO){
+		return sqlSessionTemplate.insert("treatmentRecord.registerNonMemberPet",petOwnerVO);
+	}	
 }

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.animalhospital.paging.model.VO.ListVO;
+import org.animalhospital.petowner.model.VO.PetOwnerVO;
 import org.animalhospital.treatment.model.VO.DiseaseVO;
 import org.animalhospital.treatment.model.VO.TreatmentRecordVO;
 
@@ -28,4 +29,6 @@ public interface TreatmentService {
 	
 	public List<TreatmentRecordVO> findTreatmentRecordByPetOwnerTel(String petOwnerTel);
 	public List<TreatmentRecordVO> findTreatmentRecordByVetLicenseNo(int vetLicenseNo);
+	public int registerNonMember(PetOwnerVO petOwnerVO);
+	public int registerNonMemberPet(PetOwnerVO petOwnerVO);
 }

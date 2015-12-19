@@ -84,6 +84,14 @@ public class TreatmentServiceImpl implements TreatmentService {
 		return treatmentDAO.findTreatmentRecordByVetLicenseNo(vetLicenseNo);
 	}
 	
-	
+	/**
+	 * 비회원 진료시 비회원 insert, petInfo insert
+	 */
+	public int registerNonMember(PetOwnerVO petOwnerVO){
+		return treatmentDAO.registerNonMember(petOwnerVO);
+	}
+	public int registerNonMemberPet(PetOwnerVO petOwnerVO){
+		return treatmentDAO.registerNonMemberPet(petOwnerVO);
+	}
 	
 }

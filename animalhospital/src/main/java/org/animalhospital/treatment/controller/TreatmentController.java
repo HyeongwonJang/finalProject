@@ -95,7 +95,23 @@ public class TreatmentController {
 			TreatmentRecordVO treatmentRecordVO) {
 		return "treatmentRecord/register_treatmentRecord_result";
 	}
-
+	/**
+	 * 비회원 진료 등록 컨트롤러
+	 * @param request
+	 * @param treatmentRecordVO
+	 * @return
+	 */
+	@RequestMapping("registerNonMemberTreatmentRecord.do")
+	public String registerNonMemberTreatmentRecord(HttpServletRequest request,
+			TreatmentRecordVO treatmentRecordVO) {
+		PetOwnerVO pvo= treatmentRecordVO.getPetOwnerVO();
+		treatmentService.registerNonMember(treatmentRecordVO.getPetOwnerVO());
+		treatmentService.registerNonMemberPet(treatmentRecordVO.getPetOwnerVO());
+		treatmentService.registerTreatmentRecord(treatmentRecordVO);
+		return "redirect:registerTreatmentRecord_result.do";
+	}
+	
+	
 	@RequestMapping(value = "findPetListByPetOwnerTel.do")
 	@ResponseBody
 	public PetOwnerVO findPetListByPetownerTel(String petOwnerTel) {

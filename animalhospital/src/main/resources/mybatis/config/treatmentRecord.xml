@@ -152,4 +152,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	values(Treatment_Record_no.nextval, sysdate, #{treatmentContent}, #{petWeight}, #{petOwnerVO.petOwnerNo}, #{petOwnerVO.petVO[0].petName}, #{hospitalVO.vetList[0].vetLicenseVO.vetLicenseNo},#{diseaseVO.diseaseName})
 	</insert>
 	
+	<!-- 비회원 insert -->
+	<insert id="registerNonMember" parameterType="povo" >
+       <selectKey keyProperty="petOwnerNo" resultType="int" order="BEFORE">
+         select Pet_Owner_no_seq.nextval from dual
+      </selectKey>
+		insert into Pet_Owner(Pet_Owner_no, Pet_Owner_tel, Pet_Owner_name, Pet_Owner_id, Pet_Owner_password, Pet_Owner_address)
+		values(#{petOwnerNo},#{petOwnerTel},#{petOwnerName},null,null,null)
+    </insert>
+    <!-- 비회원 pet insert -->
+	<insert id="registerNonMemberPet" parameterType="povo">
+		insert into Pet(Pet_Owner_no, Pet_name, Pet_gender)
+		values(#{petOwnerNo}, #{petVO[0].petName},#{petVO[0].petGender}) 	
+ 	</insert>
+	
 </mapper>	
