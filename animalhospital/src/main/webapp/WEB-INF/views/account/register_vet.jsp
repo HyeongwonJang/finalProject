@@ -198,7 +198,7 @@
 		<div class="x_content">
 			<br>
 			<form id="vetForm" class="form-horizontal form-label-left"
-				action="registerVet.do" method=post>
+				action="registerVet.do" method="post" enctype="multipart/form-data">
 				<div class="form-group">
 					<label class="control-label col-md-3 col-sm-3 col-xs-12"
 						for="occupation"><span class="required">* </span>아이디 
@@ -283,6 +283,15 @@
 					<input type="hidden" name="hospitalId" id="hospitalId" value="">
 					<div>
 						<button type="button" class="btn btn-info" id="popbutton">조회</button>
+					</div>
+					<div class="form-group">
+						<label for="last-name"
+							class="control-label col-md-3 col-sm-3 col-xs-12">사진 
+						</label>
+						<div class="col-md-2 col-sm-6 col-xs-12">
+							<!-- 수의사 이름에 대한 input -->
+							<input id="fileList"  type="file" name="" >
+						</div>
 					</div>
 					<div class="ln_solid"></div>
 					<div class="form-group">

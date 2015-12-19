@@ -1,18 +1,18 @@
 package org.animalhospital.view.controller;
 
+import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
 import org.animalhospital.petowner.model.VO.PetOwnerVO;
 import org.animalhospital.petowner.service.PetOwnerService;
-import org.animalhospital.reservation.service.ReservationService;
 import org.animalhospital.treatment.service.TreatmentService;
 import org.animalhospital.vaccination.service.VaccinationService;
 import org.animalhospital.vet.model.VO.HospitalVO;
 import org.animalhospital.view.service.ViewService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -25,6 +25,22 @@ public class ViewController {
 	private VaccinationService vaccinationService;
 	@Resource
 	private ViewService viewService;
+	
+	/**
+	 * 세션에 있는 보호자 전화번호를 기준으로 알람데이터를 받아온다
+	 * ajax로 처리하도록 구성
+	 * 차후 테이블을 새로 생성하여 쿼리의 부담을 덜어주게 할 예정
+	 * @param petOwnerTel
+	 * @return
+	 * @author 민호
+	 */
+	@RequestMapping("findAllAlarmDataByPetOwnerTel.do")
+	@ResponseBody
+	public List<Object> findAllAlarmDataByPetOwnerTel(String petOwnerTel){
+		List<Object> list = null;
+		list = viewService.findAlarmListByPetOwnerTel(petOwnerTel);
+		return list;
+	}
 	
 	
 	/**

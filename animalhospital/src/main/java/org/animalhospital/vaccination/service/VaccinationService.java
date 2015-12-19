@@ -1,9 +1,7 @@
 package org.animalhospital.vaccination.service;
 
-import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
-
 import org.animalhospital.paging.model.VO.ListVO;
 import org.animalhospital.petowner.model.VO.PetOwnerVO;
 import org.animalhospital.vaccination.model.VO.VaccinationRecordVO;
@@ -28,5 +26,4 @@ public interface VaccinationService {
 	public VaccinationRecordVO findDetailVaccinationRecordByVaccinationRecordNo(
 			int vaccinationRecordNo);
 	int registerVetVaccination(VaccinationRecordVO vrvo);
-	public List<Object> findAlarmListByPetOwnerTel(String petOwnerTel) throws ParseException;
 }

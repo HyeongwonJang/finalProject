@@ -42,6 +42,19 @@
 		<property name="prefix" value="/WEB-INF/views/"></property>
 		<property name="suffix" value=".jsp"></property>
 	</bean>
+
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding" value="utf-8"></property>
+		<!-- -1은 제한 없음 5*1024*1024 -->
+		<property name="maxUploadSize" value="-1"></property>
+	</bean>
+	<!-- upload path 개발시에는 workspace 경로를 주입시키고 운영시에는 실제 서버 경로를 주입시킨다. 운영 업로드 
+		경로 C:\java-kosta\WAS\spring2-tomcat\webapps\springmvc25-fileupload-inst\upload -->
+	<bean id="uploadPath" class="java.lang.String">
+		<constructor-arg 
+		value="C:\\Users\\KOSTA\\git\\finalProject\\animalhospital\\src\\main\\\webapp\\resources\\upload" />
+	</bean>
 </beans>
 
 
