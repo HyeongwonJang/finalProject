@@ -16,23 +16,45 @@ public class CommunityBoardServiceImpl implements CommunityBoardService{
 	@Resource
 	private CommunityBoardDAO communityBoardDAO;
 	
+	/**
+	 * 1:1 문의 게시판 글 작성 메서드
+	 * @param QuestionBoardVO
+	 * @author 강신후 , 곽진혁
+	 */
 	@Override
 	public void writeCommunity(QuestionBoardVO qbvo) {
 			communityBoardDAO.writeCommunity(qbvo);
 	}
 
+	/**
+	 * 1:1 문의 게시판 글 상세 보기 메서드 (showCommunityBoardContent)
+	 * 조회수 증가시키는 메서드 (updateCount)
+	 * @param int
+	 * @author 강신후 , 곽진혁
+	 */
 	@Override
 	   public QuestionBoardVO showCommunityBoardContent(int questionBoardNo){
 	      communityBoardDAO.updateCount(questionBoardNo);
 	      return communityBoardDAO.showCommunityBoardContent(questionBoardNo);
 	   }
-	
+	/**
+	 * 1:1 문의 게시판 글 상세 보기 메서드 
+	 * writeCommunity와 updateCommunityBoard는 조회수를 증가시키지 않는다.
+	 * @param int
+	 * @author 강신후 , 곽진혁
+	 */
 	@Override
 	public QuestionBoardVO showCommunityBoardContentNoHit(int questionBoardNo) {
 		return communityBoardDAO.showCommunityBoardContent(questionBoardNo);
 	}
 
 
+	 /**
+	 * 1:1 문의 게시판 전체 글 목록 출력하는 메소드 (findCommunityBoardList)
+	 * 전체 글 갯수 구하는 메소드 (totalContent)
+	 * @param String
+	 * @author 강신후 , 곽진혁
+	 */
 	@Override
 	public ListVO findCommunityBoardList(String pageNo) {
 		if(pageNo==null||pageNo=="") 
@@ -44,11 +66,21 @@ public class CommunityBoardServiceImpl implements CommunityBoardService{
 		return lvo;
 	}
 
+	/**
+	 * 1:1 문의 게시판 글 수정 처리하는 메소드
+	 * @param QuestionBoardVO
+	 * @author 강신후 , 곽진혁
+	 */
 	@Override
 	public void updateCommunityBoard(QuestionBoardVO qbvo) {
 		communityBoardDAO.updateCommunityBoard(qbvo);
 	}
 
+	/**
+	 * 1:1 문의 게시판 글 삭제 처리하는 메소드
+	 * @param int
+	 * @author 강신후 , 곽진혁
+	 */
 	@Override
 	public void deleteCommunityBoard(int questionBoardNo) {
 		communityBoardDAO.deleteCommunityBoard(questionBoardNo);

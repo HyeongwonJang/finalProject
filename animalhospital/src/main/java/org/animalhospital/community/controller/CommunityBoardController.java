@@ -15,44 +15,62 @@ public class CommunityBoardController {
 	@Resource
 	private CommunityBoardService communityBoardService;
 	
-	    /**
-	    * 글 작성
-	    */
+	/**
+	 * 1:1 문의 게시판 글 작성 메서드
+	 * @param QuestionBoardVO
+	 * @author 강신후 , 곽진혁
+	 */
 	@RequestMapping(value="writeCommunity.do",method=RequestMethod.POST)	
 	public ModelAndView writeCommunity(QuestionBoardVO qbvo) {
 		communityBoardService.writeCommunity(qbvo);
 		return new ModelAndView("redirect:showCommunityBoardContentNoHit.do?questionBoardNo="+qbvo.getQuestionBoardNo());
 	}	
 	
-	    /**
-	    * 글 상세 보기, 조회수 증가
-	    */
+	/**
+	 * 1:1 문의 게시판 글 상세 보기 메서드
+	 * @param int
+	 * @author 강신후 , 곽진혁
+	 */
 	   @RequestMapping("showCommunityBoardContent.do")
 	   public ModelAndView showContent(int questionBoardNo) {      
-		   QuestionBoardVO qbvo=communityBoardService.showCommunityBoardContent(questionBoardNo);  
-		   System.out.println("조회값: " + qbvo);
-	      return new ModelAndView("showContent_community","qbvo",qbvo);
+		 QuestionBoardVO qbvo=communityBoardService.showCommunityBoardContent(questionBoardNo);  
+	   return new ModelAndView("showContent_community","qbvo",qbvo);
 	   }
+	   /**
+		 * 1:1 문의 게시판 조회수 증가 시키기는 메소드
+		 * @param int
+		 * @author 강신후 , 곽진혁
+		 */
 	   @RequestMapping("showCommunityBoardContentNoHit.do")
 	   public ModelAndView showContentNoHit(int questionBoardNo) {      
 	      return new ModelAndView("showContent_community","qbvo",communityBoardService.showCommunityBoardContentNoHit(questionBoardNo));
 	   }
 	   
 	   /**
-	    * 게시판 목록 
-	    */
+		 * 1:1 문의 게시판 전제 글 목록 출력하는 메소드
+		 * @param String
+		 * @author 강신후 , 곽진혁
+		 */
 	   @RequestMapping("findCommunityBoardList.do")
 	   public ModelAndView findCommunityBoardList(String pageNo){
 	      return new ModelAndView("list_community","lvo",communityBoardService.findCommunityBoardList(pageNo));
 	   }
 	   
 	   /**
-	    * 게시판 수정 
-	    */
+		 * 1:1 문의 게시판 글 수정 폼(update_community.jsp)으로 넘어가는 메소드
+		 * questionBoardNo를 참조하여 해당 글의 정보를 넘긴다.
+		 * @param int
+		 * @author 강신후 , 곽진혁
+		 */
 	   @RequestMapping("updateCommunityView.do")
 		public ModelAndView updateCommunityView(int questionBoardNo){
 			return new ModelAndView("update_community","qbvo",communityBoardService.showCommunityBoardContentNoHit(questionBoardNo));
 		}
+	   /**
+		 * 1:1 문의 게시판 글 수정 처리하는 메소드
+		 * @param QuestionBoardVO
+		 * @author 강신후 , 곽진혁
+		 */
 	   @RequestMapping(value="updateCommunityBoard.do", method = RequestMethod.POST)
 	   public ModelAndView updateCommunityBoard(QuestionBoardVO qbvo){
 		   communityBoardService.updateCommunityBoard(qbvo);
@@ -61,15 +79,17 @@ public class CommunityBoardController {
 	   }
 	  
 	   /**
-	    * 게시판 삭제 
-	    */
+		 * 1:1 문의 게시판 글 삭제 처리하는 메소드
+		 * @param int
+		 * @author 강신후 , 곽진혁
+		 */
 	   @RequestMapping("deleteCommunityBoard.do")
 	   public ModelAndView deleteCommunityBoard(int questionBoardNo){
 		   communityBoardService.deleteCommunityBoard(questionBoardNo);
 		   return new ModelAndView("redirect:findCommunityBoardList.do");
 	   }
 	   
-	   /**
+	    /**
 		 * 답변을 처리 
 		 */
 		@RequestMapping("replyCommunity.do")
