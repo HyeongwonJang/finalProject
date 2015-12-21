@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Aspect
 public class ThumbnailImageUpload {
 
-	@Around("execution(public * org.animalhospital.petowner.service.register.*(..))")
+	/*@Around("execution(public * org.animalhospital.petowner.service.register.*(..))")
 	public Object uploadSingleImage(ProceedingJoinPoint point) throws Throwable{
 		Object[] args = point.getArgs();
 		Object retValue = null;
@@ -19,5 +19,5 @@ public class ThumbnailImageUpload {
 		retValue = point.proceed();
 		
 		return retValue;
-	}
+	}*/
 }
