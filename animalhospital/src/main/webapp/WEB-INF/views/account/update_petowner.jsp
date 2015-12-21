@@ -26,7 +26,7 @@
 			}else{
 				$.ajax({
 					type:"POST",
-					url:"telCheckAjax.do",				
+					url:"checkPetOwnerTelAjax.do",				
 					data:"petOwnerTel=" + petOwnerTel,	
 					success:function(data){						
 						if(data=="fail"){

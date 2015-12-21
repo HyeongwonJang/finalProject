@@ -21,20 +21,31 @@ public class VetController {
 	@Resource
 	private VetService vetService;
 	
-	@RequestMapping("checkVetByTel.do")
-	@ResponseBody
-	public int checkVetByTel(VetVO vetVO){
-		return vetService.checkVetByTel( vetVO);
+	/**
+	 * 수의사 로그인 
+	 * session userLevel로 수의사와 보호자를 구분
+	 * 수의사 userLevel = "vet"
+	 */
+	@RequestMapping("loginVet.do")
+	public String vetLogin(HttpServletRequest request, VetVO vvo) {
+		HospitalVO loginResult = vetService.loginVet(vvo);
+		if (loginResult != null) {
+			HttpSession session = request.getSession();
+			session.setAttribute("loginVO", loginResult);
+			session.setAttribute("userLevel", "vet");
+			return "redirect:home.do";
+		} else {
+			return "account/login_fail";
+		}
 	}
 	
-	@RequestMapping("test.do")
-	public String test(HospitalVO vo, VetVO vvo){
-		vo.addListObject(vvo);
-		return "test";
-	}
-
 	/**
-	 * 수의사 등록
+	 * logout
+	 * org.animalhospital.petowner.controller.PetOwnerController의 logout method 공통사용
+	 */
+	
+	/**
+	 * 수의사 회원가입
 	 */
 	@RequestMapping("registerVet.do")
 	public String registerVet(HospitalVO hvo, MultipartFile file) {
@@ -42,19 +53,49 @@ public class VetController {
 		System.out.println(file.getOriginalFilename());
 		return "redirect:home.do";
 	}
-
+	
 	/**
-	 * 라이센스 체크 라이센스의 이름과 번호가 존재하는지 확인하여 count(*) 
-	 * return 존재하면 1 존재하지 않으면 0
+	 * 수의사 정보 수정
+	 * @param request
+	 * @param hospitalVO
+	 * @return
+	 */
+	@RequestMapping("updateVet.do")
+	public String updateVet(HttpServletRequest request, HospitalVO hospitalVO) {
+		vetService.updateVet(hospitalVO);
+		request.getSession().setAttribute("loginVO", hospitalVO);
+		return "home_vet";
+	}
+	
+	/**
+	 * 수의사 전화번호 중복체크
+	 * 수의사 회원가입, 전화번호 수정 시
+	 * VET table에 해당 번호를 이용하는 수의사가 있는지 체크
+	 * @param vetVO
+	 * @return
+	 */
+	@RequestMapping("checkVetByTel.do")
+	@ResponseBody
+	public int checkVetByTel(VetVO vetVO){
+		return vetService.checkVetByTel( vetVO);
+	}
+	
+	/**
+	 * 라이센스 체크 
+	 * 수의사 회원가입시 
+	 * 입력한 이름과 번호에 해당하는 라이센스가 존재하는지,
+	 * 이미 가입되어 있는 라이센스 정보는 아닌지 체크한다
+	 * 사용 가능하면 ok
+	 * 그렇지 않으면 fail return
 	 */
 	@RequestMapping("checkVetLicense.do")
 	@ResponseBody
-	public int checkVetLicense(VetLicenseVO lvo) {
+	public String checkVetLicense(VetLicenseVO lvo) {
 		return vetService.checkVetLicense(lvo);
 	}
 
 	/**
-	 * 병원 검색 병원이름으로 병원을 검색, 입력한 hospitalName을 포함하고 있다면 HospitalVO리스트로 return
+	 * 병원 검색
 	 */
 	@RequestMapping("findHospital.do")
 	@ResponseBody
@@ -80,35 +121,8 @@ public class VetController {
 		return hospitalList;
 	}
 
-	@RequestMapping("testAjax.do")
-	@ResponseBody
-	public String testAjax() {
-		return "테스트 성공";
-	}
 
-	/**
-	 * 수의사 로그인 userLevel로 수의사와 보호자를 구분한다 수의사 userLevel = "vet"
-	 */
-	@RequestMapping("loginVet.do")
-	public String vetLogin(HttpServletRequest request, VetVO vvo) {
-		HospitalVO loginResult = vetService.loginVet(vvo);
-		if (loginResult != null) {
-			HttpSession session = request.getSession();
-			session.setAttribute("loginVO", loginResult);
-			session.setAttribute("userLevel", "vet");
-			return "redirect:home.do";
-		} else {
-			return "account/login_fail";
-		}
-	}
-
-	@RequestMapping("updateVet.do")
-	public String updateVet(HttpServletRequest request, HospitalVO hospitalVO) {
-		//System.out.println(hospitalVO);
-		vetService.updateVet(hospitalVO);
-		request.getSession().setAttribute("loginVO", hospitalVO);
-		return "home_vet";
-	}
+	
 	@RequestMapping("findVetLicenseByHospitalId.do")
 	@ResponseBody
 	public List<VetLicenseVO> findVetLicenseByHospitalId(String hospitalId) {

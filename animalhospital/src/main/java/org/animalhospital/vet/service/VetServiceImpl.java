@@ -32,11 +32,11 @@ public class VetServiceImpl implements VetService{
 	 * 사용하고 있다 = 가입을 할 수 없다 = 0
 	 * 사용하지 않았다 = 가입을 할 수 있다 = 1
 	 */
-	public int checkVetLicense(VetLicenseVO lvo) {
+	public String checkVetLicense(VetLicenseVO lvo) {
 		if(vetDAO.useCheckVetVicense(lvo) == 0 && vetDAO.checkVetLicense(lvo) == 1){
-			return 1;
+			return "ok";
 		} else {
-			return 0;
+			return "fail";
 		}
 	}
 	

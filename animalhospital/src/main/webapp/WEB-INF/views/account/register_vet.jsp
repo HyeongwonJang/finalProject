@@ -119,7 +119,7 @@
 				    url: "checkVetLicense.do", 
 				    data: "vetLicenseNo=" + $("#vetLicenseNo").val() + "&vetName=" + $("#vetName").val(),
 				    success: function(searchResult){
-				   		if(searchResult == 0){
+				   		if(searchResult == "fail"){
 				   			$("#licenseSearchMessage").text("면허번호와 이름이 일치하지 않거나 이미 사용하고 있는 면허번호입니다!");
 				   			$("#licenseSearchMessage").attr('class', 'text-danger');
 				   			submitFlag = false;
