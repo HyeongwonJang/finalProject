@@ -1,3 +1,14 @@
+select 	q.Question_board_no,
+      	q.Question_board_title,
+      	to_char(q.Question_board_hours,'YYYY.MM.DD HH24:MI') as Question_board_hours,
+     	q.Question_board_content,
+     	q.Question_board_hit,
+		po.pet_owner_name,
+		po.pet_owner_id
+from Question_board q, PET_OWNER po
+where q.Question_board_writer = po.pet_owner_id
+and Question_board_no=17
+
 select r.Reservation_no, to_char(r.reservation_date, 'yyyy-mm-dd') as reservation_date, rt.Reservation_time, vl.vet_name, po.Pet_owner_name, p.pet_name, po.Pet_Owner_tel, r.reservation_content
 			from Reservation_Time rt, Reservation r, Pet p,Vet v, Vet_License vl, Hospital h, Pet_Owner po
 			where rt.Time_no = r.Time_no and h.Hospital_id = v.Hospital_id and vl.Vet_License_no = v.Vet_License_no
