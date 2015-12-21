@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.animalhospital.community.model.service.CommunityBoardService;
 import org.animalhospital.petowner.model.VO.PetOwnerVO;
 import org.animalhospital.petowner.service.PetOwnerService;
 import org.animalhospital.treatment.service.TreatmentService;
@@ -27,6 +28,8 @@ public class ViewController {
 	private VaccinationService vaccinationService;
 	@Resource
 	private ViewService viewService;
+	@Resource
+	private CommunityBoardService communityBoardService;
 	
 	/**
 	 * 세션에 있는 보호자 전화번호를 기준으로 알람데이터를 받아온다
@@ -298,5 +301,29 @@ public class ViewController {
 	@RequestMapping("writeCommunityView.do")
 	public String writeCommunityView(){
 		return "write_community";
+	}
+	/**
+	 * 1:1 문의 게시판 글 수정 폼(update_community.jsp)으로 넘어가는 메소드
+	 * questionBoardNo를 참조하여 해당 글의 정보를 넘긴다.
+	 * @param int
+	 * @author 강신후 , 곽진혁
+	 */
+   @RequestMapping("updateCommunityView.do")
+	public ModelAndView updateCommunityView(int questionBoardNo){
+		return new ModelAndView("update_community","qbvo",communityBoardService.showCommunityBoardContentNoHit(questionBoardNo));
+	}
+	/**
+	 * 답변 폼을 보여 준다
+	 * client가 showContent_community.jsp에서 글을 보고 답글버튼을 클릭하면 답글할 폼을 보여준다. 
+	 * 1. Client로 부터 답변할 글 번호(questionBoardNo)를 받는다. 
+	 * 2. BoardService의 showContentNoHit(questionBoardNo) 를 호출하여 
+	 *     답변 원본 글의 데이터를 가진 QuestionBoardVO 객체를 받아온다. 
+	 * 3. QuestionBoardVO객체(qbvo)를 request scope에 넣고 reply_community.jsp로 수행을 넘긴다.
+	 */
+	@RequestMapping("replyCommunityView.do")
+	public ModelAndView replyCommunityView(int questionBoardNo) {		
+		System.out.println(questionBoardNo);
+		return new ModelAndView("reply_community","qbvo",
+				communityBoardService.showCommunityBoardContentNoHit(questionBoardNo));
 	}
 }

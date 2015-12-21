@@ -57,16 +57,6 @@ public class CommunityBoardController {
 	   }
 	   
 	   /**
-		 * 1:1 문의 게시판 글 수정 폼(update_community.jsp)으로 넘어가는 메소드
-		 * questionBoardNo를 참조하여 해당 글의 정보를 넘긴다.
-		 * @param int
-		 * @author 강신후 , 곽진혁
-		 */
-	   @RequestMapping("updateCommunityView.do")
-		public ModelAndView updateCommunityView(int questionBoardNo){
-			return new ModelAndView("update_community","qbvo",communityBoardService.showCommunityBoardContentNoHit(questionBoardNo));
-		}
-	   /**
 		 * 1:1 문의 게시판 글 수정 처리하는 메소드
 		 * @param QuestionBoardVO
 		 * @author 강신후 , 곽진혁

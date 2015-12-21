@@ -39,12 +39,18 @@
       
       <tr>
          <td valign="middle" align="center" colspan="3">
-             <a class="btn btn-default" href="${initparam.root}replyCommunity.do" role="button">답글</a>	  
+           <c:if test="${sessionScope.userLevel == 'vet' }">
+             <a class="btn btn-default" href="${initparam.root}replyCommunityView.do?questionBoardNo=${requestScope.qbvo.questionBoardNo}" role="button">답글</a>	  
+            </c:if>  
               <a class="btn btn-default" href="${initparam.root}findCommunityBoardList.do" role="button">목록</a>
-               <c:if test="${ requestScope.qbvo.petOwnerVO.petOwnerId == sessionScope.loginVO.petOwnerId }">
-               		<input class="btn btn-default" type="button" value="삭제" id="deleteBtn">
-               		<input class="btn btn-default" type="button" value="수정" id="updateBtn">
-               </c:if>
-         </td>
+				<c:if 	test="${sessionScope.userLevel == 'petOwner' 
+				&& requestScope.qbvo.petOwnerVO.petOwnerId 
+				== sessionScope.loginVO.petOwnerId }">
+					<input class="btn btn-default" type="button" value="수정"
+						id="updateBtn">
+					<input class="btn btn-default" type="button" value="삭제"
+						id="deleteBtn">
+				</c:if>
+		</td>
       </tr>
    </table>
