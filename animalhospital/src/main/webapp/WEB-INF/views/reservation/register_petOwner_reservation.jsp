@@ -67,7 +67,7 @@ function changeVet(){
 	<div class="x_content">
 		  
 		<!-- 폼 시작부 -->
-		<form id="treatmentForm" action="registerPetOwnerReservation.do" method="post">
+		<form id="treatmentForm" action="registerReservation.do" method="post">
 			<input type="hidden" id="petOwnerNo"  value="${sessionScope.loginVO.petOwnerNo }" name="petOwnerVO.petOwnerNo">
 			<label for="inputInfo">병원검색</label> <span id="checkTel"></span>
 			<input type="text" id="hospitalName" class="form-control" required="required"  readonly value='클릭하여 병원을 검색하여 주세요.'/>

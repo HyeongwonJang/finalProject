@@ -107,7 +107,7 @@ function changePet(){
 	<div class="x_content">
 		  
 		<!-- 폼 시작부 -->
-		<form id="vetReservationForm" action="registerPetOwnerReservation.do" method="post">
+		<form id="vetReservationForm" action="registerReservation.do" method="post">
 			<label for="inputInfo">보호자 전화번호:</label> <span id="checkTel"></span>
 			<input type="text" id="petOwnerTel" class="form-control" name="" required="required"/>
 			<input type="hidden" id="petOwnerNo" name="petOwnerVO.petOwnerNo" >
