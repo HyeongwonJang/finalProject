@@ -85,7 +85,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		order by t.Time_no asc
 	</select>
 	
-	<insert id="registerPetOwnerReservation" parameterType="rvo" >
+	<insert id="registerReservation" parameterType="rvo" >
 		insert into reservation 
 		(Reservation_no ,Reservation_date,Time_no,
 		Vet_License_no,Pet_name,Pet_Owner_no,reservation_content )

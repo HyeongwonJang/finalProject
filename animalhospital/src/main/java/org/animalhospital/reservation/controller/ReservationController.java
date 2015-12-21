@@ -35,7 +35,17 @@ public class ReservationController {
 		HospitalVO hvo = (HospitalVO)request.getSession().getAttribute("loginVO");
 		return new ModelAndView("find2_vet_reservation", "reservationList", reservationService.findVetReservation(hvo.getHospitalId()));
 	}
-
+	/**
+	 * 예약 가능 시간을 출력해주는 컨트롤러
+	 * 뷰 계층에서 vet_license_no와 reservation_date 값을 받아
+	 * findPossableReservationTime서비스에 map형식으로 값을 입력해주면 
+	 * 해당 날짜, 해당 의사에게 예약가능한 시간을 출력해 준다. 
+	 * @param request
+	 * @param vetLicenseVO
+	 * @param reservationVO
+	 * @author 두현
+	 * @return
+	 */
 	@RequestMapping("findPossableReservationTime.do")
 	@ResponseBody
 	public List<ReservationTimeVO> findPossableReservationTime(HttpServletRequest request,
@@ -45,13 +55,30 @@ public class ReservationController {
 		map.put("vet_license_no", vetLicenseVO.getVetLicenseNo());
 		return reservationService.findPossableReservationTime(map);
 	}
-	@RequestMapping("registerPetOwnerReservation.do")
-	public String registerPetOwnerReservation(ReservationVO reservationVO){
-		reservationService.registerPetOwnerReservation(reservationVO);
-		return "redirect:PetOwnerReservationResult.do";
+	/**
+	 * PetOwner와 vet양측의 진료예약을 등록하는 컨트롤러
+	 * ReservationVO타입으로 값들을 값들을 입력받아 
+	 * registerPetOwnerReservation서비스를 실행하도록 한다.
+	 * 중복 입력을 방지하기 위하여 redirect방식으로 데이터를 전송한다.
+	 * @param reservationVO
+	 * @author 두현
+	 * @return
+	 */
+	@RequestMapping("registerReservation.do")
+	public String registerReservation(ReservationVO reservationVO){
+		reservationService.registerReservation(reservationVO);
+		return "redirect:ReservationResult.do";
 	}
-	@RequestMapping("PetOwnerReservationResult.do")
-	public String PetOwnerReservationResult(){
+	/**
+	 * register_*_Reservation에서
+	 * 중복된 자료입력이 되는 상황을 방지하기 위하여 
+	 * 생성된 컨트롤러 
+	 * 등록 완료후 home.do를 실행 한다. 
+	 * @author 두현
+	 * @return
+	 */
+	@RequestMapping("ReservationResult.do")
+	public String ReservationResult(){
 		return "redirect:home.do";
 	}
 	

@@ -56,16 +56,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values(#{questionBoardNo},#{questionBoardTitle}, #{petOwnerVO.petOwnerId}, #{questionBoardContent},sysdate,#{questionBoardHit})
 	</insert>
 	
-	
-	<!-- 조회수 증가 -->
-	<update id="updateCommunityBoardHit" parameterType="int">
-		update Question_board 
-		set Question_board_hit = Question_board_hit+1 
-		where Question_board_no=#{questionBoardNo}
-	</update>
-	
-   
-	<!--  상세 보기 -->
+	<!-- 상세 보기 -->
 	 <select id="showCommunityBoardContent" resultMap="qbvoRM">
       select 	q.Question_board_no,
 		      	q.Question_board_title,
@@ -78,6 +69,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where q.Question_board_writer = po.pet_owner_id
 		and Question_board_no=#{value}
    </select>
+   
+	<!-- 조회수 증가 -->
+	<update id="updateCommunityBoardHit" parameterType="int">
+		update Question_board 
+		set Question_board_hit = Question_board_hit+1 
+		where Question_board_no=#{questionBoardNo}
+	</update>
    
    <!-- 게시판 수정 -->
    <update id="updateCommunityBoard" parameterType="qbvo" >

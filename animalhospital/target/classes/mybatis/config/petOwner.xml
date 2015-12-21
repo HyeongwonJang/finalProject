@@ -20,33 +20,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		</collection>
  	</resultMap>
  	
- 	<!-- 반려동물 보호자 로그인 -->
- 	<select id="loginPetOwner" resultType="povo" resultMap="povoRM">
- 		select po.Pet_Owner_no, po.Pet_Owner_id, po.Pet_Owner_name, po.Pet_Owner_tel, po.Pet_Owner_address
-		from  Pet_Owner po, Pet p
-		where po.Pet_Owner_id = #{petOwnerId} and po.Pet_Owner_password =#{petOwnerPassword} 
- 	</select>
- 	
- 	<!-- 회원 정보 수정 -->
- 	<update id="updatePetOwner" parameterType="povo">
- 		update Pet_Owner
-		set Pet_Owner_tel=#{petOwnerTel}, Pet_Owner_name=#{petOwnerName},
-			 Pet_Owner_password=#{petOwnerPassword}, Pet_Owner_address = #{petOwnerAddress}
-		where Pet_Owner_id = #{petOwnerId}  
- 	</update>
- 	<!-- 보호자 전화번호 중복 검사 -->
- 	<select id = "checkPetOwnerTel" resultType="povo" resultMap="povoRM">
-		select Pet_Owner_no, Pet_Owner_id, Pet_Owner_tel
-		from Pet_Owner 
-		where Pet_Owner_tel = #{petOwnerTel}
- 	</select>
- 	<!-- 회원 탈퇴 -->
- 	<update id ="deletePetOwner" parameterType="povo">
- 		update Pet_Owner
-		set Pet_Owner_id=null, Pet_Owner_password=null, Pet_Owner_address=null
-		where Pet_Owner_id = #{petOwnerId}
- 	</update>
- 	
  	<!-- 회원가입 -->
     <insert id="registerPetOwner" parameterType="povo">
        <selectKey keyProperty="petOwnerNo" resultType="int" order="BEFORE">
@@ -55,13 +28,63 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       insert into Pet_Owner(Pet_Owner_no, Pet_Owner_tel, Pet_Owner_name, Pet_Owner_id, Pet_Owner_password, Pet_Owner_address)
       values(#{petOwnerNo}, #{petOwnerTel}, #{petOwnerName}, #{petOwnerId}, #{petOwnerPassword}, #{petOwnerAddress})   
     </insert>
+ 	<!-- 번호로 비회원 보호자 회원 가입 -->
+ 	<update id="registerPetOwnerByTel" parameterType="povo">
+ 		update Pet_Owner
+		set Pet_Owner_id=#{petOwnerId}, Pet_Owner_name=#{petOwnerName},
+			 Pet_Owner_password=#{petOwnerPassword}, Pet_Owner_address = #{petOwnerAddress}
+		where Pet_Owner_tel=#{petOwnerTel}
+ 	</update>
+ 	<!-- 보호자 아이디 중복 검사 -->
+ 	<select id = "findPetOwnerById" resultType="int" >
+		select count(*) 
+		from Pet_Owner 
+		where Pet_Owner_id = #{petOwnerId}
+ 	</select>
+ 	<!-- 반려동물 보호자 로그인 -->
+ 	<select id="loginPetOwner" resultType="povo" resultMap="povoRM">
+ 		select po.Pet_Owner_no, po.Pet_Owner_id, po.Pet_Owner_name, po.Pet_Owner_tel, po.Pet_Owner_address
+		from  Pet_Owner po, Pet p
+		where po.Pet_Owner_id = #{petOwnerId} and po.Pet_Owner_password =#{petOwnerPassword} 
+ 	</select>
+ 	<!-- 보호자 전화번호 중복 검사 -->
+ 	<select id = "checkPetOwnerTel" resultType="povo" resultMap="povoRM">
+		select Pet_Owner_no, Pet_Owner_id, Pet_Owner_tel
+		from Pet_Owner 
+		where Pet_Owner_tel = #{petOwnerTel}
+ 	</select>
+ 	
+ 	
+ 	<!-- 회원 정보 수정 -->
+ 	<update id="updatePetOwner" parameterType="povo">
+ 		update Pet_Owner
+		set Pet_Owner_tel=#{petOwnerTel}, Pet_Owner_name=#{petOwnerName},
+			 Pet_Owner_password=#{petOwnerPassword}, Pet_Owner_address = #{petOwnerAddress}
+		where Pet_Owner_id = #{petOwnerId}  
+ 	</update>
+ 	<!-- 회원 탈퇴 -->
+ 	<update id ="deletePetOwner" parameterType="povo">
+ 		update Pet_Owner
+		set Pet_Owner_id=null, Pet_Owner_password=null, Pet_Owner_address=null
+		where Pet_Owner_id = #{petOwnerId}
+ 	</update>
+ 	
+ 	
  	<!-- 반려동물 등록 -->
  	 <insert id="registerPet" parameterType="map">
 		insert into Pet(Pet_Owner_no, Pet_name, Pet_birthday, Pet_gender, Pet_note, Animal_kind_name)
 		values(#{petOwnerNo}, #{petVO.petName}, #{petVO.petBirthday}, #{petVO.petGender}, #{petVO.petNote}, #{petVO.animalKindName}) 	
  	</insert>
  	<!-- 반려동물 정보 수정 -->
- 	<!-- 아이디로 보유 동물 목록 조회 -->
+ 	<update id="updatePet" parameterType="povo">
+ 		update Pet 
+		set Pet_name = #{petVO[0].petName}, Pet_birthday = #{petVO[0].petBirthday}, 
+			  Pet_gender=#{petVO[0].petGender}, Pet_note=#{petVO[0].petNote}, 
+			  Animal_kind_name=#{petVO[0].animalKindName}
+		where Pet_name = #{petVO[0].petName}  
+				 and Pet_Owner_no = #{petOwnerNo}
+ 	</update>
+ 	<!-- petOwnerId로 보유 동물 목록 조회 -->
  	<select id="findPetListById" parameterType="povo" resultMap="povoRM">
  		select po.Pet_Owner_no, p.Pet_name
 		from Pet p, Pet_Owner po
@@ -73,14 +96,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from Pet p, Pet_Owner po
 		where p.Pet_name=#{petVO.petName} and po.Pet_Owner_no = p.Pet_Owner_no and po.Pet_Owner_no = #{petOwnerNo}
  	</select>
- 	<update id="updatePet" parameterType="povo">
- 		update Pet 
-		set Pet_name = #{petVO[0].petName}, Pet_birthday = #{petVO[0].petBirthday}, 
-			  Pet_gender=#{petVO[0].petGender}, Pet_note=#{petVO[0].petNote}, 
-			  Animal_kind_name=#{petVO[0].animalKindName}
-		where Pet_name = #{petVO[0].petName}  
-				 and Pet_Owner_no = #{petOwnerNo}
- 	</update>
  	
  	
  	<!-- 전화번호로 반려동물 조회 -->
@@ -90,15 +105,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where po.Pet_Owner_no = p.Pet_Owner_no
 		and po.Pet_Owner_tel = #{petOwnerTel} 	
  	</select>
-
-
  	<!-- 아이디로 진료기록 조회 -->
  	<select id = "findTreatmentRecordById" resultType="povo" parameterType="povo">
  		select tr.Treatment_Record_no, tr.Treatment_hours, tr.Treatment_content, p.Pet_name, tr.Pet_weight, p.Pet_gender, tr.Disease_name
 		from Treatment_Record tr , Pet p , Pet_Owner po
 		where po.Pet_Owner_id=#{petOwnerId} and p.Pet_name = #{petName} and p.Pet_Owner_no = tr.Pet_Owner_no and p.Pet_name = tr.Pet_name
  	</select>
- 	
  	<!-- PET_OWNER_tel를 이용하여 PetList 출력 -->
 	<select id="findPetListByPetownerTel" resultMap="povoRM">
 		select
@@ -109,17 +121,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where o.pet_owner_no=p.pet_owner_no
 		and o.pet_owner_tel=#{value}
 	</select>
- 	<!-- 보호자 아이디 중복 검사 -->
- 	<select id = "findPetOwnerById" resultType="int" >
-		select count(*) 
-		from Pet_Owner 
-		where Pet_Owner_id = #{petOwnerId}
- 	</select>
-	<!-- 번호로 비회원 보호자 회원 가입 -->
- 	<update id="registerPetOwnerByTel" parameterType="povo">
- 		update Pet_Owner
-		set Pet_Owner_id=#{petOwnerId}, Pet_Owner_name=#{petOwnerName},
-			 Pet_Owner_password=#{petOwnerPassword}, Pet_Owner_address = #{petOwnerAddress}
-		where Pet_Owner_tel=#{petOwnerTel}
- 	</update>
+ 	
+	
  </mapper>
