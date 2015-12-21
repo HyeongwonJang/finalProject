@@ -17,21 +17,33 @@ public class VaccinationDAOImpl implements VaccinationDAO {
 	@Resource
 	private SqlSessionTemplate sqlSessionTemplate;
 	
-
+	/**
+	 * registerVaccination insert문 
+	 * @author 진혁
+	 */
 	@Override
 	public int registerVaccination(VaccinationRecordVO vrvo){
 		return sqlSessionTemplate.insert("vaccination.registerVaccination", vrvo);
 	}
+	
+	/**
+	 * registerVetVaccination 수의사 insert문 
+	 * @author 진혁
+	 */
 	@Override
 	public int registerVetVaccination(VaccinationRecordVO vrvo){
 		return sqlSessionTemplate.insert("vaccination.registerVetVaccination", vrvo);
 	}
 
-
+	/**
+	 * findAllVaccination 백신 리스트 출력 
+	 * @author 진혁
+	 */
 	@Override
 	public List<VaccinationVO> findAllVaccination() {
 		return sqlSessionTemplate.selectList("vaccination.findAllVaccination");
 	}
+	
 
 	@Override
 	public List<Object> findVaccinationRecordByPetOwnerTelAndPetName(
@@ -39,7 +51,7 @@ public class VaccinationDAOImpl implements VaccinationDAO {
 		return sqlSessionTemplate.selectList("vaccination.findVaccinationRecordByPetOwnerTelAndPetName", paramMap);
 	}
 
-
+	
 	@Override
 	public int findAllVaccinationRecord(Map<String, Object> paramMap) {
 		return sqlSessionTemplate.selectOne("vaccination.findAllVaccinationRecord", paramMap);

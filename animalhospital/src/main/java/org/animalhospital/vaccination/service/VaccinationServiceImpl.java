@@ -24,19 +24,35 @@ public class VaccinationServiceImpl implements VaccinationService {
 	@Resource
 	private ListVO listVO;
 	
+	/**
+	 * 예방접종 등록
+	 * @author 진혁
+	 */
 	@Override
 	public int registerVaccination(VaccinationRecordVO vrvo){
 		return vaccinationDAO.registerVaccination(vrvo);
 	}
+	/**
+	 * 수의사 예방접종
+	 * @author 진혁
+	 */
 	@Override
 	public int registerVetVaccination(VaccinationRecordVO vrvo){
 		return vaccinationDAO.registerVetVaccination(vrvo);
 	}
+	/**
+	 * 전화번호를 통해 반려동물 이름 찾기
+	 *@author 진혁
+	 */
 	@Override
 	public PetOwnerVO findPetByTel(PetOwnerVO povo) {
 		return petOwnerDAO.findPetByTel(povo);
 	}
-
+	
+	/**
+	 * 예방백신 리스트 출력
+	 * @author 진혁
+	 */
 	@Override
 	public List<VaccinationVO> findAllVaccination() {
 		return vaccinationDAO.findAllVaccination();

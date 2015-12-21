@@ -22,8 +22,8 @@ public class PetOwnerServiceImpl implements PetOwnerService {
 		petOwnerDAO.updatePetOwner(povo);
 	}
 	@Override
-	public String telCheckPetOwner(PetOwnerVO povo) {
-		PetOwnerVO telCheckedpovo = petOwnerDAO.telCheckPetOwner(povo);
+	public String checkPetOwnerTel(PetOwnerVO povo) {
+		PetOwnerVO telCheckedpovo = petOwnerDAO.checkPetOwnerTel(povo);
 		String flag = "fail";
 		if(telCheckedpovo != null) {
 			if(telCheckedpovo.getPetOwnerTel() != null)
@@ -68,6 +68,7 @@ public class PetOwnerServiceImpl implements PetOwnerService {
 	public PetOwnerVO findPetListByTel(PetOwnerVO povo) {
 		return petOwnerDAO.findPetListByTel(povo);
 	}
+	@Override
 	public PetOwnerVO findPetListByPetownerTel(String petOwnerTel){
 		return petOwnerDAO.findPetListByPetownerTel(petOwnerTel);
 	}

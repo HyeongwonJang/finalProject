@@ -31,6 +31,7 @@ public class VaccinationController {
 	 * @param request
 	 * @param vrvo
 	 * @return
+	 * @author 진혁
 	 */
 	@RequestMapping("registerVaccination.do")
 	public String registerVaccination(HttpServletRequest request, VaccinationRecordVO vrvo){
@@ -43,6 +44,11 @@ public class VaccinationController {
 		}
 		return "redirect:registerVaccinationResult.do";
 	}
+	/**
+	 * registerVaccinationResult 출력
+	 * @return
+	 * @author 진혁
+	 */
 	@RequestMapping("registerVaccinationResult.do")
 	public String registerVaccinationResult(){
 		return "vaccination/register_result_vaccination";
@@ -53,7 +59,7 @@ public class VaccinationController {
 	 * @param request
 	 * @param povo
 	 * @param lvo
-	 * @return
+	 * @
 	 */
 	@RequestMapping("findVaccinationRecordByPetOwnerTelAndPetName.do")
 	public ModelAndView findVaccinationRecordByPetOwnerTelAndPetName(
@@ -71,7 +77,12 @@ public class VaccinationController {
 		}
 		return mav;
 	}
-	
+	/**
+	 * 
+	 * @param vaccinationRecordNo
+	 * @return
+	 * @author 진혁
+	 */
 	@RequestMapping("findDetailVaccinationRecordByVaccinationRecordNo.do")
 	@ResponseBody
 	public VaccinationRecordVO findDetailVaccinationRecordByVaccinationRecordNo(int vaccinationRecordNo){
