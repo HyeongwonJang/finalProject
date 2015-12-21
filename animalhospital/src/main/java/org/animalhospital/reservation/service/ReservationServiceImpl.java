@@ -30,15 +30,24 @@ public class ReservationServiceImpl implements ReservationService {
 	public List<ReservationVO> findVetReservation(int hospitalId) {
 		return reservationDAO.findVetReservation(hospitalId);
 	}
-	
+	/**
+	 * 해당의사,날짜에게 진료 가능한 시간을 출력해 주는 서비스 
+	 * vet_license_no와 reservation_date 값을 map 형식으로 받아
+	 * 해당의사의 진료 가능 시간을 출력해 주도록 한다.
+	 * @author 두현
+	 */
 	@Override
 	public List<ReservationTimeVO> findPossableReservationTime(HashMap map){
 		return reservationDAO.findPossableReservationTime(map);
 	}
-	
+	/**
+	 * ReservationVO 타입으로 값을 입력받아
+	 * PetOwner가 진료 예약을 할 수 있도록 도와주는 메서드
+	 * @author 두현
+	 */
 	@Override
-	public int registerPetOwnerReservation(ReservationVO reservationVO){
-		return reservationDAO.registerPetOwnerReservation(reservationVO);
+	public int registerReservation(ReservationVO reservationVO){
+		return reservationDAO.registerReservation(reservationVO);
 	}
 	
 }

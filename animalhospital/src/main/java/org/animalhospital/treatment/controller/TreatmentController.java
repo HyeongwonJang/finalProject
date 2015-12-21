@@ -91,7 +91,7 @@ public class TreatmentController {
 	 *  registerTreatmentRecord_result.do컨트롤러로 보내준다. 
 	 * @param request
 	 * @param treatmentRecordVO
-	 * @author 백두현
+	 * @author 두현
 	 * @return
 	 */
 	@RequestMapping("registerTreatmentRecord.do")
@@ -105,7 +105,7 @@ public class TreatmentController {
 	 * 방지하기 위하여 사용되는 메서드
 	 * @param request
 	 * @param treatmentRecordVO
-	 * @author 백두현
+	 * @author 두현
 	 * @return
 	 */
 	@RequestMapping("registerTreatmentRecord_result.do")
@@ -126,7 +126,7 @@ public class TreatmentController {
 	 * registerTreatmentRecord_result.do컨트롤러로 보내준다.
 	 * @param request
 	 * @param treatmentRecordVO
-	 * @author 백두현
+	 * @author 두현
 	 * @return
 	 */
 	@RequestMapping("registerNonMemberTreatmentRecord.do")

@@ -18,6 +18,6 @@ public interface ReservationDAO {
 	
 	List<ReservationTimeVO> findPossableReservationTime(HashMap map);
 	
-	int registerPetOwnerReservation(ReservationVO reservationVO);
+	int registerReservation(ReservationVO reservationVO);
 
 }

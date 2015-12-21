@@ -32,12 +32,21 @@ public class ReservationDAOImpl implements ReservationDAO {
 	public List<ReservationVO> findVetReservation(int hospitalId) {
 		return sqlSessionTemplate.selectList("reservation.findVetReservation", hospitalId);
 	}
+	
+	/**
+	 * 진료가능 시간을 출력해주는 메서드
+	 * @author 두현
+	 */
 	@Override	
 	public List<ReservationTimeVO> findPossableReservationTime(HashMap map){
 		return sqlSessionTemplate.selectList("reservation.findPossableReservationTime",map);
 	}
+	/**
+	 * petOwner가 진료를 예약할 수 있게 해주는 메서드 
+	 * @author 두현
+	 */
 	@Override
-	public int registerPetOwnerReservation(ReservationVO reservationVO){
-		return sqlSessionTemplate.insert("reservation.registerPetOwnerReservation",reservationVO);
+	public int registerReservation(ReservationVO reservationVO){
+		return sqlSessionTemplate.insert("reservation.registerReservation",reservationVO);
 	}
 }
