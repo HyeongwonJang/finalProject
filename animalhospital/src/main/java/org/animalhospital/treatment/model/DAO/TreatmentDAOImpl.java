@@ -82,18 +82,27 @@ public class TreatmentDAOImpl implements TreatmentDAO {
 	public List<DiseaseVO> allDiseaseList(){
 		return sqlSessionTemplate.selectList("treatmentRecord.allDiseaseList");
 	}
+	/**
+	 * 입력받은 정보를 DataBase에 저장하기 위한 메서드
+	 * @author 두현
+	 */
 	public int registerTreatmentRecord(TreatmentRecordVO treatmentRecordVO){
-		//System.out.println("input date : "+treatmentRecordVO);
 		return sqlSessionTemplate.insert("treatmentRecord.registerTreatmentRecord", treatmentRecordVO);
 	}
 	/**
-	 * 비회원 insert, 비회원 pet 
+	 * 초진 대상자의 정보를  insert하는 메서드 
+	 * select key를 이용하여 petOwnerNo를 부여받는다
 	 * @param petOwnerVO
+	 * @author 두현
 	 * @return
 	 */
 	public int registerNonMember(PetOwnerVO petOwnerVO){
 		return sqlSessionTemplate.insert("treatmentRecord.registerNonMember",petOwnerVO);
 	}
+	/**
+	 * 초진 대상자의 pet의 정보를 insert하는 메서드 
+	 * @author 두현
+	 */
 	public int registerNonMemberPet(PetOwnerVO petOwnerVO){
 		return sqlSessionTemplate.insert("treatmentRecord.registerNonMemberPet",petOwnerVO);
 	}	

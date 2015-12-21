@@ -58,7 +58,6 @@
  		$("#nonMemberViewDiv").hide();
  		$(".commandRadio").change(function(){
  			var checkMember=$("input[name=loginCommand]:checked").attr('value');
- 			//alert(checkMember);
  			if(checkMember=="member"){
  				$("#memberViweDiv").show();
  				$("#nonMemberViewDiv").hide();
