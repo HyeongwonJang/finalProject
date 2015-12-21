@@ -25,6 +25,13 @@ public interface TreatmentService {
 	 */
 	public TreatmentRecordVO findDetailTreatmentRecordByTreatmentNo(int treatmentNo);
 	public List<DiseaseVO> allDiseaseList();
+	
+	/**
+	 * 입력받은 진료정보를 기록하기 위한 메서드 
+	 * @param treatmentRecordVO
+	 * @author 두현
+	 * @return
+	 */
 	public int registerTreatmentRecord(TreatmentRecordVO treatmentRecordVO);
 	
 	public List<TreatmentRecordVO> findTreatmentRecordByPetOwnerTel(String petOwnerTel);
