@@ -7,7 +7,7 @@ import org.animalhospital.treatment.model.VO.TreatmentRecordVO;
 public interface PetOwnerDAO {
 	public PetOwnerVO loginPetOwner(PetOwnerVO povo);
 	public void updatePetOwner(PetOwnerVO povo);
-	public PetOwnerVO telCheckPetOwner(PetOwnerVO povo);
+	public PetOwnerVO checkPetOwnerTel(PetOwnerVO povo);
 	public void deletePetOwner(PetOwnerVO povo);
 	public void registerPetOwner(PetOwnerVO povo) throws Exception;
 	public void registerPet(HashMap<String, Object> pom) throws Exception;

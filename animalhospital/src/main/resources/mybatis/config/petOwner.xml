@@ -35,7 +35,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where Pet_Owner_id = #{petOwnerId}  
  	</update>
  	<!-- 보호자 전화번호 중복 검사 -->
- 	<select id = "telCheckPetOwner" resultType="povo" resultMap="povoRM">
+ 	<select id = "checkPetOwnerTel" resultType="povo" resultMap="povoRM">
 		select Pet_Owner_no, Pet_Owner_id, Pet_Owner_tel
 		from Pet_Owner 
 		where Pet_Owner_tel = #{petOwnerTel}

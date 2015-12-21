@@ -55,7 +55,7 @@
 			if($(this).val().length == 11) {
 				$.ajax({
 				    type: "post", // get 또는 post로 설정
-				    url: "telCheckAjax.do", // 이동할 url 설정
+				    url: "checkPetOwnerTelAjax.do", // 이동할 url 설정
 				    data: "petOwnerTel=" + $(this).val(),
 				    success: function(searchResult){
 				    	if(searchResult == "ok"){

@@ -25,8 +25,8 @@ public class PetOwnerDAOImpl implements PetOwnerDAO {
 		sqlSessionTemplate.update("petOwner.updatePetOwner",povo);
 	}
 	@Override
-	public PetOwnerVO telCheckPetOwner(PetOwnerVO povo) {
-		return sqlSessionTemplate.selectOne("petOwner.telCheckPetOwner",povo);
+	public PetOwnerVO checkPetOwnerTel(PetOwnerVO povo) {
+		return sqlSessionTemplate.selectOne("petOwner.checkPetOwnerTel",povo);
 	}
 	@Override
 	public void deletePetOwner(PetOwnerVO povo) {

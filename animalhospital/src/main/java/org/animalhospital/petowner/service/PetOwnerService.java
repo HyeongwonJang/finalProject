@@ -6,7 +6,7 @@ public interface PetOwnerService {
 
 	public PetOwnerVO loginPetOwner(PetOwnerVO povo);
 	public void updatePetOwner(PetOwnerVO povo);
-	public String telCheckPetOwner(PetOwnerVO povo);
+	public String checkPetOwnerTel(PetOwnerVO povo);
 	public void registerPetOwner(PetOwnerVO povo) throws Exception;
 	public void registerPet(PetOwnerVO povo) throws Exception;
 	public PetOwnerVO findPetListByTel(PetOwnerVO povo);
