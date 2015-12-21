@@ -143,6 +143,7 @@ public class PetOwnerController {
 		return petOwnerService.checkPetOwnerTel(povo);
 	}
 	
+	
 	/**
 	 * 보호자 회원가입시 petOwnerId 중복 체크
 	 * 같은 아이디가 존재하지 않으면 ok
