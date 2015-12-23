@@ -16,7 +16,7 @@
 				$.ajax({
 					type:"post",
 					data:"petOwnerTel="+$("#petOwnerTel").val(),
-					url:"findPetListByTel.do",
+					url:"findPetListByPetOwnerTel.do",
 					success: function(PetOwnerVO){//전화번호로 검색하여 PetOwnerVO를 가져온다.
 						var petVO=PetOwnerVO.petVO;
 						var result="";
@@ -110,27 +110,32 @@
 			name="hospitalVO.vetList[0].vetLicenseVO.vetLicenseNo"
 			value="${sessionScope.loginVO.vetList[0].vetLicenseVO.vetLicenseNo }">
 			<label>반려동물 - 보호자 전화번호로 검색</label>
-				 <select class="select2_single form-control" tabindex="-1" id="selectPet" 
-				 		name="petOwnerVO.petVO[0].petName" required="required">
-					<option></option>
-				</select>
+		 	<select class="select2_single form-control" tabindex="-1" id="selectPet" 
+			 		name="petOwnerVO.petVO[0].petName" required="required">
+				<option></option>
+			</select>
+				
+			<br>
 			<label for="inputInfo" >몸무게:</label> 
 			<input type="text" id="petWeight" class="form-control" name="petWeight" required="required"/>
+			<hr> 
+			<label>예방접종종류</label> 
+			<select class="select2_single form-control" name="vaccinationVO.vaccinationNo"   required="required" id="vaccinationName">
+	            <c:forEach var="vaccination" items="${requestScope.VaccinationList }">
+	               <option value="${vaccination.vaccinationNo }">${vaccination.vaccinationName }</option>
+	            </c:forEach>
+         	</select>
 			
-			 <hr> <label>예방접종종류</label> <select class="select2_single form-control" 
-          name="vaccinationVO.vaccinationNo"   required="required" id="vaccinationName">
-            <c:forEach var="vaccination" items="${requestScope.VaccinationList }">
-               <option value="${vaccination.vaccinationNo }">${vaccination.vaccinationName }</option>
-            </c:forEach>
-         </select>
+         	<br>
 			<label>예방접종차수</label>
 			<select class="form-control"
 				name="vaccinationCurrentSection" required="required"
 				id="vaccinationCurrentSection">
 			</select>
+			<br>
 			<label>진료내용</label>
-			<textarea class="form-control" rows="8" name="vaccinationContent" required="required"  placeholder="진료내용을 입력해주세요"></textarea>
-			
+			<textarea class="form-control" rows="8" name="vaccinationContent" required="required"  placeholder="진료내용을 입력해주세요">
+			</textarea>
 			<div class="ln_solid"></div>
 			<div class="form-group">
 				<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">

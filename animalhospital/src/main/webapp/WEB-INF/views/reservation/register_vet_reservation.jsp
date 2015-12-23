@@ -66,7 +66,7 @@ function changePet(){
 				$.ajax({
 					type:"post",
 					data:"petOwnerTel="+$("#petOwnerTel").val(),
-					url:"findPetListByTel.do",
+					url:"findPetListByPetOwnerTel.do",
 					success: function(PetOwnerVO){//전화번호로 검색하여 PetOwnerVO를 가져온다.
 						var petVO=PetOwnerVO.petVO;
 						var result="";

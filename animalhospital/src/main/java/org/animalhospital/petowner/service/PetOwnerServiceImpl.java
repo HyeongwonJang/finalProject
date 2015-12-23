@@ -166,14 +166,14 @@ public class PetOwnerServiceImpl implements PetOwnerService {
 	
 	
 	
-
+//진료기록, 백신기록 조회 -> 전화번호로 pet Name List 가져오는거
 	@Override
 	public PetOwnerVO findPetListByTel(PetOwnerVO povo) {
 		return petOwnerDAO.findPetListByTel(povo);
 	}
 	@Override
-	public PetOwnerVO findPetListByPetownerTel(String petOwnerTel){
-		return petOwnerDAO.findPetListByPetownerTel(petOwnerTel);
+	public PetOwnerVO findPetListByPetOwnerTel(PetOwnerVO povo){
+		return petOwnerDAO.findPetListByPetOwnerTel(povo);
 	}
 
 	

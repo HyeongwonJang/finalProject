@@ -43,7 +43,7 @@ public class ViewServiceImpl implements ViewService {
 				paramVO.getPetOwnerTel()));
 		map.put("reservationList", 
 				reservationDAO.findTodayPetOwnerReservation(paramVO.getPetOwnerId()));
-		map.put("petList", petOwnerDAO.findPetListByPetownerTel(paramVO.getPetOwnerTel()));
+		map.put("petList", petOwnerDAO.findPetListByPetOwnerTel(paramVO));
 		return map;
 	}
 

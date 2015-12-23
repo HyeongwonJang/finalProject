@@ -10,7 +10,7 @@ public interface PetOwnerService {
 	public void registerPetOwner(PetOwnerVO povo) throws Exception;
 	public void registerPet(PetOwnerVO povo) throws Exception;
 	public PetOwnerVO findPetListByTel(PetOwnerVO povo);
-	public PetOwnerVO findPetListByPetownerTel(String petOwnerTel);
+	public PetOwnerVO findPetListByPetOwnerTel(PetOwnerVO povo);
 	public String findPetOwnerById(PetOwnerVO povo);
 	public void registerPetOwnerByTel(PetOwnerVO povo) throws Exception;
 	public PetOwnerVO findPetListById(PetOwnerVO povo);

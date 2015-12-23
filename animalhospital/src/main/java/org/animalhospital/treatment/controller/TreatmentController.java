@@ -72,7 +72,7 @@ public class TreatmentController {
 	 * @param petOwnerVO
 	 * @return
 	 */
-	@RequestMapping("findPetListByTel.do")
+	/*@RequestMapping("findPetListByTel.do")
 	@ResponseBody
 	public PetOwnerVO findPetListByTel(HttpServletRequest request, PetOwnerVO petOwnerVO){
 		if(petOwnerVO.getPetOwnerTel() == null){
@@ -81,7 +81,7 @@ public class TreatmentController {
 		} else {
 			return petOwnerService.findPetListByTel(petOwnerVO);
 		}
-	}	
+	}	*/
 	/**
 	 * 수의사가 회원의 진료를 기록할때 사용하는 메서드 
 	 * register_treatmentRecord.jsp에서
@@ -139,10 +139,6 @@ public class TreatmentController {
 	}
 	
 	
-	@RequestMapping(value = "findPetListByPetOwnerTel.do")
-	@ResponseBody
-	public PetOwnerVO findPetListByPetownerTel(String petOwnerTel) {
-		return petOwnerService.findPetListByPetownerTel(petOwnerTel);
-	}
+	
 
 }

@@ -23,6 +23,7 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
+		var vetTel=$("#vetTel").val();
 		// 모달창 띄우는 함수
 		$("#popbutton").click(function() {
 			// 모달창이 뜨기 전에 ajax로 병원 정보를 가져온다
@@ -57,13 +58,35 @@
 				
 			});
 		});
-		
+
 		//숫자만 입력할 수 있도록 정의
 		$("#vetTel").keyup(function(){
 			$(this).val( $(this).val().replace(/[^0-9]/g,""));
-			if($(this).val().length > 11){
+			if($(this).val().trim().length > 11){
 				$(this).val($(this).val().replace($(this).val(),$(this).val().substring(0,11)));
 				alert("전화번호 양식에 맞게 작성해주세요!");
+			}else{
+				if($(this).val()==vetTel){
+					$("#telCheckInfo").text("전화번호가 사용가능합니다!");
+					submitFlag=true;
+				}else{
+					$.ajax({
+						url : "checkVetByTel.do",
+						data : "vetTel="+ $(this).val(),
+						type : "post",
+						success : function(checkVetByTelResult){
+							if(checkVetByTelResult==0){
+								$("#telCheckInfo").text("전화번호가 사용가능합니다!");
+								$("#telCheckInfo").attr('class', 'text-primary');
+								submitFlag=true;
+							}else{
+								$("#telCheckInfo").text("이미 존재하는 전화번호입니다");
+								$("#telCheckInfo").attr('class', 'text-danger');
+								submitFlag=false;
+							}
+						}
+					});
+				}
 			}
 		});
 		
@@ -117,7 +140,7 @@
             </div>
             <div>
             	<!-- 텍스트 색깔은 text-primary -->
-              <span class="text-primary" style="font-weight: bold">
+              <span class="text-primary" id="telCheckInfo" style="font-weight: bold">
               	전화번호는 특수기호를 빼고 넣어주세요<br>
               	ex) 01020433456
               </span>

@@ -62,7 +62,8 @@
 			    success: function(hospitalList){
 			    	var tableInfo = "";
 			    	$.each(hospitalList, function(index) {
-			    		tableInfo += "<tr class='odd pointer' name="+ hospitalList[index].hospitalName.toLowerCase() +">";
+			    		tableInfo += "<tr class='odd pointer' name="
+			                   + hospitalList[index].hospitalName.toLowerCase().replace(/ /g, '') +">";
 			    		tableInfo += "<td>" + hospitalList[index].hospitalId +"</td>";
 			    		tableInfo += "<td>" + hospitalList[index].hospitalName +"</td>";
 			    		tableInfo += "<td>" + hospitalList[index].hospitalAddress +"</td>";

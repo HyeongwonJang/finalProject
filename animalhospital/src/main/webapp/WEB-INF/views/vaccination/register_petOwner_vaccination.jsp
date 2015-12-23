@@ -27,7 +27,8 @@ $(function(){
       // 페이지 로딩 시 자동으로 ajax를 실행하여 petList를 가져온다
       $.ajax({
              type: "post", // get 또는 post로 설정
-             url: "findPetListByTel.do", // 이동할 url 설정
+             data:"petOwnerTel="+$("#petOwnerTel").val(),
+             url: "findPetListByPetOwnerTel.do", // 이동할 url 설정
              dataType:"json",      
              success: function(petList){
                 //alert(petList.petVO[0].petName)
@@ -101,7 +102,7 @@ $(function(){
          <hr><label>반려동물 이름을 선택해주세요 </label> 
          <select class="select2_single form-control" id="petListSelect" name="petOwnerVO.petVO[0].petName">
          </select>
-         <input type="hidden" id="">
+         <input type="hidden" id="petOwnerTel" value="${sessionScope.loginVO.petOwnerTel }">
          <br><br>
          <label for="inputInfo" >몸무게:</label> 
          <input type="text" id="petWeight" class="form-control" name="petWeight" required="required" />

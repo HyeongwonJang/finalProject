@@ -13,7 +13,7 @@ public interface PetOwnerDAO {
 	public void registerPet(HashMap<String, Object> pom) throws Exception;
 	public PetOwnerVO findPetListByTel(PetOwnerVO povo);
 	public TreatmentRecordVO findTreatmentRecordById(PetOwnerVO povo);
-	public PetOwnerVO findPetListByPetownerTel(String petOwnerTel);
+	public PetOwnerVO findPetListByPetOwnerTel(PetOwnerVO povo);
 	public PetOwnerVO findPetByTel(PetOwnerVO povo);
 	public int findPetOwnerById(PetOwnerVO povo);
 	public void registerPetOwnerByTel(PetOwnerVO povo);

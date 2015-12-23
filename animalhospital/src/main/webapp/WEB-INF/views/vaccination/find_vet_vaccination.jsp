@@ -17,7 +17,7 @@
 	    	//petOwnerTel 검색조건을 이용하여 반려동물 이름 리스트를 가져온다
 	    	$.ajax({
 			    type: "post", // get 또는 post로 설정
-			    url: "findPetListByTel.do", // 이동할 url 설정
+			    url: "findPetListByPetOwnerTel.do", // 이동할 url 설정
 			    data: "petOwnerTel="+$("#petOwnerTel").val(),
 			    dataType:"json",      
 			    success: function(petList){		     
@@ -61,7 +61,7 @@
 			if($(this).val().length>=10){
 				$.ajax({
 				    type: "post", // get 또는 post로 설정
-				    url: "findPetListByTel.do", // 이동할 url 설정
+				    url: "findPetListByPetOwnerTel.do", // 이동할 url 설정
 				    data: "petOwnerTel="+$(this).val(),
 				    dataType:"json",      
 				    success: function(petList){		     

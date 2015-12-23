@@ -149,7 +149,7 @@ public class PetOwnerController {
 	 * @param povo
 	 * @author 강신후, 장형원
 	 */
-	@RequestMapping(value="findPetListById.do", method = RequestMethod.POST)
+	/*@RequestMapping(value="findPetListById.do", method = RequestMethod.POST)
 	@ResponseBody
 	public PetOwnerVO findPetListById(HttpServletRequest request, PetOwnerVO povo){
 		if(povo.getPetOwnerId() == null){
@@ -158,7 +158,7 @@ public class PetOwnerController {
 		} else {
 			return petOwnerService.findPetListById(povo);
 		}
-	}	
+	}	*/
 	/**
 	 * 펫 정보 수정시 펫 리스트에서 선택된 petName과 session의 petOwnerNo를 이용하여
 	 * 펫 정보를 반환
@@ -181,7 +181,16 @@ public class PetOwnerController {
 		return "account/update_pet_result";
 	}
 	
-	
+	/**
+	 * 백신, 진료기록 조회에서 petOwnerTel을 이용하여 펫리스트 가져옴
+	 * @param petOwnerTel
+	 * @return
+	 */
+	@RequestMapping(value = "findPetListByPetOwnerTel.do")
+	@ResponseBody
+	public PetOwnerVO findPetListByPetOwnerTel(PetOwnerVO povo) {
+		return petOwnerService.findPetListByPetOwnerTel(povo);
+	}
 	
 	
 	

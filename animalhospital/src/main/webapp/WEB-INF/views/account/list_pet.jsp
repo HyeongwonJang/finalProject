@@ -7,7 +7,8 @@
 		// 페이지 로딩 시 자동으로 ajax를 실행하여 petList를 가져온다
 		$.ajax({
 			    type: "post", // get 또는 post로 설정
-			    url: "findPetListById.do", // 이동할 url 설정
+			    url: "findPetListByPetOwnerTel.do", // 이동할 url 설정
+			    data: "petOwnerTel="+$("#petOwnerTel").val(), 
 			    dataType:"json",      
 			    success: function(petList){
 			   		var searchPetList = '';
@@ -47,6 +48,7 @@
 		<form action="findPetByPetName.do" method="post" id="petListForm" >
 		<input type="hidden" name="petOwnerNo" value="${sessionScope.loginVO.petOwnerNo }">
 			<label>반려동물명</label>
+			<input type="hidden" id="petOwnerTel" value="${sessionScope.loginVO.petOwnerTel}">
 			<select class="select1_single form-control" id="petListSelect" name="petVO[0].petName" required="required">
 			</select>
 		</form>

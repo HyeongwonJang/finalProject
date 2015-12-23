@@ -282,7 +282,7 @@ public class ViewController {
 	@RequestMapping("registerPetOwnerReservationView.do")
 	public String registerReservationView(HttpServletRequest request,PetOwnerVO povo) {
 		povo = (PetOwnerVO) request.getSession(false).getAttribute("loginVO");
-		request.setAttribute("petList", petOwnerService.findPetListById(povo));
+		request.setAttribute("petList", petOwnerService.findPetListByPetOwnerTel(povo));
 		return "register_petOwner_reservation";
 	}
 	

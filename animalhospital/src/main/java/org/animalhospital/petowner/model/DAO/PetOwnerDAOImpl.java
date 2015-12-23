@@ -140,8 +140,9 @@ public class PetOwnerDAOImpl implements PetOwnerDAO {
 	public TreatmentRecordVO findTreatmentRecordById(PetOwnerVO povo) {
 		return sqlSessionTemplate.selectOne("petOwner.findTreatmentRecordById",povo);
 	}
-	public PetOwnerVO findPetListByPetownerTel(String petOwnerTel){
-		return sqlSessionTemplate.selectOne("petOwner.findPetListByPetownerTel",petOwnerTel);
+	@Override
+	public PetOwnerVO findPetListByPetOwnerTel(PetOwnerVO povo){
+		return sqlSessionTemplate.selectOne("petOwner.findPetListByPetOwnerTel",povo);
 	}
 
 	
