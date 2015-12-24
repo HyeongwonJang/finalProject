@@ -169,6 +169,14 @@ public class PetOwnerController {
 	public ModelAndView findPetByPetName(PetOwnerVO povo){
 		return new ModelAndView("pet_update","povo",petOwnerService.findPetByPetName(povo));
 	}
+	/**
+	 * 펫 중복 등록을 거르기 위해 동일한 petName을 가진 반려동물이 있는지 확인하는 메서드
+	 */
+	@RequestMapping("checkPetNameAjax.do")
+	@ResponseBody
+	public String checkPetNameAjax(PetOwnerVO povo){
+		return petOwnerService.checkPetNameAjax(povo);
+	}
 	
 	/**
 	 * 펫 정보 수정 처리하는 메서드
@@ -189,6 +197,7 @@ public class PetOwnerController {
 	@RequestMapping(value = "findPetListByPetOwnerTel.do")
 	@ResponseBody
 	public PetOwnerVO findPetListByPetOwnerTel(PetOwnerVO povo) {
+		System.out.println(povo);
 		return petOwnerService.findPetListByPetOwnerTel(povo);
 	}
 	

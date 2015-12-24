@@ -111,7 +111,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from Treatment_Record tr , Pet p , Pet_Owner po
 		where po.Pet_Owner_id=#{petOwnerId} and p.Pet_name = #{petName} and p.Pet_Owner_no = tr.Pet_Owner_no and p.Pet_name = tr.Pet_name
  	</select>
- 	<!-- PET_OWNER_tel를 이용하여 PetList 출력 -->
+ 	<!-- Pet_Owner_tel를 이용하여 PetList 출력 -->
 	<select id="findPetListByPetOwnerTel" resultMap="povoRM" parameterType="povo">
 		select
 		o.Pet_Owner_no,o.Pet_Owner_tel,o.Pet_Owner_name, p.Pet_name,

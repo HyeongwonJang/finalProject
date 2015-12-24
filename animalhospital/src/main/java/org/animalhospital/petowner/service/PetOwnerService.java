@@ -16,4 +16,5 @@ public interface PetOwnerService {
 	public PetOwnerVO findPetListById(PetOwnerVO povo);
 	public PetOwnerVO findPetByPetName(PetOwnerVO povo);
 	public void updatePet(PetOwnerVO povo);
+	public String checkPetNameAjax(PetOwnerVO povo);
 }

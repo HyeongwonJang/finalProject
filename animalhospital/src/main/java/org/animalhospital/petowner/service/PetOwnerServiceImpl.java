@@ -1,7 +1,9 @@
 package org.animalhospital.petowner.service;
 
 import java.util.HashMap;
+
 import javax.annotation.Resource;
+
 import org.animalhospital.petowner.model.DAO.PetOwnerDAO;
 import org.animalhospital.petowner.model.VO.PetOwnerVO;
 import org.springframework.stereotype.Service;
@@ -174,6 +176,20 @@ public class PetOwnerServiceImpl implements PetOwnerService {
 	@Override
 	public PetOwnerVO findPetListByPetOwnerTel(PetOwnerVO povo){
 		return petOwnerDAO.findPetListByPetOwnerTel(povo);
+	}
+	
+	
+	@Override
+	public String checkPetNameAjax(PetOwnerVO povo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("petOwnerNo", povo.getPetOwnerNo());
+		map.put("petVO", povo.getPetVO().get(0));
+		System.out.println(petOwnerDAO.findPetByPetName(map));
+		if(petOwnerDAO.findPetByPetName(map)==null){
+			return "ok";
+		}else{
+			return "fail";
+		}
 	}
 
 	

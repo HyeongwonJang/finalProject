@@ -2,7 +2,30 @@
 	pageEncoding="UTF-8"%>
 
 <script type="text/javascript">
-	
+var submitFlag;
+	$(document).ready(function(){
+		 $(".form-control col-md-7 col-xs-12").keyup(function(){
+			// alert("petOwnerNo="+$("#petOwnerNo").val()+"&petVO[0].petName="+$(this).val());
+			$.ajax({
+				type: "post",
+				url: "checkPetNameAjax.do",
+				data: "petOwnerNo="+$("#petOwnerNo").val()+"&petVO[0].petName="+$(this).val(),
+				success: function(checkResult){
+					if(checkResult=="ok"){
+						$("#nameCheck").text("");
+						submitFlag=true;
+					}else{
+						$("#nameCheck").text("반려동물 이름이 중복됩니다");
+						submitFlag=false;
+					}
+				}
+			});
+		});
+		$("#petForm").submit(function(){
+			
+			return submitFlag;
+		}); 
+	});
 </script>
 <div class="x_panel">
 		<div class="x_title">
@@ -15,14 +38,14 @@
 		<div class="x_content">
 			<br>
 			<form id="petForm" class="form-horizontal form-label-left" action="registerPet.do" method="get">
-			<input type="hidden" name = "petOwnerNo" value="${sessionScope.loginVO.petOwnerNo }">
+			<input type="hidden" id="petOwnerNo" name = "petOwnerNo" value="${sessionScope.loginVO.petOwnerNo }">
 			
 			 <!-- 펫 Name -->
 			<div class='form-group'>
 				<label class='control-label col-md-3 col-sm-3 col-xs-12' for='first-name'>* 이름 
-					<span class='required'></span></label>
+					<span class='required' id="nameCheck"></span></label>
 					<div class='col-md-2 col-sm-6 col-xs-12'>
-						<input type='text' class='form-control col-md-7 col-xs-12' 
+						<input type='text' class='form-control col-md-7 col-xs-12_petName' 
 						id='first-name' required='required' name="petVO[0].petName">
 					</div>
 				</div>
