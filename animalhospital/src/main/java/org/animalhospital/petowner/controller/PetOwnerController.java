@@ -197,7 +197,7 @@ public class PetOwnerController {
 	@RequestMapping(value = "findPetListByPetOwnerTel.do")
 	@ResponseBody
 	public PetOwnerVO findPetListByPetOwnerTel(PetOwnerVO povo) {
-		System.out.println(povo);
+		//System.out.println(povo);
 		return petOwnerService.findPetListByPetOwnerTel(povo);
 	}
 	

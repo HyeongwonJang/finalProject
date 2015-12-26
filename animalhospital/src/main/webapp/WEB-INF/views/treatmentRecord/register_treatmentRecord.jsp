@@ -5,6 +5,7 @@
 <script type="text/javascript">
 
 	function findPetListByTelAjax(){
+		checkMember=$("input[name=memberCommand]:checked").attr('value');
 		$.ajax({
 			type:"post",
 			data:"petOwnerTel="+$("#petOwnerTel").val(),
@@ -12,9 +13,18 @@
 			success: function(PetOwnerVO){//전화번호로 검색하여 PetOwnerVO를 가져온다.
 				var petVO=PetOwnerVO.petVO;
 				var result="";
-				 if(PetOwnerVO == ""){
-					$("#checkTel").html("초진입니다.");
+				 if(PetOwnerVO == ""&&checkMember=="member"){
+					$("#checkTel").html("초진입니다.비회원 메뉴를 이용해 주세요");
 					$("#checkTel").attr('class','text-danger');
+					submitFlag=false;
+				}else if(PetOwnerVO == ""&&checkMember=="nonMember"){
+		    		$("#checkTel").html("초진입니다. 보호자 이름을 입력해주세요.");
+					$("#checkTel").attr('class','text-primary');
+		   			submitFlag = true;
+				}else if(PetOwnerVO !=""&&checkMember=="nonMember"){
+		   			$("#checkTel").html("진료기록이 있는 회원입니다. 회원 메뉴를 이용해주세요");
+		   			$("#checkTel").attr('class', 'text-danger');
+		   			submitFlag = false;
 				}else{	//if-end ,else-begin		
 					$.each(petVO, function(pi) {
 						result+="<option>"+petVO[pi].petName+"</option>"
@@ -23,57 +33,15 @@
 					$("#checkTel").attr('class','text-primary');
 					$("#petOwnerNo").attr('value', PetOwnerVO.petOwnerNo);
 					$("#selectPet").append(result);
+					submitFlag=true;
 				}//else 
 			}//success
 		});//ajax종료
-		/* if($("input[name=loginCommand]:checked").val()=="nonMember"){
-			$.ajax({
-			    type: "post", // get 또는 post로 설정
-			    url: "checkPetOwnerTelAjax.do", // 이동할 url 설정
-			    data: "petOwnerTel=" +$("#petOwnerTel").val(),
-			    success: function(searchResult){
-			    	if(searchResult == "ok"){
-			    		$("#checkTel").html("초진입니다");
-						$("#checkTel").attr('class','text-danger');
-			   			submitFlag = true;
-			   		} else if (searchResult == "ok_update"){
-			   			$("#checkTel").text("방문 기록이 있는 비회원입니다");
-			   			$("#checkTel").attr('class', 'text-primary');
-			   			submitFlag = true;
-			   		} else {
-			   			$("#checkTel").text("회원의 전화번호입니다 회원 메뉴를 이용해주세요");
-			   			$("#checkTel").attr('class', 'text-danger');
-			   			submitFlag = false;
-			   		}
-			    }
-			});
-		}else{
-			$.ajax({
-				type:"post",
-				data:"petOwnerTel="+$("#petOwnerTel").val(),
-				url:"findPetListByPetOwnerTel.do",
-				success: function(PetOwnerVO){//전화번호로 검색하여 PetOwnerVO를 가져온다.
-					var petVO=PetOwnerVO.petVO;
-					var result="";
-					 if(PetOwnerVO == ""){
-						$("#checkTel").html("초진입니다.");
-						$("#checkTel").attr('class','text-danger');
-					}else{	//if-end ,else-begin		
-						$.each(petVO, function(pi) {
-							result+="<option>"+petVO[pi].petName+"</option>"
-						});
-						$("#checkTel").html("전화번호가 확인되었습니다. 다음 단계로 진행하세요");
-						$("#checkTel").attr('class','text-primary');
-						$("#petOwnerNo").attr('value', PetOwnerVO.petOwnerNo);
-						$("#selectPet").append(result);
-					}//else 
-				}//success
-			});//ajax종료
-		} */
 	}
 </script>
 <script type="text/javascript">
-	//var submitFlag=false;
+	var submitFlag=false;
+	var checkMember;
 	$(document).ready(function() {
 		//숫자만 입력할 수 있도록 정의
 		$("#petOwnerTel").keyup(function(){
@@ -88,7 +56,6 @@
 				$("#checkTel").html("전화번호를 9자리 이상 입력해주세요");
 				$("#checkTel").attr('class', 'text-danger');
 			}else{
-			//보호자 전화번호값이 10자 이상인 경우 전화번호를 이용하여 petList를 불러옴
 				findPetListByTelAjax();
 			}
 		});
@@ -102,7 +69,8 @@
  		
  		$("#nonMemberViewDiv").hide();
  		$(".commandRadio").change(function(){
- 			var checkMember=$("input[name=loginCommand]:checked").attr('value');
+ 			$("#checkTel").html("");
+ 			checkMember=$("input[name=memberCommand]:checked").attr('value');
  			if(checkMember=="member"){
  				$("#memberViweDiv").show();
  				$("#nonMemberViewDiv").hide();
@@ -130,9 +98,14 @@
 				$("#treatmentForm").attr("action","registerNonMemberTreatmentRecord.do");
  			}
  		});
- 		/* $("#treatmentForm").submit(function(){
- 			return submitFlag;
- 		}); */
+ 		$("#treatmentForm").submit(function(){
+ 			if(submitFlag){
+ 				return submitFlag;
+ 			}else{
+ 				alert("정보를 확인해주세요");
+ 				return submitFlag;
+ 			}
+ 		}); 
 	});
 </script>
 <!-- /select2 -->
@@ -150,9 +123,9 @@
 	<div class="x_content">
 		  	<div class="commandRadio" >
 				<label>
-					<input type="radio" name="loginCommand"value="member" checked="checked"> 회원</label> &nbsp;&nbsp;
+					<input type="radio" name="memberCommand"value="member" checked="checked"> 회원</label> &nbsp;&nbsp;
 				<label>
-					<input type="radio" name="loginCommand"value="nonMember" > 비회원</label>
+					<input type="radio" name="memberCommand"value="nonMember" > 비회원</label>
 			</div>
 		<!-- 폼 시작부 -->
 		<form id="treatmentForm" action="registerTreatmentRecord.do" method="post">
