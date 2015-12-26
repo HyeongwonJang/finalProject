@@ -48,7 +48,7 @@ public class ViewServiceImpl implements ViewService {
 	}
 
 	@Override
-	public Map<String, Object> findVetOwnerMainPageData(HospitalVO paramVO) {
+	public Map<String, Object> findVetMainPageData(HospitalVO paramVO) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		int vetLicenseNo = paramVO.getVetList().get(0).getVetLicenseVO().getVetLicenseNo();
 		map.put("treatmentList", 

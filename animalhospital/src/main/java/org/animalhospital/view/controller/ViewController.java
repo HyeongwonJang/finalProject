@@ -89,7 +89,7 @@ public class ViewController {
 		} else if(session.getAttribute("userLevel").equals("vet")){
 			url = "home_vet";
 			HospitalVO hvo = (HospitalVO) request.getSession().getAttribute("loginVO");
-			mav.addAllObjects(viewService.findVetOwnerMainPageData(hvo));
+			mav.addAllObjects(viewService.findVetMainPageData(hvo));
 		} else if(session.getAttribute("userLevel").equals("petOwner")){
 			PetOwnerVO povo = (PetOwnerVO) request.getSession(false).getAttribute("loginVO");
 			url = "home_petOwner";
