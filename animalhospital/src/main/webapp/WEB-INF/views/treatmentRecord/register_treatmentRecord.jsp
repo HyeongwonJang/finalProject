@@ -3,7 +3,9 @@
    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 
 <script type="text/javascript">
-
+	function changeFlag(){
+		submitFlag=true;
+	}
 	function findPetListByTelAjax(){
 		checkMember=$("input[name=memberCommand]:checked").attr('value');
 		$.ajax({
@@ -33,7 +35,7 @@
 					$("#checkTel").attr('class','text-primary');
 					$("#petOwnerNo").attr('value', PetOwnerVO.petOwnerNo);
 					$("#selectPet").append(result);
-					submitFlag=true;
+					submitFlag=false;
 				}//else 
 			}//success
 		});//ajax종료
@@ -64,11 +66,15 @@
 		});
  		$(".select2_single").select2({
 			placeholder : "해당 항목을 선택해주세요",
-			allowClear : false
+			allowClear : true
 		});
  		
  		$("#nonMemberViewDiv").hide();
  		$(".commandRadio").change(function(){
+ 			submitFlag = false;
+ 			$("#selectPet").val("");
+ 		 $("#selectPet").html("<option selected='selected'>반려동물을 선택해주세요</option>");
+ 			$("#petOwnerTel").val("");
  			$("#checkTel").html("");
  			checkMember=$("input[name=memberCommand]:checked").attr('value');
  			if(checkMember=="member"){
@@ -83,7 +89,7 @@
  				$("#selectPet").attr("name","petOwnerVO.petVO[0].petName");
  				
 
-				$("#treatmentForm").attr("action", "registerTreatmentRecord.do"); 				
+				$("#treatmentForm").attr("action", "registerTreatmentRecord.do");
  			}else{
  				$("#memberViweDiv").hide();
  				$("#nonMemberViewDiv").show();
@@ -105,6 +111,7 @@
  				alert("정보를 확인해주세요");
  				return submitFlag;
  			}
+ 			
  		}); 
 	});
 </script>
@@ -134,9 +141,9 @@
 			<!-- Member가 진료시 보여지는 div  -->
 			<div id="memberViweDiv">
 			<label>반려동물 - 보호자 전화번호로 검색</label>
-				 <select class="select2_single form-control" tabindex="-1" id="selectPet" 
-				 		name="petOwnerVO.petVO[0].petName" >
-					<option></option>
+				 <select class="form-control" tabindex="-1" id="selectPet" 
+				 		name="petOwnerVO.petVO[0].petName" required="required"  onclick="changeFlag()">
+					<option selected="selected">반려동물을 선택해주세요</option>
 				</select>
 			</div>
 			<!--회원가입이 되지 않은 Member가 진료시 보여지는 Div  -->
